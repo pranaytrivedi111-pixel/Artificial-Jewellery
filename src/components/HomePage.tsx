@@ -54,14 +54,19 @@ export const HomePage: React.FC<HomePageProps> = ({
     return () => clearInterval(interval);
   }, [isPaused, heroProducts.length]);
 
-  // Smoothly scroll the active thumbnail card into view when sliding or selected
+  // Smoothly scroll the active thumbnail card horizontally inside its container ONLY
+  // (Never calls window.scroll or scrollIntoView, so user page scroll position is never affected)
   useEffect(() => {
     const activeBtn = thumbnailButtonRefs.current[selectedHeroIndex];
-    if (activeBtn && thumbnailContainerRef.current) {
-      activeBtn.scrollIntoView({
+    const container = thumbnailContainerRef.current;
+    if (activeBtn && container) {
+      const btnLeft = activeBtn.offsetLeft;
+      const btnWidth = activeBtn.offsetWidth;
+      const containerWidth = container.clientWidth;
+      const targetScrollLeft = btnLeft - containerWidth / 2 + btnWidth / 2;
+      container.scrollTo({
+        left: Math.max(0, targetScrollLeft),
         behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
       });
     }
   }, [selectedHeroIndex]);
@@ -85,8 +90,14 @@ export const HomePage: React.FC<HomePageProps> = ({
     setSelectedHeroIndex((prev) => (prev + 1) % heroProducts.length);
   };
 
-  // FAQ Accordion State
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  // FAQ Accordion State (supports 2-column desktop view with independent item toggling)
+  const [openFaqIndices, setOpenFaqIndices] = useState<number[]>([0]);
+
+  const toggleFaq = (idx: number) => {
+    setOpenFaqIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
 
   // Why Qavelle (Trust Pillars) Mobile Slider State & Ref (Shows 2 cards only, other 2 in slider)
   const trustSliderRef = useRef<HTMLDivElement>(null);
@@ -744,37 +755,47 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* =========================================================================
           7. PRECISE FAQ ACCORDION
+          - Desktop view: 2 columns (md:grid-cols-2)
+          - Mobile view: 1 column
           ========================================================================= */}
-      <section className="bg-white border-t border-gray-200/80 py-10 sm:py-14">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
+      <section className="bg-white border-t border-gray-200/80 py-10 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-[#B3874B]">
               Frequently Asked Questions
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-gray-950 font-serif mt-1">
               Everything You Need to Know
             </h2>
+            <p className="text-xs sm:text-sm text-gray-600 max-w-lg mx-auto mt-1.5">
+              Got questions? We have answers. Feel free to contact our WhatsApp support team anytime.
+            </p>
           </div>
 
-          <div className="space-y-3">
-            {HOME_FAQS.slice(0, 5).map((faq, idx) => {
-              const isOpen = openFaqIndex === idx;
+          {/* 2 Columns in Desktop View, 1 Column in Mobile View */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4.5 items-start">
+            {HOME_FAQS.map((faq, idx) => {
+              const isOpen = openFaqIndices.includes(idx);
               return (
                 <div
                   key={idx}
-                  className="rounded-xl border border-gray-200 overflow-hidden transition-all bg-[#FAF9F5]"
+                  className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                    isOpen
+                      ? 'border-amber-200/90 bg-white shadow-2xs'
+                      : 'border-gray-200/80 bg-[#FAF9F5] hover:border-amber-200'
+                  }`}
                 >
                   <button
                     type="button"
-                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full px-4 py-3.5 sm:px-5 sm:py-4 text-left flex items-center justify-between gap-3 cursor-pointer hover:bg-amber-50/50 transition-colors"
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full px-4 py-3.5 sm:px-5 sm:py-4 text-left flex items-center justify-between gap-3 cursor-pointer hover:bg-amber-50/40 transition-colors"
                   >
-                    <span className="text-xs sm:text-sm font-bold text-gray-900">
+                    <span className="text-xs sm:text-sm font-bold text-gray-900 leading-snug">
                       {faq.question}
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 text-gray-500 transition-transform duration-200 shrink-0 ${
-                        isOpen ? 'rotate-180' : ''
+                        isOpen ? 'rotate-180 text-[#B3874B]' : ''
                       }`}
                     />
                   </button>

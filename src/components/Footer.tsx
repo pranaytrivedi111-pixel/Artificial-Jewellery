@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { IndiaPaymentsStrip } from './PaymentLogos';
 import {
   ASSET_IMAGES,
@@ -17,6 +18,8 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const currentProduct =
     activeProductId === 'allure-gold-set'
       ? ALLURE_GOLD_SET_PRODUCT_DETAILS
@@ -81,13 +84,35 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
               </a>
             </div>
 
-            <p className="text-xs text-gray-600 leading-relaxed mt-3">
-              India's premier royal ethnic jewelry brand. Handcrafted designer jhumkas, bridal diamond chokers, and heritage accessories fit for royalty.
-            </p>
+            <div className="mt-3">
+              <p className="text-xs text-gray-600 leading-relaxed inline">
+                India's premier royal ethnic jewelry brand. Handcrafted designer jhumkas, bridal diamond chokers, and heritage accessories fit for royalty.{' '}
+              </p>
+              <button
+                type="button"
+                onClick={() => setIsExpanded((prev) => !prev)}
+                onMouseEnter={() => setIsExpanded(true)}
+                className="lg:hidden inline-flex items-center gap-1 text-xs font-bold text-[#B3874B] hover:text-amber-800 underline underline-offset-2 ml-1 cursor-pointer transition-colors"
+                aria-expanded={isExpanded}
+              >
+                <span>{isExpanded ? 'Read less' : 'Read more...'}</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    isExpanded ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+            </div>
           </div>
 
-          {/* Right Column: Exact Paragraphs in Sequence */}
-          <div className="lg:col-span-8 space-y-4 text-[13.5px] sm:text-[14px] text-[#222222] leading-[1.65] font-normal">
+          {/* Right Column: Exact Paragraphs in Sequence (always visible on desktop, expands on mobile) */}
+          <div
+            className={`lg:col-span-8 space-y-4 text-[13.5px] sm:text-[14px] text-[#222222] leading-[1.65] font-normal transition-all duration-300 ${
+              isExpanded
+                ? 'block mt-4 pt-3.5 border-t border-gray-100 lg:mt-0 lg:pt-0 lg:border-t-0'
+                : 'hidden lg:block'
+            }`}
+          >
             <p>
               QAVELLE is India's most trusted destination for handcrafted traditional and contemporary ethnic jewelry. We specialise in authentic Oxidised Gold Jhumkas, Temple Jewelry, Royal Peacock motif earrings, and festive sets crafted with premium anti-tarnish alloy.
             </p>

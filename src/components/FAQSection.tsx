@@ -28,7 +28,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ activeProductId = 'jhumk
 
   return (
     <section id="faqs" className="py-10 bg-gray-50 border-t border-gray-200">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-8">
           <span className="bg-amber-100 text-amber-900 text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
@@ -42,8 +42,8 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ activeProductId = 'jhumk
           </p>
         </div>
 
-        {/* Accordion */}
-        <div className="space-y-2.5">
+        {/* Accordion in 2 Columns on Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-start">
           {FAQS_LIST.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (

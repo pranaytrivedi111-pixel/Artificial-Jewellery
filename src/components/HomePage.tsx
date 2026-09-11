@@ -36,6 +36,7 @@ import {
   RADHIKA_GREEN_AD_BUNDLE_OPTIONS,
   SHIMMERING_BUNDLE_OPTIONS,
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
 } from '../data/productData';
 import { BundleOption, ProductId } from '../types';
 
@@ -66,6 +67,25 @@ export const HomePage: React.FC<HomePageProps> = ({
   // FAQ Accordion State
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
+  // Auto-play luxury hero slider with hover pause
+  const [isSliderPaused, setIsSliderPaused] = useState(false);
+
+  useEffect(() => {
+    if (isSliderPaused) return;
+    const timer = setInterval(() => {
+      setActiveHeroIndex((prev) => (prev + 1) % HOME_PROMO_SLIDES.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [isSliderPaused]);
+
+  const handlePrevHero = () => {
+    setActiveHeroIndex((prev) => (prev - 1 + HOME_PROMO_SLIDES.length) % HOME_PROMO_SLIDES.length);
+  };
+
+  const handleNextHero = () => {
+    setActiveHeroIndex((prev) => (prev + 1) % HOME_PROMO_SLIDES.length);
+  };
+
   const toggleWishlist = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     setWishlistedIds((prev) =>
@@ -75,6 +95,8 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   const getBundleForProduct = (productId: ProductId): BundleOption => {
     switch (productId) {
+      case 'trendy-alloy-set':
+        return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
       case 'allure-gold-set':
         return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
       case 'radhika-green-ad':
@@ -102,6 +124,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       if (!matchesSearch) return false;
 
       if (activeCategoryFilter === 'all') return true;
+      if (activeCategoryFilter === 'trendy-alloy') return prod.id === 'trendy-alloy-set';
       if (activeCategoryFilter === 'allure-set') return prod.id === 'allure-gold-set';
       if (activeCategoryFilter === 'combo-5') return prod.category === 'Combo Deals';
       if (activeCategoryFilter === 'choker-royal') return prod.id === 'choker';
@@ -118,50 +141,44 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <div className="w-full bg-[#FAF9F5] text-gray-900 selection:bg-amber-100">
       {/* =========================================================================
-          1. LUXURY ANNOUNCEMENT TICKER
+          LUXURY SMOOTH PRODUCT HERO SLIDER
+          Featuring all products with elegant slide controls, pristine typography & zero text overlay
           ========================================================================= */}
-      <div className="bg-[#111111] text-amber-300/90 text-[11px] sm:text-xs py-2 px-3 tracking-widest uppercase font-semibold text-center border-b border-amber-900/30">
-        <div className="max-w-7xl mx-auto flex items-center justify-center gap-4 sm:gap-8 flex-wrap">
-          <span className="flex items-center gap-1.5 text-white">
-            <Truck className="w-3.5 h-3.5 text-amber-400" />
-            Free Express 48H Air Delivery
-          </span>
-          <span className="hidden min-[500px]:inline text-amber-500/50">•</span>
-          <span className="flex items-center gap-1.5 text-white">
-            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-            100% Cash On Delivery Available
-          </span>
-          <span className="hidden md:inline text-amber-500/50">•</span>
-          <span className="hidden md:flex items-center gap-1.5 text-white">
-            <Award className="w-3.5 h-3.5 text-amber-400" />
-            Anti-Tarnish QAVELLE Hallmark Standard
-          </span>
-        </div>
-      </div>
-
-      {/* =========================================================================
-          2. PRECISE LUXURY SPLIT HERO SECTION
-          Clean Image Rendering: No text overlays on jewelry photo
-          ========================================================================= */}
-      <section className="relative bg-white border-b border-gray-200/80 pt-6 sm:pt-8 md:pt-10 pb-8 sm:pb-12 overflow-hidden">
+      <section
+        id="hero-slider-section"
+        onMouseEnter={() => setIsSliderPaused(true)}
+        onMouseLeave={() => setIsSliderPaused(false)}
+        className="relative bg-white border-b border-gray-200/80 pt-6 sm:pt-9 md:pt-11 pb-8 sm:pb-12 overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* LEFT COLUMN: Clean Typography, Offer details & CTAs */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-5">
-              {/* Royal Collection Tag */}
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#B3874B]">
-                <Sparkles className="w-4 h-4 text-[#B3874B]" />
-                <span>Qavelle Royal Jewellery • Direct From Artisans</span>
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-5 transition-all duration-500">
+              {/* Royal Collection Tag & Slide Counter */}
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#B3874B]">
+                  <Sparkles className="w-4 h-4 text-[#B3874B]" />
+                  <span>{activeSlide.badge || 'Qavelle Royal Jewellery • Direct From Artisans'}</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gray-500 bg-stone-100 px-2.5 py-0.5 rounded-full">
+                  <span>Product {activeHeroIndex + 1} of {HOME_PROMO_SLIDES.length}</span>
+                </div>
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black text-gray-950 font-serif leading-[1.18] tracking-tight">
+              <h1
+                key={`title-${activeSlide.id}`}
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black text-gray-950 font-serif leading-[1.18] tracking-tight transition-opacity duration-300"
+              >
                 {activeSlide.title}
               </h1>
 
               {/* Subtitle / Craft Story */}
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl">
+              <p
+                key={`sub-${activeSlide.id}`}
+                className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl transition-opacity duration-300"
+              >
                 {activeSlide.subtitle}
               </p>
 
@@ -238,34 +255,98 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>Instant Buy Now (COD)</span>
                 </button>
               </div>
+
+              {/* Slider Dots Indicator */}
+              <div className="flex items-center gap-2 pt-2">
+                {HOME_PROMO_SLIDES.map((_, idx) => (
+                  <button
+                    key={`dot-${idx}`}
+                    type="button"
+                    onClick={() => setActiveHeroIndex(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                      idx === activeHeroIndex
+                        ? 'w-7 bg-[#B3874B]'
+                        : 'w-2 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* RIGHT COLUMN: Pure, Clean Product Image (Zero Text Overlays) */}
-            <div className="lg:col-span-5 flex flex-col items-center">
+            <div className="lg:col-span-5 flex flex-col items-center relative">
               <div
                 onClick={() => onSelectProduct(activeSlide.productId)}
                 className="group relative w-full aspect-square max-w-[460px] mx-auto rounded-2xl bg-[#F8F7F4] border border-stone-200/90 overflow-hidden cursor-pointer shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center p-4"
                 title={`Click to view ${activeSlide.title}`}
               >
-                {/* Clean Genuine Simple Hero Image - Stable & Match Product Page */}
+                {/* Clean Genuine Simple Hero Image */}
                 <img
+                  key={`hero-img-${activeSlide.id}`}
                   src={activeSlide.image}
                   alt={activeSlide.title}
-                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                  className="w-full h-full object-contain transition-all duration-500 group-hover:scale-[1.02]"
                   referrerPolicy="no-referrer"
                   loading="eager"
                 />
+
+                {/* Left / Right Slider Navigation Arrows */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrevHero();
+                  }}
+                  aria-label="Previous Slide"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-white text-gray-800 shadow-md flex items-center justify-center border border-gray-200/80 transition-all hover:scale-105 active:scale-95 cursor-pointer z-10"
+                >
+                  <ChevronLeft className="w-5 h-5 text-gray-700" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNextHero();
+                  }}
+                  aria-label="Next Slide"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-white text-gray-800 shadow-md flex items-center justify-center border border-gray-200/80 transition-all hover:scale-105 active:scale-95 cursor-pointer z-10"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-700" />
+                </button>
               </div>
             </div>
 
           </div>
 
-          {/* Bottom Switcher: Quick Access to the 5 Genuine Products */}
+          {/* Bottom Switcher: Quick Access to All Genuine Products in the Slider */}
           <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 text-center sm:text-left">
-              Featured Royal Collection (5 Authentic Masterpieces)
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
+                Featured Royal Collection ({HOME_PROMO_SLIDES.length} Authentic Masterpieces)
+              </p>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={handlePrevHero}
+                  aria-label="Previous Slide"
+                  className="p-1 rounded-md text-gray-500 hover:text-gray-900 hover:bg-stone-100 transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNextHero}
+                  aria-label="Next Slide"
+                  className="p-1 rounded-md text-gray-500 hover:text-gray-900 hover:bg-stone-100 transition-colors"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-2.5">
               {HOME_PROMO_SLIDES.map((slide, idx) => {
                 const isCurrent = idx === activeHeroIndex;
                 return (
@@ -273,13 +354,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                     key={slide.id}
                     type="button"
                     onClick={() => setActiveHeroIndex(idx)}
-                    className={`flex items-center gap-2.5 p-2 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`flex flex-col sm:flex-row items-center gap-2 p-2 rounded-xl border text-left transition-all cursor-pointer ${
                       isCurrent
-                        ? 'bg-amber-50/70 border-[#B3874B] shadow-xs'
+                        ? 'bg-amber-50/80 border-[#B3874B] ring-1 ring-[#B3874B] shadow-xs'
                         : 'bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                     }`}
                   >
-                    <div className="w-11 h-11 rounded-lg bg-gray-100 overflow-hidden shrink-0 flex items-center justify-center p-0.5">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-stone-50 overflow-hidden shrink-0 flex items-center justify-center p-0.5 border border-stone-200/50">
                       <img
                         src={slide.image}
                         alt={slide.title}
@@ -287,11 +368,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                         referrerPolicy="no-referrer"
                       />
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <h4 className="text-xs font-bold text-gray-900 truncate">
+                    <div className="min-w-0 flex-1 text-center sm:text-left">
+                      <h4 className="text-[11px] font-bold text-gray-900 truncate leading-tight">
                         {slide.title}
                       </h4>
-                      <p className="text-[11px] font-semibold text-[#B3874B]">
+                      <p className="text-[10px] font-semibold text-[#B3874B]">
                         {slide.price}
                       </p>
                     </div>
@@ -372,38 +453,40 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* =========================================================================
           4. THE CURATED COLLECTION (Best Sellers & Iconic Sets)
+          Simple luxury listing style matching "You May Also Like"
           Strictly Clean Image Rendering: Zero Text Overlays on photos
           ========================================================================= */}
-      <section id="bestsellers-section" className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 border-b border-gray-200/80 pb-5">
-          <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#B3874B] mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Direct From Artisans</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-950 font-serif">
-              Best Sellers & Iconic Sets
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-600 mt-0.5">
-              Certified authentic handcrafted jewelry sets with verified Indian customer ratings
-            </p>
+      <section id="bestsellers-section" className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Centered Serif Section Header */}
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#B3874B] mb-2">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Direct From Artisans • Hallmark Standard</span>
           </div>
+          <h2
+            className="text-2xl sm:text-3xl lg:text-[36px] font-normal text-gray-950 tracking-tight"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          >
+            Best Sellers & Iconic Sets
+          </h2>
+          <p className="text-xs sm:text-sm text-gray-500 max-w-lg mx-auto mt-2">
+            Certified authentic handcrafted jewelry sets with verified Indian customer ratings
+          </p>
 
-          {/* Quick Search */}
-          <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          {/* Quick Search & Filter Count */}
+          <div className="mt-5 max-w-md mx-auto relative">
+            <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search jewellery set..."
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-gray-300 focus:outline-none focus:border-[#B3874B] bg-white shadow-2xs"
+              placeholder="Search bestsellers by name or style..."
+              className="w-full pl-9 pr-8 py-2 text-xs rounded-full border border-stone-300 focus:outline-none focus:border-[#B3874B] bg-white shadow-2xs text-center"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black text-xs font-bold"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black text-xs font-bold cursor-pointer"
               >
                 ✕
               </button>
@@ -411,118 +494,109 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
         </div>
 
-        {/* Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        {/* Product Cards Grid: Simple, elegant, matching You May Also Like layout */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {filteredProducts.map((product) => {
             const bundle = getBundleForProduct(product.id);
             const isWishlisted = wishlistedIds.includes(product.id);
 
             return (
-              <div
-                key={product.id}
-                className="group bg-white rounded-2xl border border-gray-200/90 overflow-hidden hover:shadow-lg hover:border-amber-300/80 transition-all duration-300 flex flex-col justify-between"
-              >
-                {/* 1. TOP: Pure Genuine Image Container - Stable Simple Hero Image (No Hover Swap) */}
-                <div
-                  onClick={() => onSelectProduct(product.id)}
-                  className="relative aspect-square w-full bg-[#FAF9F6] border-b border-stone-100 overflow-hidden cursor-pointer select-none p-4 flex items-center justify-center"
-                >
-                  {/* Primary Simple Hero Image - Consistent with Product Page */}
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                    referrerPolicy="no-referrer"
-                    loading="lazy"
-                  />
-
-                  {/* Discreet Wishlist Button */}
-                  <button
-                    onClick={(e) => toggleWishlist(product.id, e)}
-                    className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-2xs ${
-                      isWishlisted
-                        ? 'bg-rose-50 text-rose-600 border border-rose-200'
-                        : 'bg-white/95 hover:bg-white text-gray-600 hover:text-black border border-gray-200'
-                    }`}
-                    aria-label="Add to Wishlist"
-                  >
-                    <Heart
-                      className={`w-4 h-4 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`}
-                    />
-                  </button>
-                </div>
-
-                {/* 2. BOTTOM: Structured Product Details, Pricing & CTAs (Cleanly below image) */}
-                <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-3">
+              <div key={product.id} className="w-full flex flex-col items-center">
+                <div className="group block w-full text-center select-none bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-3.5 border border-stone-200/70 hover:border-amber-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between h-full">
                   <div>
-                    {/* Category Label */}
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[11px] font-bold tracking-wider uppercase text-[#B3874B]">
-                        {product.category}
-                      </span>
-                      <span className="text-[11px] font-semibold text-gray-500">
-                        Only {product.inStockCount} left
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      onClick={() => onSelectProduct(product.id)}
-                      className="text-sm sm:text-base font-bold text-gray-900 line-clamp-2 hover:text-[#B3874B] transition-colors cursor-pointer leading-snug"
+                    {/* Clean Image Frame with Rounded Corners (Zero text overlay) */}
+                    <a
+                      href={product.slug}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onSelectProduct(product.id);
+                      }}
+                      className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#F8F6F2] shadow-2xs group-hover:shadow-xs transition-all duration-300 p-2 sm:p-3 flex items-center justify-center block cursor-pointer"
+                      title={`View ${product.title}`}
                     >
-                      {product.title}
-                    </h3>
+                      {/* Clean Product Photograph */}
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                      />
 
-                    {/* Rating Row */}
-                    <div className="flex items-center gap-1.5 mt-2">
-                      <div className="flex items-center gap-0.5 text-xs font-black bg-[#1E8E3E] text-white px-1.5 py-0.5 rounded">
-                        <span>{product.rating}</span>
-                        <Star className="w-3 h-3 fill-white" />
-                      </div>
-                      <span className="text-xs text-gray-600 font-medium">
-                        ({product.reviewsCount.toLocaleString('en-IN')} verified reviews)
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Price Row */}
-                  <div className="pt-2 border-t border-gray-100">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl sm:text-2xl font-black text-gray-950">
-                        ₹{product.price}
-                      </span>
-                      <span className="text-xs sm:text-sm text-gray-400 line-through">
-                        ₹{product.originalPrice}
-                      </span>
-                      <span className="bg-amber-100 text-amber-800 text-[11px] font-extrabold px-2 py-0.5 rounded">
+                      {/* Subtle Discount Pill */}
+                      <span className="absolute top-2.5 right-2.5 bg-[#B3874B] text-white text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full shadow-xs">
                         {product.discountPercent}% OFF
                       </span>
-                    </div>
 
-                    <p className="text-[11px] font-medium text-emerald-700 mt-1 flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
-                      <span>Free Velvet Gift Box Included • Free Delivery</span>
-                    </p>
+                      {/* Verified Rating Pill */}
+                      <div className="absolute top-2.5 left-2.5 flex items-center gap-0.5 bg-black/75 backdrop-blur-xs text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md">
+                        <span>{product.rating}</span>
+                        <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+                      </div>
+
+                      {/* Discreet Wishlist Button */}
+                      <button
+                        type="button"
+                        onClick={(e) => toggleWishlist(product.id, e)}
+                        className={`absolute bottom-2.5 right-2.5 w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-xs ${
+                          isWishlisted
+                            ? 'bg-rose-50 text-rose-600 border border-rose-200'
+                            : 'bg-white/90 hover:bg-white text-gray-600 hover:text-black border border-gray-200'
+                        }`}
+                        aria-label="Add to Wishlist"
+                      >
+                        <Heart
+                          className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`}
+                        />
+                      </button>
+                    </a>
+
+                    {/* Clean Product Title and Price Below Frame */}
+                    <div className="mt-3 px-1 flex flex-col items-center">
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#B3874B] mb-0.5">
+                        {product.category}
+                      </span>
+                      <a
+                        href={product.slug}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectProduct(product.id);
+                        }}
+                        className="cursor-pointer"
+                        title={product.title}
+                      >
+                        <h3
+                          className="text-xs sm:text-[13px] font-semibold text-gray-900 group-hover:text-[#B3874B] transition-colors leading-snug line-clamp-2"
+                        >
+                          {product.title}
+                        </h3>
+                      </a>
+                      <div className="mt-1.5 flex items-baseline justify-center gap-1.5">
+                        <span className="text-sm sm:text-base font-extrabold text-gray-950">
+                          ₹{product.price}
+                        </span>
+                        <span className="text-xs text-gray-400 line-through font-normal">
+                          ₹{product.originalPrice}
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Dual Action Buttons */}
-                  <div className="grid grid-cols-2 gap-2 pt-1">
+                  {/* Clean Simple Action Buttons */}
+                  <div className="mt-3 pt-2.5 border-t border-stone-100 flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => onSelectProduct(product.id)}
-                      className="w-full inline-flex items-center justify-center gap-1 bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
+                      className="flex-1 bg-stone-50 hover:bg-stone-100 text-gray-900 text-[11px] font-bold py-2 rounded-xl transition-colors cursor-pointer border border-stone-200"
                     >
-                      <span>View Details</span>
-                      <ExternalLink className="w-3 h-3 text-gray-500" />
+                      Details
                     </button>
-
                     <button
                       type="button"
                       onClick={() => onBuyNow(bundle)}
-                      className="w-full inline-flex items-center justify-center gap-1 bg-[#111111] hover:bg-black text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer shadow-2xs"
+                      className="flex-1 bg-[#111111] hover:bg-black text-white text-[11px] font-bold py-2 rounded-xl transition-colors cursor-pointer shadow-2xs"
                     >
-                      <ShoppingBag className="w-3 h-3" />
-                      <span>Buy Now</span>
+                      Buy Now
                     </button>
                   </div>
                 </div>

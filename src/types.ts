@@ -4,7 +4,8 @@ export type ProductId =
   | 'necklace-combo-5'
   | 'radhika-green-ad'
   | 'elegant-everyday-5'
-  | 'allure-gold-set';
+  | 'allure-gold-set'
+  | 'trendy-alloy-set';
 
 export interface ProductGalleryItem {
   id: string;

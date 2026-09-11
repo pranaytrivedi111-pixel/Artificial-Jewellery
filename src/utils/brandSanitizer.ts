@@ -98,6 +98,16 @@ export const PROHIBITED_BRAND_PATTERNS: BrandReplacementRule[] = [
     replacement: 'QAVELLE Artisans',
     description: 'Fashnear to QAVELLE Artisans',
   },
+  {
+    pattern: /\b(J\s*H\s*J\s*(Jewell?er(y|ies))?)\b/gi,
+    replacement: 'QAVELLE Royal Artisans',
+    description: 'JHJ Jewelleries to QAVELLE Royal Artisans',
+  },
+  {
+    pattern: /\bqp1c\b/gi,
+    replacement: 'QAV-TRENDY-ALLOY',
+    description: 'Meesho SKU qp1c to QAVELLE SKU',
+  },
 
   // Other Reselling & Wholesale Platforms
   {

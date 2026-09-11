@@ -129,6 +129,18 @@ export const JHUMKA_MATCHING_VARIANTS = [
     tag: 'Combo of 5',
     sourceUrl: '/elegant-everyday-necklace-set-combo-of-5-necklaces',
   },
+  {
+    id: 'var-jhumka-trendy',
+    productId: 'trendy-alloy-set' as const,
+    title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+    category: 'Necklace Sets',
+    price: 399,
+    originalPrice: 1499,
+    discountPercent: 73,
+    image: '/b1.png',
+    tag: 'Trendy Bestseller',
+    sourceUrl: '/products/trendy-alloy-gold-plated-jewellery-set',
+  },
 ];
 
 // Matching Earrings / Jhumka Sets to mention on Necklace Product Page ("and vice versa in necklace page")
@@ -169,16 +181,16 @@ export const CHOKER_MATCHING_VARIANTS = [
     sourceUrl: '/shimmering-beautiful-pack-of-5-necklace-chain-pendant-combo-for-women-and-girls',
   },
   {
-    id: 'var-elegant-everyday-5',
-    productId: 'elegant-everyday-5' as const,
-    title: 'Elegant Everyday Necklace Set – Combo of 5 Necklaces',
-    category: 'Everyday Necklace Combo (Set of 5)',
-    price: 349,
-    originalPrice: 999,
-    discountPercent: 65,
-    image: '/elegant_combo_1.webp',
-    tag: 'Combo of 5',
-    sourceUrl: '/elegant-everyday-necklace-set-combo-of-5-necklaces',
+    id: 'var-choker-trendy',
+    productId: 'trendy-alloy-set' as const,
+    title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+    category: 'Necklace Sets',
+    price: 399,
+    originalPrice: 1499,
+    discountPercent: 73,
+    image: '/b1.png',
+    tag: 'Trendy Bestseller',
+    sourceUrl: '/products/trendy-alloy-gold-plated-jewellery-set',
   },
 ];
 
@@ -369,16 +381,16 @@ export const ALLURE_GOLD_SET_MATCHING_VARIANTS = [
     sourceUrl: '/radhika-anant-ambani-inspired-green-ad-neckless-set',
   },
   {
-    id: 'var-allure-everyday',
-    productId: 'elegant-everyday-5' as const,
-    title: 'Elegant Everyday Necklace Set – Combo of 5 Necklaces',
-    category: 'Minimalist Combo (Pack of 5)',
-    price: 349,
-    originalPrice: 999,
-    discountPercent: 65,
-    image: '/elegant_combo_1.webp',
-    tag: 'Combo of 5',
-    sourceUrl: '/elegant-everyday-necklace-set-combo-of-5-necklaces',
+    id: 'var-allure-trendy',
+    productId: 'trendy-alloy-set' as const,
+    title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+    category: 'Necklace Sets',
+    price: 399,
+    originalPrice: 1499,
+    discountPercent: 73,
+    image: '/b1.png',
+    tag: 'Trendy Bestseller',
+    sourceUrl: '/products/trendy-alloy-gold-plated-jewellery-set',
   },
 ];
 
@@ -1871,6 +1883,278 @@ export const ALLURE_GOLD_SET_CUSTOMER_MEDIA = [
     caption: 'Matching adjustable bracelet and cocktail ring — exquisite finishing throughout.',
   },
 ];
+
+// =========================================================================
+// TRENDY ALLOY GOLD PLATED JEWELLERY SET (₹399) - Reselling Edition
+// =========================================================================
+
+export const TRENDY_ALLOY_SET_SLUG = '/products/trendy-alloy-gold-plated-jewellery-set';
+
+export const TRENDY_ALLOY_SET_MATCHING_VARIANTS = [
+  {
+    id: 'var-trendy-radhika',
+    productId: 'radhika-green-ad' as const,
+    title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Drop Earrings',
+    category: 'Celebrity Bridal AD Set',
+    price: 299,
+    originalPrice: 999,
+    discountPercent: 70,
+    image: '/radhika_ambani_1.webp',
+    tag: 'Ambani Inspired',
+    sourceUrl: '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',
+  },
+  {
+    id: 'var-trendy-allure',
+    productId: 'allure-gold-set' as const,
+    title: 'Royal Elegant Gold Plated Jewellery Set with Matching Earrings',
+    category: 'Necklace Sets',
+    price: 749,
+    originalPrice: 2499,
+    discountPercent: 70,
+    image: '/aa1.webp',
+    tag: '22K Gold Plated',
+    sourceUrl: '/products/royal-elegant-gold-plated-jewellery-set',
+  },
+  {
+    id: 'var-trendy-choker',
+    productId: 'choker' as const,
+    title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
+    category: 'Bridal Choker Set',
+    price: 799,
+    originalPrice: 2999,
+    discountPercent: 73,
+    image: '/neklace_producshot.webp',
+    sourceUrl: '/products/rhodium-plated-austrian-diamond-choker-set',
+  },
+  {
+    id: 'var-trendy-jhumka',
+    productId: 'jhumka' as const,
+    title: 'Handcrafted 18K Gold Plated Jhumka Earrings – Set of 6 Pairs',
+    category: 'Jhumka Combo',
+    price: 499,
+    originalPrice: 1999,
+    discountPercent: 75,
+    image: '/Hero_website.webp',
+    sourceUrl: '/products/gold-plated-fancy-jhumka-earrings-set-of-6',
+  },
+];
+
+export const TRENDY_ALLOY_SET_PRODUCT_DETAILS = {
+  id: 'trendy-alloy-set',
+  title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+  fullDescription:
+    'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set – Exquisite handcrafted alloy necklace enriched with lustrous Austrian pearls, royal kundan stones, and matching drop earrings. Engineered with a durable skin-safe base, 22K micro gold plating, and an anti-tarnish protective coating. Ideal for weddings, festive pujas, and ethnic celebrations. Complete with free luxury velvet jewelry gift box.',
+  shortTitle: 'Trendy Alloy Jewellery Set',
+  tagline: '22K Micro Gold Plating • Handcrafted Kundan & Pearl Drops • Free Royal Velvet Gift Box',
+  rating: 4.8,
+  ratingsCount: 14280,
+  reviewsCount: 3640,
+  size: 'Adjustable Silk Dori (Free Size fits all neck sizes comfortably)',
+  price: 399,
+  originalPrice: 1499,
+  discountPercent: 73,
+  sku: 'QAV-TRENDY-ALLOY-399',
+  inStock: true,
+  stockLeft: 12,
+  recentSales24h: 248,
+  currentLiveViewers: 39,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  countryOfOrigin: 'India',
+};
+
+export const TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS = [
+  { label: 'Base Metal', value: 'High-Grade Skin-Safe Brass & Copper Alloy' },
+  { label: 'Plating', value: '22K Micro Gold Plated with Anti-Tarnish Seal' },
+  { label: 'Stone Type', value: 'Lustrous Austrian Pearls & Hand-Cut Kundan Stones' },
+  { label: 'Sizing', value: 'Free Size (Adjustable Silk Dori Fits All)' },
+  { label: 'Occasion', value: 'Weddings, Reception, Festive Puja, Sangeet & Traditional Functions' },
+  { label: 'Net Quantity (N)', value: '1 Necklace + 1 Pair Matching Drop Earrings' },
+];
+
+export const TRENDY_ALLOY_SET_ADDITIONAL_DETAILS = [
+  { label: 'Package Contains', value: '1 Gold Plated Alloy Necklace + 1 Pair Matching Drop Earrings + Luxury Velvet Gift Box' },
+  { label: 'Closure', value: 'Traditional Hand-Braided Silk Drawstring Cord (Dori) / Secure Clasp' },
+  { label: 'Earring Type', value: 'Matching Traditional Drop Earrings with Push-Back Clasps' },
+  { label: 'Stone Setting', value: 'Hand-Crafted Bezel & Micro-Prong Pearl Setting' },
+  { label: 'Skin Safety', value: '100% Lead-Free & Nickel-Free (Hypoallergenic & Non-Irritating)' },
+  { label: 'Country of Origin', value: 'India' },
+  { label: 'Care Instructions', value: 'Wipe with soft lint-free cloth after use. Store in provided velvet box away from perfumes and moisture.' },
+];
+
+export const TRENDY_ALLOY_SET_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'ta-1',
+    src: '/b1.png',
+    thumbSrc: '/b1_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Earrings - Main View',
+    title: 'Complete Trendy Alloy Set',
+    tag: 'Hero View',
+  },
+  {
+    id: 'ta-2',
+    src: '/b2.png',
+    thumbSrc: '/b2_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Jewellery Set - Artisan Motif and Craft Detail',
+    title: 'Heritage Craftsmanship',
+    tag: 'Craft Detail',
+  },
+  {
+    id: 'ta-3',
+    src: '/b3.png',
+    thumbSrc: '/b3_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Choker & Drop Earrings - Angle View',
+    title: 'Kundan & Pearl Detail',
+    tag: 'Close-Up',
+  },
+  {
+    id: 'ta-4',
+    src: '/b4.png',
+    thumbSrc: '/b4_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Jewellery Set - Presentation View',
+    title: 'Complete Ensemble',
+    tag: 'Set View',
+  },
+  {
+    id: 'ta-5',
+    src: '/b5.png',
+    thumbSrc: '/b5_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Kundan & Pearl Drops - Macro Artistry',
+    title: 'Macro Artistry',
+    tag: 'Macro',
+  },
+];
+
+export const TRENDY_ALLOY_SET_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'trendy-alloy-single',
+    title: '1x Trendy Alloy Gold Plated Set',
+    subtitle: '1 Necklace + 1 Pair Matching Drop Earrings + Free Velvet Box + Free Express Shipping',
+    unitCount: 1,
+    price: 399,
+    originalPrice: 1499,
+    discountPercent: 73,
+    popular: true,
+    saveAmount: 1100,
+  },
+  {
+    id: 'trendy-alloy-double',
+    title: '2x Sets (Sister / Bestie Combo)',
+    subtitle: '2 Complete Jewellery Sets + 2 Velvet Gift Boxes + Extra ₹50 OFF',
+    unitCount: 2,
+    price: 749,
+    originalPrice: 2998,
+    discountPercent: 75,
+    popular: false,
+    saveAmount: 2249,
+  },
+  {
+    id: 'trendy-alloy-family',
+    title: '3x Sets (Grand Festive Family Combo)',
+    subtitle: '3 Complete Sets + Free Express Courier Delivery + Royal Gift Packaging',
+    unitCount: 3,
+    price: 1099,
+    originalPrice: 4497,
+    discountPercent: 76,
+    popular: false,
+    saveAmount: 3398,
+  },
+];
+
+export const TRENDY_ALLOY_SET_REVIEWS_LIST: ReviewItem[] = [
+  {
+    id: 'ta-rev-1',
+    author: 'Pooja Verma',
+    city: 'Ahmedabad',
+    state: 'Gujarat',
+    rating: 5,
+    date: '1 day ago',
+    title: 'Unbelievable beauty and shine for ₹399! Loved it',
+    comment:
+      'I was so pleasantly surprised when opening the package. The gold plating looks so rich and authentic, like real 22K gold. The pearl drops and kundan stones sparkle gorgeously. The adjustable dori makes it very easy to fit. Highly recommended!',
+    verified: true,
+    helpfulCount: 89,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_1.jpg',
+  },
+  {
+    id: 'ta-rev-2',
+    author: 'Sunita Rawat',
+    city: 'Dehradun',
+    state: 'Uttarakhand',
+    rating: 5,
+    date: '3 days ago',
+    title: 'Earrings are super comfortable and lightweight',
+    comment:
+      'Often heavy necklace sets hurt the ears, but these matching earrings are wonderfully light while looking grand. The finish has zero roughness, totally skin friendly. Beautiful velvet box packaging too.',
+    verified: true,
+    helpfulCount: 64,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_2.jpg',
+  },
+  {
+    id: 'ta-rev-3',
+    author: 'Ritu Nair',
+    city: 'Kochi',
+    state: 'Kerala',
+    rating: 5,
+    date: '4 days ago',
+    title: 'Wore it for family wedding — got so many compliments!',
+    comment:
+      'Draped it with my Kanjeevaram silk saree. Everyone thought I bought it from a high-end bridal boutique. QAVELLE’s quality and packaging is top-notch. Express delivery reached in 2 days.',
+    verified: true,
+    helpfulCount: 47,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_3.jpg',
+  },
+  {
+    id: 'ta-rev-4',
+    author: 'Divya Agarwal',
+    city: 'Indore',
+    state: 'Madhya Pradesh',
+    rating: 5,
+    date: '6 days ago',
+    title: 'Value for money is unmatched',
+    comment:
+      'At this price point, the craftsmanship is remarkable. The alloy is sturdy, the gold tone is elegant without being too bright or yellow, and the finish is clean. Will order another one as a gift for my sister.',
+    verified: true,
+    helpfulCount: 38,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_4.jpg',
+  },
+];
+
+export const TRENDY_ALLOY_SET_CUSTOMER_MEDIA = [
+  {
+    id: 'm-ta-1',
+    type: 'image',
+    image: '/b1.png',
+    author: 'Pooja Verma',
+    caption: 'Trendy Alloy Gold Plated Jewellery Set complete necklace and earrings.',
+  },
+  {
+    id: 'm-ta-2',
+    type: 'image',
+    image: '/b2.png',
+    author: 'Sunita Rawat',
+    caption: 'Stunning traditional craft and intricate kundan setting.',
+  },
+  {
+    id: 'm-ta-3',
+    type: 'image',
+    image: '/b3.png',
+    author: 'Ritu Nair',
+    caption: 'Close-up of the delicate floral motif and lustrous pearl drops.',
+  },
+  {
+    id: 'm-ta-4',
+    type: 'image',
+    image: '/b4.png',
+    author: 'Divya Agarwal',
+    caption: 'Detailed view of the 22K micro gold plating finish and matching earrings.',
+  },
+];
+
 
 
 

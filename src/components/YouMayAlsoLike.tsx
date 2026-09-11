@@ -6,6 +6,7 @@ import {
   ELEGANT_EVERYDAY_MATCHING_VARIANTS,
   RADHIKA_GREEN_AD_MATCHING_VARIANTS,
   ALLURE_GOLD_SET_MATCHING_VARIANTS,
+  TRENDY_ALLOY_SET_MATCHING_VARIANTS,
 } from '../data/productData';
 import { ProductId } from '../types';
 
@@ -16,6 +17,7 @@ interface YouMayAlsoLikeProps {
 }
 
 const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'trendy-alloy-set': '/products/trendy-alloy-gold-plated-jewellery-set',
   'allure-gold-set': '/products/royal-elegant-gold-plated-jewellery-set',
   'radhika-green-ad': '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',
   'elegant-everyday-5': '/products/elegant-everyday-necklace-set-combo-of-5',
@@ -36,7 +38,9 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
   onSwitchProduct,
 }) => {
   const products =
-    activeProductId === 'allure-gold-set'
+    activeProductId === 'trendy-alloy-set'
+      ? TRENDY_ALLOY_SET_MATCHING_VARIANTS
+      : activeProductId === 'allure-gold-set'
       ? ALLURE_GOLD_SET_MATCHING_VARIANTS
       : activeProductId === 'radhika-green-ad'
       ? RADHIKA_GREEN_AD_MATCHING_VARIANTS

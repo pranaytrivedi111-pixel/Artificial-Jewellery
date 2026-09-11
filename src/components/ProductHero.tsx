@@ -62,6 +62,12 @@ import {
   ALLURE_GOLD_SET_ADDITIONAL_DETAILS,
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
   ALLURE_GOLD_SET_REVIEWS_LIST,
+  TRENDY_ALLOY_SET_PRODUCT_DETAILS,
+  TRENDY_ALLOY_SET_PRODUCT_GALLERY,
+  TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS,
+  TRENDY_ALLOY_SET_ADDITIONAL_DETAILS,
+  TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_REVIEWS_LIST,
 } from '../data/productData';
 import {
   GPayLogo,
@@ -96,8 +102,11 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isCombo5 = isShimmering || isElegantEveryday;
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
+  const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
 
-  const currentProduct: ProductDetails = isAllureGold
+  const currentProduct: ProductDetails = isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_DETAILS
@@ -109,7 +118,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isAllureGold
+  const currentGallery = isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_GALLERY
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_GALLERY
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_GALLERY
@@ -121,7 +132,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isAllureGold
+  const currentHighlights = isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_HIGHLIGHTS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_HIGHLIGHTS
@@ -133,7 +146,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isAllureGold
+  const currentAdditionalDetails = isTrendyAlloy
+    ? TRENDY_ALLOY_SET_ADDITIONAL_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_ADDITIONAL_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_ADDITIONAL_DETAILS
@@ -145,7 +160,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isAllureGold
+  const currentBundleOptions = isTrendyAlloy
+    ? TRENDY_ALLOY_SET_BUNDLE_OPTIONS
+    : isAllureGold
     ? ALLURE_GOLD_SET_BUNDLE_OPTIONS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_BUNDLE_OPTIONS
@@ -157,7 +174,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isAllureGold
+  const currentReviewsList = isTrendyAlloy
+    ? TRENDY_ALLOY_SET_REVIEWS_LIST
+    : isAllureGold
     ? ALLURE_GOLD_SET_REVIEWS_LIST
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_REVIEWS_LIST
@@ -174,7 +193,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   // Reset active image when product switches
   useEffect(() => {
     setActiveImageIndex(0);
-  }, [activeProductId, isChoker, isCombo5, isRadhikaGreen, isAllureGold]);
+  }, [activeProductId, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy]);
   const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
   const [isOfferExpanded, setIsOfferExpanded] = useState(true);
   const [activeReviewIdx, setActiveReviewIdx] = useState(0);

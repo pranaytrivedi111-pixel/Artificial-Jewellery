@@ -45,6 +45,9 @@ import {
   RADHIKA_GREEN_AD_PRODUCT_DETAILS,
   ALLURE_GOLD_SET_PRODUCT_DETAILS,
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_PRODUCT_DETAILS,
+  TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -73,6 +76,18 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('trendy') ||
+    pathname.includes('alloy') ||
+    pathname.includes('qp1c') ||
+    param === 'trendy-alloy-set' ||
+    param === 'trendy-alloy' ||
+    param === 'alloy' ||
+    param === 'qp1c'
+  ) {
+    return { view: 'product', productId: 'trendy-alloy-set' };
   }
 
   if (
@@ -147,6 +162,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'trendy-alloy-set': '/products/trendy-alloy-gold-plated-jewellery-set',
   'allure-gold-set': '/products/royal-elegant-gold-plated-jewellery-set',
   'radhika-green-ad': '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',
   'elegant-everyday-5': '/products/elegant-everyday-necklace-set-combo-of-5',
@@ -160,6 +176,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
   if (productId === 'radhika-green-ad') return RADHIKA_GREEN_AD_BUNDLE_OPTIONS[0];
   if (productId === 'elegant-everyday-5') return ELEGANT_EVERYDAY_BUNDLE_OPTIONS[0];

@@ -14,6 +14,8 @@ import {
   ELEGANT_EVERYDAY_BUNDLE_OPTIONS,
   RADHIKA_GREEN_AD_BUNDLE_OPTIONS,
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_PRODUCT_DETAILS,
+  TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
 } from '../data/productData';
 import { ShieldCheck, Star } from 'lucide-react';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -26,6 +28,7 @@ interface StickyBottomBarProps {
 }
 
 const getFallbackBundle = (productId: ProductId | string = 'jhumka'): BundleOption => {
+  if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
   if (productId === 'radhika-green-ad') return RADHIKA_GREEN_AD_BUNDLE_OPTIONS[0];
   if (productId === 'elegant-everyday-5') return ELEGANT_EVERYDAY_BUNDLE_OPTIONS[0];
@@ -40,6 +43,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   onAddToCart,
   activeProductId = 'jhumka',
 }) => {
+  const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isChoker = activeProductId === 'choker';
   const isCombo5 = activeProductId === 'necklace-combo-5';
   const isElegantEveryday = activeProductId === 'elegant-everyday-5';
@@ -49,7 +53,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   // Guaranteed safe fallback bundle to eliminate any undefined access
   const safeBundle = bundle && bundle.price ? bundle : getFallbackBundle(activeProductId);
 
-  const currentProduct = isAllureGold
+  const currentProduct = isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_DETAILS
@@ -61,7 +67,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentImage = isAllureGold
+  const currentImage = isTrendyAlloy
+    ? '/b1.png'
+    : isAllureGold
     ? '/aa1.webp'
     : isRadhikaGreen
     ? '/radhika_ambani_1.webp'

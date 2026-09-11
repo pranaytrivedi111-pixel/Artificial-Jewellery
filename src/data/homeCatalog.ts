@@ -2,6 +2,7 @@ import { ProductId } from '../types';
 
 export interface GenuineProduct {
   id: ProductId;
+  cardKey?: string;
   slug: string;
   title: string;
   shortTitle: string;
@@ -188,17 +189,44 @@ export const GENUINE_PRODUCTS: GenuineProduct[] = [
     discountPercent: 75,
     rating: 4.8,
     reviewsCount: 2840,
-    image: '/Hero_website.webp',
+    image: '/Cinematic.webp',
     tag: 'Set of 6 Pairs',
     inStockCount: 9,
     highlights: [
       'Set of 6 Unique Traditional Jhumka Designs',
+      'Includes Free Velvet Keepsake Box',
       'Handcrafted with Austrian Crystals & Lustrous Pearl Drops',
       '18K Micro Gold Plating with Anti-Allergy Push Backs',
-      'Ideal for Festive Ethnic Wear & Traditional Functions',
     ],
     occasion: 'Festivals, Puja, Weddings & Traditional Family Gatherings',
-    packageContains: '6 Distinct Pairs of Jhumka Earrings + Velvet Jewelry Box',
+    packageContains: '6 Distinct Pairs of Jhumka Earrings + Free Velvet Keepsake Box',
+  },
+  {
+    id: 'allure-gold-set',
+    cardKey: 'royal-antique-gold',
+    slug: '/products/royal-antique-temple-gold-plated-jewellery-set',
+    title: 'Royal Antique Temple Gold Plated Heritage Necklace Set with Matching Jhumkas',
+    shortTitle: 'Royal Antique Temple Set',
+    subtitle: '24K Micro Gold Plated Antique Temple Jewellery Set with Intricate Craftsmanship',
+    category: 'Necklace Sets',
+    badge: 'HERITAGE TEMPLE',
+    price: 699,
+    originalPrice: 2199,
+    discountPercent: 68,
+    rating: 4.9,
+    reviewsCount: 2980,
+    image: '/royal_gold_1.webp',
+    hoverImage: '/royal_gold_2.webp',
+    tag: 'Antique Temple Gold',
+    inStockCount: 6,
+    highlights: [
+      'Handcrafted Temple Motif with 24K Micro Gold Polish',
+      'Matching Royal Temple Jhumkas Included',
+      'Skin-Safe Hypoallergenic Brass Alloy',
+      'Free Luxury Velvet Jewellery Box',
+    ],
+    occasion: 'Weddings, Traditional Festivals & Grand Ceremonies',
+    packageContains: '1 Royal Antique Temple Necklace + 1 Pair Matching Jhumkas + Velvet Box',
   },
 ];
 
@@ -207,8 +235,8 @@ export const HOME_CATEGORIES = [
     id: 'all',
     label: 'All Products',
     icon: '✨',
-    image: '/Hero_website.webp',
-    count: 7,
+    image: '/Cinematic.webp',
+    count: 8,
   },
   {
     id: 'trendy-alloy',
@@ -254,7 +282,7 @@ export const HOME_CATEGORIES = [
     id: 'jhumka-set',
     label: 'Gold Jhumkas',
     icon: '🪔',
-    image: '/Hero_website.webp',
+    image: '/Cinematic.webp',
     count: 1,
     targetProduct: 'jhumka' as ProductId,
   },
@@ -325,11 +353,11 @@ export const HOME_PROMO_SLIDES = [
     id: 'slide-jhumka',
     badge: 'TRADITIONAL BESTSELLER',
     title: 'Handcrafted 18K Gold Plated Jhumkas (Set of 6 Pairs)',
-    subtitle: '6 Regal Peacock & Temple Motif Jhumkas with Lustrous Pearl Drops. 100% Skin Safe & Hypoallergenic in Velvet Box.',
-    offer: 'Flat 75% OFF • 6 Pairs in 1 Velvet Box • ₹499 Only',
+    subtitle: '6 Regal Peacock & Temple Motif Jhumkas with Lustrous Pearl Drops. Includes Free Velvet Keepsake Box.',
+    offer: 'Flat 75% OFF • 6 Pairs + Free Velvet Keepsake Box • ₹499 Only',
     price: '₹499',
     originalPrice: '₹1,999',
-    image: '/Hero_website.webp',
+    image: '/Cinematic.webp',
     productId: 'jhumka' as ProductId,
     ctaText: 'Shop 6-Pair Set',
     theme: 'warm',
@@ -394,7 +422,7 @@ export const HOME_SHOP_BY_PURPOSE = [
     id: 'purpose-puja',
     title: 'Traditional Festive & Puja',
     tagline: '18K Gold Plated Jhumka Earrings with Pearl Drops (Set of 6 Pairs)',
-    image: '/Hero_website.webp',
+    image: '/Cinematic.webp',
     productId: 'jhumka' as ProductId,
     badge: 'Set of 6 Pairs',
     price: '₹499',
@@ -494,6 +522,6 @@ export const HOME_REVIEWS = [
       'All 6 pairs of gold-plated jhumkas are distinct and beautifully detailed. The pearl drops give that classic traditional look. Lightweight on ears, wore them for 8 hours during Diwali puja without any pain!',
     productTitle: 'Gold Plated Jhumka Set (6 Pairs)',
     verified: true,
-    userImage: '/Hero_website.webp',
+    userImage: '/Cinematic.webp',
   },
 ];

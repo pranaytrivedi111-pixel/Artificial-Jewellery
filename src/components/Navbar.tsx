@@ -8,7 +8,6 @@ import {
   Heart,
   Crown,
   ChevronRight,
-  Sparkles,
 } from 'lucide-react';
 import { ASSET_IMAGES } from '../data/productData';
 import { GENUINE_PRODUCTS } from '../data/homeCatalog';
@@ -99,77 +98,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 />
               </a>
             </div>
-
-            {/* Middle: Desktop Navigation Links (Astrotalk Store inspired) */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-              <button
-                onClick={onNavigateHome}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                  currentView === 'home'
-                    ? 'text-amber-800 bg-amber-50'
-                    : 'text-gray-700 hover:text-black hover:bg-gray-50'
-                }`}
-              >
-                Home
-              </button>
-
-              <button
-                onClick={() => handleProductClick('radhika-green-ad')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 ${
-                  activeProductId === 'radhika-green-ad' && currentView === 'product'
-                    ? 'text-amber-800 bg-amber-50'
-                    : 'text-gray-700 hover:text-black hover:bg-gray-50'
-                }`}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
-                Ambani Set
-              </button>
-
-              <button
-                onClick={() => handleProductClick('elegant-everyday-5')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 ${
-                  activeProductId === 'elegant-everyday-5' && currentView === 'product'
-                    ? 'text-amber-800 bg-amber-50'
-                    : 'text-gray-700 hover:text-black hover:bg-gray-50'
-                }`}
-              >
-                <Sparkles className="w-3 h-3 text-amber-500" />
-                Combo of 5
-              </button>
-
-              <button
-                onClick={() => handleProductClick('choker')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                  activeProductId === 'choker' && currentView === 'product'
-                    ? 'text-amber-800 bg-amber-50'
-                    : 'text-gray-700 hover:text-black hover:bg-gray-50'
-                }`}
-              >
-                Royal Choker
-              </button>
-
-              <button
-                onClick={() => handleProductClick('jhumka')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                  activeProductId === 'jhumka' && currentView === 'product'
-                    ? 'text-amber-800 bg-amber-50'
-                    : 'text-gray-700 hover:text-black hover:bg-gray-50'
-                }`}
-              >
-                Gold Jhumkas
-              </button>
-
-              <button
-                onClick={() => handleProductClick('necklace-combo-5')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                  activeProductId === 'necklace-combo-5' && currentView === 'product'
-                    ? 'text-amber-800 bg-amber-50'
-                    : 'text-gray-700 hover:text-black hover:bg-gray-50'
-                }`}
-              >
-                Shimmering 5
-              </button>
-            </nav>
 
             {/* Right Action Icons: Search, Track Order, Wishlist, Cart */}
             <div className="flex items-center gap-1 sm:gap-2">

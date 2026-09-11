@@ -431,8 +431,11 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                 </span>
               </div>
 
-              <div className="text-xs text-gray-500 mt-1">
-                (Inclusive of all taxes)
+              <div className="flex items-center justify-between gap-2 flex-wrap text-xs text-gray-500 mt-1">
+                <span>(Inclusive of all taxes)</span>
+                <span className="font-bold text-gray-800 bg-[#FAF9F5] border border-stone-200/90 px-2 py-0.5 rounded-md text-[11px] inline-flex items-center gap-1.5 shadow-2xs">
+                  <span className="text-amber-700">🎁</span> Includes Free Velvet Keepsake Box
+                </span>
               </div>
 
               {/* Green Offer Countdown Alert Bar */}
@@ -783,6 +786,10 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                     <li className="flex items-start gap-1.5">
                       <span className="text-amber-600 font-bold">&bull;</span>
                       <span><strong className="font-bold text-black">6 Distinct Handcrafted Designs</strong> - Mayur Peacock, Lakshmi Devi, and Traditional Bell Jhumkas</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-amber-600 font-bold">&bull;</span>
+                      <span><strong className="font-bold text-black">Includes Free Velvet Keepsake Box</strong> - Safely nestled in a plush velvet keepsake jewelry box with individual slots for royal presentation & dust-free care</span>
                     </li>
                   </ul>
                 )}

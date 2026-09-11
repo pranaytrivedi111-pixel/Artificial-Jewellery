@@ -50,7 +50,7 @@ export const ASSET_IMAGES = {
   templeHaram: templeHaramImg,
   rubyFloralNecklace: rubyFloralNecklaceImg,
   antiqueBangles: antiqueBanglesImg,
-  hero: '/Hero_website.png',
+  hero: '/Cinematic.webp',
   hand: '/UGC_1.png',
   chart: '/Cinematic.png',
   cert: '/UGC_3.png',
@@ -63,7 +63,7 @@ export const ASSET_IMAGES = {
   unboxReel: '/UGC.png',
   custBangles: '/UGC_2.png',
   custPalm: '/UGC_3.png',
-  jhumkaHero: '/Hero_website.png',
+  jhumkaHero: '/Cinematic.webp',
   jhumkaCinematic: '/Cinematic.png',
   jhumkaStudioWhite: jhumkaStudioWhite,
   jhumkaModelEar: '/UGC_1.png',
@@ -424,6 +424,7 @@ export const PRODUCT_HIGHLIGHTS = [
   { label: 'Plating', value: 'Oxidised Gold' },
   { label: 'Occasion', value: 'Festive, Ethnic, Daily Wear' },
   { label: 'Net Quantity (N)', value: '1 (Set of 6 Pairs)' },
+  { label: 'Packaging', value: 'Free Velvet Keepsake Box' },
 ];
 
 export const ADDITIONAL_DETAILS = [
@@ -433,6 +434,7 @@ export const ADDITIONAL_DETAILS = [
   { label: 'Sizing', value: 'Free Size' },
   { label: 'Color', value: 'Gold' },
   { label: 'Brand', value: 'QAVELLE' },
+  { label: 'Package Includes', value: '6 Pairs Jhumkas + Free Velvet Keepsake Box' },
   { label: 'Generic Name', value: 'Accessories' },
   { label: 'L × W × H', value: '2 × 3 × 2 inch' },
   { label: 'Country of Origin', value: 'India' },
@@ -485,7 +487,7 @@ export const BUNDLE_OPTIONS: BundleOption[] = [
   {
     id: 'single-set',
     title: 'Gold Plated Fancy Jhumka Earrings (Set of 6 Pairs)',
-    subtitle: 'Includes all 6 Antique Oxidised Gold Designs + Velvet Pouch',
+    subtitle: 'Includes all 6 Antique Oxidised Gold Designs + Free Velvet Keepsake Box',
     unitCount: 1,
     price: 499,
     originalPrice: 1999,
@@ -600,7 +602,7 @@ export const SPECIFICATIONS_TABLE = [
   { label: 'Stones & Accents', value: 'Hand-set Ruby & Emerald Glass Stones, Faux Basra Pearls' },
   { label: 'Closure Type', value: 'Ear-Safe Push Back / Secure Screw Posts' },
   { label: 'Weight', value: 'Approx. 8 - 14 Grams per pair (Lightweight for all-day comfort)' },
-  { label: 'Box Contents', value: '6 Unique Pairs of Antique Jhumkas + Luxury Keepsake Box + Velvet Pouches + Certificate of Authenticity' },
+  { label: 'Box Contents', value: '6 Unique Pairs of Antique Jhumkas + Free Velvet Keepsake Box + Velvet Pouches + Certificate of Authenticity' },
   { label: 'Country of Origin', value: 'Handcrafted in Jaipur, India' },
 ];
 
@@ -1934,7 +1936,7 @@ export const TRENDY_ALLOY_SET_MATCHING_VARIANTS = [
     price: 499,
     originalPrice: 1999,
     discountPercent: 75,
-    image: '/Hero_website.webp',
+    image: '/Cinematic.webp',
     sourceUrl: '/products/gold-plated-fancy-jhumka-earrings-set-of-6',
   },
 ];

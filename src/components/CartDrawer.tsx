@@ -181,6 +181,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                             ₹{item.bundle.originalPrice}
                           </span>
                         </div>
+
+                        <div className="mt-1.5 flex items-center gap-1 text-[10px] font-semibold text-emerald-800 bg-emerald-50/80 border border-emerald-200/70 px-1.5 py-0.5 rounded w-fit">
+                          <span>🎁</span>
+                          <span>Includes Free Velvet Keepsake Box</span>
+                        </div>
                       </div>
                     </div>
 

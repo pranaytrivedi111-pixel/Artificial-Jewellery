@@ -1126,8 +1126,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     </div>
                     {(confirmedOrder?.utrNumber || utrNumber) && (
                       <div className="flex items-center justify-between">
-                        <span className="text-emerald-900 font-semibold">Transaction Ref:</span>
-                        <span className="font-mono text-emerald-950 font-bold">{confirmedOrder?.utrNumber || utrNumber}</span>
+                        <span className="text-emerald-900 font-semibold">Verified UTR / Ref No:</span>
+                        <span className="font-mono text-emerald-950 font-bold">UTR #{confirmedOrder?.utrNumber || utrNumber}</span>
                       </div>
                     )}
                   </div>

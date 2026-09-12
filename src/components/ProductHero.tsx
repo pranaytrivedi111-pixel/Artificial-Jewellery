@@ -328,11 +328,11 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
         <div className="lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-10 lg:items-start">
           {/* LEFT COLUMN: Gallery with Hero Image on Top and Collection Grid Below (Fixed/Sticky on Desktop) */}
           <div className="lg:col-span-6 xl:col-span-6 lg:sticky lg:top-20 self-start w-full mx-auto lg:mx-0">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5 sm:gap-3">
               {/* Main Hero Media Frame - 100% Raw, No Borders, Curvy Rounded Edges */}
               <div className="w-full relative flex justify-center">
                 <div
-                  className="relative aspect-square w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[480px] xl:max-w-[500px] rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center select-none mx-auto"
+                  className="relative aspect-square w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[380px] xl:max-w-[420px] rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center select-none mx-auto"
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
@@ -353,15 +353,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
               </div>
 
               {/* Image Collection Thumbnails - Same Corner Curvy Design (rounded-2xl sm:rounded-3xl) */}
-              <div className="w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[480px] xl:max-w-[500px] mx-auto">
-                <div className="flex items-center justify-center gap-2.5 sm:gap-3 px-0.5 py-1 w-full overflow-x-auto no-scrollbar">
+              <div className="w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[380px] xl:max-w-[420px] mx-auto">
+                <div className="flex items-center justify-center gap-2 sm:gap-2.5 px-0.5 py-1 w-full overflow-x-auto no-scrollbar">
                   {currentGallery.map((item, idx) => (
                     <button
                       key={item.id}
                       type="button"
                       onClick={() => setActiveImageIndex(idx)}
                       onMouseEnter={() => setActiveImageIndex(idx)}
-                      className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-[72px] lg:h-[72px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shrink-0 flex items-center justify-center p-0.5 transition-all duration-200 ${
+                      className={`relative w-13 h-13 min-[375px]:w-14 min-[375px]:h-14 sm:w-16 sm:h-16 lg:w-14 lg:h-14 xl:w-16 xl:h-16 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer shrink-0 flex items-center justify-center p-0.5 transition-all duration-200 ${
                         activeImageIndex === idx
                           ? 'ring-2 ring-[#b3874b] shadow-xs'
                           : 'opacity-85 hover:opacity-100 hover:ring-1 hover:ring-gray-300'
@@ -375,10 +375,10 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                         referrerPolicy="no-referrer"
                         loading="eager"
                         decoding="async"
-                        className="w-full h-full object-contain rounded-2xl sm:rounded-3xl"
+                        className="w-full h-full object-contain rounded-xl sm:rounded-2xl"
                       />
                       {activeImageIndex === idx && (
-                        <span className="absolute bottom-1 inset-x-3 h-0.5 bg-[#b3874b] rounded-full" />
+                        <span className="absolute bottom-1 inset-x-2.5 sm:inset-x-3 h-0.5 bg-[#b3874b] rounded-full" />
                       )}
                     </button>
                   ))}

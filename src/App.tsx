@@ -333,8 +333,8 @@ export default function App() {
   };
 
   // Switch product function: switches to PDP with specific slug
-  const handleSwitchProduct = (productId: ProductId) => {
-    const targetSlug = getSlugForProduct(productId);
+  const handleSwitchProduct = (productId: ProductId, customSlug?: string) => {
+    const targetSlug = customSlug || getSlugForProduct(productId);
     setActiveProductId(productId);
     setCurrentView('product');
     setSelectedBundle(getDefaultBundle(productId));

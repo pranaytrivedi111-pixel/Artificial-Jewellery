@@ -201,33 +201,6 @@ export const GENUINE_PRODUCTS: GenuineProduct[] = [
     occasion: 'Festivals, Puja, Weddings & Traditional Family Gatherings',
     packageContains: '6 Distinct Pairs of Jhumka Earrings + Free Velvet Keepsake Box',
   },
-  {
-    id: 'allure-gold-set',
-    cardKey: 'royal-antique-gold',
-    slug: '/products/royal-antique-temple-gold-plated-jewellery-set',
-    title: 'Royal Antique Temple Gold Plated Heritage Necklace Set with Matching Jhumkas',
-    shortTitle: 'Royal Antique Temple Set',
-    subtitle: '24K Micro Gold Plated Antique Temple Jewellery Set with Intricate Craftsmanship',
-    category: 'Necklace Sets',
-    badge: 'HERITAGE TEMPLE',
-    price: 699,
-    originalPrice: 2199,
-    discountPercent: 68,
-    rating: 4.9,
-    reviewsCount: 2980,
-    image: '/royal_gold_1.webp',
-    hoverImage: '/royal_gold_2.webp',
-    tag: 'Antique Temple Gold',
-    inStockCount: 6,
-    highlights: [
-      'Handcrafted Temple Motif with 24K Micro Gold Polish',
-      'Matching Royal Temple Jhumkas Included',
-      'Skin-Safe Hypoallergenic Brass Alloy',
-      'Free Luxury Velvet Jewellery Box',
-    ],
-    occasion: 'Weddings, Traditional Festivals & Grand Ceremonies',
-    packageContains: '1 Royal Antique Temple Necklace + 1 Pair Matching Jhumkas + Velvet Box',
-  },
 ];
 
 export const HOME_CATEGORIES = [
@@ -236,7 +209,7 @@ export const HOME_CATEGORIES = [
     label: 'All Products',
     icon: '✨',
     image: '/Cinematic.webp',
-    count: 8,
+    count: 7,
   },
   {
     id: 'trendy-alloy',

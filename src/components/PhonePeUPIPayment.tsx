@@ -111,47 +111,26 @@ export const PhonePeUPIPayment: React.FC<PhonePeUPIPaymentProps> = ({
     // Trigger app deep link
     window.location.href = url;
 
-    // Smooth verification progress simulation
+    // Verification progress simulation (waiting for real user payment)
     if (progressTimerRef.current) clearInterval(progressTimerRef.current);
     progressTimerRef.current = setInterval(() => {
       setVerificationProgress((prev) => {
-        if (prev >= 90) {
+        if (prev >= 85) {
           if (progressTimerRef.current) clearInterval(progressTimerRef.current);
-          return 95;
+          return 85;
         }
         return prev + 15;
       });
     }, 800);
-
-    // Automatic confirmation after 4.5 seconds
-    if (autoConfirmTimerRef.current) clearTimeout(autoConfirmTimerRef.current);
-    autoConfirmTimerRef.current = setTimeout(() => {
-      triggerOrderConfirmation();
-    }, 4500);
   };
 
-  // Automatic detection when user returns back to browser tab from their UPI app
+  // User returns from UPI app
   useEffect(() => {
-    const handleVisibilityOrFocus = () => {
-      if (isVerifying && document.visibilityState === 'visible') {
-        // User returned from UPI app - complete payment & order automatically
-        setVerificationProgress(100);
-        setTimeout(() => {
-          triggerOrderConfirmation();
-        }, 500);
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityOrFocus);
-    window.addEventListener('focus', handleVisibilityOrFocus);
-
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityOrFocus);
-      window.removeEventListener('focus', handleVisibilityOrFocus);
       if (autoConfirmTimerRef.current) clearTimeout(autoConfirmTimerRef.current);
       if (progressTimerRef.current) clearInterval(progressTimerRef.current);
     };
-  }, [isVerifying, onPaymentSuccess]);
+  }, []);
 
   const handleCancelVerification = () => {
     setIsVerifying(false);

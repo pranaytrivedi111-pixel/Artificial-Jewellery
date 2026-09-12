@@ -1438,7 +1438,7 @@ export const RADHIKA_GREEN_AD_PRODUCT_DETAILS = {
   id: 'radhika-green-ad',
   title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Earrings',
   fullDescription:
-    'Radhika Anant Ambani Inspired Green AD Necklace Set – Regal Emerald Green Austrian American Diamond Choker Necklace with Matching Chandelier Earrings, crafted with skin-safe brass alloy and anti-tarnish rhodium silver plating.',
+    'Regal Emerald Green Austrian American Diamond Choker Necklace with Matching Chandelier Earrings, crafted with skin-safe brass alloy and anti-tarnish rhodium silver plating.',
   shortTitle: 'Radhika Ambani Inspired Green AD Set',
   tagline: 'Colombian Emerald Green Crystals • Austrian American Diamonds • Anti-Tarnish Rhodium Finish',
   rating: 4.9,
@@ -1667,7 +1667,7 @@ export const ALLURE_GOLD_SET_PRODUCT_DETAILS = {
   id: 'allure-gold-set',
   title: 'Royal Elegant Gold Plated Jewellery Set with Matching Earrings',
   fullDescription:
-    'Royal Elegant Gold Plated Jewellery Set – Majestic 22K micro gold-plated necklace set adorned with intricate leaf-shaped crystal motifs, imperial ruby-red gemstones, matching drop earrings, adjustable bracelet, and cocktail ring. Complete with free royal velvet presentation box.',
+    'Majestic 22K micro gold-plated necklace set adorned with intricate leaf-shaped crystal motifs, imperial ruby-red gemstones, matching drop earrings, adjustable bracelet, and cocktail ring. Complete with free royal velvet presentation box.',
   shortTitle: 'Royal Elegant Gold Plated Set',
   tagline: '22K Micro Gold Plating • Imperial Ruby Gemstones • Austrian Crystals • Free Royal Velvet Gift Box',
   rating: 4.9,
@@ -1945,7 +1945,7 @@ export const TRENDY_ALLOY_SET_PRODUCT_DETAILS = {
   id: 'trendy-alloy-set',
   title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
   fullDescription:
-    'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set – Exquisite handcrafted alloy necklace enriched with lustrous Austrian pearls, royal kundan stones, and matching drop earrings. Engineered with a durable skin-safe base, 22K micro gold plating, and an anti-tarnish protective coating. Ideal for weddings, festive pujas, and ethnic celebrations. Complete with free luxury velvet jewelry gift box.',
+    'Exquisite handcrafted alloy necklace enriched with lustrous Austrian pearls, royal kundan stones, and matching drop earrings. Engineered with a durable skin-safe base, 22K micro gold plating, and an anti-tarnish protective coating. Ideal for weddings, festive pujas, and ethnic celebrations. Complete with free luxury velvet jewelry gift box.',
   shortTitle: 'Trendy Alloy Jewellery Set',
   tagline: '22K Micro Gold Plating • Handcrafted Kundan & Pearl Drops • Free Royal Velvet Gift Box',
   rating: 4.8,

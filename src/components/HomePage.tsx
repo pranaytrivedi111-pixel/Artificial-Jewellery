@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import {
   Star,
   ShieldCheck,
@@ -40,22 +41,30 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   const [selectedHeroIndex, setSelectedHeroIndex] = useState<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const currentHeroProduct = heroProducts[selectedHeroIndex] || heroProducts[0];
 
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   const thumbnailButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Sliding hero main tab: auto advances every 3.8 seconds when not hovered/paused
+  // Continuous auto-slider: automatically advances hero product every 3.5 seconds
   useEffect(() => {
     if (isPaused || heroProducts.length <= 1) return;
     const interval = setInterval(() => {
       setSelectedHeroIndex((prev) => (prev + 1) % heroProducts.length);
-    }, 3800);
+    }, 3500);
     return () => clearInterval(interval);
   }, [isPaused, heroProducts.length]);
 
+  // Clean up pause timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    };
+  }, []);
+
   // Smoothly scroll the active thumbnail card horizontally inside its container ONLY
-  // (Never calls window.scroll or scrollIntoView, so user page scroll position is never affected)
+  // to keep the active item from the collection centered
   useEffect(() => {
     const activeBtn = thumbnailButtonRefs.current[selectedHeroIndex];
     const container = thumbnailContainerRef.current;
@@ -71,23 +80,14 @@ export const HomePage: React.FC<HomePageProps> = ({
     }
   }, [selectedHeroIndex]);
 
-  // Manual scroll handler for thumbnail cards collection
-  const handleScrollThumbnails = (direction: 'left' | 'right') => {
-    if (!thumbnailContainerRef.current) return;
-    const scrollAmount = direction === 'left' ? -180 : 180;
-    thumbnailContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  };
-
-  const handlePrevHero = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  // When user clicks a thumbnail, switch to it immediately and resume auto-sliding after 5s
+  const handleSelectHero = (idx: number) => {
+    setSelectedHeroIndex(idx);
     setIsPaused(true);
-    setSelectedHeroIndex((prev) => (prev - 1 + heroProducts.length) % heroProducts.length);
-  };
-
-  const handleNextHero = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsPaused(true);
-    setSelectedHeroIndex((prev) => (prev + 1) % heroProducts.length);
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 5000);
   };
 
   // FAQ Accordion State (supports 2-column desktop view with independent item toggling)
@@ -152,12 +152,12 @@ export const HomePage: React.FC<HomePageProps> = ({
           ========================================================================= */}
       <section
         id="hero-vice-versa-showcase"
-        className="pt-2 sm:pt-4 pb-4 sm:pb-8 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8"
+        className="pt-1 sm:pt-2 lg:pt-1.5 pb-2 sm:pb-4 lg:pb-3 w-full max-w-6xl mx-auto px-2 sm:px-4 lg:px-6"
       >
         {/* Clean Header */}
-        <div className="mb-2.5 sm:mb-3.5 text-center">
+        <div className="mb-1 sm:mb-1.5 lg:mb-2 text-center">
           <h1
-            className="text-lg sm:text-2xl lg:text-[26px] font-normal text-gray-950 tracking-tight leading-tight"
+            className="text-base sm:text-xl lg:text-2xl font-normal text-gray-950 tracking-tight leading-tight"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Royal Handcrafted Jewellery
@@ -166,31 +166,20 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         {/* 
             SCROLLABLE CARDS ABOVE (Image Collection)
-            - Renders ALL products dynamically (auto-includes any new product)
-            - Multiple cards visible at once
-            - Horizontally scrollable with smooth scroll & optional chevron buttons
-            - Hover or click immediately renders the selected product below
+            - Renders ALL products dynamically in a synchronized horizontal collection
+            - Hover or click immediately switches to that product
+            - Active item is highlighted with gold ring and smoothly centered
             - Zero text overlays on thumbnail images
         */}
         <div
-          className="relative w-full max-w-[480px] sm:max-w-[580px] lg:max-w-3xl xl:max-w-4xl mx-auto mb-2.5 sm:mb-4 px-1"
+          className="relative w-full max-w-full sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mb-1.5 lg:mb-2 px-0.5"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Scroll Left Button */}
-          <button
-            type="button"
-            onClick={() => handleScrollThumbnails('left')}
-            className="hidden sm:flex absolute -left-3.5 lg:-left-5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-white/95 border border-stone-300 shadow-xs hover:bg-amber-50 hover:border-[#B3874B] text-gray-700 hover:text-[#B3874B] items-center justify-center transition-all cursor-pointer"
-            aria-label="Scroll products left"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-
           {/* Horizontal Scrollable Thumbnails Container */}
           <div
             ref={thumbnailContainerRef}
-            className="flex items-center gap-2 sm:gap-2.5 px-1 py-1 w-full overflow-x-auto scroll-smooth no-scrollbar"
+            className="flex items-center justify-start lg:justify-center gap-2 sm:gap-2.5 px-1 py-0.5 w-full overflow-x-auto scroll-smooth no-scrollbar"
           >
             {heroProducts.map((prod, idx) => {
               const isSelected = selectedHeroIndex === idx;
@@ -199,18 +188,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                   key={prod.cardKey || `${prod.id}-${idx}`}
                   ref={(el) => (thumbnailButtonRefs.current[idx] = el)}
                   type="button"
-                  onClick={() => {
-                    setSelectedHeroIndex(idx);
-                    setIsPaused(true);
-                  }}
-                  onMouseEnter={() => {
-                    setSelectedHeroIndex(idx);
-                    setIsPaused(true);
-                  }}
-                  className={`relative w-14 h-14 min-[375px]:w-15 min-[375px]:h-15 sm:w-16 sm:h-16 lg:w-[72px] lg:h-[72px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shrink-0 flex items-center justify-center p-1 transition-all duration-200 ${
+                  onClick={() => handleSelectHero(idx)}
+                  className={`relative w-13 h-13 min-[375px]:w-14 min-[375px]:h-14 sm:w-15 sm:h-15 lg:w-13 lg:h-13 xl:w-14 xl:h-14 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer shrink-0 flex items-center justify-center p-0.5 transition-all duration-300 ${
                     isSelected
                       ? 'ring-2 ring-[#B3874B] bg-white shadow-xs scale-105 z-10'
-                      : 'bg-white/80 border border-stone-200/90 opacity-80 hover:opacity-100 hover:ring-1 hover:ring-stone-300 hover:scale-102'
+                      : 'bg-white/80 border border-stone-200/90 opacity-75 hover:opacity-100 hover:ring-1 hover:ring-stone-300 hover:scale-102'
                   }`}
                   aria-label={`Select ${prod.shortTitle || prod.title}`}
                   title={prod.shortTitle || prod.title}
@@ -221,31 +203,22 @@ export const HomePage: React.FC<HomePageProps> = ({
                     alt={prod.title}
                     referrerPolicy="no-referrer"
                     loading="eager"
-                    className="w-full h-full object-contain rounded-xl sm:rounded-2xl"
+                    className="w-full h-full object-contain rounded-lg sm:rounded-xl"
                   />
                   {isSelected && (
-                    <span className="absolute bottom-1 inset-x-2.5 sm:inset-x-3 h-0.5 bg-[#B3874B] rounded-full" />
+                    <span className="absolute bottom-0.5 inset-x-2 sm:inset-x-2.5 h-0.5 bg-[#B3874B] rounded-full" />
                   )}
                 </button>
               );
             })}
           </div>
-
-          {/* Scroll Right Button */}
-          <button
-            type="button"
-            onClick={() => handleScrollThumbnails('right')}
-            className="hidden sm:flex absolute -right-3.5 lg:-right-5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-white/95 border border-stone-300 shadow-xs hover:bg-amber-50 hover:border-[#B3874B] text-gray-700 hover:text-[#B3874B] items-center justify-center transition-all cursor-pointer"
-            aria-label="Scroll products right"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
         </div>
 
         {/* 
-            MAIN PRODUCT CARD (BELOW THE SCROLLABLE CARDS)
-            - Auto-sliding product showcase
-            - Zero text overlays on images (pure clean jewellery photo)
+            MAIN PRODUCT CARD (BELOW THE SCROLLABLE COLLECTION)
+            - Auto-sliding hero product showcase synchronizing with the above collection
+            - Strictly ZERO arrow overlays on or over the image
+            - Hero image fit to screen with smooth animated transition
             - Displays category, badge, rating, price, discount cleanly in info section
             - Clickable to navigate to that product page
         */}
@@ -253,43 +226,35 @@ export const HomePage: React.FC<HomePageProps> = ({
           onClick={() => onSelectProduct(currentHeroProduct.id)}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          className="group relative w-full max-w-[440px] sm:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-sm hover:shadow-md hover:border-amber-300 transition-all duration-300 cursor-pointer overflow-hidden select-none"
+          className="group relative w-full max-w-full sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-sm hover:shadow-md hover:border-amber-300 transition-all duration-300 cursor-pointer overflow-hidden select-none"
           title={`Click to view ${currentHeroProduct.title}`}
         >
-          {/* Subtle Slide Navigation Buttons on Hero Card */}
-          <button
-            type="button"
-            onClick={handlePrevHero}
-            className="absolute left-2 sm:left-3 top-1/3 sm:top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 border border-stone-200 shadow-xs text-gray-700 hover:text-[#B3874B] hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-            aria-label="Previous product slide"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={handleNextHero}
-            className="absolute right-2 sm:right-3 top-1/3 sm:top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 border border-stone-200 shadow-xs text-gray-700 hover:text-[#B3874B] hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-            aria-label="Next product slide"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          {/* MOBILE VIEW (Compact Single Fold Layout with Zero Text Overlay on Image) */}
-          <div className="block lg:hidden p-3 sm:p-4">
-            {/* Pristine Clean Image Container (Strictly ZERO Text/Badge/Rating Overlay on Image) */}
-            <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#FAF8F5] p-2.5 sm:p-3.5 flex items-center justify-center">
-              <img
-                key={currentHeroProduct.id}
-                src={currentHeroProduct.image}
-                alt={currentHeroProduct.title}
-                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                loading="eager"
-                referrerPolicy="no-referrer"
-              />
+          {/* MOBILE VIEW (Edge-to-edge Fit-to-screen Image with Very Little Space on Sides, matching PDP Hero) */}
+          <div className="block lg:hidden p-1 sm:p-2">
+            {/* Pristine Clean Image Container - Aspect Square Fit to Screen (Strictly ZERO Arrow, Text, Badge, or Rating Overlay on Image) */}
+            <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF8F5] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentHeroProduct.id}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="w-full h-full flex items-center justify-center"
+                >
+                  <img
+                    src={currentHeroProduct.image}
+                    alt={currentHeroProduct.title}
+                    className="w-full h-full object-contain rounded-2xl sm:rounded-3xl select-none transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                    referrerPolicy="no-referrer"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Product Details cleanly placed underneath the photo */}
-            <div className="mt-2.5 px-0.5">
+            <div className="mt-2.5 px-2 pb-2">
               <div className="flex items-center justify-between gap-1.5 flex-wrap mb-1">
                 <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#B3874B]">
                   {currentHeroProduct.category}
@@ -329,22 +294,32 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
 
-          {/* DESKTOP VIEW (Horizontal Size-Fit Layout with Zero Text Overlay on Image) */}
-          <div className="hidden lg:grid lg:grid-cols-12 items-center p-5 xl:p-6 gap-6">
-            {/* Left Col: Pristine Clean Main Product Photo (Strictly ZERO Text/Badge/Rating Overlay) */}
-            <div className="lg:col-span-5 relative h-[280px] xl:h-[320px] rounded-2xl overflow-hidden bg-[#FAF8F5] p-4 flex items-center justify-center">
-              <img
-                key={currentHeroProduct.id}
-                src={currentHeroProduct.image}
-                alt={currentHeroProduct.title}
-                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                loading="eager"
-                referrerPolicy="no-referrer"
-              />
+          {/* DESKTOP VIEW (Fit-to-First-Fold Aspect-Square Image with Smooth Auto-slide Transition & Zero Overlay) */}
+          <div className="hidden lg:grid lg:grid-cols-12 items-center p-3 xl:p-4 gap-4 xl:gap-6">
+            {/* Left Col: Pristine Clean Main Product Photo Fit to Screen (Aspect-Square, Zero Arrow/Badge/Rating Overlay) */}
+            <div className="lg:col-span-5 xl:col-span-5 relative aspect-square w-full max-w-[270px] xl:max-w-[300px] 2xl:max-w-[320px] mx-auto rounded-2xl overflow-hidden bg-[#FAF8F5] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentHeroProduct.id}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="w-full h-full flex items-center justify-center p-1"
+                >
+                  <img
+                    src={currentHeroProduct.image}
+                    alt={currentHeroProduct.title}
+                    className="w-full h-full object-contain rounded-2xl select-none transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                    referrerPolicy="no-referrer"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Right Col: Product Information, Badges, Price & CTA */}
-            <div className="lg:col-span-7 flex flex-col justify-between h-full py-1">
+            <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-between h-full py-0.5">
               <div>
                 <div className="flex items-center gap-2 text-xs font-semibold text-gray-600 flex-wrap">
                   <span className="text-[#B3874B] font-bold uppercase tracking-wider">
@@ -359,24 +334,24 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <span>{currentHeroProduct.rating}</span>
                     <Star className="w-3 h-3 fill-emerald-600 text-emerald-600" />
                   </div>
-                  <span className="text-gray-500 font-medium">
-                    ({currentHeroProduct.reviewsCount.toLocaleString()} Royal Reviews)
+                  <span className="text-gray-500 font-medium text-[11px]">
+                    ({currentHeroProduct.reviewsCount.toLocaleString()} Reviews)
                   </span>
                 </div>
 
                 <h2
-                  className="text-lg xl:text-xl font-bold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug mt-2"
+                  className="text-base xl:text-lg 2xl:text-xl font-bold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug mt-1.5"
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   {currentHeroProduct.title}
                 </h2>
 
-                <p className="text-xs text-gray-600 mt-1.5 leading-relaxed line-clamp-2">
+                <p className="text-xs text-gray-600 mt-1 leading-relaxed line-clamp-2">
                   {currentHeroProduct.subtitle}
                 </p>
 
                 {/* Highlights */}
-                <div className="mt-3 grid grid-cols-2 gap-1.5 text-[11px] text-gray-700">
+                <div className="mt-2.5 grid grid-cols-2 gap-1 text-[11px] text-gray-700">
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
                     <span className="truncate">24K Micro Gold Polish</span>
@@ -397,27 +372,51 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
 
               {/* Price Row & CTA */}
-              <div className="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between gap-4">
+              <div className="mt-3 pt-2.5 border-t border-stone-200/80 flex items-center justify-between gap-4">
                 <div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl xl:text-3xl font-black text-gray-950">
+                    <span className="text-xl xl:text-2xl font-black text-gray-950">
                       ₹{currentHeroProduct.price}
                     </span>
-                    <span className="text-sm text-gray-400 line-through font-normal">
+                    <span className="text-xs text-gray-400 line-through font-normal">
                       MRP ₹{currentHeroProduct.originalPrice}
                     </span>
                   </div>
-                  <span className="text-xs font-bold text-[#B3874B]">
+                  <span className="text-[11px] font-bold text-[#B3874B]">
                     {currentHeroProduct.discountPercent}% OFF • Special Royal Offer
                   </span>
                 </div>
 
-                <div className="bg-[#111111] group-hover:bg-[#B3874B] text-white px-5 py-2.5 rounded-xl text-xs xl:text-sm font-bold flex items-center gap-2 transition-colors shadow-xs shrink-0">
+                <div className="bg-[#111111] group-hover:bg-[#B3874B] text-white px-4 py-2 rounded-xl text-xs xl:text-sm font-bold flex items-center gap-2 transition-colors shadow-xs shrink-0">
                   <span>View Product Details</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Subtle Auto Slider Indicator Dots (Centered beneath, ZERO overlay on image) */}
+          <div className="flex items-center justify-center gap-1.5 pb-2 pt-0.5 bg-white">
+            {heroProducts.map((prod, idx) => {
+              const isActive = idx === selectedHeroIndex;
+              return (
+                <button
+                  key={`hero-dot-${prod.id}-${idx}`}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelectHero(idx);
+                  }}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? 'w-6 bg-[#B3874B]'
+                      : 'w-1.5 bg-stone-300 hover:bg-stone-400'
+                  }`}
+                  aria-label={`Show ${prod.title}`}
+                  title={prod.shortTitle || prod.title}
+                />
+              );
+            })}
           </div>
         </div>
       </section>

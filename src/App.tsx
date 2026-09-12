@@ -55,6 +55,11 @@ import {
   AESTHETIC_PENDANT_COMBO_REVIEWS_LIST,
   AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA,
   AESTHETIC_PENDANT_COMBO_SLUG,
+  EMERALD_SNAKE_PRODUCT_DETAILS,
+  EMERALD_SNAKE_BUNDLE_OPTIONS,
+  EMERALD_SNAKE_REVIEWS_LIST,
+  EMERALD_SNAKE_CUSTOMER_MEDIA,
+  EMERALD_SNAKE_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -83,6 +88,21 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('7mhyk6') ||
+    pathname.includes('emerald') ||
+    pathname.includes('snake-chain') ||
+    pathname.includes('flat-snake') ||
+    pathname.includes('cubic-zirconia') ||
+    pathname.includes('461052726') ||
+    param === 'emerald-snake-pendant' ||
+    param === '7mhyk6' ||
+    param === 'emerald-snake' ||
+    param === 'snake'
+  ) {
+    return { view: 'product', productId: 'emerald-snake-pendant' };
   }
 
   if (
@@ -184,6 +204,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'emerald-snake-pendant': EMERALD_SNAKE_SLUG,
   'combo-2-pendants': AESTHETIC_PENDANT_COMBO_SLUG,
   'trendy-alloy-set': '/products/trendy-alloy-gold-plated-jewellery-set',
   'allure-gold-set': '/products/royal-elegant-gold-plated-jewellery-set',
@@ -199,6 +220,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'emerald-snake-pendant') return EMERALD_SNAKE_BUNDLE_OPTIONS[0];
   if (productId === 'combo-2-pendants') return AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
@@ -215,9 +237,10 @@ export default function App() {
   // Current view: 'home' | 'product'
   const [currentView, setCurrentView] = useState<'home' | 'product'>(initialLoc.view);
 
-  // Active product: 'jhumka' | 'choker' | 'necklace-combo-5' | 'elegant-everyday-5' | 'radhika-green-ad' | 'allure-gold-set' | 'trendy-alloy-set' | 'combo-2-pendants'
+  // Active product: 'jhumka' | 'choker' | 'necklace-combo-5' | 'elegant-everyday-5' | 'radhika-green-ad' | 'allure-gold-set' | 'trendy-alloy-set' | 'combo-2-pendants' | 'emerald-snake-pendant'
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
   const isAestheticCombo = activeProductId === 'combo-2-pendants';
   const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isChoker = activeProductId === 'choker';
@@ -226,7 +249,9 @@ export default function App() {
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isAestheticCombo
+  const currentProductDetails = isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_DETAILS
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
@@ -242,7 +267,9 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isAestheticCombo
+  const currentReviews = isEmeraldSnake
+    ? EMERALD_SNAKE_REVIEWS_LIST
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_REVIEWS_LIST
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_REVIEWS_LIST
@@ -258,7 +285,9 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isAestheticCombo
+  const currentCustomerMedia = isEmeraldSnake
+    ? EMERALD_SNAKE_CUSTOMER_MEDIA
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_CUSTOMER_MEDIA
@@ -404,6 +433,9 @@ export default function App() {
   useEffect(() => {
     if (currentView === 'home') {
       document.title = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+    } else if (activeProductId === 'emerald-snake-pendant') {
+      document.title =
+        'Gold Plated Stainless Steel Emerald CZ Flat Snake Chain Necklace | QAVELLE';
     } else if (activeProductId === 'combo-2-pendants') {
       document.title =
         'Combo of 2 Aesthetic Daily Wear Pendants – Pastel Pink & Panna Green Locket | QAVELLE';

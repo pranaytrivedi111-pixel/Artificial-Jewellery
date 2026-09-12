@@ -9,6 +9,7 @@ import {
   RADHIKA_GREEN_AD_PRODUCT_DETAILS,
   ALLURE_GOLD_SET_PRODUCT_DETAILS,
   ELEGANT_EVERYDAY_PRODUCT_DETAILS,
+  EMERALD_SNAKE_PRODUCT_DETAILS,
 } from '../data/productData';
 import { ProductId } from '../types';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -21,7 +22,9 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
   const [isExpanded, setIsExpanded] = useState(false);
 
   const currentProduct =
-    activeProductId === 'allure-gold-set'
+    activeProductId === 'emerald-snake-pendant'
+      ? EMERALD_SNAKE_PRODUCT_DETAILS
+      : activeProductId === 'allure-gold-set'
       ? ALLURE_GOLD_SET_PRODUCT_DETAILS
       : activeProductId === 'radhika-green-ad'
       ? RADHIKA_GREEN_AD_PRODUCT_DETAILS

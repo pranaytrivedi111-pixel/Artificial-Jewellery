@@ -18,6 +18,8 @@ import {
   TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
   AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS,
   AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
+  EMERALD_SNAKE_PRODUCT_DETAILS,
+  EMERALD_SNAKE_BUNDLE_OPTIONS,
 } from '../data/productData';
 import { ShieldCheck, Star } from 'lucide-react';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -30,6 +32,7 @@ interface StickyBottomBarProps {
 }
 
 const getFallbackBundle = (productId: ProductId | string = 'jhumka'): BundleOption => {
+  if (productId === 'emerald-snake-pendant') return EMERALD_SNAKE_BUNDLE_OPTIONS[0];
   if (productId === 'combo-2-pendants') return AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
@@ -46,6 +49,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   onAddToCart,
   activeProductId = 'jhumka',
 }) => {
+  const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
   const isAestheticCombo = activeProductId === 'combo-2-pendants';
   const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isChoker = activeProductId === 'choker';
@@ -57,7 +61,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   // Guaranteed safe fallback bundle to eliminate any undefined access
   const safeBundle = bundle && bundle.price ? bundle : getFallbackBundle(activeProductId);
 
-  const currentProduct = isAestheticCombo
+  const currentProduct = isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_DETAILS
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
@@ -73,7 +79,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentImage = isAestheticCombo
+  const currentImage = isEmeraldSnake
+    ? '/d1.png'
+    : isAestheticCombo
     ? '/c1.png'
     : isTrendyAlloy
     ? '/b1.png'

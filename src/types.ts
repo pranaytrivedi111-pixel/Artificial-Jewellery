@@ -6,7 +6,8 @@ export type ProductId =
   | 'elegant-everyday-5'
   | 'allure-gold-set'
   | 'trendy-alloy-set'
-  | 'combo-2-pendants';
+  | 'combo-2-pendants'
+  | 'emerald-snake-pendant';
 
 export interface ProductGalleryItem {
   id: string;

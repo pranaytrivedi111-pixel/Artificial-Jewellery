@@ -2388,6 +2388,213 @@ export const AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA = [
   },
 ];
 
+// ============================================================================
+// GOLD PLATED STAINLESS STEEL EMERALD CUBIC ZIRCONIA FLAT SNAKE CHAIN
+// ============================================================================
+export const EMERALD_SNAKE_SLUG =
+  '/products/gold-plated-stainless-steel-cubic-zirconia-pendant-green-emerald-anti-tarnish-gold-plated-stainless-steel-flat-snake-chain-necklace-green-waterproof-chain-layering-pendant-gifts-for-women-and-girls';
+
+export const EMERALD_SNAKE_PRODUCT_DETAILS = {
+  id: 'emerald-snake-pendant',
+  title:
+    'Gold Plated Stainless Steel Cubic Zirconia Pendant Green Emerald Anti-Tarnish Flat Snake Chain Necklace | Waterproof Chain Layering Pendant',
+  fullDescription:
+    'Elevate your everyday luxury with this premium 18K Gold Plated Stainless Steel Flat Snake Chain Necklace featuring an opulent radiant-cut Emerald Green Cubic Zirconia solitaire pendant. Masterfully crafted from surgical-grade stainless steel with a high-mirror liquid gold herringbone weave that glides seamlessly against your collarbone. Engineered with advanced anti-tarnish vacuum PVD gold plating, making it 100% waterproof, sweatproof, and shower-safe without ever turning green or fading. Designed with an adjustable lobster clasp extender, making it ideal for solo minimalist elegance or stylish layering with other necklaces. A timeless gift for women and girls for daily office wear, parties, anniversaries, and festive celebrations.',
+  shortTitle: 'Gold Plated Emerald Snake Chain Pendant',
+  tagline:
+    '18K Gold Plated • Emerald Green Cubic Zirconia • 100% Waterproof & Anti-Tarnish Flat Snake Chain • Daily & Office Wear',
+  rating: 4.9,
+  ratingsCount: 9240,
+  reviewsCount: 1450,
+  size: '16 Inch Flat Snake Chain + 2 Inch Adjustable Extender (Free Size Adjustable Fit)',
+  price: 549,
+  originalPrice: 1499,
+  discountPercent: 63,
+  sku: 'QAV-EMERALD-SNAKE-549',
+  inStock: true,
+  stockLeft: 14,
+  recentSales24h: 385,
+  currentLiveViewers: 52,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  countryOfOrigin: 'India',
+};
+
+export const EMERALD_SNAKE_PRODUCT_HIGHLIGHTS = [
+  { label: 'Base Metal', value: 'Surgical-Grade 316L Stainless Steel' },
+  { label: 'Plating', value: '18K Real Gold Vacuum PVD Plating (Anti-Fade Guaranteed)' },
+  { label: 'Stone Type', value: 'Radiant-Cut Emerald Green Cubic Zirconia (American Diamond)' },
+  { label: 'Chain Type', value: 'Liquid Mirror Flat Snake / Herringbone Chain' },
+  { label: 'Water & Sweat Resistance', value: '100% Waterproof & Anti-Tarnish (Shower, Swim & Gym Safe)' },
+  { label: 'Sizing & Fit', value: '16 Inch Chain + 2 Inch Adjustable Extender (Free Size)' },
+  { label: 'Net Quantity (N)', value: '1 Pendant Necklace + Velvet Presentation Pouch' },
+  { label: 'Occasion', value: 'Daily Wear, Office, Casual Western Outfits, Parties, Layering & Gifting' },
+];
+
+export const EMERALD_SNAKE_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '1 Gold Plated Stainless Steel Flat Snake Chain with Emerald CZ Pendant + Royal Velvet Gift Pouch',
+  },
+  { label: 'Closure', value: 'Reinforced Stainless Steel Lobster Claw Clasp with 2-inch Extender Loop' },
+  { label: 'Finish', value: 'High-Gloss Liquid Mirror Gold Polish with Scratch-Resistant Coating' },
+  { label: 'Skin Safety', value: '100% Hypoallergenic, Lead-Free & Nickel-Free (Zero Skin Irritation)' },
+  { label: 'Durability', value: 'Non-Corrosive, Never Turns Green or Black, Resists Perfumes & Heat' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value: 'Shower and water safe. Simply rinse with clean water and wipe dry with a soft cloth to restore dazzling liquid gold shine.',
+  },
+];
+
+export const EMERALD_SNAKE_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'esp-1',
+    src: '/d1.png',
+    thumbSrc: '/d1_thumb.webp',
+    alt: 'Gold Plated Stainless Steel Emerald Green Cubic Zirconia Flat Snake Chain Necklace - Hero View',
+    title: 'Emerald Snake Necklace',
+    tag: 'Hero View',
+  },
+  {
+    id: 'esp-2',
+    src: '/d2.png',
+    thumbSrc: '/d2_thumb.webp',
+    alt: 'Emerald Solitaire Pendant with Liquid Gold Herringbone Snake Chain Weave',
+    title: 'Emerald Solitaire & Chain',
+    tag: 'Detail View',
+  },
+  {
+    id: 'esp-3',
+    src: '/d3.png',
+    thumbSrc: '/d3_thumb.webp',
+    alt: 'Gold Plated Stainless Steel Flat Snake Chain Necklace Angle View',
+    title: 'Mirror Finish Angle',
+    tag: 'Angle View',
+  },
+];
+
+export const EMERALD_SNAKE_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'emerald-snake-single',
+    title: '1x Emerald Snake Chain Necklace',
+    subtitle: '1 Pendant Necklace + Velvet Gift Pouch + Free Express Delivery',
+    unitCount: 1,
+    price: 549,
+    originalPrice: 1499,
+    discountPercent: 63,
+    popular: true,
+    saveAmount: 950,
+  },
+  {
+    id: 'emerald-snake-double',
+    title: '2x Emerald Snake Chain Necklaces (Best for Gifting)',
+    subtitle: '2 Necklaces + 2 Velvet Pouches + Extra Savings',
+    unitCount: 2,
+    price: 999,
+    originalPrice: 2998,
+    discountPercent: 67,
+    popular: false,
+    saveAmount: 1999,
+  },
+  {
+    id: 'emerald-snake-triple',
+    title: '3x Emerald Snake Chain Necklaces (Family Pack)',
+    subtitle: '3 Necklaces + Royal Presentation Gift Boxes + Maximum Value',
+    unitCount: 3,
+    price: 1399,
+    originalPrice: 4497,
+    discountPercent: 69,
+    popular: false,
+    saveAmount: 3098,
+  },
+];
+
+export const EMERALD_SNAKE_REVIEWS: ReviewItem[] = [
+  {
+    id: 'r-esp-1',
+    author: 'Ishita Kapoor',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    rating: 5,
+    date: 'Yesterday',
+    title: 'Absolutely waterproof and stunning liquid gold finish!',
+    comment:
+      'I have been wearing this flat snake chain for over 2 weeks non-stop including daily showers, workouts, and perfume sprays — zero tarnishing! The green emerald stone is so deeply cut and reflects light like real precious emerald. It looks easily like a ₹4,000 fine jewelry piece. Phenomenal value for ₹549!',
+    verified: true,
+    helpfulCount: 148,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-esp-2',
+    author: 'Priyanka Sen',
+    city: 'Kolkata',
+    state: 'West Bengal',
+    rating: 5,
+    date: '3 days ago',
+    title: 'The snake chain glides like liquid silk on the collarbone',
+    comment:
+      'The herringbone snake chain quality is unbelievable! It does not pinch hair or skin, lays completely flat, and has a rich liquid gold reflection. The emerald green stone makes every outfit look luxurious. Packaged beautifully in a velvet pouch.',
+    verified: true,
+    helpfulCount: 112,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-esp-3',
+    author: 'Aditi Deshmukh',
+    city: 'Pune',
+    state: 'Maharashtra',
+    rating: 5,
+    date: '5 days ago',
+    title: 'Best daily wear chain I own, 10/10 recommend!',
+    comment:
+      'Ordered after seeing it viral on Meesho and Qavelle’s finishing is even better! The emerald pendant is gorgeous and the clasp is super sturdy. Love the ₹100 + ₹25 prepaid discount as well.',
+    verified: true,
+    helpfulCount: 89,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-esp-4',
+    author: 'Rhea Nambiar',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    rating: 5,
+    date: '1 week ago',
+    title: 'Premium stainless steel — zero allergy or irritation',
+    comment:
+      'I have very sensitive skin that usually turns red with cheap imitation jewelry. This stainless steel chain is genuinely hypoallergenic! Super light, waterproof, and the emerald green color is pure royalty.',
+    verified: true,
+    helpfulCount: 76,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const EMERALD_SNAKE_REVIEWS_LIST = EMERALD_SNAKE_REVIEWS;
+
+export const EMERALD_SNAKE_CUSTOMER_MEDIA = [
+  {
+    id: 'm-esp-1',
+    type: 'image',
+    image: '/d1.png',
+    author: 'Ishita Kapoor',
+    caption: 'Real photo: Gold Plated Emerald Flat Snake Chain Necklace.',
+  },
+  {
+    id: 'm-esp-2',
+    type: 'image',
+    image: '/d2.png',
+    author: 'Priyanka Sen',
+    caption: 'Real photo: Liquid gold herringbone chain and emerald solitaire detail.',
+  },
+  {
+    id: 'm-esp-3',
+    type: 'image',
+    image: '/d3.png',
+    author: 'Aditi Deshmukh',
+    caption: 'Real photo: Anti-tarnish gold finish and clasp angle view.',
+  },
+];
+
 
 
 

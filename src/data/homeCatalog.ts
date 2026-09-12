@@ -7,7 +7,7 @@ export interface GenuineProduct {
   title: string;
   shortTitle: string;
   subtitle: string;
-  category: 'Necklace Sets' | 'Combo Deals' | 'Earrings & Jhumkas' | 'Celebrity Inspired';
+  category: 'Necklace Sets' | 'Combo Deals' | 'Earrings & Jhumkas' | 'Celebrity Inspired' | 'Anti-Tarnish Jewellery';
   badge: string;
   price: number;
   originalPrice: number;
@@ -24,6 +24,32 @@ export interface GenuineProduct {
 }
 
 export const GENUINE_PRODUCTS: GenuineProduct[] = [
+  {
+    id: 'emerald-snake-pendant',
+    slug: '/products/gold-plated-stainless-steel-cubic-zirconia-pendant-green-emerald-anti-tarnish-gold-plated-stainless-steel-flat-snake-chain-necklace-green-waterproof-chain-layering-pendant-gifts-for-women-and-girls',
+    title: 'Gold Plated Stainless Steel Cubic Zirconia Pendant Green Emerald Anti-Tarnish Flat Snake Chain Necklace',
+    shortTitle: 'Gold Plated Emerald Snake Chain',
+    subtitle: '18K Gold Plated Stainless Steel • 100% Waterproof & Anti-Tarnish • Radiant-Cut Emerald CZ Solitaire',
+    category: 'Anti-Tarnish Jewellery',
+    badge: '100% WATERPROOF',
+    price: 549,
+    originalPrice: 1499,
+    discountPercent: 63,
+    rating: 4.9,
+    reviewsCount: 1450,
+    image: '/d1.png',
+    hoverImage: '/d2.png',
+    tag: 'Anti-Tarnish Waterproof',
+    inStockCount: 14,
+    highlights: [
+      '18K Gold Plated Surgical Grade 316L Stainless Steel',
+      '100% Waterproof & Anti-Tarnish (Shower, Swim & Gym Safe)',
+      'Radiant-Cut Emerald Green Cubic Zirconia Solitaire',
+      'Liquid-Mirror Flat Snake Herringbone Weave with 2-Inch Extender',
+    ],
+    occasion: 'Daily Wear, Office, Casual Western Outfits, Layering & Gifting',
+    packageContains: '1 Gold Plated Stainless Steel Flat Snake Chain with Emerald CZ Pendant + Royal Velvet Gift Pouch',
+  },
   {
     id: 'combo-2-pendants',
     slug: '/products/combo-of-2-aesthetic-daily-wear-pendants-stylish-pastel-pink-panna-green-locket-with-sleek-chain',
@@ -235,7 +261,15 @@ export const HOME_CATEGORIES = [
     label: 'All Products',
     icon: '✨',
     image: '/Cinematic.webp',
-    count: 8,
+    count: 9,
+  },
+  {
+    id: 'emerald-snake',
+    label: 'Anti-Tarnish Snake Chain',
+    icon: '💚',
+    image: '/d1.png',
+    count: 1,
+    targetProduct: 'emerald-snake-pendant' as ProductId,
   },
   {
     id: 'aesthetic-pendants',

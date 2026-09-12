@@ -74,6 +74,12 @@ import {
   AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS,
   AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
   AESTHETIC_PENDANT_COMBO_REVIEWS_LIST,
+  EMERALD_SNAKE_PRODUCT_DETAILS,
+  EMERALD_SNAKE_PRODUCT_GALLERY,
+  EMERALD_SNAKE_PRODUCT_HIGHLIGHTS,
+  EMERALD_SNAKE_ADDITIONAL_DETAILS,
+  EMERALD_SNAKE_BUNDLE_OPTIONS,
+  EMERALD_SNAKE_REVIEWS_LIST,
 } from '../data/productData';
 import {
   GPayLogo,
@@ -110,8 +116,11 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isAllureGold = activeProductId === 'allure-gold-set';
   const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isAestheticCombo = activeProductId === 'combo-2-pendants';
+  const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
 
-  const currentProduct: ProductDetails = isAestheticCombo
+  const currentProduct: ProductDetails = isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_DETAILS
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
@@ -127,7 +136,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isAestheticCombo
+  const currentGallery = isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_GALLERY
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_PRODUCT_GALLERY
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_GALLERY
@@ -143,7 +154,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isAestheticCombo
+  const currentHighlights = isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_HIGHLIGHTS
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_PRODUCT_HIGHLIGHTS
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS
@@ -159,7 +172,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isAestheticCombo
+  const currentAdditionalDetails = isEmeraldSnake
+    ? EMERALD_SNAKE_ADDITIONAL_DETAILS
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_ADDITIONAL_DETAILS
@@ -175,7 +190,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isAestheticCombo
+  const currentBundleOptions = isEmeraldSnake
+    ? EMERALD_SNAKE_BUNDLE_OPTIONS
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_BUNDLE_OPTIONS
@@ -191,7 +208,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isAestheticCombo
+  const currentReviewsList = isEmeraldSnake
+    ? EMERALD_SNAKE_REVIEWS_LIST
+    : isAestheticCombo
     ? AESTHETIC_PENDANT_COMBO_REVIEWS_LIST
     : isTrendyAlloy
     ? TRENDY_ALLOY_SET_REVIEWS_LIST
@@ -212,7 +231,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   // Reset active image when product switches
   useEffect(() => {
     setActiveImageIndex(0);
-  }, [activeProductId, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy]);
+  }, [activeProductId, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy, isAestheticCombo, isEmeraldSnake]);
   const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
   const [isOfferExpanded, setIsOfferExpanded] = useState(true);
   const [activeReviewIdx, setActiveReviewIdx] = useState(0);

@@ -2157,6 +2157,237 @@ export const TRENDY_ALLOY_SET_CUSTOMER_MEDIA = [
   },
 ];
 
+// ============================================================================
+// COMBO OF 2 AESTHETIC DAILY WEAR PENDANTS (PASTEL PINK & PANNA GREEN)
+// ============================================================================
+export const AESTHETIC_PENDANT_COMBO_SLUG =
+  '/products/combo-of-2-aesthetic-daily-wear-pendants-stylish-pastel-pink-panna-green-locket-with-sleek-chain';
+
+export const AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS = {
+  id: 'combo-2-pendants',
+  title:
+    'Combo of 2 Aesthetic Daily Wear Pendants Stylish Pastel Pink & Panna Green Locket with Sleek Chain',
+  fullDescription:
+    'A must-have Korean minimalist duo crafted for everyday styling. This combo pack includes 2 separate dainty pendant chains: one featuring a delicate pastel blush pink solitaire crystal locket, and the second featuring a rich royal emerald panna green crystal locket. Finished with sleek, anti-tarnish Italian link chains, hypoallergenic brass alloy, and smooth lobster clasps with 2-inch extenders. Perfect to wear individually for minimal chic or layered together for trendy aesthetic charm. Complimentary luxury velvet gift pouch included.',
+  shortTitle: 'Combo of 2 Aesthetic Pendants',
+  tagline:
+    'Combo of 2 Pendants • Pastel Pink & Panna Emerald Green • Anti-Tarnish Sleek Chain • Daily & College Wear',
+  rating: 4.8,
+  ratingsCount: 8460,
+  reviewsCount: 1280,
+  size: '16 Inch Sleek Chain + 2 Inch Adjustable Extender (Fits all necklines comfortably)',
+  price: 549,
+  originalPrice: 1499,
+  discountPercent: 63,
+  sku: 'QAV-AESTHETIC-COMBO2-549',
+  inStock: true,
+  stockLeft: 16,
+  recentSales24h: 312,
+  currentLiveViewers: 44,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  countryOfOrigin: 'India',
+};
+
+export const AESTHETIC_PENDANT_COMBO_PRODUCT_HIGHLIGHTS = [
+  { label: 'Base Metal', value: 'High-Grade Skin-Safe Alloy with Anti-Tarnish Finish' },
+  { label: 'Plating', value: 'Micro Rhodium & 18K Polish with Protective Anti-Fade Coat' },
+  { label: 'Stone Type', value: 'Faceted Pastel Blush Pink & Panna Emerald Green Solitaire Crystals' },
+  { label: 'Chain Type', value: 'Sleek Dainty Italian Link Chain with 2-Inch Extender' },
+  { label: 'Sizing', value: 'Adjustable 16" + 2" Length (Customizable Fit)' },
+  { label: 'Net Quantity (N)', value: '2 Individual Pendant Chains (1 Pink + 1 Green)' },
+  { label: 'Occasion', value: 'Daily Wear, College, Office, Casual Outfits, Date Nights & Gifting' },
+];
+
+export const AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '2 Individual Pendant Necklaces (1 Pastel Pink Locket + 1 Panna Green Locket) + Velvet Gift Pouch',
+  },
+  { label: 'Closure', value: 'Durable Stainless Lobster Claw Clasp with 2-inch Extender Loop' },
+  { label: 'Style & Silhouette', value: 'Minimalist Korean Aesthetic Solitaire Pendants' },
+  { label: 'Skin Safety', value: '100% Lead-Free & Nickel-Free (Hypoallergenic & Non-Allergic)' },
+  { label: 'Water & Sweat Resistance', value: 'Everyday splash and sweat resistant anti-tarnish protective sealing' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value: 'Wipe gently with soft cloth after daily wear. Store in provided velvet pouch away from direct perfume sprays.',
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'apc-1',
+    src: '/c1.png',
+    thumbSrc: '/c1_thumb.webp',
+    alt: 'Combo of 2 Aesthetic Daily Wear Pendants Stylish Pastel Pink & Panna Green Lockets - Hero Shot',
+    title: 'Combo of 2 Aesthetic Pendants',
+    tag: 'Hero View',
+  },
+  {
+    id: 'apc-2',
+    src: '/c2.png',
+    thumbSrc: '/c2_thumb.webp',
+    alt: 'Panna Emerald Green Solitaire Locket with Sleek Anti-Tarnish Chain',
+    title: 'Panna Green Locket',
+    tag: 'Emerald Green',
+  },
+  {
+    id: 'apc-3',
+    src: '/c3.png',
+    thumbSrc: '/c3_thumb.webp',
+    alt: 'Pastel Blush Pink Solitaire Crystal Locket with Sleek Chain',
+    title: 'Pastel Pink Locket',
+    tag: 'Pastel Pink',
+  },
+  {
+    id: 'apc-4',
+    src: '/c4.png',
+    thumbSrc: '/c4_thumb.webp',
+    alt: 'Model Wearing Aesthetic Daily Wear Pendant - Chic Korean Minimalist Styling',
+    title: 'Model Styling View',
+    tag: 'On Model',
+  },
+  {
+    id: 'apc-5',
+    src: '/c5.png',
+    thumbSrc: '/c5_thumb.webp',
+    alt: 'Aesthetic Pendants Craftsmanship, Sleek Chain Links & Polish Close-Up',
+    title: 'Sleek Chain & Finish',
+    tag: 'Detail View',
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'aesthetic-combo-single',
+    title: '1x Combo (2 Pendants: Pink + Green)',
+    subtitle: '1 Pastel Pink Locket + 1 Panna Green Locket + Free Velvet Gift Pouch',
+    unitCount: 1,
+    price: 549,
+    originalPrice: 1499,
+    discountPercent: 63,
+    popular: true,
+    saveAmount: 950,
+  },
+  {
+    id: 'aesthetic-combo-double',
+    title: '2x Combos (4 Pendants - Bestie/Sister Gifting)',
+    subtitle: '4 Pendants (2 Pink + 2 Green) + 2 Velvet Pouches + Extra Savings',
+    unitCount: 2,
+    price: 999,
+    originalPrice: 2998,
+    discountPercent: 67,
+    popular: false,
+    saveAmount: 1999,
+  },
+  {
+    id: 'aesthetic-combo-triple',
+    title: '3x Combos (6 Pendants - Grand Value Pack)',
+    subtitle: '6 Pendants total + Free Express Shipping + Royal Gift Packaging',
+    unitCount: 3,
+    price: 1399,
+    originalPrice: 4497,
+    discountPercent: 69,
+    popular: false,
+    saveAmount: 3098,
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_REVIEWS_LIST: ReviewItem[] = [
+  {
+    id: 'apc-rev-1',
+    author: 'Ananya Sharma',
+    city: 'Pune',
+    state: 'Maharashtra',
+    rating: 5,
+    date: '1 day ago',
+    title: 'So aesthetic! Both the pastel pink & green are gorgeous',
+    comment:
+      'I was looking for minimal pendants for daily college wear and this combo is perfection! The green panna stone has a rich emerald tone, and the pastel pink looks so soft and cute. The sleek chain is lightweight and does not tangle or turn black. Incredible deal for ₹549!',
+    verified: true,
+    helpfulCount: 92,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_1.jpg',
+  },
+  {
+    id: 'apc-rev-2',
+    author: 'Sneha Mukherjee',
+    city: 'Kolkata',
+    state: 'West Bengal',
+    rating: 5,
+    date: '3 days ago',
+    title: 'Quality is surprisingly premium, chains are very sleek',
+    comment:
+      'Genuinely impressed with the finish. The lobster clasp is sturdy, and the 2-inch extender makes it easy to adjust length depending on what top or dress I am wearing. Highly recommended for daily office and casual wear.',
+    verified: true,
+    helpfulCount: 68,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_2.jpg',
+  },
+  {
+    id: 'apc-rev-3',
+    author: 'Kavya Pillai',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    rating: 5,
+    date: '4 days ago',
+    title: 'Gifted one to my sister and kept one for myself!',
+    comment:
+      'My sister took the pastel pink and I kept the emerald green one. Both look super stylish and we get compliments all the time. Packaged nicely in a cute pouch.',
+    verified: true,
+    helpfulCount: 54,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_3.jpg',
+  },
+  {
+    id: 'apc-rev-4',
+    author: 'Tanvi Joshi',
+    city: 'Jaipur',
+    state: 'Rajasthan',
+    rating: 5,
+    date: '5 days ago',
+    title: 'No skin irritation, 100% skin safe',
+    comment:
+      'I have sensitive skin and cheap chains usually cause rashes. Wore this all day in the heat and zero redness or itching. The anti-tarnish coating actually works. Love it!',
+    verified: true,
+    helpfulCount: 41,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_4.jpg',
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA = [
+  {
+    id: 'm-apc-1',
+    type: 'image',
+    image: '/c1.png',
+    author: 'Ananya Sharma',
+    caption: 'Combo of 2 Aesthetic Daily Wear Pendants (Pastel Pink & Panna Green).',
+  },
+  {
+    id: 'm-apc-2',
+    type: 'image',
+    image: '/c2.png',
+    author: 'Sneha Mukherjee',
+    caption: 'Panna emerald green solitaire locket worn with white shirt.',
+  },
+  {
+    id: 'm-apc-3',
+    type: 'image',
+    image: '/c3.png',
+    author: 'Kavya Pillai',
+    caption: 'Delicate pastel blush pink locket close-up.',
+  },
+  {
+    id: 'm-apc-4',
+    type: 'image',
+    image: '/c4.png',
+    author: 'Tanvi Joshi',
+    caption: 'Minimalist Korean aesthetic styling for college wear.',
+  },
+];
+
 
 
 

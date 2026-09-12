@@ -154,15 +154,19 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }
   }
 
-  // Active coupon discount: Applied only on prepaid orders
-  const activeCouponDiscount = paymentMethod === 'cod' ? 0 : discountAmount;
+  // 100 coupon is for prepaid orders, 25 is UPI discount -> 100 + 25 saving (₹125 total)
+  const couponDiscount = discountAmount > 0 ? discountAmount : 100;
+  const upiDiscount = 25; // ₹25 instant UPI discount
+  const totalPrepaidSavings = couponDiscount + upiDiscount; // ₹100 + ₹25 = ₹125
 
-  // Prepaid vs COD totals
-  const baseTotal = Math.max(0, subtotal - activeCouponDiscount);
-  const prepaidDiscount = Math.max(25, Math.round(baseTotal * 0.05 * 100) / 100);
+  // Active coupon & UPI discount based on payment method
+  const activeCouponDiscount = paymentMethod === 'cod' ? 0 : couponDiscount;
+  const activeUpiDiscount = paymentMethod === 'cod' ? 0 : upiDiscount;
+  const activeTotalSavings = activeCouponDiscount + activeUpiDiscount;
+
   const finalTotal = paymentMethod === 'cod'
     ? subtotal
-    : Math.max(0, Math.round((baseTotal - prepaidDiscount) * 100) / 100);
+    : Math.max(0, subtotal - activeTotalSavings);
   const totalItemsCount = cartItems.reduce((s, i) => s + i.quantity, 0);
 
   const fullAddress = [
@@ -546,9 +550,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
 
               <div className="flex items-center gap-2">
-                {discountAmount > 0 && (
+                {paymentMethod !== 'cod' ? (
                   <span className="text-[10px] font-black text-emerald-800 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
-                    SAVE ₹{discountAmount}
+                    SAVE ₹{totalPrepaidSavings}
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-bold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
+                    COD
                   </span>
                 )}
                 <span className="text-xs sm:text-sm font-black text-gray-950 font-mono">
@@ -593,6 +601,28 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     </div>
                   </div>
                 ))}
+
+                {/* Pricing Summary */}
+                <div className="pt-2 border-t border-gray-200/80 space-y-1 text-[11px]">
+                  <div className="flex justify-between text-gray-600">
+                    <span>Item Subtotal:</span>
+                    <span className="font-semibold text-gray-900 font-mono">₹{subtotal}</span>
+                  </div>
+                  {paymentMethod !== 'cod' && (
+                    <div className="flex justify-between text-emerald-800 font-bold bg-emerald-50/80 px-1.5 py-0.5 rounded border border-emerald-200/70">
+                      <span>Total Savings:</span>
+                      <span className="font-mono">-₹{totalPrepaidSavings}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-gray-600">
+                    <span>Express Delivery:</span>
+                    <span className="font-bold text-emerald-600 uppercase text-[10px]">FREE</span>
+                  </div>
+                  <div className="flex justify-between text-gray-950 font-black pt-1 border-t border-gray-200 text-xs">
+                    <span>Total Payable:</span>
+                    <span className="font-mono text-black">₹{finalTotal}</span>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -953,20 +983,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               {/* Order Summary & Proceed to Pay CTA (In-flow, NOT fixed or sticky) */}
               <div className="p-2.5 sm:p-3.5 rounded-xl bg-gradient-to-r from-amber-50/90 via-[#FFFDF8] to-amber-50/70 border border-amber-200/90 shadow-2xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 mt-0.5">
-                <div className="flex items-center justify-between sm:justify-start gap-2">
+                <div className="flex items-center justify-between sm:justify-start gap-2 flex-wrap">
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-[11px] text-gray-500 font-medium">To Pay:</span>
                     <span className="font-black text-gray-950 text-base font-mono">
-                      ₹{finalTotal}
+                      ₹{subtotal - totalPrepaidSavings}
                     </span>
                   </div>
-                  {(discountAmount > 0 || appliedCoupon) && (
-                    <span className="text-[9.5px] font-black bg-emerald-600 text-white px-1.5 py-0.5 rounded shadow-2xs">
-                      ₹{discountAmount > 0 ? discountAmount : 100} OFF APPLIED
-                    </span>
-                  )}
+                  <span className="text-[9.5px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded shadow-2xs">
+                    SAVE ₹{totalPrepaidSavings}
+                  </span>
                   <span className="text-[10px] text-gray-500 hidden xs:inline">
-                    &bull; Free Delivery
+                    &bull; Free Express Delivery
                   </span>
                 </div>
 
@@ -1117,8 +1145,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       <strong className="text-emerald-950 font-bold">UPI Instant Payment (Prepaid)</strong>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-emerald-900 font-semibold">Prepaid Coupon:</span>
-                      <span className="font-bold text-emerald-700">✓ QVL100 Auto-Applied (-₹{confirmedOrder?.discountAmount ?? (discountAmount > 0 ? discountAmount : 100)})</span>
+                      <span className="text-emerald-900 font-semibold">Prepaid Savings:</span>
+                      <span className="font-bold font-mono text-emerald-800">✓ ₹{totalPrepaidSavings} Saved</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-emerald-900 font-semibold">Payment Status:</span>

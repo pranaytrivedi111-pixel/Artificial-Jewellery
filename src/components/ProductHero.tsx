@@ -68,6 +68,12 @@ import {
   TRENDY_ALLOY_SET_ADDITIONAL_DETAILS,
   TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
   TRENDY_ALLOY_SET_REVIEWS_LIST,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_GALLERY,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_HIGHLIGHTS,
+  AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS,
+  AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
+  AESTHETIC_PENDANT_COMBO_REVIEWS_LIST,
 } from '../data/productData';
 import {
   GPayLogo,
@@ -103,8 +109,11 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
   const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
+  const isAestheticCombo = activeProductId === 'combo-2-pendants';
 
-  const currentProduct: ProductDetails = isTrendyAlloy
+  const currentProduct: ProductDetails = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
+    : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
     : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
@@ -118,7 +127,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isTrendyAlloy
+  const currentGallery = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_GALLERY
+    : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_GALLERY
     : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_GALLERY
@@ -132,7 +143,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isTrendyAlloy
+  const currentHighlights = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_HIGHLIGHTS
+    : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS
     : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_HIGHLIGHTS
@@ -146,7 +159,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isTrendyAlloy
+  const currentAdditionalDetails = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS
+    : isTrendyAlloy
     ? TRENDY_ALLOY_SET_ADDITIONAL_DETAILS
     : isAllureGold
     ? ALLURE_GOLD_SET_ADDITIONAL_DETAILS
@@ -160,7 +175,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isTrendyAlloy
+  const currentBundleOptions = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS
+    : isTrendyAlloy
     ? TRENDY_ALLOY_SET_BUNDLE_OPTIONS
     : isAllureGold
     ? ALLURE_GOLD_SET_BUNDLE_OPTIONS
@@ -174,7 +191,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isTrendyAlloy
+  const currentReviewsList = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_REVIEWS_LIST
+    : isTrendyAlloy
     ? TRENDY_ALLOY_SET_REVIEWS_LIST
     : isAllureGold
     ? ALLURE_GOLD_SET_REVIEWS_LIST

@@ -16,6 +16,8 @@ import {
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
   TRENDY_ALLOY_SET_PRODUCT_DETAILS,
   TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS,
+  AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
 } from '../data/productData';
 import { ShieldCheck, Star } from 'lucide-react';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -28,6 +30,7 @@ interface StickyBottomBarProps {
 }
 
 const getFallbackBundle = (productId: ProductId | string = 'jhumka'): BundleOption => {
+  if (productId === 'combo-2-pendants') return AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
   if (productId === 'radhika-green-ad') return RADHIKA_GREEN_AD_BUNDLE_OPTIONS[0];
@@ -43,6 +46,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   onAddToCart,
   activeProductId = 'jhumka',
 }) => {
+  const isAestheticCombo = activeProductId === 'combo-2-pendants';
   const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isChoker = activeProductId === 'choker';
   const isCombo5 = activeProductId === 'necklace-combo-5';
@@ -53,7 +57,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   // Guaranteed safe fallback bundle to eliminate any undefined access
   const safeBundle = bundle && bundle.price ? bundle : getFallbackBundle(activeProductId);
 
-  const currentProduct = isTrendyAlloy
+  const currentProduct = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
+    : isTrendyAlloy
     ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
     : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
@@ -67,7 +73,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentImage = isTrendyAlloy
+  const currentImage = isAestheticCombo
+    ? '/c1.png'
+    : isTrendyAlloy
     ? '/b1.png'
     : isAllureGold
     ? '/aa1.webp'

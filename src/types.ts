@@ -5,7 +5,8 @@ export type ProductId =
   | 'radhika-green-ad'
   | 'elegant-everyday-5'
   | 'allure-gold-set'
-  | 'trendy-alloy-set';
+  | 'trendy-alloy-set'
+  | 'combo-2-pendants';
 
 export interface ProductGalleryItem {
   id: string;

@@ -9,6 +9,7 @@ interface YouMayAlsoLikeProps {
 }
 
 const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'combo-2-pendants': '/products/combo-of-2-aesthetic-daily-wear-pendants-stylish-pastel-pink-panna-green-locket-with-sleek-chain',
   'trendy-alloy-set': '/products/trendy-alloy-gold-plated-jewellery-set',
   'allure-gold-set': '/products/royal-elegant-gold-plated-jewellery-set',
   'radhika-green-ad': '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',

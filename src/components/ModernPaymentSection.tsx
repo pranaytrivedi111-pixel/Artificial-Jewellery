@@ -93,13 +93,13 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
   };
 
   // Pricing calculations
-  // Coupon is automatically applied ONLY on prepaid orders!
-  const effectiveCouponDiscount = activeMode === 'upi' ? (discountAmount > 0 ? discountAmount : 100) : 0;
-  const baseTotal = Math.max(0, subtotal - (discountAmount > 0 ? discountAmount : 100));
-  // Instant online prepaid discount (₹25 or 5%)
-  const prepaidDiscount = Math.max(25, Math.round(baseTotal * 0.05 * 100) / 100);
-  const onlinePrepaidTotal = Math.max(0, Math.round((baseTotal - prepaidDiscount) * 100) / 100);
-  const totalPrepaidSavings = (discountAmount > 0 ? discountAmount : 100) + prepaidDiscount;
+  // 100 coupon is for prepaid orders, 25 is UPI discount -> 100 + 25 saving (₹125 total)
+  const couponDiscount = discountAmount > 0 ? discountAmount : 100;
+  const upiDiscount = 25; // ₹25 instant UPI discount
+  const baseTotal = Math.max(0, subtotal - couponDiscount);
+  const totalPrepaidSavings = couponDiscount + upiDiscount; // ₹100 + ₹25 = ₹125
+  const onlinePrepaidTotal = Math.max(0, subtotal - totalPrepaidSavings);
+  const prepaidDiscount = upiDiscount;
 
   // States
   const [isAllUpiModalOpen, setIsAllUpiModalOpen] = useState(false);
@@ -1314,12 +1314,12 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                 <span className="text-[13.5px] font-bold text-gray-950">
                   UPI / Online Payment (Prepaid)
                 </span>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/90 border border-emerald-200 px-1.5 py-0.2 rounded-full">
+                <span className="text-[10px] font-black text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full">
                   Save ₹{totalPrepaidSavings.toFixed(0)}
                 </span>
               </div>
               <span className="text-[11px] text-gray-500 mt-0.5">
-                Instant ₹100 coupon applied &bull; Free express delivery
+                Instant ₹{totalPrepaidSavings.toFixed(0)} savings applied &bull; Free express delivery
               </span>
             </div>
           </div>
@@ -1389,20 +1389,12 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="flex items-center gap-1 text-emerald-800">
+                <div className="flex items-center justify-between text-[11px] bg-emerald-50/80 -mx-1 px-2 py-1 rounded border border-emerald-200/70">
+                  <span className="flex items-center gap-1 font-bold text-emerald-900">
                     <Tag className="w-3.5 h-3.5 text-emerald-600" />
-                    Auto coupon applied <strong className="font-mono text-emerald-900 bg-emerald-100 px-1 py-0.2 rounded text-[10px]">QVL100</strong>
+                    Prepaid Savings
                   </span>
-                  <span className="font-bold text-emerald-700">-₹{(discountAmount > 0 ? discountAmount : 100).toFixed(2)}</span>
-                </div>
-
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="flex items-center gap-1 text-emerald-800">
-                    <Zap className="w-3.5 h-3.5 text-blue-600 fill-blue-600" />
-                    Extra instant prepaid discount
-                  </span>
-                  <span className="font-bold text-emerald-700">-₹{prepaidDiscount.toFixed(2)}</span>
+                  <span className="font-bold text-emerald-700 font-mono">-₹{totalPrepaidSavings.toFixed(2)}</span>
                 </div>
 
                 <div className="flex items-center justify-between text-[11px] bg-amber-50/80 -mx-1 px-2 py-1 rounded border border-amber-200/70">
@@ -1424,11 +1416,11 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
 
             {/* Green Pill Savings Badge */}
             <div className="mb-3.5 flex justify-center">
-              <div className="w-full inline-flex items-center justify-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#E8F8F0] text-[#0E7A4A] text-[11px] sm:text-[11.5px] font-semibold border border-[#D0F0E0]">
+              <div className="w-full inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#E8F8F0] text-[#0E7A4A] text-[11px] sm:text-[11.5px] font-bold border border-[#D0F0E0]">
                 <svg className="w-3.5 h-3.5 shrink-0 text-[#0E7A4A]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2l2.4 2.5 3.5-.5 1.5 3.1 3.2 1.4-.4 3.5 2.2 2.7-2.2 2.7.4 3.5-3.2 1.4-1.5 3.1-3.5-.5L12 22l-2.4-2.5-3.5.5-1.5-3.1-3.2-1.4.4-3.5L-0.4 12l2.2-2.7-.4-3.5 3.2-1.4 1.5-3.1 3.5.5L12 2zm-1.5 6a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm3 7a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-3.3 2.8l4.6-6.6a.75.75 0 10-1.2-.8l-4.6 6.6a.75.75 0 101.2.8z" />
                 </svg>
-                <span>Pay online &amp; save ₹{totalPrepaidSavings.toFixed(2)} (Coupon QVL100 Auto-Applied)</span>
+                <span>Pay online &amp; save ₹{totalPrepaidSavings.toFixed(0)} (Instant Discount Auto-Applied)</span>
               </div>
             </div>
 
@@ -1759,8 +1751,8 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                     <span className="text-xl font-black text-gray-950 font-mono">
                       ₹{formattedPrepaidAmount}
                     </span>
-                    <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded mt-0.5">
-                      ✓ QVL100 Auto-Applied + 5% Prepaid Savings
+                    <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded mt-0.5">
+                      ✓ Instant ₹{totalPrepaidSavings.toFixed(0)} Savings Applied
                     </span>
                   </div>
 
@@ -1924,7 +1916,7 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                 <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                 <div className="leading-snug">
                   <span className="font-bold block text-amber-950 text-[11.5px]">
-                    Coupon QVL100 is valid only on Prepaid Orders
+                    Prepaid Savings of ₹{totalPrepaidSavings.toFixed(0)} is valid only on Prepaid Orders
                   </span>
                   <p className="text-[11px] text-amber-800 mt-0.5">
                     Save ₹{totalPrepaidSavings.toFixed(0)} instantly by switching to UPI / Online payment.
@@ -1958,10 +1950,10 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
               <div className="flex items-center justify-between text-gray-600 text-[11.5px]">
                 <span className="flex items-center gap-1">
                   <Tag className="w-3.5 h-3.5 text-gray-400" />
-                  Coupon (QVL100)
+                  Prepaid Coupon (QVL100) &amp; UPI Discount
                 </span>
                 <span className="text-gray-400 font-medium text-[10.5px]">
-                  ₹0.00 (Prepaid Only)
+                  ₹0.00 (Prepaid Orders Only)
                 </span>
               </div>
 

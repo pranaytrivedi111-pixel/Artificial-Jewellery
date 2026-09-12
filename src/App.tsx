@@ -47,7 +47,14 @@ import {
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
   TRENDY_ALLOY_SET_PRODUCT_DETAILS,
   TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_REVIEWS_LIST,
+  TRENDY_ALLOY_SET_CUSTOMER_MEDIA,
   TRENDY_ALLOY_SET_SLUG,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS,
+  AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
+  AESTHETIC_PENDANT_COMBO_REVIEWS_LIST,
+  AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA,
+  AESTHETIC_PENDANT_COMBO_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -76,6 +83,21 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('combo-of-2') ||
+    pathname.includes('aesthetic') ||
+    pathname.includes('gse4gp') ||
+    pathname.includes('panna-green') ||
+    pathname.includes('pastel-pink') ||
+    pathname.includes('2-aesthetic') ||
+    param === 'combo-2-pendants' ||
+    param === 'gse4gp' ||
+    param === 'aesthetic-pendants' ||
+    param === 'aesthetic'
+  ) {
+    return { view: 'product', productId: 'combo-2-pendants' };
   }
 
   if (
@@ -162,6 +184,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'combo-2-pendants': AESTHETIC_PENDANT_COMBO_SLUG,
   'trendy-alloy-set': '/products/trendy-alloy-gold-plated-jewellery-set',
   'allure-gold-set': '/products/royal-elegant-gold-plated-jewellery-set',
   'radhika-green-ad': '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',
@@ -176,6 +199,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'combo-2-pendants') return AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
   if (productId === 'radhika-green-ad') return RADHIKA_GREEN_AD_BUNDLE_OPTIONS[0];
@@ -191,16 +215,22 @@ export default function App() {
   // Current view: 'home' | 'product'
   const [currentView, setCurrentView] = useState<'home' | 'product'>(initialLoc.view);
 
-  // Active product: 'jhumka' | 'choker' | 'necklace-combo-5' | 'elegant-everyday-5' | 'radhika-green-ad' | 'allure-gold-set'
+  // Active product: 'jhumka' | 'choker' | 'necklace-combo-5' | 'elegant-everyday-5' | 'radhika-green-ad' | 'allure-gold-set' | 'trendy-alloy-set' | 'combo-2-pendants'
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isAestheticCombo = activeProductId === 'combo-2-pendants';
+  const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isChoker = activeProductId === 'choker';
   const isShimmering = activeProductId === 'necklace-combo-5';
   const isElegantEveryday = activeProductId === 'elegant-everyday-5';
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isAllureGold
+  const currentProductDetails = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_DETAILS
@@ -212,7 +242,11 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isAllureGold
+  const currentReviews = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_REVIEWS_LIST
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_REVIEWS_LIST
+    : isAllureGold
     ? ALLURE_GOLD_SET_REVIEWS_LIST
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_REVIEWS_LIST
@@ -224,7 +258,11 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isAllureGold
+  const currentCustomerMedia = isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_CUSTOMER_MEDIA
+    : isAllureGold
     ? ALLURE_GOLD_SET_CUSTOMER_MEDIA
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_CUSTOMER_MEDIA
@@ -366,6 +404,12 @@ export default function App() {
   useEffect(() => {
     if (currentView === 'home') {
       document.title = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+    } else if (activeProductId === 'combo-2-pendants') {
+      document.title =
+        'Combo of 2 Aesthetic Daily Wear Pendants – Pastel Pink & Panna Green Locket | QAVELLE';
+    } else if (activeProductId === 'trendy-alloy-set') {
+      document.title =
+        'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings | QAVELLE';
     } else if (activeProductId === 'allure-gold-set') {
       document.title =
         'Royal Elegant Gold Plated Jewellery Set with Matching Earrings | QAVELLE';

@@ -566,7 +566,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         <img
                           src={ASSET_IMAGES.hero}
                           alt={item.bundle.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover rounded-lg"
                         />
                         <span className="absolute bottom-0 right-0 bg-black text-[#FFD600] text-[9px] font-bold px-1 rounded-tl">
                           x{item.quantity}

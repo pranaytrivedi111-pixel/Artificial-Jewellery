@@ -103,10 +103,8 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
       }}
     >
       {/* Green Promotional Announcement Ribbon - Mobile & Desktop */}
-      <div className="bg-[#1E8E3E] text-white text-[10.5px] sm:text-xs font-bold py-1 px-2.5 sm:px-3 text-center tracking-wide flex items-center justify-center gap-1 sm:gap-2">
+      <div className="bg-[#1E8E3E] text-white text-[10.5px] sm:text-xs font-bold py-1 px-2.5 sm:px-3 text-center tracking-wide flex items-center justify-center">
         <span>₹500 Cashback on prepaid orders</span>
-        <span className="opacity-70">&bull;</span>
-        <span>Includes Free Velvet Keepsake Box</span>
       </div>
 
       {/* Main Bottom Checkout Action Bar */}
@@ -123,7 +121,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
                 referrerPolicy="no-referrer"
                 loading="eager"
                 decoding="async"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain rounded-xl"
               />
             </div>
 

@@ -424,7 +424,7 @@ export const PRODUCT_HIGHLIGHTS = [
   { label: 'Plating', value: 'Oxidised Gold' },
   { label: 'Occasion', value: 'Festive, Ethnic, Daily Wear' },
   { label: 'Net Quantity (N)', value: '1 (Set of 6 Pairs)' },
-  { label: 'Packaging', value: 'Free Velvet Keepsake Box' },
+  { label: 'Packaging', value: 'Secure Protective Packaging' },
 ];
 
 export const ADDITIONAL_DETAILS = [
@@ -434,7 +434,7 @@ export const ADDITIONAL_DETAILS = [
   { label: 'Sizing', value: 'Free Size' },
   { label: 'Color', value: 'Gold' },
   { label: 'Brand', value: 'QAVELLE' },
-  { label: 'Package Includes', value: '6 Pairs Jhumkas + Free Velvet Keepsake Box' },
+  { label: 'Package Includes', value: '6 Pairs Jhumkas' },
   { label: 'Generic Name', value: 'Accessories' },
   { label: 'L × W × H', value: '2 × 3 × 2 inch' },
   { label: 'Country of Origin', value: 'India' },
@@ -487,7 +487,7 @@ export const BUNDLE_OPTIONS: BundleOption[] = [
   {
     id: 'single-set',
     title: 'Gold Plated Fancy Jhumka Earrings (Set of 6 Pairs)',
-    subtitle: 'Includes all 6 Antique Oxidised Gold Designs + Free Velvet Keepsake Box',
+    subtitle: 'Includes all 6 Antique Oxidised Gold Designs',
     unitCount: 1,
     price: 499,
     originalPrice: 1999,
@@ -590,8 +590,8 @@ export const RITUAL_STEPS = [
   },
   {
     step: '4',
-    title: 'Storage in Velvet Box',
-    detail: 'Store each pair in the provided velvet pouch or keepsake box to maintain the pristine antique gold finish.',
+    title: 'Safe Storage',
+    detail: 'Store each pair in a dry jewelry pouch or box to maintain the pristine antique gold finish.',
   },
 ];
 
@@ -602,7 +602,7 @@ export const SPECIFICATIONS_TABLE = [
   { label: 'Stones & Accents', value: 'Hand-set Ruby & Emerald Glass Stones, Faux Basra Pearls' },
   { label: 'Closure Type', value: 'Ear-Safe Push Back / Secure Screw Posts' },
   { label: 'Weight', value: 'Approx. 8 - 14 Grams per pair (Lightweight for all-day comfort)' },
-  { label: 'Box Contents', value: '6 Unique Pairs of Antique Jhumkas + Free Velvet Keepsake Box + Velvet Pouches + Certificate of Authenticity' },
+  { label: 'Box Contents', value: '6 Unique Pairs of Antique Jhumkas + Certificate of Authenticity' },
   { label: 'Country of Origin', value: 'Handcrafted in Jaipur, India' },
 ];
 
@@ -631,7 +631,7 @@ export const REVIEWS_LIST: ReviewItem[] = [
     date: '4 days ago',
     title: 'Lightweight and comfortable! Looks regal on ears',
     comment:
-      'I was worried about earlobe heaviness, but these are wonderfully lightweight. The micro gold plating and ruby-emerald stone accents look premium. The keepsake box gave complete peace of mind.',
+      'I was worried about earlobe heaviness, but these are wonderfully lightweight. The micro gold plating and ruby-emerald stone accents look premium. The secure packaging gave complete peace of mind.',
     verified: true,
     helpfulCount: 98,
     badge: 'Verified Buyer',
@@ -983,7 +983,7 @@ export const SHOWCASE_ITEMS = {
     id: 'jhumka-set',
     title: 'Gold Plated Fancy Jhumka Earrings for Women – Set of 6 Pairs',
     category: 'Jhumka Combo',
-    subtitle: '6 Unique Pairs of Antique Oxidised Gold Jhumkas in Royal Keepsake Box',
+    subtitle: '6 Unique Pairs of Antique Oxidised Gold Jhumkas with Intricate Detailing',
     price: 499,
     originalPrice: 1999,
     discount: '75% OFF',

@@ -358,7 +358,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </div>
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
-                    <span className="truncate">Free Velvet Keepsake Box</span>
+                    <span className="truncate">Free Express Delivery</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
@@ -474,7 +474,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain rounded-xl transition-transform duration-500 group-hover:scale-105"
                     loading="eager"
                     referrerPolicy="no-referrer"
                   />

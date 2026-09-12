@@ -98,7 +98,7 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
                       src={product.image}
                       alt={product.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out"
+                      className="w-full h-full object-contain rounded-xl sm:rounded-2xl group-hover:scale-105 transition-transform duration-500 ease-out"
                       loading="lazy"
                     />
                   </div>

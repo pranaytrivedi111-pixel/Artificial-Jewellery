@@ -194,12 +194,12 @@ export const GENUINE_PRODUCTS: GenuineProduct[] = [
     inStockCount: 9,
     highlights: [
       'Set of 6 Unique Traditional Jhumka Designs',
-      'Includes Free Velvet Keepsake Box',
       'Handcrafted with Austrian Crystals & Lustrous Pearl Drops',
       '18K Micro Gold Plating with Anti-Allergy Push Backs',
+      'Certificate of Authenticity & Quality Guarantee',
     ],
     occasion: 'Festivals, Puja, Weddings & Traditional Family Gatherings',
-    packageContains: '6 Distinct Pairs of Jhumka Earrings + Free Velvet Keepsake Box',
+    packageContains: '6 Distinct Pairs of Jhumka Earrings',
   },
 ];
 
@@ -326,8 +326,8 @@ export const HOME_PROMO_SLIDES = [
     id: 'slide-jhumka',
     badge: 'TRADITIONAL BESTSELLER',
     title: 'Handcrafted 18K Gold Plated Jhumkas (Set of 6 Pairs)',
-    subtitle: '6 Regal Peacock & Temple Motif Jhumkas with Lustrous Pearl Drops. Includes Free Velvet Keepsake Box.',
-    offer: 'Flat 75% OFF • 6 Pairs + Free Velvet Keepsake Box • ₹499 Only',
+    subtitle: '6 Regal Peacock & Temple Motif Jhumkas with Lustrous Pearl Drops.',
+    offer: 'Flat 75% OFF • 6 Pairs • ₹499 Only',
     price: '₹499',
     originalPrice: '₹1,999',
     image: '/Cinematic.webp',

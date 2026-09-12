@@ -38,7 +38,7 @@ export const EnergizationBanner: React.FC = () => {
               src="/UGC.png"
               alt="Handcrafted Jhumka Set in Hand"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain rounded-xl"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
               <span className="text-white font-bold text-xs">
@@ -55,7 +55,7 @@ export const EnergizationBanner: React.FC = () => {
               src="/Cinematic.png"
               alt="Complete 6-Pair Royal Antique Gold Jhumka Collection on Silk"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain rounded-xl"
             />
           </div>
 
@@ -64,7 +64,7 @@ export const EnergizationBanner: React.FC = () => {
               <Award className="w-3.5 h-3.5" /> 100% Quality Inspected
             </div>
             <h3 className="text-xl sm:text-2xl font-extrabold text-white leading-snug">
-              Royal Keepsake Packaging &amp; Authenticity Guarantee
+              Royal Presentation Packaging &amp; Authenticity Guarantee
             </h3>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
               Every parcel comes secured in protective packaging suitable for personal safekeeping or gifting to loved ones on weddings, festivals, and special celebrations.

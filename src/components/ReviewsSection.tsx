@@ -243,7 +243,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                               src={rev.userImage || '/girl_reviewer_1.jpg'}
                               alt={rev.author}
                               referrerPolicy="no-referrer"
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover rounded-full"
                             />
                           </div>
 

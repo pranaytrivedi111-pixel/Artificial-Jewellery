@@ -888,7 +888,7 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
             {showQrFallback && qrCodeDataUrl && (
               <div className="mt-2.5 p-3.5 rounded-2xl bg-white border border-gray-200 shadow-sm flex flex-col items-center text-center animate-fadeIn">
                 <div className="p-2 bg-white rounded-xl border border-gray-200">
-                  <img src={qrCodeDataUrl} alt="UPI QR Code" className="w-40 h-40 object-contain" />
+                  <img src={qrCodeDataUrl} alt="UPI QR Code" className="w-40 h-40 object-contain rounded-xl" />
                 </div>
                 <span className="text-xs font-mono font-bold text-gray-950 mt-2">
                   Scan &amp; Pay ₹{formattedPrepaidAmount}
@@ -1029,7 +1029,7 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
             {showQrFallback && qrCodeDataUrl && (
               <div className="mt-2.5 p-3.5 rounded-2xl bg-white border border-gray-200 shadow-sm flex flex-col items-center text-center animate-fadeIn">
                 <div className="p-2 bg-white rounded-xl border border-gray-200">
-                  <img src={qrCodeDataUrl} alt="UPI QR Code" className="w-40 h-40 object-contain" />
+                  <img src={qrCodeDataUrl} alt="UPI QR Code" className="w-40 h-40 object-contain rounded-xl" />
                 </div>
                 <span className="text-xs font-mono font-bold text-gray-950 mt-2">
                   Scan &amp; Pay ₹{formattedPrepaidAmount}
@@ -1743,7 +1743,7 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                       <img
                         src={qrCodeDataUrl}
                         alt={`Scan QR code to pay ₹${formattedPrepaidAmount}`}
-                        className="w-48 h-48 sm:w-52 sm:h-52 object-contain"
+                        className="w-48 h-48 sm:w-52 sm:h-52 object-contain rounded-xl"
                       />
                     ) : (
                       <div className="w-48 h-48 flex items-center justify-center text-gray-400 text-xs">

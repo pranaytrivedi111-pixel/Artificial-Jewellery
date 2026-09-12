@@ -339,7 +339,7 @@ export const PhonePeUPIPayment: React.FC<PhonePeUPIPaymentProps> = ({
               <img
                 src={qrDataUrl}
                 alt={`Scan QR Code to pay ₹${amount}`}
-                className="w-52 h-52 sm:w-56 sm:h-56 block rounded"
+                className="w-52 h-52 sm:w-56 sm:h-56 block rounded-xl"
               />
             ) : (
               <div className="w-52 h-52 sm:w-56 sm:h-56 flex items-center justify-center text-gray-400 text-xs">

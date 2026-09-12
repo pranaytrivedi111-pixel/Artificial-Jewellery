@@ -35,7 +35,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ onAddToCartIte
                   src={prod.image}
                   alt={prod.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-t-2xl sm:rounded-t-3xl"
                 />
               </div>
 

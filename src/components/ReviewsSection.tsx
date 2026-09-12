@@ -6,8 +6,9 @@ import {
   ChevronRight,
   ThumbsUp,
 } from 'lucide-react';
-import { REVIEWS_LIST, ASSET_IMAGES } from '../data/productData';
+import { REVIEWS_LIST } from '../data/productData';
 import { ReviewItem } from '../types';
+import { ReadMoreText } from './ReadMoreText';
 
 interface ReviewsSectionProps {
   customReviews?: ReviewItem[];
@@ -62,7 +63,6 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
       verified: true,
       helpfulCount: 1,
       badge: 'Verified Buyer',
-      userImage: '/girl_reviewer_1.jpg',
     };
 
     setReviews([newRev, ...reviews]);
@@ -235,34 +235,23 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                     className="shrink-0 w-full sm:w-[calc(50%-8px)] snap-center rounded-2xl p-4.5 sm:p-5 bg-white border border-gray-200/90 hover:border-gray-300 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between"
                   >
                     <div>
-                      {/* Customer Info Header with Authentic AI Girl Reviewer Avatar */}
+                      {/* Customer Info Header without DP photo */}
                       <div className="flex items-start justify-between gap-2.5">
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 border border-gray-200 shrink-0 shadow-2xs">
-                            <img
-                              src={rev.userImage || '/girl_reviewer_1.jpg'}
-                              alt={rev.author}
-                              referrerPolicy="no-referrer"
-                              className="w-full h-full object-cover rounded-full"
-                            />
-                          </div>
-
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="font-bold text-[13px] sm:text-sm text-gray-900 truncate">
-                                {rev.author}
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="font-bold text-[13px] sm:text-sm text-gray-900 truncate">
+                              {rev.author}
+                            </span>
+                            {rev.verified && (
+                              <span className="bg-[#2E7D32] text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 shrink-0">
+                                <CheckCircle2 className="w-2.5 h-2.5" /> Verified
                               </span>
-                              {rev.verified && (
-                                <span className="bg-[#2E7D32] text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 shrink-0">
-                                  <CheckCircle2 className="w-2.5 h-2.5" /> Verified
-                                </span>
-                              )}
-                            </div>
-                            <div className="flex items-center gap-1 text-[11px] text-gray-500 mt-0.5 font-medium">
-                              <span className="truncate">{rev.city}, {rev.state}</span>
-                              <span>•</span>
-                              <span className="shrink-0">{rev.date}</span>
-                            </div>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-1 text-[11px] text-gray-500 mt-0.5 font-medium">
+                            <span className="truncate">{rev.city}, {rev.state}</span>
+                            <span>•</span>
+                            <span className="shrink-0">{rev.date}</span>
                           </div>
                         </div>
 
@@ -274,15 +263,32 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
 
                       {/* Review Title */}
                       {rev.title && (
-                        <h4 className="font-bold text-xs sm:text-[13px] text-gray-900 mt-3 leading-snug">
+                        <ReadMoreText
+                          as="h4"
+                          maxLines={2}
+                          className="font-bold text-xs sm:text-[13px] text-gray-900 leading-snug"
+                          containerClassName="mt-3"
+                          expandLabel="Read more"
+                          collapseLabel="Read less"
+                          buttonClassName="text-[#B3874B] hover:text-amber-900 font-semibold text-[11px]"
+                        >
                           {rev.title}
-                        </h4>
+                        </ReadMoreText>
                       )}
 
                       {/* Review Quote / Comment */}
-                      <p className="text-xs text-gray-600 leading-relaxed mt-2">
-                        "{rev.comment}"
-                      </p>
+                      <ReadMoreText
+                        as="p"
+                        maxLines={2}
+                        quoteMarks={true}
+                        className="text-xs text-gray-600 leading-relaxed"
+                        containerClassName="mt-2"
+                        expandLabel="Read more"
+                        collapseLabel="Read less"
+                        buttonClassName="text-[#B3874B] hover:text-amber-900 font-semibold text-[11px]"
+                      >
+                        {rev.comment}
+                      </ReadMoreText>
                     </div>
 
                     {/* Bottom Footer: Purchased product & Helpful counter */}

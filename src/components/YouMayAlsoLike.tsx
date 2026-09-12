@@ -1,6 +1,7 @@
 import React from 'react';
 import { GENUINE_PRODUCTS, GenuineProduct } from '../data/homeCatalog';
 import { ProductId } from '../types';
+import { ReadMoreText } from './ReadMoreText';
 
 interface YouMayAlsoLikeProps {
   activeProductId?: ProductId;
@@ -119,13 +120,16 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
                     )}
                   </div>
 
-                  {/* Title below Image in elegant Serif font (2-line clamped with ellipsis) */}
-                  <h3
-                    className="mt-1.5 font-normal text-xs sm:text-[14.5px] text-gray-900 leading-snug line-clamp-2 px-1 group-hover:text-[#B3874B] transition-colors h-8 sm:h-11 font-serif"
-                    style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                  {/* Title below Image in elegant Serif font */}
+                  <ReadMoreText
+                    as="h3"
+                    maxLines={2}
+                    className="font-normal text-xs sm:text-[14.5px] text-gray-900 leading-snug px-1 group-hover:text-[#B3874B] transition-colors font-serif min-h-[32px] sm:min-h-[44px]"
+                    containerClassName="mt-1.5 w-full flex flex-col items-center"
+                    buttonClassName="text-[#B3874B] hover:text-amber-800 font-semibold text-[10.5px] sm:text-[11px] mx-auto"
                   >
                     {product.title}
-                  </h3>
+                  </ReadMoreText>
 
                   {/* Star Rating snippet */}
                   <div className="flex items-center justify-center gap-1 mt-1 text-[10.5px] sm:text-xs text-amber-700 font-medium">

@@ -22,7 +22,6 @@ import {
   BUNDLE_OPTIONS,
   AVAILABLE_COUPONS,
   REVIEWS_LIST,
-  ASSET_IMAGES,
   PRODUCT_DETAILS,
   PRODUCT_HIGHLIGHTS,
   ADDITIONAL_DETAILS,
@@ -86,6 +85,7 @@ import {
   PhonePeLogo,
   PaytmLogo,
 } from './PaymentLogos';
+import { ReadMoreText } from './ReadMoreText';
 
 interface ProductHeroProps {
   selectedBundle: BundleOption;
@@ -429,13 +429,28 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
           <div className="lg:col-span-6 xl:col-span-6 mt-4 lg:mt-0 space-y-3 sm:space-y-3.5">
             {/* Product Title, Rating */}
             <div>
-              <h1 className="text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-black text-black tracking-tight leading-tight">
+              <ReadMoreText
+                as="h1"
+                maxLines={2}
+                className="text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-black text-black tracking-tight leading-tight"
+                expandLabel="Read more"
+                collapseLabel="Read less"
+                buttonClassName="text-[#B3874B] hover:text-amber-900 font-bold text-sm sm:text-base hover:underline"
+              >
                 {currentProduct.title}
-              </h1>
+              </ReadMoreText>
               
-              <p className="text-xs sm:text-sm text-gray-600 font-medium mt-1 leading-relaxed">
+              <ReadMoreText
+                as="p"
+                maxLines={2}
+                className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed"
+                containerClassName="mt-1"
+                expandLabel="Read more"
+                collapseLabel="Read less"
+                buttonClassName="text-[#B3874B] hover:text-amber-900 font-semibold text-xs"
+              >
                 {currentProduct.fullDescription}
-              </p>
+              </ReadMoreText>
 
               {/* Rating Row */}
               <div className="flex items-center gap-2 mt-2 flex-wrap">
@@ -586,20 +601,14 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
             <div className="mt-4 pt-4 sm:mt-5 sm:pt-5 border-t border-gray-200/80 w-full space-y-3.5 sm:space-y-4">
           {/* Customer Review Carousel Card */}
           <div className="relative rounded-2xl border border-[#CFEAD5] bg-[#F1F9F3] p-3.5 sm:p-4 shadow-2xs">
-              {/* User Profile Row */}
-              <div className="flex items-center gap-3">
-                <img
-                  src={currentReviewsList[activeReviewIdx]?.userImage || ASSET_IMAGES.ankit}
-                  alt={currentReviewsList[activeReviewIdx]?.author || 'Customer'}
-                  referrerPolicy="no-referrer"
-                  className="w-12 h-12 rounded-full object-cover border border-white shadow-2xs"
-                />
+              {/* User Profile Row without DP photo */}
+              <div className="flex items-center justify-between gap-2">
                 <div>
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <span className="font-bold text-black text-sm sm:text-base">
                       {currentReviewsList[activeReviewIdx]?.author || 'Kavya Singhania'}
                     </span>
-                    <span className="bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="bg-[#1E8E3E] text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
                       <CheckCircle2 className="w-2.5 h-2.5 text-white" />
                       Verified
                     </span>
@@ -624,14 +633,23 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                   <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
                 </button>
 
-                <p className="text-xs sm:text-sm text-gray-800 leading-relaxed font-normal flex-1 px-1">
-                  "{currentReviewsList[activeReviewIdx]?.comment ||
+                <ReadMoreText
+                  as="p"
+                  maxLines={2}
+                  quoteMarks={true}
+                  className="text-xs sm:text-sm text-gray-800 leading-relaxed font-normal"
+                  containerClassName="flex-1 px-1 min-w-0"
+                  expandLabel="Read more"
+                  collapseLabel="Read less"
+                  buttonClassName="text-emerald-800 hover:text-emerald-950 font-semibold text-[11px] sm:text-xs"
+                >
+                  {currentReviewsList[activeReviewIdx]?.comment ||
                     (isCombo5
                       ? 'All 5 necklaces are sleek & subtle! Incredible value for ₹349. Beautiful design and doesn’t tarnish.'
                       : isChoker
                       ? 'Wore this set for my sister wedding reception. Everyone thought it was real polki diamond jewelry! Heavy royal look without hurting neckline.'
-                      : 'Meri wife ke liye gift liya tha, pack of 6 combo is fantastic value. Har ek jhumka ka finish aur design royal lagta hai. Light weight hone ki wajah se all-day function me pehenne me comfortable hai.')}"
-                </p>
+                      : 'Meri wife ke liye gift liya tha, pack of 6 combo is fantastic value. Har ek jhumka ka finish aur design royal lagta hai. Light weight hone ki wajah se all-day function me pehenne me comfortable hai.')}
+                </ReadMoreText>
 
                 <button
                   onClick={() =>
@@ -829,9 +847,18 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                   </ul>
                 )}
 
-                <p className="text-[12.5px] sm:text-[13.5px] text-gray-700 leading-normal pt-2.5 border-t border-amber-100/60 mt-2.5">
-                  <strong className="font-bold text-black">Care Note:</strong> {isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
-                </p>
+                <ReadMoreText
+                  as="p"
+                  maxLines={2}
+                  prefix={<strong className="font-bold text-black mr-1">Care Note:</strong>}
+                  className="text-[12.5px] sm:text-[13.5px] text-gray-700 leading-normal"
+                  containerClassName="pt-2.5 border-t border-amber-100/60 mt-2.5"
+                  expandLabel="Read more"
+                  collapseLabel="Read less"
+                  buttonClassName="text-amber-800 hover:text-amber-950 font-semibold text-xs"
+                >
+                  {isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
+                </ReadMoreText>
               </div>
             </div>
           </div>

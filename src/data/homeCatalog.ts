@@ -542,7 +542,7 @@ export const HOME_FAQS = [
   {
     question: 'How do I track my order once placed?',
     answer:
-      'As soon as your package is dispatched, you will receive an instant SMS and WhatsApp notification with your live tracking link. You can also click the "Track Order" button in the top navigation at any time and enter your order number or phone number for real-time live status updates.',
+      'As soon as your package is dispatched, you will receive an instant SMS and WhatsApp notification with your live tracking link and courier AWB number for real-time dispatch updates. Our dedicated WhatsApp support team (+91 7982438137) is also available 6 days a week to assist you with instant order updates.',
   },
 ];
 

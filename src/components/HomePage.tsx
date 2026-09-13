@@ -28,7 +28,6 @@ interface HomePageProps {
   onSelectProduct: (productId: ProductId) => void;
   onAddToCart?: (bundle: BundleOption) => void;
   onBuyNow?: (bundle: BundleOption) => void;
-  onOpenTrackOrder?: () => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({

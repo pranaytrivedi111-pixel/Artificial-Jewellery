@@ -4,7 +4,6 @@ import {
   Menu,
   X,
   Search,
-  Package,
   Heart,
   Crown,
   ChevronRight,
@@ -16,7 +15,6 @@ import { ProductId } from '../types';
 interface NavbarProps {
   cartCount: number;
   onOpenCart: () => void;
-  onOpenTrackOrder?: () => void;
   wishlistCount?: number;
   onToggleWishlist?: () => void;
   isWishlisted?: boolean;
@@ -29,7 +27,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   cartCount,
   onOpenCart,
-  onOpenTrackOrder,
   wishlistCount = 0,
   onToggleWishlist,
   isWishlisted = false,
@@ -111,19 +108,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Search className="w-5 h-5 stroke-[2]" />
               </button>
-
-              {/* Track Order Button */}
-              {onOpenTrackOrder && (
-                <button
-                  type="button"
-                  onClick={onOpenTrackOrder}
-                  className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-gray-700 hover:text-black hover:bg-gray-100 rounded-lg text-xs font-bold transition-colors cursor-pointer"
-                  title="Track Your Order"
-                >
-                  <Package className="w-4 h-4 text-amber-700" />
-                  <span>Track Order</span>
-                </button>
-              )}
 
               {/* Wishlist Button */}
               {onToggleWishlist && (
@@ -295,21 +279,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </div>
                   </button>
                 ))}
-
-                {onOpenTrackOrder && (
-                  <div className="pt-3">
-                    <button
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        onOpenTrackOrder();
-                      }}
-                      className="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold text-gray-800 bg-gray-50 hover:bg-gray-100 flex items-center gap-2"
-                    >
-                      <Package className="w-4 h-4 text-amber-700" />
-                      <span>Track Your Order</span>
-                    </button>
-                  </div>
-                )}
               </div>
             </div>
 

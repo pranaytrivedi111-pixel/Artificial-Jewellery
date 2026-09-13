@@ -41,6 +41,7 @@ import {
   SliceEmblem,
   UpiEmblem,
   WhatsAppPayEmblem,
+  WhatsAppIcon,
   JupiterEmblem,
   ClubbedUpiLogo,
 } from './PaymentLogos';
@@ -183,6 +184,27 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
 
   // Base UPI intent URL
   const universalUpiUrl = `upi://pay?pa=${OFFICIAL_PAYMENT_CONFIG.upiId}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+
+  // Helper to generate WhatsApp screenshot share link for prepaid payments
+  const getWhatsAppPrepaidShareUrl = (appContext?: string, utrValue?: string) => {
+    const lines = [
+      `👑 *QAVELLE – PREPAID PAYMENT SCREENSHOT*`,
+      ``,
+      `Hello Qavelle Support, I have paid ₹${formattedPrepaidAmount} via Prepaid UPI for my order!`,
+      ``,
+      `📦 *Order ID:* ${orderId}`,
+      customerName ? `👤 *Customer Name:* ${customerName}` : null,
+      customerPhone ? `📞 *Phone:* ${customerPhone}` : null,
+      `💰 *Amount Paid:* ₹${formattedPrepaidAmount}`,
+      `💳 *Paid via:* ${appContext || pendingPaymentApp || 'UPI App'}`,
+      utrValue ? `🔖 *UTR Number:* ${utrValue}` : `🔖 *UTR:* Attached in screenshot`,
+      deliveryAddress ? `📍 *Delivery Address:* ${deliveryAddress}` : null,
+      ``,
+      `📸 *Sharing my payment screenshot / receipt below for instant order confirmation:*`
+    ].filter(Boolean) as string[];
+
+    return `https://wa.me/917982438137?text=${encodeURIComponent(lines.join('\n'))}`;
+  };
 
   // Generate QR Code with auto-filled amount
   useEffect(() => {
@@ -709,6 +731,53 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
               )}
             </button>
 
+            {/* Direct Alternative: Share Payment Screenshot via WhatsApp */}
+            <div className="pt-2">
+              <div className="relative flex items-center justify-center my-2">
+                <div className="w-full border-t border-gray-200"></div>
+                <span className="bg-white px-2.5 text-[10.5px] font-bold text-gray-400 uppercase tracking-wider absolute">
+                  OR
+                </span>
+              </div>
+
+              <div className="p-3 rounded-xl bg-gradient-to-r from-[#EBFBF0] to-[#DCFCE7]/70 border border-[#25D366]/30 flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <WhatsAppIcon className="w-4 h-4 text-[#25D366] shrink-0" />
+                    <span className="text-[11.5px] font-bold text-gray-950">
+                      Already paid or can't find 12-digit UTR?
+                    </span>
+                  </div>
+                  <span className="px-1.5 py-0.5 rounded bg-[#25D366]/20 text-[#075E54] text-[9px] font-extrabold uppercase">
+                    Instant
+                  </span>
+                </div>
+                <p className="text-[11px] text-emerald-950 font-bold text-center leading-snug">
+                  Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+                </p>
+                <a
+                  href={getWhatsAppPrepaidShareUrl(pendingPaymentApp, enteredUtr)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    handleSuccessConfirmation('upi', {
+                      utr: enteredUtr.trim() || 'WhatsApp-Screenshot-Pending',
+                      app: pendingPaymentApp,
+                    });
+                  }}
+                  id="whatsapp-share-screenshot-utr-cta"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs cursor-pointer transition-all text-center"
+                >
+                  <WhatsAppIcon className="w-4 h-4 text-white shrink-0" />
+                  <span>Share Payment Screenshot</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-white/90 shrink-0" />
+                </a>
+                <p className="text-[10px] text-center text-emerald-800">
+                  Tap above to send screenshot directly to WhatsApp (+91 7982438137)
+                </p>
+              </div>
+            </div>
+
             <button
               type="button"
               onClick={() => {
@@ -865,14 +934,27 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
               <span>{redirectingApp.id === 'universal' ? 'Open UPI App' : `Retry Opening ${redirectingApp.name}`}</span>
             </button>
 
-            <button
-              type="button"
-              onClick={() => openUtrVerification(redirectingApp.name)}
-              className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+            <p className="text-[11.5px] sm:text-xs text-gray-950 font-bold text-center bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl leading-snug">
+              Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+            </p>
+
+            <a
+              href={getWhatsAppPrepaidShareUrl(redirectingApp.name)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                handleSuccessConfirmation('upi', {
+                  utr: 'WhatsApp-Screenshot-Direct',
+                  app: redirectingApp.name,
+                });
+              }}
+              id="whatsapp-share-screenshot-app-cta"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs flex items-center justify-center gap-2 cursor-pointer shadow-xs text-center"
             >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>I Have Paid • Enter 12-Digit UTR to Confirm</span>
-            </button>
+              <WhatsAppIcon className="w-4 h-4 text-white shrink-0" />
+              <span>Share Payment Screenshot</span>
+              <ExternalLink className="w-3.5 h-3.5 text-white/90 shrink-0" />
+            </a>
 
             {!showQrFallback && (
               <button
@@ -894,14 +976,26 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                   Scan &amp; Pay ₹{formattedPrepaidAmount}
                 </span>
 
-                <button
-                  type="button"
-                  onClick={() => openUtrVerification('QR Code Scan')}
-                  className="w-full mt-2.5 py-2 px-3 rounded-xl bg-black hover:bg-neutral-800 text-[#FFD600] font-black text-xs uppercase tracking-wide flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+                <p className="text-[10.5px] text-gray-950 font-bold text-center mt-2 px-1 leading-tight">
+                  Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+                </p>
+
+                <a
+                  href={getWhatsAppPrepaidShareUrl('QR Code Scan')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    handleSuccessConfirmation('upi', {
+                      utr: 'WhatsApp-QR-Screenshot',
+                      app: 'QR Code Scan',
+                    });
+                  }}
+                  className="w-full mt-2 py-2 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-all text-center"
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>I Have Paid via QR • Enter UTR to Confirm</span>
-                </button>
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-white shrink-0" />
+                  <span>Share Payment Screenshot</span>
+                  <ExternalLink className="w-3 h-3 text-white/90 shrink-0" />
+                </a>
               </div>
             )}
           </div>
@@ -1008,14 +1102,26 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
               <span>Open UPI App on this device</span>
             </button>
 
-            <button
-              type="button"
-              onClick={() => openUtrVerification(`UPI Collect (${upiCollectRequest.vpa})`)}
-              className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+            <p className="text-[11.5px] sm:text-xs text-gray-950 font-bold text-center bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl leading-snug">
+              Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+            </p>
+
+            <a
+              href={getWhatsAppPrepaidShareUrl(`UPI Collect (${upiCollectRequest.vpa})`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                handleSuccessConfirmation('upi', {
+                  utr: 'WhatsApp-Screenshot-Collect',
+                  app: `UPI Collect (${upiCollectRequest.vpa})`,
+                });
+              }}
+              className="w-full py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs flex items-center justify-center gap-2 cursor-pointer shadow-xs text-center"
             >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>I Have Approved Payment • Enter UTR to Confirm</span>
-            </button>
+              <WhatsAppIcon className="w-4 h-4 text-white shrink-0" />
+              <span>Share Payment Screenshot</span>
+              <ExternalLink className="w-3.5 h-3.5 text-white/90 shrink-0" />
+            </a>
 
             <button
               type="button"
@@ -1035,14 +1141,26 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                   Scan &amp; Pay ₹{formattedPrepaidAmount}
                 </span>
 
-                <button
-                  type="button"
-                  onClick={() => openUtrVerification('QR Code Scan')}
-                  className="w-full mt-2.5 py-2 px-3 rounded-xl bg-black hover:bg-neutral-800 text-[#FFD600] font-black text-xs uppercase tracking-wide flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+                <p className="text-[10.5px] text-gray-950 font-bold text-center mt-2 px-1 leading-tight">
+                  Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+                </p>
+
+                <a
+                  href={getWhatsAppPrepaidShareUrl('QR Code Scan')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    handleSuccessConfirmation('upi', {
+                      utr: 'WhatsApp-QR-Screenshot',
+                      app: 'QR Code Scan',
+                    });
+                  }}
+                  className="w-full mt-2 py-2 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-all text-center"
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>I Have Paid via QR • Enter UTR to Confirm</span>
-                </button>
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-white shrink-0" />
+                  <span>Share Payment Screenshot</span>
+                  <ExternalLink className="w-3 h-3 text-white/90 shrink-0" />
+                </a>
               </div>
             )}
           </div>
@@ -1758,15 +1876,27 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
 
                   {/* Order Confirm & Download Action Buttons */}
                   <div className="w-full max-w-xs mt-3.5 flex flex-col gap-2">
-                    <button
-                      type="button"
-                      id="confirm-qr-payment-btn"
-                      onClick={() => openUtrVerification('QR Code Scan')}
-                      className="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-neutral-800 active:scale-[0.99] text-[#FFD600] font-black text-xs uppercase tracking-wide flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all"
+                    <p className="text-[11px] text-gray-950 font-bold text-center leading-snug">
+                      Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+                    </p>
+
+                    <a
+                      href={getWhatsAppPrepaidShareUrl('QR Code Scan')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        handleSuccessConfirmation('upi', {
+                          utr: 'WhatsApp-QR-Screenshot',
+                          app: 'QR Code Scan',
+                        });
+                      }}
+                      id="whatsapp-share-screenshot-qr-cta"
+                      className="w-full py-2 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-all text-center"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-[#FFD600]" />
-                      <span>I Have Paid via QR • Enter UTR to Confirm</span>
-                    </button>
+                      <WhatsAppIcon className="w-4 h-4 text-white shrink-0" />
+                      <span>Share Payment Screenshot</span>
+                      <ExternalLink className="w-3 h-3 text-white/90 shrink-0" />
+                    </a>
 
                     <button
                       type="button"
@@ -1849,17 +1979,7 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
               </form>
             </div>
 
-            {/* Quick direct link: Already transferred payment / Verify UTR */}
-            <div className="pt-2.5 mt-2 border-t border-gray-100 flex items-center justify-center">
-              <button
-                type="button"
-                onClick={() => openUtrVerification('UPI Transfer')}
-                className="text-[11px] text-[#B3874B] hover:text-[#936d39] font-bold inline-flex items-center gap-1.5 py-1 px-2.5 rounded-lg hover:bg-amber-50/60 transition-colors cursor-pointer"
-              >
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Already transferred? Enter 12-digit UTR to verify &amp; confirm order</span>
-              </button>
-            </div>
+
           </div>
         )}
       </div>

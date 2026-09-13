@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage / Main Catalog -->
+  <url>
+    <loc>https://qavelle.store/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/qavelle_logo.png</image:loc>
+      <image:title>QAVELLE – Royal Handcrafted Jewellery Store</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 1: U-Shaped White Enamel Handbag Drop Earrings -->
+  <url>
+    <loc>https://qavelle.store/products/suyug-high-grade-u-shaped-white-enemel-handbag-drop-earrings-for-women-and-girls</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/e1.webp</image:loc>
+      <image:title>U-Shaped White Enamel Handbag Drop Earrings for Women and Girls</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 2: Green Emerald Waterproof Flat Snake Chain Necklace -->
+  <url>
+    <loc>https://qavelle.store/products/gold-plated-stainless-steel-cubic-zirconia-pendant-green-emerald-anti-tarnish-gold-plated-stainless-steel-flat-snake-chain-necklace-green-waterproof-chain-layering-pendant-gifts-for-women-and-girls</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/emerald_snake_hero.webp</image:loc>
+      <image:title>Green Emerald Anti-Tarnish Gold Plated Stainless Steel Flat Snake Chain Necklace</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 3: Combo of 2 Aesthetic Daily Wear Pendants -->
+  <url>
+    <loc>https://qavelle.store/products/combo-of-2-aesthetic-daily-wear-pendants-stylish-pastel-pink-panna-green-locket-with-sleek-chain</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/combo_2_aesthetic_hero.webp</image:loc>
+      <image:title>Combo of 2 Aesthetic Daily Wear Pendants - Stylish Pastel Pink &amp; Panna Green Locket</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 4: Radhika Ambani Inspired Emerald Green AD Choker Set -->
+  <url>
+    <loc>https://qavelle.store/products/radhika-anant-ambani-inspired-green-ad-necklace-set</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/radhika_green_hero.webp</image:loc>
+      <image:title>Radhika Ambani Inspired Royal Green AD Emerald Choker Set</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 5: Royal Allure Gold Plated Jewellery Set -->
+  <url>
+    <loc>https://qavelle.store/products/royal-elegant-gold-plated-jewellery-set</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/Hero_website_neklace.webp</image:loc>
+      <image:title>Royal Elegant Gold Plated Jewellery Set with Matching Earrings</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 6: Trendy Alloy Gold Plated Jewellery Set -->
+  <url>
+    <loc>https://qavelle.store/products/trendy-alloy-gold-plated-jewellery-set</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/neklace_producshot.webp</image:loc>
+      <image:title>Trendy Alloy Gold Plated Heritage Jewellery Set</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 7: Elegant Everyday Necklace Set Combo of 5 -->
+  <url>
+    <loc>https://qavelle.store/products/elegant-everyday-necklace-set-combo-of-5</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/elegant_combo_1.webp</image:loc>
+      <image:title>Elegant Everyday Necklace Set Combo of 5</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 8: Rhodium Plated Austrian Diamond Choker Set -->
+  <url>
+    <loc>https://qavelle.store/products/rhodium-plated-austrian-diamond-choker-set</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/Cinematic.webp</image:loc>
+      <image:title>Rhodium Plated Sparkling Austrian Diamond Choker Necklace Set</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 9: Shimmering Pack of 5 Necklace & Pendant Combo -->
+  <url>
+    <loc>https://qavelle.store/products/shimmering-pack-of-5-necklace-pendant-combo</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/Hero_website.webp</image:loc>
+      <image:title>Shimmering Pack of 5 Necklace &amp; Pendant Combo</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 10: Gold Plated Fancy Jhumka Earrings Set of 6 -->
+  <url>
+    <loc>https://qavelle.store/products/gold-plated-fancy-jhumka-earrings-set-of-6</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/radhika_ambani_1.webp</image:loc>
+      <image:title>Gold Plated Royal Heritage Fancy Jhumka Earrings Set of 6</image:title>
+    </image:image>
+  </url>
+
+</urlset>

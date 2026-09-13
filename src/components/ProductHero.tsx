@@ -365,23 +365,6 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   return (
     <section id="product-hero" className="pt-1 sm:pt-1.5 pb-3 sm:pb-4 lg:pb-5 bg-white">
       <div className="max-w-3xl lg:max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
-        {/* Top Short Breadcrumb: Qavelle / Product name in short */}
-        <div className="mb-2 flex items-center justify-between gap-2 flex-wrap text-xs text-gray-500 pb-1.5 border-b border-gray-100">
-          <div className="flex items-center gap-1.5 font-medium">
-            <button
-              type="button"
-              onClick={() => (onNavigateHome ? onNavigateHome() : onSwitchProduct && onSwitchProduct('jhumka'))}
-              className="hover:text-black cursor-pointer transition-colors bg-transparent border-none p-0 text-gray-600 font-semibold"
-            >
-              Qavelle
-            </button>
-            <span className="text-gray-400">/</span>
-            <span className="text-black font-bold truncate max-w-[280px] sm:max-w-md">
-              {currentProduct.shortTitle || (isChoker ? 'Austrian Diamond Choker Set' : 'Gold Plated Jhumka Set')}
-            </span>
-          </div>
-        </div>
-
         <div className="lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-10 lg:items-start">
           {/* LEFT COLUMN: Gallery with Hero Image on Top and Collection Grid Below (Fixed/Sticky on Desktop) */}
           <div className="lg:col-span-6 xl:col-span-6 lg:sticky lg:top-20 self-start w-full mx-auto lg:mx-0">

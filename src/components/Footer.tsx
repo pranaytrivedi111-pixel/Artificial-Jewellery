@@ -97,7 +97,6 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
               <button
                 type="button"
                 onClick={() => setIsExpanded((prev) => !prev)}
-                onMouseEnter={() => setIsExpanded(true)}
                 className="lg:hidden inline-flex items-center gap-1 text-xs font-bold text-[#B3874B] hover:text-amber-800 underline underline-offset-2 ml-1 cursor-pointer transition-colors"
                 aria-expanded={isExpanded}
               >

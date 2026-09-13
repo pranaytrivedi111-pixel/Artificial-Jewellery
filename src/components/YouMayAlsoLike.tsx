@@ -1,7 +1,6 @@
 import React from 'react';
 import { GENUINE_PRODUCTS, GenuineProduct } from '../data/homeCatalog';
 import { ProductId } from '../types';
-import { ReadMoreText } from './ReadMoreText';
 
 interface YouMayAlsoLikeProps {
   activeProductId?: ProductId;
@@ -58,116 +57,81 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
   return (
     <section
       id="you-may-also-like"
-      className="pt-7 pb-6 sm:pt-9 sm:pb-8 bg-white border-t border-gray-100"
+      className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 border-t border-gray-100"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Centered Serif Section Header */}
-        <div className="text-center mb-8 sm:mb-11">
-          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#B3874B] block mb-1.5">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 sm:mb-8 gap-2">
+        <div>
+          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#B3874B]">
             Curated Royal Treasury
           </span>
           <h2
-            className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-gray-900 tracking-tight"
+            className="text-base sm:text-xl lg:text-2xl font-normal text-gray-950 tracking-tight leading-tight"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             You May Also Like
           </h2>
-          <p className="text-xs sm:text-sm text-gray-500 max-w-lg mx-auto mt-2 font-light">
-            Every handcrafted heritage piece in our royal jewelry collection
-          </p>
         </div>
+        <p className="text-xs text-gray-500 hidden sm:block">
+          Click any set to view detailed 360° gallery & order with COD
+        </p>
+      </div>
 
-        {/* Product Cards Grid: Show EVERY product in the store (2 columns on mobile, 4 columns on desktop) */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
-          {displayProducts.map((product) => {
-            const isCurrent = product.id === activeProductId;
-            const targetSlug = product.slug || getTargetSlug(product.id);
+      {/* 
+          PRODUCT CARDS GRID: 
+          Exclusively identical to the "Explore All Authentic Masterpieces" product cards:
+          - 4 cards per row on desktop (grid-cols-4)
+          - 2 cards per row on mobile (grid-cols-2)
+          - Pristine clean image with zero overlays/badges
+          - Clean uppercase category tracking
+          - Single-line title with hover golden transition
+          - High-contrast price with strike-through MRP and discount percentage
+      */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 lg:gap-4.5">
+        {displayProducts.map((product) => {
+          const targetSlug = product.slug || getTargetSlug(product.id);
 
-            return (
-              <div
-                key={product.cardKey || `${product.id}-${product.slug}`}
-                className="w-full flex flex-col items-center"
-              >
-                <a
-                  href={targetSlug}
-                  onClick={(e) => handleProductClick(e, product)}
-                  className={`group flex flex-col w-full text-center cursor-pointer select-none rounded-2xl sm:rounded-3xl p-2 sm:p-3 transition-all duration-300 ${
-                    isCurrent
-                      ? 'bg-amber-50/40 border border-amber-200/90 shadow-xs'
-                      : 'bg-transparent hover:bg-stone-50/80 border border-transparent hover:border-stone-200/80'
-                  }`}
-                  title={`View ${product.title}`}
-                >
-                  {/* Clean Image Frame with Rounded Corners (Zero text overlay on the image) */}
-                  <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#F8F6F2] group-hover:bg-[#f3efe8] transition-colors duration-300 p-2 sm:p-3 flex items-center justify-center">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain rounded-xl sm:rounded-2xl group-hover:scale-105 transition-transform duration-500 ease-out"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  {/* Badges / Category Tag below image (never on image) */}
-                  <div className="mt-2.5 flex items-center justify-center gap-1.5 flex-wrap">
-                    {isCurrent ? (
-                      <span className="text-[9.5px] sm:text-[10px] font-bold uppercase tracking-wider text-amber-900 bg-amber-100/90 px-2 py-0.5 rounded-full">
-                        Currently Viewing
-                      </span>
-                    ) : (
-                      <span className="text-[9.5px] sm:text-[10px] font-bold uppercase tracking-wider text-stone-700 bg-stone-100 px-2 py-0.5 rounded-full">
-                        {product.tag || product.category}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Title below Image in elegant Serif font */}
-                  <ReadMoreText
-                    as="h3"
-                    maxLines={2}
-                    className="font-normal text-xs sm:text-[14.5px] text-gray-900 leading-snug px-1 group-hover:text-[#B3874B] transition-colors font-serif min-h-[32px] sm:min-h-[44px]"
-                    containerClassName="mt-1.5 w-full flex flex-col items-center"
-                    buttonClassName="text-[#B3874B] hover:text-amber-800 font-semibold text-[10.5px] sm:text-[11px] mx-auto"
-                  >
-                    {product.title}
-                  </ReadMoreText>
-
-                  {/* Star Rating snippet */}
-                  <div className="flex items-center justify-center gap-1 mt-1 text-[10.5px] sm:text-xs text-amber-700 font-medium">
-                    <span>★ {product.rating}</span>
-                    <span className="text-gray-400">
-                      ({product.reviewsCount.toLocaleString('en-IN')})
-                    </span>
-                  </div>
-
-                  {/* Centered Price Row with discount pill below */}
-                  <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-1 sm:mt-1.5 flex-wrap">
-                    <span className="text-sm sm:text-base font-bold text-gray-950 font-mono">
-                      ₹{product.price.toLocaleString('en-IN')}
-                    </span>
-                    <span className="text-[11px] sm:text-xs text-gray-400 line-through font-normal font-mono">
-                      ₹{product.originalPrice.toLocaleString('en-IN')}
-                    </span>
-                    {product.discountPercent && (
-                      <span className="text-[9.5px] sm:text-[10px] font-black bg-emerald-50 text-emerald-700 border border-emerald-200/60 px-1.5 py-0.2 rounded">
-                        {product.discountPercent}% OFF
-                      </span>
-                    )}
-                  </div>
-
-                  {/* View Details Action Link */}
-                  <div className="mt-2.5 pt-2 border-t border-gray-100/80 w-full flex items-center justify-center">
-                    <span className="text-[11px] sm:text-xs font-semibold text-[#B3874B] group-hover:text-[#8d6735] flex items-center gap-1 transition-colors">
-                      <span>View Piece</span>
-                      <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
-                    </span>
-                  </div>
-                </a>
+          return (
+            <a
+              key={product.cardKey || `${product.id}-${product.slug}`}
+              href={targetSlug}
+              onClick={(e) => handleProductClick(e, product)}
+              className="group w-full text-center select-none bg-white rounded-2xl p-2 sm:p-2.5 border border-stone-200/80 hover:border-amber-300 hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              title={`Click to view ${product.title}`}
+            >
+              {/* Pristine Clean Image Container: Zero overlay badges */}
+              <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#F8F6F2] p-2 sm:p-3 flex items-center justify-center">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full h-full object-contain rounded-xl transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
               </div>
-            );
-          })}
-        </div>
+
+              {/* Clean Product Info Below Image */}
+              <div className="mt-2 px-1 flex flex-col items-center">
+                <span className="text-[10px] uppercase font-bold tracking-wider text-[#B3874B] line-clamp-1">
+                  {product.category}
+                </span>
+                <h3 className="text-xs sm:text-[13px] font-semibold text-gray-900 group-hover:text-[#B3874B] transition-colors leading-snug line-clamp-1 mt-0.5">
+                  {product.title}
+                </h3>
+                <div className="mt-1 flex items-baseline justify-center gap-1.5 flex-wrap">
+                  <span className="text-xs sm:text-sm font-extrabold text-gray-950">
+                    ₹{product.price}
+                  </span>
+                  <span className="text-[10px] sm:text-xs text-gray-400 line-through font-normal">
+                    ₹{product.originalPrice}
+                  </span>
+                  <span className="text-[10px] font-bold text-[#B3874B]">
+                    ({product.discountPercent}% OFF)
+                  </span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </section>
   );

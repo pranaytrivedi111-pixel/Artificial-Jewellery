@@ -1,0 +1,7 @@
+# Robots.txt for Qavelle Store
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Official XML Sitemap for Google Search Console & Search Engines
+Sitemap: https://qavelle.store/sitemap.xml

@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 
 const PORT = 3000;
@@ -17,6 +18,37 @@ async function startServer() {
   // 1. Health check route
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', time: new Date().toISOString() });
+  });
+
+  // Explicit Sitemap & Robots endpoints for Google Search Console & Crawlers
+  app.get('/sitemap.xml', (req, res) => {
+    const candidates = [
+      path.join(process.cwd(), 'public', 'sitemap.xml'),
+      path.join(process.cwd(), 'dist', 'sitemap.xml'),
+    ];
+    for (const file of candidates) {
+      if (fs.existsSync(file)) {
+        res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        return res.sendFile(file);
+      }
+    }
+    res.status(404).type('text/plain').send('sitemap.xml not found');
+  });
+
+  app.get('/robots.txt', (req, res) => {
+    const candidates = [
+      path.join(process.cwd(), 'public', 'robots.txt'),
+      path.join(process.cwd(), 'dist', 'robots.txt'),
+    ];
+    for (const file of candidates) {
+      if (fs.existsSync(file)) {
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        return res.sendFile(file);
+      }
+    }
+    res.status(404).type('text/plain').send('robots.txt not found');
   });
 
   // 2. Server-side Order Lead Proxy to Google Sheets

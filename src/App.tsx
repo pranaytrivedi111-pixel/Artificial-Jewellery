@@ -12,7 +12,6 @@ import { ReviewsSection } from './components/ReviewsSection';
 import { YouMayAlsoLike } from './components/YouMayAlsoLike';
 import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
-import { TrackOrderModal } from './components/TrackOrderModal';
 import { StickyBottomBar } from './components/StickyBottomBar';
 import { Footer } from './components/Footer';
 import { preloadProductAssets } from './utils/imagePreload';
@@ -337,17 +336,9 @@ export default function App() {
   const [selectedBundle, setSelectedBundle] = useState<BundleOption>(() =>
     getDefaultBundle(initialLoc.productId)
   );
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: 'default-item',
-      bundle: getDefaultBundle(initialLoc.productId),
-      quantity: 1,
-      freeVelvetBox: true,
-    },
-  ]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [isTrackOrderOpen, setIsTrackOrderOpen] = useState(false);
   const [appliedCoupon, setAppliedCoupon] = useState<CouponCode | null>(AVAILABLE_COUPONS[0]); // Auto-applied QVL100
   const [isWishlisted, setIsWishlisted] = useState(false);
 
@@ -595,7 +586,6 @@ export default function App() {
       <Navbar
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenTrackOrder={() => setIsTrackOrderOpen(true)}
         wishlistCount={isWishlisted ? 1 : 0}
         onToggleWishlist={() => setIsWishlisted(!isWishlisted)}
         isWishlisted={isWishlisted}
@@ -612,7 +602,6 @@ export default function App() {
             onSelectProduct={handleSwitchProduct}
             onAddToCart={handleAddToCart}
             onBuyNow={handleBuyNow}
-            onOpenTrackOrder={() => setIsTrackOrderOpen(true)}
           />
         ) : (
           <>
@@ -681,14 +670,8 @@ export default function App() {
         onClearCart={() => setCartItems([])}
       />
 
-      {/* Live Order Tracking Modal */}
-      <TrackOrderModal
-        isOpen={isTrackOrderOpen}
-        onClose={() => setIsTrackOrderOpen(false)}
-      />
-
       {/* Mobile & Desktop Sticky Bottom Conversion Bar (Persistently visible at all times on all Product Detail Pages) */}
-      {currentView === 'product' && !isCheckoutOpen && !isTrackOrderOpen && (
+      {currentView === 'product' && !isCheckoutOpen && (
         <StickyBottomBar
           key={`bottom-bar-${activeProductId}`}
           bundle={selectedBundle}

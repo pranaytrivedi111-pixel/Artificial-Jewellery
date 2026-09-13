@@ -25,11 +25,13 @@ import {
   Clock,
   Tag,
   Package,
+  ExternalLink,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CartItem, CouponCode } from '../types';
 import { ASSET_IMAGES } from '../data/productData';
 import { ModernPaymentSection } from './ModernPaymentSection';
+import { WhatsAppIcon } from './PaymentLogos';
 import { recordLead } from '../services/leadService';
 
 interface CheckoutModalProps {
@@ -416,6 +418,37 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       }).catch(() => {});
     }
   };
+
+  const isPrepaidOrder = (confirmedOrder?.paymentMethod || paymentMethod) === 'upi';
+
+  const whatsappShareUrl = (() => {
+    const currentOrderId = confirmedOrder?.orderId || orderId;
+    const currentAmount = confirmedOrder?.totalAmount ?? Math.round(finalTotal);
+    const currentName = confirmedOrder?.customerName || name || 'Valued Customer';
+    const currentPhone = phone ? `+91 ${phone}` : '';
+    const currentUtr = confirmedOrder?.utrNumber || utrNumber;
+    const currentAddress = confirmedOrder?.address || fullAddress;
+    const currentCity = confirmedOrder?.city || city;
+    const currentPincode = confirmedOrder?.pincode || pincode;
+
+    const lines = [
+      `👑 *QAVELLE – PREPAID ORDER PAYMENT CONFIRMATION*`,
+      ``,
+      `Hello Qavelle Team, I have successfully placed and paid my prepaid order on qavelle.store!`,
+      ``,
+      `📦 *Order ID:* ${currentOrderId}`,
+      `👤 *Customer Name:* ${currentName}`,
+      currentPhone ? `📞 *Phone:* ${currentPhone}` : null,
+      `💰 *Amount Paid:* ₹${currentAmount}`,
+      `💳 *Payment Method:* Prepaid UPI (Verified)`,
+      currentUtr ? `🔖 *UTR / Ref No:* ${currentUtr}` : `🔖 *UTR:* Attached in screenshot`,
+      currentAddress ? `📍 *Delivery Address:* ${currentAddress}${currentCity ? `, ${currentCity}` : ''}${currentPincode ? ` - ${currentPincode}` : ''}` : null,
+      ``,
+      `📸 *Sharing my payment screenshot / receipt below for priority dispatch:*`
+    ].filter(Boolean) as string[];
+
+    return `https://wa.me/917982438137?text=${encodeURIComponent(lines.join('\n'))}`;
+  })();
 
   return (
     <div className="fixed inset-0 z-[80] bg-black/80 backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 md:p-6 animate-fadeIn overflow-hidden">
@@ -1210,15 +1243,71 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 </div>
               </div>
 
+              {/* For Prepaid Orders: Prominent "Share payment Screenshot via whatsapp" CTA Card & Button */}
+              {isPrepaidOrder && (
+                <div className="w-full p-4 rounded-2xl bg-gradient-to-br from-[#EBFBF0] via-[#F0FDF4] to-[#DCFCE7] border-2 border-[#25D366]/40 shadow-sm text-left flex flex-col gap-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start gap-2.5">
+                      <div className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                        <WhatsAppIcon className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <h4 className="text-xs sm:text-sm font-black text-gray-950">
+                            Instant Verification &amp; Priority Dispatch
+                          </h4>
+                          <span className="px-1.5 py-0.5 rounded bg-[#128C7E] text-white font-extrabold text-[9px] uppercase tracking-wider">
+                            PREPAID EXCLUSIVE
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-gray-600 mt-0.5 leading-relaxed">
+                          Share your payment screenshot or UPI receipt on WhatsApp to fast-track jewelry sanctification &amp; same-day express packaging.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* User-requested instant confirmation guidance line */}
+                  <p className="text-xs sm:text-[13px] font-bold text-[#075E54] bg-[#DCF8C6]/50 p-2.5 rounded-xl border border-[#25D366]/30 leading-snug">
+                    Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+                  </p>
+
+                  {/* CTA Button with exact text requested as per best practices */}
+                  <a
+                    href={whatsappShareUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id="prepaid-share-screenshot-whatsapp-cta"
+                    className="w-full min-h-[50px] py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer text-center group"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 text-white shrink-0 group-hover:scale-110 transition-transform" />
+                    <span className="tracking-wide">Share Payment Screenshot</span>
+                    <ExternalLink className="w-4 h-4 text-white/90 shrink-0" />
+                  </a>
+
+                  <div className="flex items-center justify-between text-[10.5px] text-emerald-900/80 px-1 pt-0.5 border-t border-emerald-200/60">
+                    <span className="flex items-center gap-1 font-medium">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                      Official WhatsApp: <strong>+91 7982438137</strong>
+                    </span>
+                    <span className="font-semibold text-emerald-800">Available 24/7</span>
+                  </div>
+                </div>
+              )}
+
               {/* Action Button: Mobile-First Single Prominent CTA */}
               <div className="w-full pt-1">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-full min-h-[48px] py-3.5 px-6 rounded-xl bg-black hover:bg-neutral-800 active:scale-[0.99] text-[#FFD600] font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg cursor-pointer transition-all flex items-center justify-center gap-2"
+                  className={`w-full min-h-[48px] py-3.5 px-6 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg cursor-pointer transition-all flex items-center justify-center gap-2 ${
+                    isPrepaidOrder
+                      ? 'bg-neutral-900 hover:bg-black text-white hover:text-[#FFD600] border border-neutral-800'
+                      : 'bg-black hover:bg-neutral-800 active:scale-[0.99] text-[#FFD600]'
+                  }`}
                 >
                   <span>Continue Shopping</span>
-                  <ArrowRight className="w-4 h-4 text-[#FFD600]" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </div>

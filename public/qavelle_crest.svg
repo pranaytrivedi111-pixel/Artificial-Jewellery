@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="460 305 80 90" width="128" height="128">
+  
+  <defs>
+    <!-- Rich metallic antique gold gradient -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b68f51"/>
+      <stop offset="35%" stop-color="#d4b06f"/>
+      <stop offset="70%" stop-color="#a67e42"/>
+      <stop offset="100%" stop-color="#c8a464"/>
+    </linearGradient>
+
+    <!-- Horizontal gold rule gradient -->
+    <linearGradient id="leftRuleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b68f51" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#b68f51" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="rightRuleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b68f51" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#b68f51" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Paper linen texture simulation for photo version -->
+    <pattern id="linenTexture" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#faf8f5"/>
+      <circle cx="2" cy="2" r="0.6" fill="#000000" opacity="0.018"/>
+      <circle cx="6" cy="6" r="0.6" fill="#000000" opacity="0.015"/>
+    </pattern>
+  </defs>
+
+  <path d="M 500 315 C 503 334 507 344 528 350 C 507 356 503 366 500 385 C 497 366 493 356 472 350 C 493 344 497 334 500 315 Z M 500 338 L 512 350 L 500 362 L 488 350 Z" fill="url(#goldGradient)" fill-rule="evenodd"/>
+</svg>

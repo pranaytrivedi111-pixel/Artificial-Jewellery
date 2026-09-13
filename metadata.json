@@ -1,0 +1,6 @@
+{
+  "name": "QAVELLE - Royal Handcrafted Jewellery Store",
+  "description": "QAVELLE – Crafted For The Queen In You. Handcrafted Royal Jewellery including Radhika Ambani Inspired Green AD Necklace Set, Royal Austrian Diamond Choker, Gold Plated Jhumka Earrings, and Elegant Everyday Combo Sets with express checkout and Cash on Delivery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

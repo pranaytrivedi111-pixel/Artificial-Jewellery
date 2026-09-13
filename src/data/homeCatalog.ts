@@ -1,0 +1,452 @@
+import { ProductId } from '../types';
+
+export interface GenuineProduct {
+  id: ProductId;
+  slug: string;
+  title: string;
+  shortTitle: string;
+  subtitle: string;
+  category: 'Necklace Sets' | 'Combo Deals' | 'Earrings & Jhumkas' | 'Celebrity Inspired';
+  badge: string;
+  price: number;
+  originalPrice: number;
+  discountPercent: number;
+  rating: number;
+  reviewsCount: number;
+  image: string;
+  hoverImage?: string;
+  tag: string;
+  inStockCount: number;
+  highlights: string[];
+  occasion: string;
+  packageContains: string;
+}
+
+export const GENUINE_PRODUCTS: GenuineProduct[] = [
+  {
+    id: 'radhika-green-ad',
+    slug: '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',
+    title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Drop Earrings',
+    shortTitle: 'Radhika Ambani Green AD Set',
+    subtitle: 'Trending Celebrity Masterpiece with Emerald Green Cut Stones & Micro-Pavé AD',
+    category: 'Celebrity Inspired',
+    badge: 'TRENDING CELEBRITY',
+    price: 299,
+    originalPrice: 999,
+    discountPercent: 70,
+    rating: 4.9,
+    reviewsCount: 1890,
+    image: '/radhika_ambani_1.webp',
+    tag: 'Ambani Inspired',
+    inStockCount: 7,
+    highlights: [
+      'Emerald Cut Centerstones with Micro-Pavé Crystals',
+      'Complimentary Matching Hanging Drop Earrings',
+      'Double-Layered 24K Gold Polish with Anti-Tarnish Coat',
+      '100% Skin Safe & Hypoallergenic',
+    ],
+    occasion: 'Weddings, Receptions & Red Carpet Festivities',
+    packageContains: '1 Green AD Necklace + 1 Pair Matching Drop Earrings + Velvet Box',
+  },
+  {
+    id: 'allure-gold-set',
+    slug: '/products/royal-elegant-gold-plated-jewellery-set',
+    title: 'Royal Elegant Gold Plated Jewellery Set with Matching Earrings',
+    shortTitle: 'Royal Elegant Gold Plated Set',
+    subtitle: 'Handcrafted 22K Micro Gold Plated Heritage Necklace with Austrian Crystals & Matching Dangler Earrings',
+    category: 'Necklace Sets',
+    badge: 'ROYAL HERITAGE',
+    price: 749,
+    originalPrice: 2499,
+    discountPercent: 70,
+    rating: 4.9,
+    reviewsCount: 3820,
+    image: '/aa1.webp',
+    hoverImage: '/aaa2.webp',
+    tag: '22K Gold Plated',
+    inStockCount: 8,
+    highlights: [
+      'Intricate 22K Micro Gold Plating with Filigree Artistry',
+      'Matching Royal Dangler Earrings Included',
+      'Imperial Ruby Gemstones & Austrian Crystal Inset with Anti-Tarnish Coating',
+      'Free Luxury Velvet Jewellery Box + Certificate of Authenticity',
+    ],
+    occasion: 'Weddings, Reception, Festive Puja & Grand Ethnic Occasions',
+    packageContains: '1 Gold Plated Necklace + 1 Pair Matching Drop Earrings + Bracelet & Ring + Velvet Box',
+  },
+  {
+    id: 'elegant-everyday-5',
+    slug: '/products/elegant-everyday-necklace-set-combo-of-5',
+    title: 'Elegant Everyday Necklace Set – Combo of 5 Necklaces with Cubic Zirconia Pendants',
+    shortTitle: 'Combo of 5 Everyday Necklaces',
+    subtitle: '5 Minimalist Aesthetic Chains with Individual Pendants for Daily & Office Wear',
+    category: 'Combo Deals',
+    badge: 'BEST VALUE COMBO',
+    price: 349,
+    originalPrice: 999,
+    discountPercent: 65,
+    rating: 4.9,
+    reviewsCount: 2140,
+    image: '/elegant_combo_1.webp',
+    tag: 'Combo of 5',
+    inStockCount: 14,
+    highlights: [
+      '5 Individual Necklaces with 5 Unique Pendant Motifs',
+      'Wear Solo for Minimalist Charm or Layer for Chic Look',
+      'Secure Lobster Claw Clasps with Length Extenders',
+      'Gift Ready Luxury Velvet Storage Pouch Included',
+    ],
+    occasion: 'Daily Wear, Office, College, Casual Outfits & Gifting',
+    packageContains: '5 Separate Pendant Necklaces + Velvet Gift Pouch',
+  },
+  {
+    id: 'choker',
+    slug: '/products/rhodium-plated-austrian-diamond-choker-set',
+    title: 'Rhodium Plated Austrian Diamond Jewellery Set with Royal Kundan Pearls & Matching Earrings',
+    shortTitle: 'Royal Austrian Diamond Choker Set',
+    subtitle: 'Regal Rhodium Plated Choker with White Austrian Crystals & Kundan Pearls',
+    category: 'Necklace Sets',
+    badge: 'ROYAL HERITAGE',
+    price: 799,
+    originalPrice: 2999,
+    discountPercent: 73,
+    rating: 4.9,
+    reviewsCount: 3420,
+    image: '/Hero_website_neklace.webp',
+    tag: 'Royal Bridal',
+    inStockCount: 11,
+    highlights: [
+      'Austrian Cut Crystals with Handcrafted Kundan Pearls',
+      'Includes Matching Royal Drop Earrings',
+      'Tarnish-Resistant Rhodium Electroplating',
+      'Comfort-Fit Flexible Back Dori with Adjustable Bead',
+    ],
+    occasion: 'Weddings, Sangeet, Engagement & Grand Galas',
+    packageContains: '1 Royal Choker Necklace + 1 Pair Matching Earrings + Gift Box',
+  },
+  {
+    id: 'necklace-combo-5',
+    slug: '/products/shimmering-pack-of-5-necklace-pendant-combo',
+    title: 'Shimmering Beautiful Pack of 5 Necklace Chain Pendant Combo for Women and Girls',
+    shortTitle: 'Pack of 5 Shimmering Pendant Combo',
+    subtitle: 'Silver-Tone & Gold-Tone Dainty Pendant Chains for Casual Chic & College Wear',
+    category: 'Combo Deals',
+    badge: 'POPULAR PACK OF 5',
+    price: 349,
+    originalPrice: 999,
+    discountPercent: 65,
+    rating: 4.8,
+    reviewsCount: 1640,
+    image: '/combo5_user_1.webp',
+    tag: 'Pack of 5',
+    inStockCount: 12,
+    highlights: [
+      '5 Shimmering Dainty Pendant Chains',
+      'Lightweight & All-Day Comfortable on Neck',
+      'Hypoallergenic Anti-Tarnish Finish',
+      'Perfect Gift for Sisters, Friends & Loved Ones',
+    ],
+    occasion: 'College, Casual Outings, Date Nights & Birthday Gifting',
+    packageContains: '5 Individual Pendant Chains + Gift Box',
+  },
+  {
+    id: 'jhumka',
+    slug: '/products/gold-plated-fancy-jhumka-earrings-set-of-6',
+    title: 'Handcrafted 18K Gold Plated Jhumka Earrings for Women – Set of 6 Pairs',
+    shortTitle: 'Gold Plated Jhumka Set (6 Pairs)',
+    subtitle: '6 Regal Handcrafted Jhumka Designs with Traditional Motifs & Pearl Drops',
+    category: 'Earrings & Jhumkas',
+    badge: 'BESTSELLER COMBO',
+    price: 499,
+    originalPrice: 1999,
+    discountPercent: 75,
+    rating: 4.8,
+    reviewsCount: 2840,
+    image: '/Hero_website.webp',
+    tag: 'Set of 6 Pairs',
+    inStockCount: 9,
+    highlights: [
+      'Set of 6 Unique Traditional Jhumka Designs',
+      'Handcrafted with Austrian Crystals & Lustrous Pearl Drops',
+      '18K Micro Gold Plating with Anti-Allergy Push Backs',
+      'Ideal for Festive Ethnic Wear & Traditional Functions',
+    ],
+    occasion: 'Festivals, Puja, Weddings & Traditional Family Gatherings',
+    packageContains: '6 Distinct Pairs of Jhumka Earrings + Velvet Jewelry Box',
+  },
+];
+
+export const HOME_CATEGORIES = [
+  {
+    id: 'all',
+    label: 'All Products',
+    icon: '✨',
+    image: '/Hero_website.webp',
+    count: 6,
+  },
+  {
+    id: 'allure-set',
+    label: 'Royal Gold Set',
+    icon: '✨',
+    image: '/aa1.webp',
+    count: 1,
+    targetProduct: 'allure-gold-set' as ProductId,
+  },
+  {
+    id: 'combo-5',
+    label: 'Combo of 5',
+    icon: '💎',
+    image: '/elegant_combo_1.webp',
+    count: 2,
+    targetProduct: 'elegant-everyday-5' as ProductId,
+  },
+  {
+    id: 'choker-royal',
+    label: 'Royal Choker',
+    icon: '👑',
+    image: '/Hero_website_neklace.webp',
+    count: 1,
+    targetProduct: 'choker' as ProductId,
+  },
+  {
+    id: 'ambani-set',
+    label: 'Ambani Inspired',
+    icon: '💚',
+    image: '/radhika_ambani_1.webp',
+    count: 1,
+    targetProduct: 'radhika-green-ad' as ProductId,
+  },
+  {
+    id: 'jhumka-set',
+    label: 'Gold Jhumkas',
+    icon: '🪔',
+    image: '/Hero_website.webp',
+    count: 1,
+    targetProduct: 'jhumka' as ProductId,
+  },
+  {
+    id: 'shimmering-pack',
+    label: 'Shimmering Pack',
+    icon: '⭐',
+    image: '/combo5_user_1.webp',
+    count: 1,
+    targetProduct: 'necklace-combo-5' as ProductId,
+  },
+];
+
+export const HOME_PROMO_SLIDES = [
+  {
+    id: 'slide-allure',
+    badge: 'NEW ARRIVAL • 22K GOLD PLATED',
+    title: 'Royal Elegant Gold Plated Jewellery Set',
+    subtitle: 'Majestic Handcrafted Necklace with Ruby Red Gemstones & Crystal Leaf Motifs. Matching Drop Earrings, Bracelet & Ring Included.',
+    offer: 'Flat 70% OFF • ₹749 Only • Free Matching Earrings & Velvet Box',
+    price: '₹749',
+    originalPrice: '₹2,499',
+    image: '/aa1.webp',
+    productId: 'allure-gold-set' as ProductId,
+    ctaText: 'Explore Royal Set',
+    theme: 'gold',
+  },
+  {
+    id: 'slide-ambani',
+    badge: 'TRENDING CELEBRITY ICON',
+    title: 'Radhika Ambani Inspired Emerald Green AD Set',
+    subtitle: 'As Seen in Royal Festivities: Emerald Cut Centerstones & Micro-Pavé Brilliance. 24K Gold Polish with Matching Drop Earrings.',
+    offer: 'Flat 70% OFF • Free Matching Earrings • Express Shipping',
+    price: '₹299',
+    originalPrice: '₹999',
+    image: '/radhika_ambani_1.webp',
+    productId: 'radhika-green-ad' as ProductId,
+    ctaText: 'Explore Ambani Set',
+    theme: 'emerald',
+  },
+  {
+    id: 'slide-choker',
+    badge: 'ROYAL HERITAGE COLLECTION',
+    title: 'Austrian Diamond & Kundan Pearl Choker Set',
+    subtitle: 'Rhodium Plated Masterpiece with Matching Royal Drop Earrings. Handcrafted for Unforgettable Celebrations.',
+    offer: 'Flat 73% OFF • Free Velvet Box • Cash on Delivery',
+    price: '₹799',
+    originalPrice: '₹2,999',
+    image: '/Hero_website_neklace.webp',
+    productId: 'choker' as ProductId,
+    ctaText: 'Shop Royal Choker',
+    theme: 'silver',
+  },
+  {
+    id: 'slide-jhumka',
+    badge: 'TRADITIONAL BESTSELLER',
+    title: 'Handcrafted 18K Gold Plated Jhumkas (Set of 6 Pairs)',
+    subtitle: '6 Regal Peacock & Temple Motif Jhumkas with Lustrous Pearl Drops. 100% Skin Safe & Hypoallergenic in Velvet Box.',
+    offer: 'Flat 75% OFF • 6 Pairs in 1 Velvet Box • ₹499 Only',
+    price: '₹499',
+    originalPrice: '₹1,999',
+    image: '/Hero_website.webp',
+    productId: 'jhumka' as ProductId,
+    ctaText: 'Shop 6-Pair Set',
+    theme: 'warm',
+  },
+  {
+    id: 'slide-combo5',
+    badge: 'INDIA’S FAVORITE COMBO',
+    title: 'Elegant Everyday Necklace Set (Combo of 5)',
+    subtitle: '5 Dainty Cubic Zirconia Pendant Chains for Daily & Office Wear. Wear Solo or Layer Effortlessly.',
+    offer: 'Flat 65% OFF • 5 Full Necklaces • Gift Box Included',
+    price: '₹349',
+    originalPrice: '₹999',
+    image: '/elegant_combo_1.webp',
+    productId: 'elegant-everyday-5' as ProductId,
+    ctaText: 'Grab Combo of 5',
+    theme: 'gold',
+  },
+  {
+    id: 'slide-shimmering',
+    badge: 'VERSATILE MINIMALIST PACK',
+    title: 'Shimmering Beautiful Pack of 5 Pendant Chains',
+    subtitle: '5 Shimmering Silver-Tone Dainty Pendant Necklaces for Casual Outfits, Date Nights & College Chic.',
+    offer: 'Flat 65% OFF • 5 Distinct Motifs • Free Shipping',
+    price: '₹349',
+    originalPrice: '₹999',
+    image: '/combo5_user_1.webp',
+    productId: 'necklace-combo-5' as ProductId,
+    ctaText: 'Shop 5-Pendant Combo',
+    theme: 'silver',
+  },
+];
+
+export const HOME_SHOP_BY_PURPOSE = [
+  {
+    id: 'purpose-daily',
+    title: 'Daily & Office Chic',
+    tagline: 'Minimalist Lightweight CZ Chains for Work, College & Casual Wear',
+    image: '/elegant_combo_1.webp',
+    productId: 'elegant-everyday-5' as ProductId,
+    badge: '5 Necklaces in 1 Set',
+    price: '₹349',
+  },
+  {
+    id: 'purpose-wedding',
+    title: 'Weddings & Royal Galas',
+    tagline: 'Rhodium Plated Austrian Diamond Choker with Handcrafted Pearls',
+    image: '/Hero_website_neklace.webp',
+    productId: 'choker' as ProductId,
+    badge: 'Necklace + Earrings',
+    price: '₹799',
+  },
+  {
+    id: 'purpose-celebrity',
+    title: 'Celebrity Red Carpet',
+    tagline: 'Radhika Ambani Inspired Emerald Green AD Set with Drop Earrings',
+    image: '/radhika_ambani_1.webp',
+    productId: 'radhika-green-ad' as ProductId,
+    badge: 'Celebrity Pick',
+    price: '₹299',
+  },
+  {
+    id: 'purpose-puja',
+    title: 'Traditional Festive & Puja',
+    tagline: '18K Gold Plated Jhumka Earrings with Pearl Drops (Set of 6 Pairs)',
+    image: '/Hero_website.webp',
+    productId: 'jhumka' as ProductId,
+    badge: 'Set of 6 Pairs',
+    price: '₹499',
+  },
+  {
+    id: 'purpose-shimmering',
+    title: 'Minimalist Dainty Charms',
+    tagline: '5 Silver-Tone Pendant Chains for Layering, College & Casual Wear',
+    image: '/combo5_user_1.webp',
+    productId: 'necklace-combo-5' as ProductId,
+    badge: 'Pack of 5 Charms',
+    price: '₹349',
+  },
+];
+
+export const HOME_FAQS = [
+  {
+    question: 'Are all products on QAVELLE Store genuine and certified?',
+    answer:
+      'Yes, 100%! Every single piece at QAVELLE is crafted with certified anti-tarnish alloys, premium 18K/24K electroplating, and inspected under strict QAVELLE Hallmark Standards. Our jewelry is 100% lead, nickel, and cadmium free, making it completely hypoallergenic and safe for sensitive Indian skin.',
+  },
+  {
+    question: 'Will the gold or rhodium plating fade with daily use?',
+    answer:
+      'Our jewelry features advanced electro-deposition plating sealed with an invisible protective lacquer that guards against everyday oxidation. With simple care (avoiding direct perfume spray, pool water, and harsh sanitizers, and wiping with a dry soft cloth after use), the lustrous shine remains vibrant for years.',
+  },
+  {
+    question: 'How many days does delivery take and is Cash on Delivery (COD) available?',
+    answer:
+      'We ship via express air courier partners (BlueDart, Delhivery, Xpressbees) across 26,000+ Indian pin codes. Orders are dispatched within 24–48 hours and typically arrive within 3–5 business days. Cash on Delivery (COD) is available nationwide with zero risk.',
+  },
+  {
+    question: 'What is your return and exchange policy?',
+    answer:
+      'We stand behind our craftsmanship with a 7-day hassle-free replacement and return policy. If you receive a damaged item or have any quality concerns, simply contact our WhatsApp support team (+91 7982438137) with a quick photo/video, and we will initiate a priority replacement immediately.',
+  },
+  {
+    question: 'Can I send this directly as a gift to someone?',
+    answer:
+      'Absolutely! Every QAVELLE order arrives nestled inside a complimentary luxury branded velvet jewelry box, ready for gifting. You can enter the recipient’s address at checkout, and we will deliver it with regal presentation.',
+  },
+  {
+    question: 'How do I track my order once placed?',
+    answer:
+      'As soon as your package is dispatched, you will receive an instant SMS and WhatsApp notification with your live tracking link. You can also click the "Track Order" button in the top navigation at any time and enter your order number or phone number for real-time live status updates.',
+  },
+];
+
+export const HOME_REVIEWS = [
+  {
+    id: 'hr-1',
+    author: 'Kavya Singhania',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    rating: 5,
+    title: 'Stunning Combo of 5! Looks like real fine jewelry',
+    comment:
+      'I ordered the Combo of 5 everyday necklaces and I am completely in love! Each chain has a different delicate pendant, the polish is very bright and does not look cheap at all. Wearing them to my office daily without any skin irritation.',
+    productTitle: 'Combo of 5 Everyday Necklaces',
+    verified: true,
+    userImage: '/elegant_combo_1.webp',
+  },
+  {
+    id: 'hr-2',
+    author: 'Pooja Verma',
+    city: 'New Delhi',
+    state: 'Delhi',
+    rating: 5,
+    title: 'Radhika Ambani set stole the show at my cousin’s wedding!',
+    comment:
+      'The emerald green stone in this Radhika Ambani necklace set is breathtaking. The Austrian diamonds have intense fire under banquet lighting. Everyone thought it was worth at least ₹15,000. Super fast 3-day delivery too!',
+    productTitle: 'Radhika Ambani Green AD Set',
+    verified: true,
+    userImage: '/radhika_ambani_1.webp',
+  },
+  {
+    id: 'hr-3',
+    author: 'Sneha Reddy',
+    city: 'Hyderabad',
+    state: 'Telangana',
+    rating: 5,
+    title: 'Royal Choker Set with Pearls is absolute royalty',
+    comment:
+      'The rhodium finish and Kundan pearls look so royal! The matching drop earrings complete the entire look. The packaging box is luxurious and sturdy. Best purchase I made this festive season.',
+    productTitle: 'Royal Austrian Diamond Choker Set',
+    verified: true,
+    userImage: '/neklace_producshot.webp',
+  },
+  {
+    id: 'hr-4',
+    author: 'Rhea Kapoor',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    rating: 5,
+    title: '6 pairs of jhumkas for this price is unbeatable value',
+    comment:
+      'All 6 pairs of gold-plated jhumkas are distinct and beautifully detailed. The pearl drops give that classic traditional look. Lightweight on ears, wore them for 8 hours during Diwali puja without any pain!',
+    productTitle: 'Gold Plated Jhumka Set (6 Pairs)',
+    verified: true,
+    userImage: '/Hero_website.webp',
+  },
+];

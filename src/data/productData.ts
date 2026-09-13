@@ -38,6 +38,9 @@ export const UPLOADED_IMAGES = {
   necklaceHeroWebsite: '/Hero_website_neklace.webp',
   necklaceProductShot1: '/neklace_producshot.webp',
   necklaceProductShot2: '/neklace_productshot_2.webp',
+  handbagEarringUser1: '/e1.webp',
+  handbagEarringUser2: '/e2.webp',
+  handbagEarringUser3: '/e3.webp',
 };
 
 export const ASSET_IMAGES = {
@@ -50,34 +53,34 @@ export const ASSET_IMAGES = {
   templeHaram: templeHaramImg,
   rubyFloralNecklace: rubyFloralNecklaceImg,
   antiqueBangles: antiqueBanglesImg,
-  hero: '/Hero_website.png',
-  hand: '/UGC_1.png',
-  chart: '/Cinematic.png',
-  cert: '/UGC_3.png',
-  astro: '/UGC_2.png',
-  box: '/Cinematic.png',
-  vedic: '/UGC.png',
-  macro: '/UGC_2.png',
-  ankit: '/UGC_1.png',
-  celebReel: '/UGC_1.png',
-  unboxReel: '/UGC.png',
-  custBangles: '/UGC_2.png',
-  custPalm: '/UGC_3.png',
-  jhumkaHero: '/Hero_website.png',
-  jhumkaCinematic: '/Cinematic.png',
-  jhumkaStudioWhite: jhumkaStudioWhite,
-  jhumkaModelEar: '/UGC_1.png',
-  jhumkaPeacock: '/UGC_2.png',
-  jhumkaLakshmi: '/UGC_3.png',
-  jhumkaCollection: '/UGC.png',
-  jhumkaPackaging: '/Cinematic.png',
-  jhumkaModelPortrait: '/UGC_1.png',
-  jhumkaHandHolding: '/UGC_2.png',
-  jhumkaCraftBanner: '/Hero_website.png',
-  jhumkaPearlCombo: '/UGC_3.png',
-  necklaceHeroWebsite: '/Hero_website_neklace.png',
-  necklaceProductShot1: '/neklace_producshot.png',
-  necklaceProductShot2: '/neklace_productshot_2.png',
+  hero: '/Cinematic.webp',
+  hand: '/UGC_1.webp',
+  chart: '/Cinematic.webp',
+  cert: '/UGC_3.webp',
+  astro: '/UGC_2.webp',
+  box: '/Cinematic.webp',
+  vedic: '/UGC.webp',
+  macro: '/UGC_2.webp',
+  ankit: '/UGC_1.webp',
+  celebReel: '/UGC_1.webp',
+  unboxReel: '/UGC.webp',
+  custBangles: '/UGC_2.webp',
+  custPalm: '/UGC_3.webp',
+  jhumkaHero: '/Cinematic.webp',
+  jhumkaCinematic: '/Cinematic.webp',
+  jhumkaStudioWhite: '/Cinematic.webp',
+  jhumkaModelEar: '/UGC_1.webp',
+  jhumkaPeacock: '/UGC_2.webp',
+  jhumkaLakshmi: '/UGC_3.webp',
+  jhumkaCollection: '/UGC.webp',
+  jhumkaPackaging: '/Cinematic.webp',
+  jhumkaModelPortrait: '/UGC_1.webp',
+  jhumkaHandHolding: '/UGC_2.webp',
+  jhumkaCraftBanner: '/Hero_website.webp',
+  jhumkaPearlCombo: '/UGC_3.webp',
+  necklaceHeroWebsite: '/Hero_website_neklace.webp',
+  necklaceProductShot1: '/neklace_producshot.webp',
+  necklaceProductShot2: '/neklace_productshot_2.webp',
 };
 
 // Matching Necklaces to mention on Jhumka Earrings Product Page
@@ -87,9 +90,9 @@ export const JHUMKA_MATCHING_VARIANTS = [
     productId: 'radhika-green-ad' as const,
     title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Earrings',
     category: 'Celebrity Bridal AD Set',
-    price: 299,
-    originalPrice: 999,
-    discountPercent: 70,
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
     image: '/radhika_ambani_1.webp',
     tag: 'Ambani Inspired',
     sourceUrl: '/radhika-anant-ambani-inspired-green-ad-neckless-set',
@@ -99,9 +102,9 @@ export const JHUMKA_MATCHING_VARIANTS = [
     productId: 'choker' as const,
     title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
     category: 'Necklace Set',
-    price: 799,
+    price: 749,
     originalPrice: 2999,
-    discountPercent: 73,
+    discountPercent: 75,
     image: '/neklace_producshot.webp',
     sourceUrl: '/necklace',
   },
@@ -129,6 +132,18 @@ export const JHUMKA_MATCHING_VARIANTS = [
     tag: 'Combo of 5',
     sourceUrl: '/elegant-everyday-necklace-set-combo-of-5-necklaces',
   },
+  {
+    id: 'var-jhumka-trendy',
+    productId: 'trendy-alloy-set' as const,
+    title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+    category: 'Necklace Sets',
+    price: 849,
+    originalPrice: 2799,
+    discountPercent: 70,
+    image: '/b1.webp',
+    tag: 'Trendy Bestseller',
+    sourceUrl: '/products/trendy-alloy-gold-plated-jewellery-set',
+  },
 ];
 
 // Matching Earrings / Jhumka Sets to mention on Necklace Product Page ("and vice versa in necklace page")
@@ -138,9 +153,9 @@ export const CHOKER_MATCHING_VARIANTS = [
     productId: 'radhika-green-ad' as const,
     title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Earrings',
     category: 'Celebrity Bridal AD Set',
-    price: 299,
-    originalPrice: 999,
-    discountPercent: 70,
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
     image: '/radhika_ambani_1.webp',
     tag: 'Ambani Inspired',
     sourceUrl: '/radhika-anant-ambani-inspired-green-ad-neckless-set',
@@ -169,16 +184,16 @@ export const CHOKER_MATCHING_VARIANTS = [
     sourceUrl: '/shimmering-beautiful-pack-of-5-necklace-chain-pendant-combo-for-women-and-girls',
   },
   {
-    id: 'var-elegant-everyday-5',
-    productId: 'elegant-everyday-5' as const,
-    title: 'Elegant Everyday Necklace Set – Combo of 5 Necklaces',
-    category: 'Everyday Necklace Combo (Set of 5)',
-    price: 349,
-    originalPrice: 999,
-    discountPercent: 65,
-    image: '/elegant_combo_1.webp',
-    tag: 'Combo of 5',
-    sourceUrl: '/elegant-everyday-necklace-set-combo-of-5-necklaces',
+    id: 'var-choker-trendy',
+    productId: 'trendy-alloy-set' as const,
+    title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+    category: 'Necklace Sets',
+    price: 849,
+    originalPrice: 2799,
+    discountPercent: 70,
+    image: '/b1.webp',
+    tag: 'Trendy Bestseller',
+    sourceUrl: '/products/trendy-alloy-gold-plated-jewellery-set',
   },
 ];
 
@@ -189,9 +204,9 @@ export const COMBO5_MATCHING_VARIANTS = [
     productId: 'radhika-green-ad' as const,
     title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Earrings',
     category: 'Celebrity Bridal AD Set',
-    price: 299,
-    originalPrice: 999,
-    discountPercent: 70,
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
     image: '/radhika_ambani_1.webp',
     tag: 'Ambani Inspired',
     sourceUrl: '/radhika-anant-ambani-inspired-green-ad-neckless-set',
@@ -212,9 +227,9 @@ export const COMBO5_MATCHING_VARIANTS = [
     productId: 'choker' as const,
     title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
     category: 'Necklace Set',
-    price: 799,
+    price: 749,
     originalPrice: 2999,
-    discountPercent: 73,
+    discountPercent: 75,
     image: '/neklace_producshot.webp',
     sourceUrl: '/necklace',
   },
@@ -239,9 +254,9 @@ export const ELEGANT_EVERYDAY_MATCHING_VARIANTS = [
     productId: 'radhika-green-ad' as const,
     title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Earrings',
     category: 'Celebrity Bridal AD Set',
-    price: 299,
-    originalPrice: 999,
-    discountPercent: 70,
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
     image: '/radhika_ambani_1.webp',
     tag: 'Ambani Inspired',
     sourceUrl: '/radhika-anant-ambani-inspired-green-ad-neckless-set',
@@ -262,9 +277,9 @@ export const ELEGANT_EVERYDAY_MATCHING_VARIANTS = [
     productId: 'choker' as const,
     title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
     category: 'Necklace Set',
-    price: 799,
+    price: 749,
     originalPrice: 2999,
-    discountPercent: 73,
+    discountPercent: 75,
     image: '/neklace_producshot.webp',
     sourceUrl: '/necklace',
   },
@@ -289,9 +304,9 @@ export const RADHIKA_GREEN_AD_MATCHING_VARIANTS = [
     productId: 'choker' as const,
     title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
     category: 'Necklace Set',
-    price: 799,
+    price: 749,
     originalPrice: 2999,
-    discountPercent: 73,
+    discountPercent: 75,
     image: '/neklace_producshot.webp',
     sourceUrl: '/necklace',
   },
@@ -339,9 +354,9 @@ export const ALLURE_GOLD_SET_MATCHING_VARIANTS = [
     productId: 'choker' as const,
     title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
     category: 'Bridal Choker Set',
-    price: 799,
+    price: 749,
     originalPrice: 2999,
-    discountPercent: 73,
+    discountPercent: 75,
     image: '/neklace_producshot.webp',
     sourceUrl: '/necklace',
   },
@@ -361,24 +376,24 @@ export const ALLURE_GOLD_SET_MATCHING_VARIANTS = [
     productId: 'radhika-green-ad' as const,
     title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Earrings',
     category: 'Celebrity Inspired',
-    price: 299,
-    originalPrice: 999,
-    discountPercent: 70,
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
     image: '/radhika_ambani_1.webp',
     tag: 'Trending Celebrity',
     sourceUrl: '/radhika-anant-ambani-inspired-green-ad-neckless-set',
   },
   {
-    id: 'var-allure-everyday',
-    productId: 'elegant-everyday-5' as const,
-    title: 'Elegant Everyday Necklace Set – Combo of 5 Necklaces',
-    category: 'Minimalist Combo (Pack of 5)',
-    price: 349,
-    originalPrice: 999,
-    discountPercent: 65,
-    image: '/elegant_combo_1.webp',
-    tag: 'Combo of 5',
-    sourceUrl: '/elegant-everyday-necklace-set-combo-of-5-necklaces',
+    id: 'var-allure-trendy',
+    productId: 'trendy-alloy-set' as const,
+    title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+    category: 'Necklace Sets',
+    price: 849,
+    originalPrice: 2799,
+    discountPercent: 70,
+    image: '/b1.webp',
+    tag: 'Trendy Bestseller',
+    sourceUrl: '/products/trendy-alloy-gold-plated-jewellery-set',
   },
 ];
 
@@ -412,6 +427,7 @@ export const PRODUCT_HIGHLIGHTS = [
   { label: 'Plating', value: 'Oxidised Gold' },
   { label: 'Occasion', value: 'Festive, Ethnic, Daily Wear' },
   { label: 'Net Quantity (N)', value: '1 (Set of 6 Pairs)' },
+  { label: 'Packaging', value: 'Secure Protective Packaging' },
 ];
 
 export const ADDITIONAL_DETAILS = [
@@ -421,6 +437,7 @@ export const ADDITIONAL_DETAILS = [
   { label: 'Sizing', value: 'Free Size' },
   { label: 'Color', value: 'Gold' },
   { label: 'Brand', value: 'QAVELLE' },
+  { label: 'Package Includes', value: '6 Pairs Jhumkas' },
   { label: 'Generic Name', value: 'Accessories' },
   { label: 'L × W × H', value: '2 × 3 × 2 inch' },
   { label: 'Country of Origin', value: 'India' },
@@ -473,7 +490,7 @@ export const BUNDLE_OPTIONS: BundleOption[] = [
   {
     id: 'single-set',
     title: 'Gold Plated Fancy Jhumka Earrings (Set of 6 Pairs)',
-    subtitle: 'Includes all 6 Antique Oxidised Gold Designs + Velvet Pouch',
+    subtitle: 'Includes all 6 Antique Oxidised Gold Designs',
     unitCount: 1,
     price: 499,
     originalPrice: 1999,
@@ -576,8 +593,8 @@ export const RITUAL_STEPS = [
   },
   {
     step: '4',
-    title: 'Storage in Velvet Box',
-    detail: 'Store each pair in the provided velvet pouch or keepsake box to maintain the pristine antique gold finish.',
+    title: 'Safe Storage',
+    detail: 'Store each pair in a dry jewelry pouch or box to maintain the pristine antique gold finish.',
   },
 ];
 
@@ -588,7 +605,7 @@ export const SPECIFICATIONS_TABLE = [
   { label: 'Stones & Accents', value: 'Hand-set Ruby & Emerald Glass Stones, Faux Basra Pearls' },
   { label: 'Closure Type', value: 'Ear-Safe Push Back / Secure Screw Posts' },
   { label: 'Weight', value: 'Approx. 8 - 14 Grams per pair (Lightweight for all-day comfort)' },
-  { label: 'Box Contents', value: '6 Unique Pairs of Antique Jhumkas + Luxury Keepsake Box + Velvet Pouches + Certificate of Authenticity' },
+  { label: 'Box Contents', value: '6 Unique Pairs of Antique Jhumkas + Certificate of Authenticity' },
   { label: 'Country of Origin', value: 'Handcrafted in Jaipur, India' },
 ];
 
@@ -617,7 +634,7 @@ export const REVIEWS_LIST: ReviewItem[] = [
     date: '4 days ago',
     title: 'Lightweight and comfortable! Looks regal on ears',
     comment:
-      'I was worried about earlobe heaviness, but these are wonderfully lightweight. The micro gold plating and ruby-emerald stone accents look premium. The keepsake box gave complete peace of mind.',
+      'I was worried about earlobe heaviness, but these are wonderfully lightweight. The micro gold plating and ruby-emerald stone accents look premium. The secure packaging gave complete peace of mind.',
     verified: true,
     helpfulCount: 98,
     badge: 'Verified Buyer',
@@ -799,9 +816,9 @@ export const CHOKER_PRODUCT_DETAILS = {
   ratingsCount: 21490,
   reviewsCount: 8420,
   size: 'Adjustable Free Size',
-  price: 799,
+  price: 749,
   originalPrice: 2999,
-  discountPercent: 73,
+  discountPercent: 75,
   sku: 'QAV-RHOD-AUST-CHOKER-01',
   inStock: true,
   stockLeft: 8,
@@ -866,11 +883,11 @@ export const CHOKER_BUNDLE_OPTIONS: BundleOption[] = [
     title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
     subtitle: '1x Royal Choker Necklace + 2x Jhumka Earrings + 1x Maang Tikka + Velvet Box',
     unitCount: 1,
-    price: 799,
+    price: 749,
     originalPrice: 2999,
-    discountPercent: 73,
+    discountPercent: 75,
     popular: true,
-    saveAmount: 2200,
+    saveAmount: 2250,
   },
 ];
 
@@ -882,7 +899,7 @@ export const CHOKER_REVIEWS_LIST: ReviewItem[] = [
     state: 'Maharashtra',
     rating: 5,
     date: '2 days ago',
-    title: 'The Austrian diamonds sparkle like real diamonds! Unbelievable quality for ₹799',
+    title: 'The Austrian diamonds sparkle like real diamonds! Unbelievable quality for ₹749',
     comment:
       'I ordered this bridal choker set for my sister’s engagement. The rhodium plating has an exquisite mirror shine and the Austrian diamonds catch the light brilliantly. Delivered in 2 days with a beautiful velvet box!',
     verified: true,
@@ -958,24 +975,24 @@ export const SHOWCASE_ITEMS = {
     title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
     category: 'Necklace Set',
     subtitle: 'Rhodium Plated White Austrian Diamond Choker + Jhumkas + Maang Tikka',
-    price: 799,
+    price: 749,
     originalPrice: 2999,
-    discount: '73% OFF',
+    discount: '75% OFF',
     rating: 4.8,
     reviews: 8420,
-    image: '/Hero_website_neklace.png',
+    image: '/Hero_website_neklace.webp',
   },
   jhumka: {
     id: 'jhumka-set',
     title: 'Gold Plated Fancy Jhumka Earrings for Women – Set of 6 Pairs',
     category: 'Jhumka Combo',
-    subtitle: '6 Unique Pairs of Antique Oxidised Gold Jhumkas in Royal Keepsake Box',
+    subtitle: '6 Unique Pairs of Antique Oxidised Gold Jhumkas with Intricate Detailing',
     price: 499,
     originalPrice: 1999,
     discount: '75% OFF',
     rating: 4.2,
     reviews: 18723,
-    image: '/Cinematic.png',
+    image: '/Cinematic.webp',
   },
 };
 
@@ -1004,14 +1021,14 @@ export const CHOKER_CUSTOMER_MEDIA = [
   {
     id: 'm-chk-shot1',
     type: 'image',
-    image: '/neklace_producshot.png',
+    image: '/neklace_producshot.webp',
     author: 'Meera Sen',
     caption: 'Close-up studio view of the necklace — intricate setting and brilliant shine!',
   },
   {
     id: 'm-chk-shot2',
     type: 'image',
-    image: '/neklace_productshot_2.png',
+    image: '/neklace_productshot_2.webp',
     author: 'Suman Chawla',
     caption: 'The matching jhumka earrings and maang tikka are pure royalty!',
   },
@@ -1424,16 +1441,16 @@ export const RADHIKA_GREEN_AD_PRODUCT_DETAILS = {
   id: 'radhika-green-ad',
   title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Earrings',
   fullDescription:
-    'Radhika Anant Ambani Inspired Green AD Necklace Set – Regal Emerald Green Austrian American Diamond Choker Necklace with Matching Chandelier Earrings, crafted with skin-safe brass alloy and anti-tarnish rhodium silver plating.',
+    'Regal Emerald Green Austrian American Diamond Choker Necklace with Matching Chandelier Earrings, crafted with skin-safe brass alloy and anti-tarnish rhodium silver plating.',
   shortTitle: 'Radhika Ambani Inspired Green AD Set',
   tagline: 'Colombian Emerald Green Crystals • Austrian American Diamonds • Anti-Tarnish Rhodium Finish',
   rating: 4.9,
   ratingsCount: 21450,
   reviewsCount: 5820,
   size: 'Adjustable Dori / Clasp (Free Size fits all neck sizes)',
-  price: 299,
-  originalPrice: 999,
-  discountPercent: 70,
+  price: 399,
+  originalPrice: 1299,
+  discountPercent: 69,
   sku: 'QAV-RADHIKA-AMBANI-GREEN-AD',
   inStock: true,
   stockLeft: 7,
@@ -1512,33 +1529,33 @@ export const RADHIKA_GREEN_AD_BUNDLE_OPTIONS: BundleOption[] = [
     title: '1x Radhika Ambani Inspired Green AD Set',
     subtitle: '1 Necklace + 1 Pair Matching Earrings + Luxury Velvet Pouch + Free Shipping',
     unitCount: 1,
-    price: 299,
-    originalPrice: 999,
-    discountPercent: 70,
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
     popular: true,
-    saveAmount: 700,
+    saveAmount: 900,
   },
   {
     id: 'radhika-green-double',
     title: '2x Sets (Best For Gifting / Sisters)',
     subtitle: '2 Complete Sets (Necklaces + Earrings) + Extra ₹49 OFF',
     unitCount: 2,
-    price: 549,
-    originalPrice: 1998,
-    discountPercent: 72,
+    price: 749,
+    originalPrice: 2598,
+    discountPercent: 71,
     popular: false,
-    saveAmount: 1449,
+    saveAmount: 1849,
   },
   {
     id: 'radhika-green-family',
     title: '3x Sets (Family Bridal Combo)',
     subtitle: '3 Complete Sets + Free Express Delivery + Luxury Gift Packaging',
     unitCount: 3,
-    price: 799,
-    originalPrice: 2997,
+    price: 1049,
+    originalPrice: 3897,
     discountPercent: 73,
     popular: false,
-    saveAmount: 2198,
+    saveAmount: 2848,
   },
 ];
 
@@ -1565,9 +1582,9 @@ export const RADHIKA_GREEN_AD_REVIEWS_LIST: ReviewItem[] = [
     state: 'Gujarat',
     rating: 5,
     date: '2 days ago',
-    title: 'Unbelievable quality for ₹299 — looks worth at least ₹3,500',
+    title: 'Unbelievable quality for ₹399 — looks worth at least ₹3,500',
     comment:
-      'I was honestly hesitant ordering jewelry at ₹299 thinking it might look dull, but when I opened the package I was stunned. The finish is immaculate, stones are tightly prong-set, and the matching earrings are statement pieces on their own. Delivered in 2 days with Cash on Delivery.',
+      'I was honestly hesitant ordering jewelry at ₹399 thinking it might look dull, but when I opened the package I was stunned. The finish is immaculate, stones are tightly prong-set, and the matching earrings are statement pieces on their own. Delivered in 2 days with Cash on Delivery.',
     verified: true,
     helpfulCount: 95,
     badge: 'Verified Buyer',
@@ -1644,7 +1661,7 @@ export const RADHIKA_GREEN_AD_CUSTOMER_MEDIA = [
 ];
 
 // =========================================================================
-// ROYAL ELEGANT GOLD PLATED JEWELLERY SET (₹749)
+// ROYAL ELEGANT GOLD PLATED JEWELLERY SET (₹849)
 // =========================================================================
 
 export const ALLURE_GOLD_SET_SLUG = '/products/royal-elegant-gold-plated-jewellery-set';
@@ -1653,17 +1670,17 @@ export const ALLURE_GOLD_SET_PRODUCT_DETAILS = {
   id: 'allure-gold-set',
   title: 'Royal Elegant Gold Plated Jewellery Set with Matching Earrings',
   fullDescription:
-    'Royal Elegant Gold Plated Jewellery Set – Majestic 22K micro gold-plated necklace set adorned with intricate leaf-shaped crystal motifs, imperial ruby-red gemstones, matching drop earrings, adjustable bracelet, and cocktail ring. Complete with free royal velvet presentation box.',
+    'Majestic 22K micro gold-plated necklace set adorned with intricate leaf-shaped crystal motifs, imperial ruby-red gemstones, matching drop earrings, adjustable bracelet, and cocktail ring. Complete with free royal velvet presentation box.',
   shortTitle: 'Royal Elegant Gold Plated Set',
   tagline: '22K Micro Gold Plating • Imperial Ruby Gemstones • Austrian Crystals • Free Royal Velvet Gift Box',
   rating: 4.9,
   ratingsCount: 18420,
   reviewsCount: 4960,
   size: 'Adjustable Silk Dori / Clasp (Free Size fits all neck sizes)',
-  price: 749,
-  originalPrice: 2499,
+  price: 849,
+  originalPrice: 2799,
   discountPercent: 70,
-  sku: 'QAV-ROYAL-GOLD-SET-749',
+  sku: 'QAV-ROYAL-GOLD-SET-849',
   inStock: true,
   stockLeft: 8,
   recentSales24h: 312,
@@ -1741,33 +1758,33 @@ export const ALLURE_GOLD_SET_BUNDLE_OPTIONS: BundleOption[] = [
     title: '1x Royal Elegant Gold Plated Set',
     subtitle: '1 Royal Necklace + 1 Pair Matching Earrings + Bracelet & Ring + Free Velvet Box + Free Shipping',
     unitCount: 1,
-    price: 749,
-    originalPrice: 2499,
+    price: 849,
+    originalPrice: 2799,
     discountPercent: 70,
     popular: true,
-    saveAmount: 1750,
+    saveAmount: 1950,
   },
   {
     id: 'allure-gold-double',
     title: '2x Sets (Sister / Bestie Combo)',
     subtitle: '2 Complete Gold Plated Sets + Free Velvet Boxes + Extra ₹100 OFF',
     unitCount: 2,
-    price: 1399,
-    originalPrice: 4998,
-    discountPercent: 72,
+    price: 1599,
+    originalPrice: 5598,
+    discountPercent: 71,
     popular: false,
-    saveAmount: 3599,
+    saveAmount: 3999,
   },
   {
     id: 'allure-gold-family',
     title: '3x Sets (Grand Bridal Festive Combo)',
     subtitle: '3 Complete Sets + Free Express Delivery + Royal Gift Wrapping Included',
     unitCount: 3,
-    price: 1999,
-    originalPrice: 7497,
+    price: 2299,
+    originalPrice: 8397,
     discountPercent: 73,
     popular: false,
-    saveAmount: 5498,
+    saveAmount: 6098,
   },
 ];
 
@@ -1781,7 +1798,7 @@ export const ALLURE_GOLD_SET_REVIEWS_LIST: ReviewItem[] = [
     date: '1 day ago',
     title: 'Pure royal craftsmanship! Looked like genuine 22K gold',
     comment:
-      'I ordered this Royal Elegant set for my brother’s wedding in Jaipur. The golden polish has that rich warm temple gold sheen, not brassy or yellow. The filigree work is clean with no rough edges, and the matching earrings are so lightweight that I wore them for 8 hours straight with zero discomfort. Worth every single rupee of ₹749!',
+      'I ordered this Royal Elegant set for my brother’s wedding in Jaipur. The golden polish has that rich warm temple gold sheen, not brassy or yellow. The filigree work is clean with no rough edges, and the matching earrings are so lightweight that I wore them for 8 hours straight with zero discomfort. Worth every single rupee of ₹849!',
     verified: true,
     helpfulCount: 94,
     badge: 'Verified Buyer',
@@ -1811,7 +1828,7 @@ export const ALLURE_GOLD_SET_REVIEWS_LIST: ReviewItem[] = [
     date: '5 days ago',
     title: 'Extremely good quality and zero tarnish after wear',
     comment:
-      'Wore it during Durga Puja celebrations in Kolkata with a Banarasi saree. Received endless compliments! The stones have dazzling fire under festive lighting. Wiped it clean and stored it back in the pouch — still looks brand new. Amazing value at ₹749.',
+      'Wore it during Durga Puja celebrations in Kolkata with a Banarasi saree. Received endless compliments! The stones have dazzling fire under festive lighting. Wiped it clean and stored it back in the pouch — still looks brand new. Amazing value at ₹849.',
     verified: true,
     helpfulCount: 52,
     badge: 'Verified Buyer',
@@ -1871,6 +1888,965 @@ export const ALLURE_GOLD_SET_CUSTOMER_MEDIA = [
     caption: 'Matching adjustable bracelet and cocktail ring — exquisite finishing throughout.',
   },
 ];
+
+// =========================================================================
+// TRENDY ALLOY GOLD PLATED JEWELLERY SET (₹849) - Reselling Edition
+// =========================================================================
+
+export const TRENDY_ALLOY_SET_SLUG = '/products/trendy-alloy-gold-plated-jewellery-set';
+
+export const TRENDY_ALLOY_SET_MATCHING_VARIANTS = [
+  {
+    id: 'var-trendy-radhika',
+    productId: 'radhika-green-ad' as const,
+    title: 'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Drop Earrings',
+    category: 'Celebrity Bridal AD Set',
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
+    image: '/radhika_ambani_1.webp',
+    tag: 'Ambani Inspired',
+    sourceUrl: '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',
+  },
+  {
+    id: 'var-trendy-allure',
+    productId: 'allure-gold-set' as const,
+    title: 'Royal Elegant Gold Plated Jewellery Set with Matching Earrings',
+    category: 'Necklace Sets',
+    price: 849,
+    originalPrice: 2799,
+    discountPercent: 70,
+    image: '/aa1.webp',
+    tag: '22K Gold Plated',
+    sourceUrl: '/products/royal-elegant-gold-plated-jewellery-set',
+  },
+  {
+    id: 'var-trendy-choker',
+    productId: 'choker' as const,
+    title: 'Rhodium Plated White Austrian Diamond Bridal Choker Set',
+    category: 'Bridal Choker Set',
+    price: 749,
+    originalPrice: 2999,
+    discountPercent: 75,
+    image: '/neklace_producshot.webp',
+    sourceUrl: '/products/rhodium-plated-austrian-diamond-choker-set',
+  },
+  {
+    id: 'var-trendy-jhumka',
+    productId: 'jhumka' as const,
+    title: 'Handcrafted 18K Gold Plated Jhumka Earrings – Set of 6 Pairs',
+    category: 'Jhumka Combo',
+    price: 499,
+    originalPrice: 1999,
+    discountPercent: 75,
+    image: '/Cinematic.webp',
+    sourceUrl: '/products/gold-plated-fancy-jhumka-earrings-set-of-6',
+  },
+];
+
+export const TRENDY_ALLOY_SET_PRODUCT_DETAILS = {
+  id: 'trendy-alloy-set',
+  title: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings',
+  fullDescription:
+    'Exquisite handcrafted alloy necklace enriched with lustrous Austrian pearls, royal kundan stones, and matching drop earrings. Engineered with a durable skin-safe base, 22K micro gold plating, and an anti-tarnish protective coating. Ideal for weddings, festive pujas, and ethnic celebrations. Complete with free luxury velvet jewelry gift box.',
+  shortTitle: 'Trendy Alloy Jewellery Set',
+  tagline: '22K Micro Gold Plating • Handcrafted Kundan & Pearl Drops • Free Royal Velvet Gift Box',
+  rating: 4.8,
+  ratingsCount: 14280,
+  reviewsCount: 3640,
+  size: 'Adjustable Silk Dori (Free Size fits all neck sizes comfortably)',
+  price: 849,
+  originalPrice: 2799,
+  discountPercent: 70,
+  sku: 'QAV-TRENDY-ALLOY-849',
+  inStock: true,
+  stockLeft: 12,
+  recentSales24h: 248,
+  currentLiveViewers: 39,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  countryOfOrigin: 'India',
+};
+
+export const TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS = [
+  { label: 'Base Metal', value: 'High-Grade Skin-Safe Brass & Copper Alloy' },
+  { label: 'Plating', value: '22K Micro Gold Plated with Anti-Tarnish Seal' },
+  { label: 'Stone Type', value: 'Lustrous Austrian Pearls & Hand-Cut Kundan Stones' },
+  { label: 'Sizing', value: 'Free Size (Adjustable Silk Dori Fits All)' },
+  { label: 'Occasion', value: 'Weddings, Reception, Festive Puja, Sangeet & Traditional Functions' },
+  { label: 'Net Quantity (N)', value: '1 Necklace + 1 Pair Matching Drop Earrings' },
+];
+
+export const TRENDY_ALLOY_SET_ADDITIONAL_DETAILS = [
+  { label: 'Package Contains', value: '1 Gold Plated Alloy Necklace + 1 Pair Matching Drop Earrings + Luxury Velvet Gift Box' },
+  { label: 'Closure', value: 'Traditional Hand-Braided Silk Drawstring Cord (Dori) / Secure Clasp' },
+  { label: 'Earring Type', value: 'Matching Traditional Drop Earrings with Push-Back Clasps' },
+  { label: 'Stone Setting', value: 'Hand-Crafted Bezel & Micro-Prong Pearl Setting' },
+  { label: 'Skin Safety', value: '100% Lead-Free & Nickel-Free (Hypoallergenic & Non-Irritating)' },
+  { label: 'Country of Origin', value: 'India' },
+  { label: 'Care Instructions', value: 'Wipe with soft lint-free cloth after use. Store in provided velvet box away from perfumes and moisture.' },
+];
+
+export const TRENDY_ALLOY_SET_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'ta-1',
+    src: '/b1.webp',
+    thumbSrc: '/b1_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Earrings - Main View',
+    title: 'Complete Trendy Alloy Set',
+    tag: 'Hero View',
+  },
+  {
+    id: 'ta-2',
+    src: '/b2.webp',
+    thumbSrc: '/b2_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Jewellery Set - Artisan Motif and Craft Detail',
+    title: 'Heritage Craftsmanship',
+    tag: 'Craft Detail',
+  },
+  {
+    id: 'ta-3',
+    src: '/b3.webp',
+    thumbSrc: '/b3_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Choker & Drop Earrings - Angle View',
+    title: 'Kundan & Pearl Detail',
+    tag: 'Close-Up',
+  },
+  {
+    id: 'ta-4',
+    src: '/b4.webp',
+    thumbSrc: '/b4_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Jewellery Set - Presentation View',
+    title: 'Complete Ensemble',
+    tag: 'Set View',
+  },
+  {
+    id: 'ta-5',
+    src: '/b5.webp',
+    thumbSrc: '/b5_thumb.webp',
+    alt: 'Trendy Alloy Gold Plated Kundan & Pearl Drops - Macro Artistry',
+    title: 'Macro Artistry',
+    tag: 'Macro',
+  },
+];
+
+export const TRENDY_ALLOY_SET_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'trendy-alloy-single',
+    title: '1x Trendy Alloy Gold Plated Set',
+    subtitle: '1 Necklace + 1 Pair Matching Drop Earrings + Free Velvet Box + Free Express Shipping',
+    unitCount: 1,
+    price: 849,
+    originalPrice: 2799,
+    discountPercent: 70,
+    popular: true,
+    saveAmount: 1950,
+  },
+  {
+    id: 'trendy-alloy-double',
+    title: '2x Sets (Sister / Bestie Combo)',
+    subtitle: '2 Complete Jewellery Sets + 2 Velvet Gift Boxes + Extra ₹100 OFF',
+    unitCount: 2,
+    price: 1599,
+    originalPrice: 5598,
+    discountPercent: 71,
+    popular: false,
+    saveAmount: 3999,
+  },
+  {
+    id: 'trendy-alloy-family',
+    title: '3x Sets (Grand Festive Family Combo)',
+    subtitle: '3 Complete Sets + Free Express Courier Delivery + Royal Gift Packaging',
+    unitCount: 3,
+    price: 2299,
+    originalPrice: 8397,
+    discountPercent: 73,
+    popular: false,
+    saveAmount: 6098,
+  },
+];
+
+export const TRENDY_ALLOY_SET_REVIEWS_LIST: ReviewItem[] = [
+  {
+    id: 'ta-rev-1',
+    author: 'Pooja Verma',
+    city: 'Ahmedabad',
+    state: 'Gujarat',
+    rating: 5,
+    date: '1 day ago',
+    title: 'Unbelievable beauty and shine for ₹849! Loved it',
+    comment:
+      'I was so pleasantly surprised when opening the package. The gold plating looks so rich and authentic, like real 22K gold. The pearl drops and kundan stones sparkle gorgeously. The adjustable dori makes it very easy to fit. Highly recommended!',
+    verified: true,
+    helpfulCount: 89,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_1.jpg',
+  },
+  {
+    id: 'ta-rev-2',
+    author: 'Sunita Rawat',
+    city: 'Dehradun',
+    state: 'Uttarakhand',
+    rating: 5,
+    date: '3 days ago',
+    title: 'Earrings are super comfortable and lightweight',
+    comment:
+      'Often heavy necklace sets hurt the ears, but these matching earrings are wonderfully light while looking grand. The finish has zero roughness, totally skin friendly. Beautiful velvet box packaging too.',
+    verified: true,
+    helpfulCount: 64,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_2.jpg',
+  },
+  {
+    id: 'ta-rev-3',
+    author: 'Ritu Nair',
+    city: 'Kochi',
+    state: 'Kerala',
+    rating: 5,
+    date: '4 days ago',
+    title: 'Wore it for family wedding — got so many compliments!',
+    comment:
+      'Draped it with my Kanjeevaram silk saree. Everyone thought I bought it from a high-end bridal boutique. QAVELLE’s quality and packaging is top-notch. Express delivery reached in 2 days.',
+    verified: true,
+    helpfulCount: 47,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_3.jpg',
+  },
+  {
+    id: 'ta-rev-4',
+    author: 'Divya Agarwal',
+    city: 'Indore',
+    state: 'Madhya Pradesh',
+    rating: 5,
+    date: '6 days ago',
+    title: 'Value for money is unmatched',
+    comment:
+      'At this price point, the craftsmanship is remarkable. The alloy is sturdy, the gold tone is elegant without being too bright or yellow, and the finish is clean. Will order another one as a gift for my sister.',
+    verified: true,
+    helpfulCount: 38,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_4.jpg',
+  },
+];
+
+export const TRENDY_ALLOY_SET_CUSTOMER_MEDIA = [
+  {
+    id: 'm-ta-1',
+    type: 'image',
+    image: '/b1.webp',
+    author: 'Pooja Verma',
+    caption: 'Trendy Alloy Gold Plated Jewellery Set complete necklace and earrings.',
+  },
+  {
+    id: 'm-ta-2',
+    type: 'image',
+    image: '/b2.webp',
+    author: 'Sunita Rawat',
+    caption: 'Stunning traditional craft and intricate kundan setting.',
+  },
+  {
+    id: 'm-ta-3',
+    type: 'image',
+    image: '/b3.webp',
+    author: 'Ritu Nair',
+    caption: 'Close-up of the delicate floral motif and lustrous pearl drops.',
+  },
+  {
+    id: 'm-ta-4',
+    type: 'image',
+    image: '/b4.webp',
+    author: 'Divya Agarwal',
+    caption: 'Detailed view of the 22K micro gold plating finish and matching earrings.',
+  },
+];
+
+// ============================================================================
+// COMBO OF 2 AESTHETIC DAILY WEAR PENDANTS (PASTEL PINK & PANNA GREEN)
+// ============================================================================
+export const AESTHETIC_PENDANT_COMBO_SLUG =
+  '/products/combo-of-2-aesthetic-daily-wear-pendants-stylish-pastel-pink-panna-green-locket-with-sleek-chain';
+
+export const AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS = {
+  id: 'combo-2-pendants',
+  title:
+    'Combo of 2 Aesthetic Daily Wear Pendants Stylish Pastel Pink & Panna Green Locket with Sleek Chain',
+  fullDescription:
+    'A must-have Korean minimalist duo crafted for everyday styling. This combo pack includes 2 separate dainty pendant chains: one featuring a delicate pastel blush pink solitaire crystal locket, and the second featuring a rich royal emerald panna green crystal locket. Finished with sleek, anti-tarnish Italian link chains, hypoallergenic brass alloy, and smooth lobster clasps with 2-inch extenders. Perfect to wear individually for minimal chic or layered together for trendy aesthetic charm. Complimentary luxury velvet gift pouch included.',
+  shortTitle: 'Combo of 2 Aesthetic Pendants',
+  tagline:
+    'Combo of 2 Pendants • Pastel Pink & Panna Emerald Green • Anti-Tarnish Sleek Chain • Daily & College Wear',
+  rating: 4.8,
+  ratingsCount: 8460,
+  reviewsCount: 1280,
+  size: '16 Inch Sleek Chain + 2 Inch Adjustable Extender (Fits all necklines comfortably)',
+  price: 549,
+  originalPrice: 1499,
+  discountPercent: 63,
+  sku: 'QAV-AESTHETIC-COMBO2-549',
+  inStock: true,
+  stockLeft: 16,
+  recentSales24h: 312,
+  currentLiveViewers: 44,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  countryOfOrigin: 'India',
+};
+
+export const AESTHETIC_PENDANT_COMBO_PRODUCT_HIGHLIGHTS = [
+  { label: 'Base Metal', value: 'High-Grade Skin-Safe Alloy with Anti-Tarnish Finish' },
+  { label: 'Plating', value: 'Micro Rhodium & 18K Polish with Protective Anti-Fade Coat' },
+  { label: 'Stone Type', value: 'Faceted Pastel Blush Pink & Panna Emerald Green Solitaire Crystals' },
+  { label: 'Chain Type', value: 'Sleek Dainty Italian Link Chain with 2-Inch Extender' },
+  { label: 'Sizing', value: 'Adjustable 16" + 2" Length (Customizable Fit)' },
+  { label: 'Net Quantity (N)', value: '2 Individual Pendant Chains (1 Pink + 1 Green)' },
+  { label: 'Occasion', value: 'Daily Wear, College, Office, Casual Outfits, Date Nights & Gifting' },
+];
+
+export const AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '2 Individual Pendant Necklaces (1 Pastel Pink Locket + 1 Panna Green Locket) + Velvet Gift Pouch',
+  },
+  { label: 'Closure', value: 'Durable Stainless Lobster Claw Clasp with 2-inch Extender Loop' },
+  { label: 'Style & Silhouette', value: 'Minimalist Korean Aesthetic Solitaire Pendants' },
+  { label: 'Skin Safety', value: '100% Lead-Free & Nickel-Free (Hypoallergenic & Non-Allergic)' },
+  { label: 'Water & Sweat Resistance', value: 'Everyday splash and sweat resistant anti-tarnish protective sealing' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value: 'Wipe gently with soft cloth after daily wear. Store in provided velvet pouch away from direct perfume sprays.',
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'apc-1',
+    src: '/c1.webp',
+    thumbSrc: '/c1_thumb.webp',
+    alt: 'Combo of 2 Aesthetic Daily Wear Pendants Stylish Pastel Pink & Panna Green Lockets - Hero Shot',
+    title: 'Combo of 2 Aesthetic Pendants',
+    tag: 'Hero View',
+  },
+  {
+    id: 'apc-2',
+    src: '/c2.webp',
+    thumbSrc: '/c2_thumb.webp',
+    alt: 'Panna Emerald Green Solitaire Locket with Sleek Anti-Tarnish Chain',
+    title: 'Panna Green Locket',
+    tag: 'Emerald Green',
+  },
+  {
+    id: 'apc-3',
+    src: '/c3.webp',
+    thumbSrc: '/c3_thumb.webp',
+    alt: 'Pastel Blush Pink Solitaire Crystal Locket with Sleek Chain',
+    title: 'Pastel Pink Locket',
+    tag: 'Pastel Pink',
+  },
+  {
+    id: 'apc-4',
+    src: '/c4.webp',
+    thumbSrc: '/c4_thumb.webp',
+    alt: 'Model Wearing Aesthetic Daily Wear Pendant - Chic Korean Minimalist Styling',
+    title: 'Model Styling View',
+    tag: 'On Model',
+  },
+  {
+    id: 'apc-5',
+    src: '/c5.webp',
+    thumbSrc: '/c5_thumb.webp',
+    alt: 'Aesthetic Pendants Craftsmanship, Sleek Chain Links & Polish Close-Up',
+    title: 'Sleek Chain & Finish',
+    tag: 'Detail View',
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'aesthetic-combo-single',
+    title: '1x Combo (2 Pendants: Pink + Green)',
+    subtitle: '1 Pastel Pink Locket + 1 Panna Green Locket + Free Velvet Gift Pouch',
+    unitCount: 1,
+    price: 549,
+    originalPrice: 1499,
+    discountPercent: 63,
+    popular: true,
+    saveAmount: 950,
+  },
+  {
+    id: 'aesthetic-combo-double',
+    title: '2x Combos (4 Pendants - Bestie/Sister Gifting)',
+    subtitle: '4 Pendants (2 Pink + 2 Green) + 2 Velvet Pouches + Extra Savings',
+    unitCount: 2,
+    price: 999,
+    originalPrice: 2998,
+    discountPercent: 67,
+    popular: false,
+    saveAmount: 1999,
+  },
+  {
+    id: 'aesthetic-combo-triple',
+    title: '3x Combos (6 Pendants - Grand Value Pack)',
+    subtitle: '6 Pendants total + Free Express Shipping + Royal Gift Packaging',
+    unitCount: 3,
+    price: 1399,
+    originalPrice: 4497,
+    discountPercent: 69,
+    popular: false,
+    saveAmount: 3098,
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_REVIEWS_LIST: ReviewItem[] = [
+  {
+    id: 'apc-rev-1',
+    author: 'Ananya Sharma',
+    city: 'Pune',
+    state: 'Maharashtra',
+    rating: 5,
+    date: '1 day ago',
+    title: 'So aesthetic! Both the pastel pink & green are gorgeous',
+    comment:
+      'I was looking for minimal pendants for daily college wear and this combo is perfection! The green panna stone has a rich emerald tone, and the pastel pink looks so soft and cute. The sleek chain is lightweight and does not tangle or turn black. Incredible deal for ₹549!',
+    verified: true,
+    helpfulCount: 92,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_1.jpg',
+  },
+  {
+    id: 'apc-rev-2',
+    author: 'Sneha Mukherjee',
+    city: 'Kolkata',
+    state: 'West Bengal',
+    rating: 5,
+    date: '3 days ago',
+    title: 'Quality is surprisingly premium, chains are very sleek',
+    comment:
+      'Genuinely impressed with the finish. The lobster clasp is sturdy, and the 2-inch extender makes it easy to adjust length depending on what top or dress I am wearing. Highly recommended for daily office and casual wear.',
+    verified: true,
+    helpfulCount: 68,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_2.jpg',
+  },
+  {
+    id: 'apc-rev-3',
+    author: 'Kavya Pillai',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    rating: 5,
+    date: '4 days ago',
+    title: 'Gifted one to my sister and kept one for myself!',
+    comment:
+      'My sister took the pastel pink and I kept the emerald green one. Both look super stylish and we get compliments all the time. Packaged nicely in a cute pouch.',
+    verified: true,
+    helpfulCount: 54,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_3.jpg',
+  },
+  {
+    id: 'apc-rev-4',
+    author: 'Tanvi Joshi',
+    city: 'Jaipur',
+    state: 'Rajasthan',
+    rating: 5,
+    date: '5 days ago',
+    title: 'No skin irritation, 100% skin safe',
+    comment:
+      'I have sensitive skin and cheap chains usually cause rashes. Wore this all day in the heat and zero redness or itching. The anti-tarnish coating actually works. Love it!',
+    verified: true,
+    helpfulCount: 41,
+    badge: 'Verified Buyer',
+    userImage: '/girl_reviewer_4.jpg',
+  },
+];
+
+export const AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA = [
+  {
+    id: 'm-apc-1',
+    type: 'image',
+    image: '/c1.webp',
+    author: 'Ananya Sharma',
+    caption: 'Combo of 2 Aesthetic Daily Wear Pendants (Pastel Pink & Panna Green).',
+  },
+  {
+    id: 'm-apc-2',
+    type: 'image',
+    image: '/c2.webp',
+    author: 'Sneha Mukherjee',
+    caption: 'Panna emerald green solitaire locket worn with white shirt.',
+  },
+  {
+    id: 'm-apc-3',
+    type: 'image',
+    image: '/c3.webp',
+    author: 'Kavya Pillai',
+    caption: 'Delicate pastel blush pink locket close-up.',
+  },
+  {
+    id: 'm-apc-4',
+    type: 'image',
+    image: '/c4.webp',
+    author: 'Tanvi Joshi',
+    caption: 'Minimalist Korean aesthetic styling for college wear.',
+  },
+];
+
+// ============================================================================
+// GOLD PLATED STAINLESS STEEL EMERALD CUBIC ZIRCONIA FLAT SNAKE CHAIN
+// ============================================================================
+export const EMERALD_SNAKE_SLUG =
+  '/products/gold-plated-stainless-steel-cubic-zirconia-pendant-green-emerald-anti-tarnish-gold-plated-stainless-steel-flat-snake-chain-necklace-green-waterproof-chain-layering-pendant-gifts-for-women-and-girls';
+
+export const EMERALD_SNAKE_PRODUCT_DETAILS = {
+  id: 'emerald-snake-pendant',
+  title:
+    'Gold Plated Stainless Steel Cubic Zirconia Pendant Green Emerald Anti-Tarnish Flat Snake Chain Necklace | Waterproof Chain Layering Pendant',
+  fullDescription:
+    'Elevate your everyday luxury with this premium 18K Gold Plated Stainless Steel Flat Snake Chain Necklace featuring an opulent radiant-cut Emerald Green Cubic Zirconia solitaire pendant. Masterfully crafted from surgical-grade stainless steel with a high-mirror liquid gold herringbone weave that glides seamlessly against your collarbone. Engineered with advanced anti-tarnish vacuum PVD gold plating, making it 100% waterproof, sweatproof, and shower-safe without ever turning green or fading. Designed with an adjustable lobster clasp extender, making it ideal for solo minimalist elegance or stylish layering with other necklaces. A timeless gift for women and girls for daily office wear, parties, anniversaries, and festive celebrations.',
+  shortTitle: 'Gold Plated Emerald Snake Chain Pendant',
+  tagline:
+    '18K Gold Plated • Emerald Green Cubic Zirconia • 100% Waterproof & Anti-Tarnish Flat Snake Chain • Daily & Office Wear',
+  rating: 4.9,
+  ratingsCount: 9240,
+  reviewsCount: 1450,
+  size: '16 Inch Flat Snake Chain + 2 Inch Adjustable Extender (Free Size Adjustable Fit)',
+  price: 549,
+  originalPrice: 1499,
+  discountPercent: 63,
+  sku: 'QAV-EMERALD-SNAKE-549',
+  inStock: true,
+  stockLeft: 14,
+  recentSales24h: 385,
+  currentLiveViewers: 52,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  countryOfOrigin: 'India',
+};
+
+export const EMERALD_SNAKE_PRODUCT_HIGHLIGHTS = [
+  { label: 'Base Metal', value: 'Surgical-Grade 316L Stainless Steel' },
+  { label: 'Plating', value: '18K Real Gold Vacuum PVD Plating (Anti-Fade Guaranteed)' },
+  { label: 'Stone Type', value: 'Radiant-Cut Emerald Green Cubic Zirconia (American Diamond)' },
+  { label: 'Chain Type', value: 'Liquid Mirror Flat Snake / Herringbone Chain' },
+  { label: 'Water & Sweat Resistance', value: '100% Waterproof & Anti-Tarnish (Shower, Swim & Gym Safe)' },
+  { label: 'Sizing & Fit', value: '16 Inch Chain + 2 Inch Adjustable Extender (Free Size)' },
+  { label: 'Net Quantity (N)', value: '1 Pendant Necklace + Velvet Presentation Pouch' },
+  { label: 'Occasion', value: 'Daily Wear, Office, Casual Western Outfits, Parties, Layering & Gifting' },
+];
+
+export const EMERALD_SNAKE_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '1 Gold Plated Stainless Steel Flat Snake Chain with Emerald CZ Pendant + Royal Velvet Gift Pouch',
+  },
+  { label: 'Closure', value: 'Reinforced Stainless Steel Lobster Claw Clasp with 2-inch Extender Loop' },
+  { label: 'Finish', value: 'High-Gloss Liquid Mirror Gold Polish with Scratch-Resistant Coating' },
+  { label: 'Skin Safety', value: '100% Hypoallergenic, Lead-Free & Nickel-Free (Zero Skin Irritation)' },
+  { label: 'Durability', value: 'Non-Corrosive, Never Turns Green or Black, Resists Perfumes & Heat' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value: 'Shower and water safe. Simply rinse with clean water and wipe dry with a soft cloth to restore dazzling liquid gold shine.',
+  },
+];
+
+export const EMERALD_SNAKE_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'esp-1',
+    src: '/d1.webp',
+    thumbSrc: '/d1_thumb.webp',
+    alt: 'Gold Plated Stainless Steel Emerald Green Cubic Zirconia Flat Snake Chain Necklace - Hero View',
+    title: 'Emerald Snake Necklace',
+    tag: 'Hero View',
+  },
+  {
+    id: 'esp-2',
+    src: '/d2.webp',
+    thumbSrc: '/d2_thumb.webp',
+    alt: 'Emerald Solitaire Pendant with Liquid Gold Herringbone Snake Chain Weave',
+    title: 'Emerald Solitaire & Chain',
+    tag: 'Detail View',
+  },
+  {
+    id: 'esp-3',
+    src: '/d3.webp',
+    thumbSrc: '/d3_thumb.webp',
+    alt: 'Gold Plated Stainless Steel Flat Snake Chain Necklace Angle View',
+    title: 'Mirror Finish Angle',
+    tag: 'Angle View',
+  },
+];
+
+export const EMERALD_SNAKE_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'emerald-snake-single',
+    title: '1x Emerald Snake Chain Necklace',
+    subtitle: '1 Pendant Necklace + Velvet Gift Pouch + Free Express Delivery',
+    unitCount: 1,
+    price: 549,
+    originalPrice: 1499,
+    discountPercent: 63,
+    popular: true,
+    saveAmount: 950,
+  },
+  {
+    id: 'emerald-snake-double',
+    title: '2x Emerald Snake Chain Necklaces (Best for Gifting)',
+    subtitle: '2 Necklaces + 2 Velvet Pouches + Extra Savings',
+    unitCount: 2,
+    price: 999,
+    originalPrice: 2998,
+    discountPercent: 67,
+    popular: false,
+    saveAmount: 1999,
+  },
+  {
+    id: 'emerald-snake-triple',
+    title: '3x Emerald Snake Chain Necklaces (Family Pack)',
+    subtitle: '3 Necklaces + Royal Presentation Gift Boxes + Maximum Value',
+    unitCount: 3,
+    price: 1399,
+    originalPrice: 4497,
+    discountPercent: 69,
+    popular: false,
+    saveAmount: 3098,
+  },
+];
+
+export const EMERALD_SNAKE_REVIEWS: ReviewItem[] = [
+  {
+    id: 'r-esp-1',
+    author: 'Ishita Kapoor',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    rating: 5,
+    date: 'Yesterday',
+    title: 'Absolutely waterproof and stunning liquid gold finish!',
+    comment:
+      'I have been wearing this flat snake chain for over 2 weeks non-stop including daily showers, workouts, and perfume sprays — zero tarnishing! The green emerald stone is so deeply cut and reflects light like real precious emerald. It looks easily like a ₹4,000 fine jewelry piece. Phenomenal value for ₹549!',
+    verified: true,
+    helpfulCount: 148,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-esp-2',
+    author: 'Priyanka Sen',
+    city: 'Kolkata',
+    state: 'West Bengal',
+    rating: 5,
+    date: '3 days ago',
+    title: 'The snake chain glides like liquid silk on the collarbone',
+    comment:
+      'The herringbone snake chain quality is unbelievable! It does not pinch hair or skin, lays completely flat, and has a rich liquid gold reflection. The emerald green stone makes every outfit look luxurious. Packaged beautifully in a velvet pouch.',
+    verified: true,
+    helpfulCount: 112,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-esp-3',
+    author: 'Aditi Deshmukh',
+    city: 'Pune',
+    state: 'Maharashtra',
+    rating: 5,
+    date: '5 days ago',
+    title: 'Best daily wear chain I own, 10/10 recommend!',
+    comment:
+      'Ordered after seeing it viral on Meesho and Qavelle’s finishing is even better! The emerald pendant is gorgeous and the clasp is super sturdy. Love the ₹100 + ₹25 prepaid discount as well.',
+    verified: true,
+    helpfulCount: 89,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-esp-4',
+    author: 'Rhea Nambiar',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    rating: 5,
+    date: '1 week ago',
+    title: 'Premium stainless steel — zero allergy or irritation',
+    comment:
+      'I have very sensitive skin that usually turns red with cheap imitation jewelry. This stainless steel chain is genuinely hypoallergenic! Super light, waterproof, and the emerald green color is pure royalty.',
+    verified: true,
+    helpfulCount: 76,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const EMERALD_SNAKE_REVIEWS_LIST = EMERALD_SNAKE_REVIEWS;
+
+export const EMERALD_SNAKE_CUSTOMER_MEDIA = [
+  {
+    id: 'm-esp-1',
+    type: 'image',
+    image: '/d1.webp',
+    author: 'Ishita Kapoor',
+    caption: 'Real photo: Gold Plated Emerald Flat Snake Chain Necklace.',
+  },
+  {
+    id: 'm-esp-2',
+    type: 'image',
+    image: '/d2.webp',
+    author: 'Priyanka Sen',
+    caption: 'Real photo: Liquid gold herringbone chain and emerald solitaire detail.',
+  },
+  {
+    id: 'm-esp-3',
+    type: 'image',
+    image: '/d3.webp',
+    author: 'Aditi Deshmukh',
+    caption: 'Real photo: Anti-tarnish gold finish and clasp angle view.',
+  },
+];
+
+// ============================================================================
+// 10. HIGH GRADE U-SHAPED WHITE ENAMEL HANDBAG DROP EARRINGS (63up0k)
+// Product ID: 'white-enamel-handbag-earrings'
+// Meesho Code: 63up0k
+// ============================================================================
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG =
+  '/products/suyug-high-grade-u-shaped-white-enemel-handbag-drop-earrings-for-women-and-girls';
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_MATCHING_VARIANTS = [
+  {
+    id: 'handbag-white-gold',
+    name: '18K Gold Plated Milk White Enamel (1 Pair)',
+    color: '#F4F1EA',
+    borderColor: '#D4AF37',
+    image: '/e1.webp',
+    inStock: true,
+  },
+  {
+    id: 'handbag-white-combo2',
+    name: 'Set of 2 Pairs (Gift Pack)',
+    color: '#FFFFFF',
+    borderColor: '#B3874B',
+    image: '/e2.webp',
+    inStock: true,
+  },
+];
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS = {
+  id: 'white-enamel-handbag-earrings',
+  title:
+    'High Grade U Shaped White Enamel Handbag Drop Earrings For Women And Girls',
+  shortTitle: 'U-Shaped White Enamel Handbag Earrings',
+  tagline:
+    '18K Gold Plated • Chic Korean Dainty Purse Motif • Hypoallergenic & Ultra-Lightweight Everyday Luxury',
+  subtitle:
+    '18K Gold Plated • Chic Korean Dainty Purse Motif • Hypoallergenic & Ultra-Lightweight Everyday Luxury',
+  price: 399,
+  originalPrice: 999,
+  regularPrice: 999,
+  salePrice: 399,
+  discountPercent: 60,
+  discountPercentage: 60,
+  rating: 4.9,
+  ratingsCount: 7120,
+  reviewsCount: 940,
+  sku: 'QVL-EARRING-63UP0K',
+  inStock: true,
+  stockLeft: 19,
+  inStockCount: 19,
+  recentSales24h: 264,
+  currentLiveViewers: 41,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  urgencyText: 'Only 19 pairs left in stock — High demand on Meesho & Instagram!',
+  fullDescription:
+    'A breathtaking fusion of playful whimsy and modern Parisian couture elegance. Crafted with an ultra-lightweight hypoallergenic alloy core and bathed in 18K yellow gold micron plating, each earring features a dainty U-shaped miniature handbag silhouette filled with high-gloss milk-white enamel inlay and an arched golden handle. Designed with a secure click-top hinged latch back, these earrings deliver effortless all-day comfort without tugging on sensitive ear lobes. Perfect for elevating casual denim, chic office blazers, brunch dates, or festive fusion ensembles.',
+  description:
+    'A breathtaking fusion of playful whimsy and modern Parisian couture elegance. Crafted with an ultra-lightweight hypoallergenic alloy core and bathed in 18K yellow gold micron plating, each earring features a dainty U-shaped miniature handbag silhouette filled with high-gloss milk-white enamel inlay and an arched golden handle. Designed with a secure click-top hinged latch back, these earrings deliver effortless all-day comfort without tugging on sensitive ear lobes. Perfect for elevating casual denim, chic office blazers, brunch dates, or festive fusion ensembles.',
+  features: [
+    '18K Yellow Gold Plating with High-Gloss Milk-White Enamel Inlay',
+    'Chic U-Shaped Miniature Handbag Silhouette with Sculpted Handle',
+    'Ultra-Lightweight & Comfort-Fit (Zero Ear Lobe Pulling for All-Day Wear)',
+    'Hypoallergenic Alloy Core with Anti-Tarnish Protective Shield',
+    'Secure Hinged Latch-Back Closure for Confident Everyday Styling',
+    'Arrives in Signature Qavelle Velvet Packaging with Quality Hallmark Certificate',
+  ],
+  size: 'Drop Length: 2.2 cm | Handbag Width: 1.5 cm | Weight: 4.2g (Pair)',
+  dimensions: 'Drop Length: 2.2 cm | Handbag Width: 1.5 cm | Weight: 4.2g (Pair)',
+  materials: 'High-Grade Hypoallergenic Alloy Core, 18K Yellow Gold Polish, Glossy Enamel',
+  countryOfOrigin: 'India',
+};
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_HIGHLIGHTS = [
+  { label: 'Design', value: 'U-Shaped Miniature Handbag / Purse Drop Hoop' },
+  { label: 'Base Metal', value: 'High Grade Hypoallergenic Skin-Friendly Alloy' },
+  { label: 'Plating', value: '18K Yellow Gold Micron Polish with Anti-Tarnish Coat' },
+  { label: 'Inlay Finish', value: 'High-Gloss Pure Milk-White Enamel' },
+  { label: 'Stone Type', value: 'Pure Enamel (Zero Loose Stones, Everyday Durable)' },
+  { label: 'Closure Type', value: 'Hinged Click-Top Latch Back (Snag-Free & Secure)' },
+  { label: 'Weight & Comfort', value: 'Ultra-Light 4.2g per pair (Zero ear pulling)' },
+  { label: 'Net Quantity (N)', value: '1 Pair (2 Pieces) + Royal Velvet Gift Pouch' },
+  { label: 'Occasion', value: 'Daily Wear, College, Office, Casual Western, Brunch & Gifting' },
+];
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '1 Pair of White Enamel Handbag Drop Earrings + Luxury Velvet Jewellery Pouch',
+  },
+  { label: 'Closure', value: 'Precision Snap-Lock Hinged Hoop Closure' },
+  { label: 'Finish', value: 'Mirror Gold Finish with Hand-Poured Gloss Enamel' },
+  { label: 'Skin Safety', value: '100% Nickel-Free & Lead-Free (Guaranteed No Skin Irritation)' },
+  { label: 'Water & Sweat Resistance', value: 'Water-Resistant with Protective Clear Shield' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value: 'Gently wipe with a soft, dry lint-free cloth after wear. Store in the complimentary velvet pouch away from direct perfume sprays and harsh corrosive liquids.',
+  },
+];
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'wehe-1',
+    src: '/e1.webp',
+    thumbSrc: '/e1_thumb.webp',
+    alt: 'High Grade U Shaped White Enamel Handbag Drop Earrings in 18K Gold Plating - Hero View',
+    title: 'White Enamel Handbag Earrings',
+    tag: 'Hero View',
+  },
+  {
+    id: 'wehe-2',
+    src: '/e2.webp',
+    thumbSrc: '/e2_thumb.webp',
+    alt: 'Real Product Detail - 18K Gold Plated Handbag Silhouette with Glossy Milk White Enamel',
+    title: 'Handbag Silhouette Detail',
+    tag: 'Close-Up',
+  },
+  {
+    id: 'wehe-3',
+    src: '/e3.webp',
+    thumbSrc: '/e3_thumb.webp',
+    alt: 'Real Product View - Pure White Enamel Inlay and Latch Clasp',
+    title: 'Craftsmanship & Finish',
+    tag: 'Pair Shot',
+  },
+];
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'handbag-earrings-single',
+    title: '1 Pair (Classic White Enamel)',
+    subtitle: '1 Pair of Earrings + Velvet Gift Pouch + Free COD Delivery',
+    unitCount: 1,
+    price: 399,
+    originalPrice: 999,
+    discountPercent: 60,
+    popular: true,
+    saveAmount: 600,
+  },
+  {
+    id: 'handbag-earrings-double',
+    title: '2 Pairs (Besties & Sister Gifting Duo)',
+    subtitle: '2 Pairs + 2 Velvet Pouches + Extra ₹100 Instant Savings',
+    unitCount: 2,
+    price: 699,
+    originalPrice: 1998,
+    discountPercent: 65,
+    popular: false,
+    saveAmount: 1299,
+  },
+  {
+    id: 'handbag-earrings-triple',
+    title: '3 Pairs (Family & Celebration Bundle)',
+    subtitle: '3 Pairs + Royal Presentation Box + Maximum Savings',
+    unitCount: 3,
+    price: 899,
+    originalPrice: 2997,
+    discountPercent: 70,
+    popular: false,
+    saveAmount: 2098,
+  },
+];
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS: ReviewItem[] = [
+  {
+    id: 'r-wehe-1',
+    author: 'Kavita Agarwal',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    rating: 5,
+    date: 'Yesterday',
+    title: 'Cutest earrings ever! Looks like high-end designer jewelry',
+    comment:
+      'Saw this trending on Meesho and ordered directly from Qavelle. The white enamel has such a lustrous pearl-like gloss and the gold border is vibrant without looking brassy. They are unbelievably lightweight — I wore them all day at work and completely forgot I had them on! Unbeatable price at ₹399.',
+    verified: true,
+    helpfulCount: 94,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-wehe-2',
+    author: 'Simran Grover',
+    city: 'New Delhi',
+    state: 'Delhi',
+    rating: 5,
+    date: '2 days ago',
+    title: 'Received so many compliments on my brunch outing!',
+    comment:
+      'The miniature handbag purse design is so chic and unique! My friends immediately asked where I got them from. The latch closure clicked securely and does not pinch. Delivered in 3 days in a lovely velvet pouch.',
+    verified: true,
+    helpfulCount: 81,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-wehe-3',
+    author: 'Ananya Roy',
+    city: 'Kolkata',
+    state: 'West Bengal',
+    rating: 5,
+    date: '4 days ago',
+    title: 'Perfect finish and 100% skin safe',
+    comment:
+      'I usually get itchiness from cheap earrings, but these caused zero irritation even in hot Kolkata humidity. The gold plating is very smooth and the white enamel is spotless. Truly impressed by the quality for just ₹399.',
+    verified: true,
+    helpfulCount: 67,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-wehe-4',
+    author: 'Sneha Patel',
+    city: 'Ahmedabad',
+    state: 'Gujarat',
+    rating: 5,
+    date: '6 days ago',
+    title: 'Aesthetic Korean style everyday earrings!',
+    comment:
+      'Pairs beautifully with white shirts, kurtis, and dresses. The purse shape gives it an elegant Korean minimalist look. The cash on delivery was super smooth and delivery was very fast. 5 stars!',
+    verified: true,
+    helpfulCount: 52,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST = WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS;
+
+export const WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA = [
+  {
+    id: 'm-wehe-1',
+    type: 'image',
+    image: '/e1.webp',
+    author: 'Kavita Agarwal',
+    caption: 'Real photo: Loved the dainty purse design and milk-white glossy finish!',
+  },
+  {
+    id: 'm-wehe-2',
+    type: 'image',
+    image: '/e2.webp',
+    author: 'Simran Grover',
+    caption: 'Real photo: Super lightweight on ears with strong snap click-top latch.',
+  },
+  {
+    id: 'm-wehe-3',
+    type: 'image',
+    image: '/e3.webp',
+    author: 'Ananya Roy',
+    caption: 'Real photo: 18K gold luster is immaculate, arrived in gorgeous velvet pouch.',
+  },
+];
+
+
 
 
 

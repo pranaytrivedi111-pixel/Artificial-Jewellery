@@ -39,7 +39,7 @@ export const LiveSalesToasts: React.FC = () => {
           src={ASSET_IMAGES.hero}
           alt="Pyrite Sun Ring"
           referrerPolicy="no-referrer"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-lg"
         />
       </div>
 

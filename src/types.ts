@@ -4,7 +4,11 @@ export type ProductId =
   | 'necklace-combo-5'
   | 'radhika-green-ad'
   | 'elegant-everyday-5'
-  | 'allure-gold-set';
+  | 'allure-gold-set'
+  | 'trendy-alloy-set'
+  | 'combo-2-pendants'
+  | 'emerald-snake-pendant'
+  | 'white-enamel-handbag-earrings';
 
 export interface ProductGalleryItem {
   id: string;

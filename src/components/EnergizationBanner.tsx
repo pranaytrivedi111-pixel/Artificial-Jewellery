@@ -35,10 +35,12 @@ export const EnergizationBanner: React.FC = () => {
 
           <div className="relative rounded-xl overflow-hidden shadow-md border border-amber-200 aspect-4/3 flex items-center justify-center bg-white">
             <img
-              src="/UGC.png"
+              src="/UGC.webp"
               alt="Handcrafted Jhumka Set in Hand"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-contain"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-contain rounded-xl"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
               <span className="text-white font-bold text-xs">
@@ -52,10 +54,12 @@ export const EnergizationBanner: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-gray-900 text-white p-5 sm:p-8 rounded-2xl shadow-md border border-gray-800">
           <div className="order-2 md:order-1 relative rounded-xl overflow-hidden shadow-md aspect-4/3 flex items-center justify-center bg-black">
             <img
-              src="/Cinematic.png"
+              src="/Cinematic.webp"
               alt="Complete 6-Pair Royal Antique Gold Jhumka Collection on Silk"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-contain"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-contain rounded-xl"
             />
           </div>
 
@@ -64,7 +68,7 @@ export const EnergizationBanner: React.FC = () => {
               <Award className="w-3.5 h-3.5" /> 100% Quality Inspected
             </div>
             <h3 className="text-xl sm:text-2xl font-extrabold text-white leading-snug">
-              Royal Keepsake Packaging &amp; Authenticity Guarantee
+              Royal Presentation Packaging &amp; Authenticity Guarantee
             </h3>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
               Every parcel comes secured in protective packaging suitable for personal safekeeping or gifting to loved ones on weddings, festivals, and special celebrations.

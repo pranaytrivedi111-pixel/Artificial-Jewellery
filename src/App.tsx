@@ -45,6 +45,26 @@ import {
   RADHIKA_GREEN_AD_PRODUCT_DETAILS,
   ALLURE_GOLD_SET_PRODUCT_DETAILS,
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_PRODUCT_DETAILS,
+  TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_REVIEWS_LIST,
+  TRENDY_ALLOY_SET_CUSTOMER_MEDIA,
+  TRENDY_ALLOY_SET_SLUG,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS,
+  AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
+  AESTHETIC_PENDANT_COMBO_REVIEWS_LIST,
+  AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA,
+  AESTHETIC_PENDANT_COMBO_SLUG,
+  EMERALD_SNAKE_PRODUCT_DETAILS,
+  EMERALD_SNAKE_BUNDLE_OPTIONS,
+  EMERALD_SNAKE_REVIEWS_LIST,
+  EMERALD_SNAKE_CUSTOMER_MEDIA,
+  EMERALD_SNAKE_SLUG,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -73,6 +93,64 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('63up0k') ||
+    pathname.includes('369268004') ||
+    pathname.includes('handbag') ||
+    pathname.includes('suyug') ||
+    pathname.includes('white-enemel') ||
+    pathname.includes('white-enamel') ||
+    pathname.includes('u-shaped') ||
+    param === 'white-enamel-handbag-earrings' ||
+    param === 'handbag-earrings' ||
+    param === '63up0k' ||
+    param === 'suyug'
+  ) {
+    return { view: 'product', productId: 'white-enamel-handbag-earrings' };
+  }
+
+  if (
+    pathname.includes('7mhyk6') ||
+    pathname.includes('emerald') ||
+    pathname.includes('snake-chain') ||
+    pathname.includes('flat-snake') ||
+    pathname.includes('cubic-zirconia') ||
+    pathname.includes('461052726') ||
+    param === 'emerald-snake-pendant' ||
+    param === '7mhyk6' ||
+    param === 'emerald-snake' ||
+    param === 'snake'
+  ) {
+    return { view: 'product', productId: 'emerald-snake-pendant' };
+  }
+
+  if (
+    pathname.includes('combo-of-2') ||
+    pathname.includes('aesthetic') ||
+    pathname.includes('gse4gp') ||
+    pathname.includes('panna-green') ||
+    pathname.includes('pastel-pink') ||
+    pathname.includes('2-aesthetic') ||
+    param === 'combo-2-pendants' ||
+    param === 'gse4gp' ||
+    param === 'aesthetic-pendants' ||
+    param === 'aesthetic'
+  ) {
+    return { view: 'product', productId: 'combo-2-pendants' };
+  }
+
+  if (
+    pathname.includes('trendy') ||
+    pathname.includes('alloy') ||
+    pathname.includes('qp1c') ||
+    param === 'trendy-alloy-set' ||
+    param === 'trendy-alloy' ||
+    param === 'alloy' ||
+    param === 'qp1c'
+  ) {
+    return { view: 'product', productId: 'trendy-alloy-set' };
   }
 
   if (
@@ -147,6 +225,10 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'white-enamel-handbag-earrings': WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG,
+  'emerald-snake-pendant': EMERALD_SNAKE_SLUG,
+  'combo-2-pendants': AESTHETIC_PENDANT_COMBO_SLUG,
+  'trendy-alloy-set': '/products/trendy-alloy-gold-plated-jewellery-set',
   'allure-gold-set': '/products/royal-elegant-gold-plated-jewellery-set',
   'radhika-green-ad': '/products/radhika-anant-ambani-inspired-green-ad-necklace-set',
   'elegant-everyday-5': '/products/elegant-everyday-necklace-set-combo-of-5',
@@ -160,6 +242,10 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'white-enamel-handbag-earrings') return WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS[0];
+  if (productId === 'emerald-snake-pendant') return EMERALD_SNAKE_BUNDLE_OPTIONS[0];
+  if (productId === 'combo-2-pendants') return AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS[0];
+  if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
   if (productId === 'radhika-green-ad') return RADHIKA_GREEN_AD_BUNDLE_OPTIONS[0];
   if (productId === 'elegant-everyday-5') return ELEGANT_EVERYDAY_BUNDLE_OPTIONS[0];
@@ -174,16 +260,28 @@ export default function App() {
   // Current view: 'home' | 'product'
   const [currentView, setCurrentView] = useState<'home' | 'product'>(initialLoc.view);
 
-  // Active product: 'jhumka' | 'choker' | 'necklace-combo-5' | 'elegant-everyday-5' | 'radhika-green-ad' | 'allure-gold-set'
+  // Active product: 'jhumka' | 'choker' | 'necklace-combo-5' | 'elegant-everyday-5' | 'radhika-green-ad' | 'allure-gold-set' | 'trendy-alloy-set' | 'combo-2-pendants' | 'emerald-snake-pendant' | 'white-enamel-handbag-earrings'
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
+  const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
+  const isAestheticCombo = activeProductId === 'combo-2-pendants';
+  const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isChoker = activeProductId === 'choker';
   const isShimmering = activeProductId === 'necklace-combo-5';
   const isElegantEveryday = activeProductId === 'elegant-everyday-5';
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isAllureGold
+  const currentProductDetails = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_DETAILS
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_DETAILS
@@ -195,7 +293,15 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isAllureGold
+  const currentReviews = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_REVIEWS_LIST
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_REVIEWS_LIST
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_REVIEWS_LIST
+    : isAllureGold
     ? ALLURE_GOLD_SET_REVIEWS_LIST
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_REVIEWS_LIST
@@ -207,7 +313,15 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isAllureGold
+  const currentCustomerMedia = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_CUSTOMER_MEDIA
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_CUSTOMER_MEDIA
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_CUSTOMER_MEDIA
+    : isAllureGold
     ? ALLURE_GOLD_SET_CUSTOMER_MEDIA
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_CUSTOMER_MEDIA
@@ -316,8 +430,8 @@ export default function App() {
   };
 
   // Switch product function: switches to PDP with specific slug
-  const handleSwitchProduct = (productId: ProductId) => {
-    const targetSlug = getSlugForProduct(productId);
+  const handleSwitchProduct = (productId: ProductId, customSlug?: string) => {
+    const targetSlug = customSlug || getSlugForProduct(productId);
     setActiveProductId(productId);
     setCurrentView('product');
     setSelectedBundle(getDefaultBundle(productId));
@@ -349,6 +463,18 @@ export default function App() {
   useEffect(() => {
     if (currentView === 'home') {
       document.title = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+    } else if (activeProductId === 'white-enamel-handbag-earrings') {
+      document.title =
+        'High Grade U-Shaped White Enamel Handbag Drop Earrings | QAVELLE';
+    } else if (activeProductId === 'emerald-snake-pendant') {
+      document.title =
+        'Gold Plated Stainless Steel Emerald CZ Flat Snake Chain Necklace | QAVELLE';
+    } else if (activeProductId === 'combo-2-pendants') {
+      document.title =
+        'Combo of 2 Aesthetic Daily Wear Pendants – Pastel Pink & Panna Green Locket | QAVELLE';
+    } else if (activeProductId === 'trendy-alloy-set') {
+      document.title =
+        'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings | QAVELLE';
     } else if (activeProductId === 'allure-gold-set') {
       document.title =
         'Royal Elegant Gold Plated Jewellery Set with Matching Earrings | QAVELLE';
@@ -480,7 +606,7 @@ export default function App() {
       />
 
       {/* Main Content: Home Page OR Product Detail View */}
-      <main className={`flex-1 ${currentView === 'product' ? 'pb-24 sm:pb-28' : 'pb-0 sm:pb-2'}`}>
+      <main className="flex-1">
         {currentView === 'home' ? (
           <HomePage
             onSelectProduct={handleSwitchProduct}

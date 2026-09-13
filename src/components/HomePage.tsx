@@ -3,367 +3,418 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import {
-  Sparkles,
   Star,
   ShieldCheck,
   Award,
   Crown,
   Truck,
-  ArrowRight,
-  Heart,
-  Search,
   CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  ShoppingBag,
-  ExternalLink,
+  ArrowRight,
 } from 'lucide-react';
 import {
   GENUINE_PRODUCTS,
-  HOME_CATEGORIES,
-  HOME_PROMO_SLIDES,
   HOME_FAQS,
   HOME_REVIEWS,
-  GenuineProduct,
 } from '../data/homeCatalog';
-import {
-  BUNDLE_OPTIONS,
-  CHOKER_BUNDLE_OPTIONS,
-  ELEGANT_EVERYDAY_BUNDLE_OPTIONS,
-  RADHIKA_GREEN_AD_BUNDLE_OPTIONS,
-  SHIMMERING_BUNDLE_OPTIONS,
-  ALLURE_GOLD_SET_BUNDLE_OPTIONS,
-} from '../data/productData';
 import { BundleOption, ProductId } from '../types';
 
 interface HomePageProps {
   onSelectProduct: (productId: ProductId) => void;
-  onAddToCart: (bundle: BundleOption) => void;
-  onBuyNow: (bundle: BundleOption) => void;
+  onAddToCart?: (bundle: BundleOption) => void;
+  onBuyNow?: (bundle: BundleOption) => void;
   onOpenTrackOrder?: () => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   onSelectProduct,
-  onAddToCart,
-  onBuyNow,
 }) => {
-  // Active Hero Slide Index
-  const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+  // Dynamically derived from GENUINE_PRODUCTS so any new product page created automatically appears!
+  const heroProducts = useMemo(() => {
+    return GENUINE_PRODUCTS;
+  }, []);
 
-  // Active Category Filter
-  const [activeCategoryFilter, setActiveCategoryFilter] = useState<string>('all');
+  const [selectedHeroIndex, setSelectedHeroIndex] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const currentHeroProduct = heroProducts[selectedHeroIndex] || heroProducts[0];
 
-  // Search Query for Collection
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const thumbnailContainerRef = useRef<HTMLDivElement>(null);
+  const thumbnailButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Wishlisted product IDs
-  const [wishlistedIds, setWishlistedIds] = useState<string[]>([]);
+  // Continuous auto-slider: automatically advances hero product every 3.5 seconds
+  useEffect(() => {
+    if (isPaused || heroProducts.length <= 1) return;
+    const interval = setInterval(() => {
+      setSelectedHeroIndex((prev) => (prev + 1) % heroProducts.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [isPaused, heroProducts.length]);
 
-  // FAQ Accordion State
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  // Clean up pause timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    };
+  }, []);
 
-  const toggleWishlist = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setWishlistedIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+  // Smoothly scroll the active thumbnail card horizontally inside its container ONLY
+  // to keep the active item from the collection centered
+  useEffect(() => {
+    const activeBtn = thumbnailButtonRefs.current[selectedHeroIndex];
+    const container = thumbnailContainerRef.current;
+    if (activeBtn && container) {
+      const btnLeft = activeBtn.offsetLeft;
+      const btnWidth = activeBtn.offsetWidth;
+      const containerWidth = container.clientWidth;
+      const targetScrollLeft = btnLeft - containerWidth / 2 + btnWidth / 2;
+      container.scrollTo({
+        left: Math.max(0, targetScrollLeft),
+        behavior: 'smooth',
+      });
+    }
+  }, [selectedHeroIndex]);
+
+  // When user clicks a thumbnail, switch to it immediately and resume auto-sliding after 5s
+  const handleSelectHero = (idx: number) => {
+    setSelectedHeroIndex(idx);
+    setIsPaused(true);
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 5000);
+  };
+
+  // FAQ Accordion State (supports 2-column desktop view with independent item toggling)
+  const [openFaqIndices, setOpenFaqIndices] = useState<number[]>([0]);
+
+  const toggleFaq = (idx: number) => {
+    setOpenFaqIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
     );
   };
 
-  const getBundleForProduct = (productId: ProductId): BundleOption => {
-    switch (productId) {
-      case 'allure-gold-set':
-        return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
-      case 'radhika-green-ad':
-        return RADHIKA_GREEN_AD_BUNDLE_OPTIONS[0];
-      case 'elegant-everyday-5':
-        return ELEGANT_EVERYDAY_BUNDLE_OPTIONS[0];
-      case 'choker':
-        return CHOKER_BUNDLE_OPTIONS[0];
-      case 'necklace-combo-5':
-        return SHIMMERING_BUNDLE_OPTIONS[0];
-      case 'jhumka':
-      default:
-        return BUNDLE_OPTIONS[0];
-    }
+  // Why Qavelle (Trust Pillars) Mobile Slider State & Ref (Shows 2 cards only, other 2 in slider)
+  const trustSliderRef = useRef<HTMLDivElement>(null);
+  const [trustSlidePage, setTrustSlidePage] = useState<number>(0);
+
+  const handleTrustScroll = () => {
+    if (!trustSliderRef.current) return;
+    const el = trustSliderRef.current;
+    const scrollLeft = el.scrollLeft;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const page = maxScroll > 0 && scrollLeft > maxScroll / 2 ? 1 : 0;
+    setTrustSlidePage(page);
   };
 
-  const filteredProducts = useMemo(() => {
-    return GENUINE_PRODUCTS.filter((prod) => {
-      const matchesSearch =
-        searchQuery === '' ||
-        prod.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        prod.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        prod.category.toLowerCase().includes(searchQuery.toLowerCase());
+  const scrollTrustToPage = (page: number) => {
+    if (!trustSliderRef.current) return;
+    const el = trustSliderRef.current;
+    const targetX = page === 0 ? 0 : el.scrollWidth - el.clientWidth;
+    el.scrollTo({ left: targetX, behavior: 'smooth' });
+    setTrustSlidePage(page);
+  };
 
-      if (!matchesSearch) return false;
+  // Customer Reviews Mobile Slider State & Ref (Shows 2 cards only, other 2 in slider)
+  const reviewSliderRef = useRef<HTMLDivElement>(null);
+  const [reviewSlidePage, setReviewSlidePage] = useState<number>(0);
 
-      if (activeCategoryFilter === 'all') return true;
-      if (activeCategoryFilter === 'allure-set') return prod.id === 'allure-gold-set';
-      if (activeCategoryFilter === 'combo-5') return prod.category === 'Combo Deals';
-      if (activeCategoryFilter === 'choker-royal') return prod.id === 'choker';
-      if (activeCategoryFilter === 'ambani-set') return prod.id === 'radhika-green-ad';
-      if (activeCategoryFilter === 'jhumka-set') return prod.id === 'jhumka';
-      if (activeCategoryFilter === 'shimmering-pack') return prod.id === 'necklace-combo-5';
-      return true;
-    });
-  }, [searchQuery, activeCategoryFilter]);
+  const handleReviewScroll = () => {
+    if (!reviewSliderRef.current) return;
+    const el = reviewSliderRef.current;
+    const scrollLeft = el.scrollLeft;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const page = maxScroll > 0 && scrollLeft > maxScroll / 2 ? 1 : 0;
+    setReviewSlidePage(page);
+  };
 
-  const activeSlide = HOME_PROMO_SLIDES[activeHeroIndex] || HOME_PROMO_SLIDES[0];
-  const activeSlideProduct = GENUINE_PRODUCTS.find((p) => p.id === activeSlide.productId) || GENUINE_PRODUCTS[0];
+  const scrollReviewToPage = (page: number) => {
+    if (!reviewSliderRef.current) return;
+    const el = reviewSliderRef.current;
+    const targetX = page === 0 ? 0 : el.scrollWidth - el.clientWidth;
+    el.scrollTo({ left: targetX, behavior: 'smooth' });
+    setReviewSlidePage(page);
+  };
 
   return (
     <div className="w-full bg-[#FAF9F5] text-gray-900 selection:bg-amber-100">
       {/* =========================================================================
-          1. LUXURY ANNOUNCEMENT TICKER
+          1. HERO SECTION: VICE-VERSA IMAGE COLLECTION & MAIN PRODUCT CARD
+          - Top: Horizontally scrollable multiple cards to render more products
+          - Bottom: Main sliding product card with prices, completely clean image (zero overlay)
+          - Sliding hero main tab with auto-slide & pause on hover
+          - Automatic inclusion of any newly created products
           ========================================================================= */}
-      <div className="bg-[#111111] text-amber-300/90 text-[11px] sm:text-xs py-2 px-3 tracking-widest uppercase font-semibold text-center border-b border-amber-900/30">
-        <div className="max-w-7xl mx-auto flex items-center justify-center gap-4 sm:gap-8 flex-wrap">
-          <span className="flex items-center gap-1.5 text-white">
-            <Truck className="w-3.5 h-3.5 text-amber-400" />
-            Free Express 48H Air Delivery
-          </span>
-          <span className="hidden min-[500px]:inline text-amber-500/50">•</span>
-          <span className="flex items-center gap-1.5 text-white">
-            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-            100% Cash On Delivery Available
-          </span>
-          <span className="hidden md:inline text-amber-500/50">•</span>
-          <span className="hidden md:flex items-center gap-1.5 text-white">
-            <Award className="w-3.5 h-3.5 text-amber-400" />
-            Anti-Tarnish QAVELLE Hallmark Standard
-          </span>
+      <section
+        id="hero-vice-versa-showcase"
+        className="pt-1 sm:pt-2 lg:pt-1.5 pb-2 sm:pb-4 lg:pb-3 w-full max-w-6xl mx-auto px-2 sm:px-4 lg:px-6"
+      >
+        {/* Clean Header */}
+        <div className="mb-1 sm:mb-1.5 lg:mb-2 text-center">
+          <h1
+            className="text-base sm:text-xl lg:text-2xl font-normal text-gray-950 tracking-tight leading-tight"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          >
+            Royal Handcrafted Jewellery
+          </h1>
         </div>
-      </div>
 
-      {/* =========================================================================
-          2. PRECISE LUXURY SPLIT HERO SECTION
-          Clean Image Rendering: No text overlays on jewelry photo
-          ========================================================================= */}
-      <section className="relative bg-white border-b border-gray-200/80 pt-6 sm:pt-8 md:pt-10 pb-8 sm:pb-12 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* LEFT COLUMN: Clean Typography, Offer details & CTAs */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-5">
-              {/* Royal Collection Tag */}
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#B3874B]">
-                <Sparkles className="w-4 h-4 text-[#B3874B]" />
-                <span>Qavelle Royal Jewellery • Direct From Artisans</span>
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black text-gray-950 font-serif leading-[1.18] tracking-tight">
-                {activeSlide.title}
-              </h1>
-
-              {/* Subtitle / Craft Story */}
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl">
-                {activeSlide.subtitle}
-              </p>
-
-              {/* Verified Star Rating */}
-              <div className="flex items-center gap-2 pt-1 flex-wrap">
-                <div className="flex items-center gap-1 bg-[#1E8E3E] text-white text-xs font-black px-2 py-0.5 rounded-md shadow-2xs">
-                  <span>{activeSlideProduct.rating}</span>
-                  <Star className="w-3 h-3 fill-white text-white" />
-                </div>
-                <span className="text-xs sm:text-sm font-semibold text-gray-900">
-                  {activeSlideProduct.reviewsCount.toLocaleString('en-IN')} Verified Customer Reviews
-                </span>
-                <span className="text-gray-300">•</span>
-                <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  Certified Authentic
-                </span>
-              </div>
-
-              {/* Pricing & Value Details (Cleanly situated outside the image) */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF9F5] border border-stone-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="flex items-baseline gap-2.5">
-                  <span className="text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-                    {activeSlide.price}
-                  </span>
-                  <span className="text-sm text-gray-400 font-normal">
-                    MRP <span className="line-through">{activeSlide.originalPrice}</span>
-                  </span>
-                  <span className="bg-[#B3874B] text-white text-[11px] font-bold px-2.5 py-0.5 rounded uppercase tracking-wide">
-                    {activeSlideProduct.discountPercent}% OFF
-                  </span>
-                </div>
-                <span className="text-xs font-bold text-gray-700">
-                  Includes Free Velvet Keepsake Box
-                </span>
-              </div>
-
-              {/* Craftsmanship Checklist */}
-              <div className="grid grid-cols-2 gap-2 pt-1 text-xs text-gray-700">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#B3874B] shrink-0" />
-                  <span>100% Skin Safe & Hypoallergenic</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#B3874B] shrink-0" />
-                  <span>Anti-Tarnish Micro-Plating</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#B3874B] shrink-0" />
-                  <span>Free Express Air Shipping</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#B3874B] shrink-0" />
-                  <span>Cash On Delivery (COD)</span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => onSelectProduct(activeSlide.productId)}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-[#111111] hover:bg-black text-white text-sm font-bold px-6 py-3.5 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
-                >
-                  <span>Explore Product Details</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => onBuyNow(getBundleForProduct(activeSlide.productId))}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-[#B3874B] hover:bg-[#9E733B] text-white text-sm font-bold px-6 py-3.5 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
-                >
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>Instant Buy Now (COD)</span>
-                </button>
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN: Pure, Clean Product Image (Zero Text Overlays) */}
-            <div className="lg:col-span-5 flex flex-col items-center">
-              <div
-                onClick={() => onSelectProduct(activeSlide.productId)}
-                className="group relative w-full aspect-square max-w-[460px] mx-auto rounded-2xl bg-[#F8F7F4] border border-stone-200/90 overflow-hidden cursor-pointer shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center p-4"
-                title={`Click to view ${activeSlide.title}`}
-              >
-                {/* Clean Genuine Simple Hero Image - Stable & Match Product Page */}
-                <img
-                  src={activeSlide.image}
-                  alt={activeSlide.title}
-                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                  referrerPolicy="no-referrer"
-                  loading="eager"
-                />
-              </div>
-            </div>
-
-          </div>
-
-          {/* Bottom Switcher: Quick Access to the 5 Genuine Products */}
-          <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 text-center sm:text-left">
-              Featured Royal Collection (5 Authentic Masterpieces)
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
-              {HOME_PROMO_SLIDES.map((slide, idx) => {
-                const isCurrent = idx === activeHeroIndex;
-                return (
-                  <button
-                    key={slide.id}
-                    type="button"
-                    onClick={() => setActiveHeroIndex(idx)}
-                    className={`flex items-center gap-2.5 p-2 rounded-xl border text-left transition-all cursor-pointer ${
-                      isCurrent
-                        ? 'bg-amber-50/70 border-[#B3874B] shadow-xs'
-                        : 'bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    <div className="w-11 h-11 rounded-lg bg-gray-100 overflow-hidden shrink-0 flex items-center justify-center p-0.5">
-                      <img
-                        src={slide.image}
-                        alt={slide.title}
-                        className="w-full h-full object-contain"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <h4 className="text-xs font-bold text-gray-900 truncate">
-                        {slide.title}
-                      </h4>
-                      <p className="text-[11px] font-semibold text-[#B3874B]">
-                        {slide.price}
-                      </p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* =========================================================================
-          3. CATEGORIES & QUICK FILTER BAR
-          Clean circular avatars without text overlay on photos
-          ========================================================================= */}
-      <section className="bg-white border-b border-gray-200/80 py-6 sm:py-7">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500">
-                Explore By Category
-              </h3>
-              <p className="text-base sm:text-lg font-extrabold text-gray-950 font-serif">
-                Handcrafted Royal Sets
-              </p>
-            </div>
-            {activeCategoryFilter !== 'all' && (
-              <button
-                onClick={() => setActiveCategoryFilter('all')}
-                className="text-xs font-bold text-[#B3874B] hover:text-[#9E733B] cursor-pointer"
-              >
-                Reset Filter
-              </button>
-            )}
-          </div>
-
-          <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto pb-2 no-scrollbar">
-            {HOME_CATEGORIES.map((cat) => {
-              const isSelected = activeCategoryFilter === cat.id;
+        {/* 
+            SCROLLABLE CARDS ABOVE (Image Collection)
+            - Renders ALL products dynamically in a synchronized horizontal collection
+            - Hover or click immediately switches to that product
+            - Active item is highlighted with gold ring and smoothly centered
+            - Zero text overlays on thumbnail images
+        */}
+        <div
+          className="relative w-full max-w-full sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mb-1.5 lg:mb-2 px-0.5"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Horizontal Scrollable Thumbnails Container */}
+          <div
+            ref={thumbnailContainerRef}
+            className="flex items-center justify-start lg:justify-center gap-2 sm:gap-2.5 px-1 py-0.5 w-full overflow-x-auto scroll-smooth no-scrollbar"
+          >
+            {heroProducts.map((prod, idx) => {
+              const isSelected = selectedHeroIndex === idx;
               return (
                 <button
-                  key={cat.id}
-                  onClick={() => {
-                    setActiveCategoryFilter(cat.id);
-                    const el = document.getElementById('bestsellers-section');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="flex flex-col items-center shrink-0 group cursor-pointer focus:outline-none"
+                  key={prod.cardKey || `${prod.id}-${idx}`}
+                  ref={(el) => (thumbnailButtonRefs.current[idx] = el)}
+                  type="button"
+                  onClick={() => handleSelectHero(idx)}
+                  className={`relative w-13 h-13 min-[375px]:w-14 min-[375px]:h-14 sm:w-15 sm:h-15 lg:w-13 lg:h-13 xl:w-14 xl:h-14 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer shrink-0 flex items-center justify-center p-0.5 transition-all duration-300 ${
+                    isSelected
+                      ? 'ring-2 ring-[#B3874B] bg-white shadow-xs scale-105 z-10'
+                      : 'bg-white/80 border border-stone-200/90 opacity-75 hover:opacity-100 hover:ring-1 hover:ring-stone-300 hover:scale-102'
+                  }`}
+                  aria-label={`Select ${prod.shortTitle || prod.title}`}
+                  title={prod.shortTitle || prod.title}
                 >
-                  <div
-                    className={`relative w-15 h-15 sm:w-18 sm:h-18 rounded-full p-0.5 transition-all duration-300 ${
-                      isSelected
-                        ? 'ring-2 ring-[#B3874B] ring-offset-2 scale-105 shadow-sm'
-                        : 'ring-1 ring-gray-200 group-hover:ring-amber-400 group-hover:scale-102'
-                    }`}
-                  >
-                    <img
-                      src={cat.image}
-                      alt={cat.label}
-                      className="w-full h-full object-cover rounded-full"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                  <span
-                    className={`text-[11px] sm:text-xs font-bold mt-2 text-center transition-colors whitespace-nowrap ${
-                      isSelected ? 'text-[#B3874B] font-extrabold' : 'text-gray-700 group-hover:text-black'
-                    }`}
-                  >
-                    {cat.label}
-                  </span>
+                  {/* Clean Thumbnail - Absolutely Zero Text Overlays on Image */}
+                  <img
+                    src={prod.image}
+                    alt={prod.title}
+                    referrerPolicy="no-referrer"
+                    loading="eager"
+                    className="w-full h-full object-contain rounded-lg sm:rounded-xl"
+                  />
+                  {isSelected && (
+                    <span className="absolute bottom-0.5 inset-x-2 sm:inset-x-2.5 h-0.5 bg-[#B3874B] rounded-full" />
+                  )}
                 </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 
+            MAIN PRODUCT CARD (BELOW THE SCROLLABLE COLLECTION)
+            - Auto-sliding hero product showcase synchronizing with the above collection
+            - Strictly ZERO arrow overlays on or over the image
+            - Hero image fit to screen with smooth animated transition
+            - Displays category, badge, rating, price, discount cleanly in info section
+            - Clickable to navigate to that product page
+        */}
+        <div
+          onClick={() => onSelectProduct(currentHeroProduct.id)}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="group relative w-full max-w-full sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-sm hover:shadow-md hover:border-amber-300 transition-all duration-300 cursor-pointer overflow-hidden select-none"
+          title={`Click to view ${currentHeroProduct.title}`}
+        >
+          {/* MOBILE VIEW (Edge-to-edge Fit-to-screen Image with Very Little Space on Sides, matching PDP Hero) */}
+          <div className="block lg:hidden p-1 sm:p-2">
+            {/* Pristine Clean Image Container - Aspect Square Fit to Screen (Strictly ZERO Arrow, Text, Badge, or Rating Overlay on Image) */}
+            <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF8F5] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentHeroProduct.id}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="w-full h-full flex items-center justify-center"
+                >
+                  <img
+                    src={currentHeroProduct.image}
+                    alt={currentHeroProduct.title}
+                    className="w-full h-full object-contain rounded-2xl sm:rounded-3xl select-none transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                    referrerPolicy="no-referrer"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Product Details cleanly placed underneath the photo */}
+            <div className="mt-2.5 px-2 pb-2">
+              <div className="flex items-center justify-between gap-1.5 flex-wrap mb-1">
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#B3874B]">
+                  {currentHeroProduct.category}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="bg-stone-100 text-stone-800 text-[9.5px] font-bold px-2 py-0.5 rounded-full border border-stone-200">
+                    {currentHeroProduct.badge}
+                  </span>
+                  <div className="flex items-center gap-1 bg-emerald-50 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-emerald-100">
+                    <Star className="w-2.5 h-2.5 fill-emerald-600 text-emerald-600" />
+                    <span>{currentHeroProduct.rating}</span>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-xs sm:text-sm font-semibold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug line-clamp-1 mt-0.5">
+                {currentHeroProduct.title}
+              </h2>
+
+              <div className="mt-1 flex items-baseline gap-2 flex-wrap">
+                <span className="text-base sm:text-lg font-black text-gray-950">
+                  ₹{currentHeroProduct.price}
+                </span>
+                <span className="text-xs text-gray-400 line-through font-normal">
+                  ₹{currentHeroProduct.originalPrice}
+                </span>
+                <span className="text-xs font-bold text-[#B3874B]">
+                  ({currentHeroProduct.discountPercent}% OFF)
+                </span>
+              </div>
+
+              {/* Action Bar */}
+              <div className="mt-2 w-full bg-[#111111] group-hover:bg-[#B3874B] text-white py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs">
+                <span>View Product Details & Offers</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </div>
+          </div>
+
+          {/* DESKTOP VIEW (Fit-to-First-Fold Aspect-Square Image with Smooth Auto-slide Transition & Zero Overlay) */}
+          <div className="hidden lg:grid lg:grid-cols-12 items-center p-3 xl:p-4 gap-4 xl:gap-6">
+            {/* Left Col: Pristine Clean Main Product Photo Fit to Screen (Aspect-Square, Zero Arrow/Badge/Rating Overlay) */}
+            <div className="lg:col-span-5 xl:col-span-5 relative aspect-square w-full max-w-[270px] xl:max-w-[300px] 2xl:max-w-[320px] mx-auto rounded-2xl overflow-hidden bg-[#FAF8F5] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentHeroProduct.id}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="w-full h-full flex items-center justify-center p-1"
+                >
+                  <img
+                    src={currentHeroProduct.image}
+                    alt={currentHeroProduct.title}
+                    className="w-full h-full object-contain rounded-2xl select-none transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                    referrerPolicy="no-referrer"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Right Col: Product Information, Badges, Price & CTA */}
+            <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-between h-full py-0.5">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-semibold text-gray-600 flex-wrap">
+                  <span className="text-[#B3874B] font-bold uppercase tracking-wider">
+                    {currentHeroProduct.category}
+                  </span>
+                  <span className="text-stone-300">•</span>
+                  <span className="bg-stone-100 text-stone-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-stone-200">
+                    {currentHeroProduct.badge}
+                  </span>
+                  <span className="text-stone-300">•</span>
+                  <div className="flex items-center gap-1 bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-md font-bold text-xs border border-emerald-100">
+                    <span>{currentHeroProduct.rating}</span>
+                    <Star className="w-3 h-3 fill-emerald-600 text-emerald-600" />
+                  </div>
+                  <span className="text-gray-500 font-medium text-[11px]">
+                    ({currentHeroProduct.reviewsCount.toLocaleString()} Reviews)
+                  </span>
+                </div>
+
+                <h2
+                  className="text-base xl:text-lg 2xl:text-xl font-bold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug mt-1.5"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
+                  {currentHeroProduct.title}
+                </h2>
+
+                <p className="text-xs text-gray-600 mt-1 leading-relaxed line-clamp-2">
+                  {currentHeroProduct.subtitle}
+                </p>
+
+                {/* Highlights */}
+                <div className="mt-2.5 grid grid-cols-2 gap-1 text-[11px] text-gray-700">
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                    <span className="truncate">24K Micro Gold Polish</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                    <span className="truncate">Free Express Delivery</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                    <span className="truncate">Hypoallergenic & Skin Safe</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                    <span className="truncate">Cash on Delivery Available</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Price Row & CTA */}
+              <div className="mt-3 pt-2.5 border-t border-stone-200/80 flex items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xl xl:text-2xl font-black text-gray-950">
+                      ₹{currentHeroProduct.price}
+                    </span>
+                    <span className="text-xs text-gray-400 line-through font-normal">
+                      MRP ₹{currentHeroProduct.originalPrice}
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-bold text-[#B3874B]">
+                    {currentHeroProduct.discountPercent}% OFF • Special Royal Offer
+                  </span>
+                </div>
+
+                <div className="bg-[#111111] group-hover:bg-[#B3874B] text-white px-4 py-2 rounded-xl text-xs xl:text-sm font-bold flex items-center gap-2 transition-colors shadow-xs shrink-0">
+                  <span>View Product Details</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Subtle Auto Slider Indicator Dots (Centered beneath, ZERO overlay on image) */}
+          <div className="flex items-center justify-center gap-1.5 pb-2 pt-0.5 bg-white">
+            {heroProducts.map((prod, idx) => {
+              const isActive = idx === selectedHeroIndex;
+              return (
+                <button
+                  key={`hero-dot-${prod.id}-${idx}`}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelectHero(idx);
+                  }}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? 'w-6 bg-[#B3874B]'
+                      : 'w-1.5 bg-stone-300 hover:bg-stone-400'
+                  }`}
+                  aria-label={`Show ${prod.title}`}
+                  title={prod.shortTitle || prod.title}
+                />
               );
             })}
           </div>
@@ -371,159 +422,82 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* =========================================================================
-          4. THE CURATED COLLECTION (Best Sellers & Iconic Sets)
-          Strictly Clean Image Rendering: Zero Text Overlays on photos
+          2. ALL HANDCRAFTED MASTERPIECES (CATALOG GRID)
+          - Desktop view: 8 cards in 2 rows of 4
+          - Mobile view: 4 cards in 2 rows of 2
+          - Zero overlay on images (no badges, no buttons obscuring jewelry photo)
+          - Underneath: Title, Category, and Pricing
           ========================================================================= */}
-      <section id="bestsellers-section" className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 border-b border-gray-200/80 pb-5">
+      <section
+        id="all-products-section"
+        className="pt-2 sm:pt-4 pb-8 sm:pb-12 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8"
+      >
+        <div className="mb-3 sm:mb-4 text-center sm:text-left flex flex-col sm:flex-row sm:items-end justify-between gap-1">
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#B3874B] mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Direct From Artisans</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-950 font-serif">
-              Best Sellers & Iconic Sets
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#B3874B]">
+              Royal Selection
+            </span>
+            <h2
+              className="text-base sm:text-xl lg:text-2xl font-normal text-gray-950 tracking-tight leading-tight"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
+              Explore All Authentic Masterpieces
             </h2>
-            <p className="text-xs sm:text-sm text-gray-600 mt-0.5">
-              Certified authentic handcrafted jewelry sets with verified Indian customer ratings
-            </p>
           </div>
-
-          {/* Quick Search */}
-          <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search jewellery set..."
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-gray-300 focus:outline-none focus:border-[#B3874B] bg-white shadow-2xs"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black text-xs font-bold"
-              >
-                ✕
-              </button>
-            )}
-          </div>
+          <p className="text-xs text-gray-500 hidden sm:block">
+            Click any set to view detailed 360° gallery & order with COD
+          </p>
         </div>
 
-        {/* Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {filteredProducts.map((product) => {
-            const bundle = getBundleForProduct(product.id);
-            const isWishlisted = wishlistedIds.includes(product.id);
-
+        {/* 
+            8-CARD GRID
+            - Desktop: 4 cards in 1 row, 8 cards fit in one fold
+            - Mobile: 2 cards in each row, 4 cards fit in one fold
+            - No Details button
+            - No Buy Now button
+            - No overlay on images
+        */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 lg:gap-4.5">
+          {GENUINE_PRODUCTS.map((product) => {
             return (
               <div
-                key={product.id}
-                className="group bg-white rounded-2xl border border-gray-200/90 overflow-hidden hover:shadow-lg hover:border-amber-300/80 transition-all duration-300 flex flex-col justify-between"
+                key={product.cardKey || product.id}
+                onClick={() => onSelectProduct(product.id)}
+                className="group w-full text-center select-none bg-white rounded-2xl p-2 sm:p-2.5 border border-stone-200/80 hover:border-amber-300 hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                title={`Click to view ${product.title}`}
               >
-                {/* 1. TOP: Pure Genuine Image Container - Stable Simple Hero Image (No Hover Swap) */}
-                <div
-                  onClick={() => onSelectProduct(product.id)}
-                  className="relative aspect-square w-full bg-[#FAF9F6] border-b border-stone-100 overflow-hidden cursor-pointer select-none p-4 flex items-center justify-center"
-                >
-                  {/* Primary Simple Hero Image - Consistent with Product Page */}
+                {/* 
+                    PRISTINE CLEAN IMAGE CONTAINER
+                    Strictly Zero Overlay on images: No rating pill, No % OFF pill, No badges
+                */}
+                <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#F8F6F2] p-2 sm:p-3 flex items-center justify-center">
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="w-full h-full object-contain rounded-xl transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
                     referrerPolicy="no-referrer"
-                    loading="lazy"
                   />
-
-                  {/* Discreet Wishlist Button */}
-                  <button
-                    onClick={(e) => toggleWishlist(product.id, e)}
-                    className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-2xs ${
-                      isWishlisted
-                        ? 'bg-rose-50 text-rose-600 border border-rose-200'
-                        : 'bg-white/95 hover:bg-white text-gray-600 hover:text-black border border-gray-200'
-                    }`}
-                    aria-label="Add to Wishlist"
-                  >
-                    <Heart
-                      className={`w-4 h-4 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`}
-                    />
-                  </button>
                 </div>
 
-                {/* 2. BOTTOM: Structured Product Details, Pricing & CTAs (Cleanly below image) */}
-                <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-3">
-                  <div>
-                    {/* Category Label */}
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[11px] font-bold tracking-wider uppercase text-[#B3874B]">
-                        {product.category}
-                      </span>
-                      <span className="text-[11px] font-semibold text-gray-500">
-                        Only {product.inStockCount} left
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      onClick={() => onSelectProduct(product.id)}
-                      className="text-sm sm:text-base font-bold text-gray-900 line-clamp-2 hover:text-[#B3874B] transition-colors cursor-pointer leading-snug"
-                    >
-                      {product.title}
-                    </h3>
-
-                    {/* Rating Row */}
-                    <div className="flex items-center gap-1.5 mt-2">
-                      <div className="flex items-center gap-0.5 text-xs font-black bg-[#1E8E3E] text-white px-1.5 py-0.5 rounded">
-                        <span>{product.rating}</span>
-                        <Star className="w-3 h-3 fill-white" />
-                      </div>
-                      <span className="text-xs text-gray-600 font-medium">
-                        ({product.reviewsCount.toLocaleString('en-IN')} verified reviews)
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Price Row */}
-                  <div className="pt-2 border-t border-gray-100">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl sm:text-2xl font-black text-gray-950">
-                        ₹{product.price}
-                      </span>
-                      <span className="text-xs sm:text-sm text-gray-400 line-through">
-                        ₹{product.originalPrice}
-                      </span>
-                      <span className="bg-amber-100 text-amber-800 text-[11px] font-extrabold px-2 py-0.5 rounded">
-                        {product.discountPercent}% OFF
-                      </span>
-                    </div>
-
-                    <p className="text-[11px] font-medium text-emerald-700 mt-1 flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
-                      <span>Free Velvet Gift Box Included • Free Delivery</span>
-                    </p>
-                  </div>
-
-                  {/* Dual Action Buttons */}
-                  <div className="grid grid-cols-2 gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => onSelectProduct(product.id)}
-                      className="w-full inline-flex items-center justify-center gap-1 bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
-                    >
-                      <span>View Details</span>
-                      <ExternalLink className="w-3 h-3 text-gray-500" />
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => onBuyNow(bundle)}
-                      className="w-full inline-flex items-center justify-center gap-1 bg-[#111111] hover:bg-black text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer shadow-2xs"
-                    >
-                      <ShoppingBag className="w-3 h-3" />
-                      <span>Buy Now</span>
-                    </button>
+                {/* Clean Product Info Below Image */}
+                <div className="mt-2 px-1 flex flex-col items-center">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#B3874B] line-clamp-1">
+                    {product.category}
+                  </span>
+                  <h3 className="text-xs sm:text-[13px] font-semibold text-gray-900 group-hover:text-[#B3874B] transition-colors leading-snug line-clamp-1 mt-0.5">
+                    {product.title}
+                  </h3>
+                  <div className="mt-1 flex items-baseline justify-center gap-1.5 flex-wrap">
+                    <span className="text-xs sm:text-sm font-extrabold text-gray-950">
+                      ₹{product.price}
+                    </span>
+                    <span className="text-[10px] sm:text-xs text-gray-400 line-through font-normal">
+                      ₹{product.originalPrice}
+                    </span>
+                    <span className="text-[10px] font-bold text-[#B3874B]">
+                      ({product.discountPercent}% OFF)
+                    </span>
                   </div>
                 </div>
               </div>
@@ -534,15 +508,16 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* =========================================================================
           5. "WHY QAVELLE?" THE ROYAL TRUST PILLARS
-          Mathematical spacing, high typographic contrast
+          - Mobile: Show 2 cards only, other 2 in slider with smooth snap scrolling & dots
+          - Desktop: 4 cards in responsive grid
           ========================================================================= */}
-      <section className="bg-white border-y border-gray-200/80 py-10 sm:py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
+      <section className="bg-white border-y border-gray-200/80 py-8 sm:py-14">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-6 sm:mb-8">
             <span className="text-xs font-extrabold uppercase tracking-widest text-[#B3874B] bg-amber-50 px-3.5 py-1 rounded-full border border-amber-200/60">
               The Royal Standard
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-950 mt-2.5 font-serif">
+            <h2 className="text-xl sm:text-3xl font-black text-gray-950 mt-2 font-serif">
               Why Indian Queens Choose QAVELLE
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto mt-1">
@@ -550,67 +525,130 @@ export const HomePage: React.FC<HomePageProps> = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div className="bg-[#FAF9F5] p-5 rounded-2xl border border-stone-200/80 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-3">
-                <ShieldCheck className="w-5 h-5" />
+          {/* 
+              Mobile Slider (2 cards visible, other 2 in slider) & Desktop Grid 
+          */}
+          <div
+            ref={trustSliderRef}
+            onScroll={handleTrustScroll}
+            className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scroll-smooth no-scrollbar px-0.5 py-1"
+          >
+            <div className="w-[calc(50%-5px)] shrink-0 snap-start sm:w-auto bg-[#FAF9F5] p-3.5 sm:p-5 rounded-2xl border border-stone-200/80 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-2.5 sm:mb-3">
+                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <h3 className="text-xs sm:text-sm font-black text-gray-950 mb-1 leading-snug">
+                  100% Skin Safe
+                </h3>
+                <p className="text-[11px] sm:text-xs text-gray-600 leading-relaxed">
+                  Lead, nickel & cadmium free. High-grade hypoallergenic brass alloy safe for sensitive skin.
+                </p>
               </div>
-              <h3 className="text-sm font-black text-gray-950 mb-1">
-                100% Skin Safe
-              </h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Lead, nickel & cadmium free. High-grade hypoallergenic brass alloy safe for sensitive skin.
-              </p>
             </div>
 
-            <div className="bg-[#FAF9F5] p-5 rounded-2xl border border-stone-200/80 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-amber-50 text-[#B3874B] flex items-center justify-center mb-3">
-                <Award className="w-5 h-5" />
+            <div className="w-[calc(50%-5px)] shrink-0 snap-start sm:w-auto bg-[#FAF9F5] p-3.5 sm:p-5 rounded-2xl border border-stone-200/80 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-50 text-[#B3874B] flex items-center justify-center mb-2.5 sm:mb-3">
+                  <Award className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <h3 className="text-xs sm:text-sm font-black text-gray-950 mb-1 leading-snug">
+                  Anti-Tarnish Hallmark
+                </h3>
+                <p className="text-[11px] sm:text-xs text-gray-600 leading-relaxed">
+                  18K/24K electro-microplating with long-lasting protective seal against oxidation.
+                </p>
               </div>
-              <h3 className="text-sm font-black text-gray-950 mb-1">
-                Anti-Tarnish Hallmark
-              </h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                18K/24K electro-microplating with long-lasting protective seal against oxidation.
-              </p>
             </div>
 
-            <div className="bg-[#FAF9F5] p-5 rounded-2xl border border-stone-200/80 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center mb-3">
-                <Crown className="w-5 h-5" />
+            <div className="w-[calc(50%-5px)] shrink-0 snap-start sm:w-auto bg-[#FAF9F5] p-3.5 sm:p-5 rounded-2xl border border-stone-200/80 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center mb-2.5 sm:mb-3">
+                  <Crown className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <h3 className="text-xs sm:text-sm font-black text-gray-950 mb-1 leading-snug">
+                  Master Craftsmanship
+                </h3>
+                <p className="text-[11px] sm:text-xs text-gray-600 leading-relaxed">
+                  Handcrafted Austrian cut crystals, royal Kundan pearls, and traditional temple motifs.
+                </p>
               </div>
-              <h3 className="text-sm font-black text-gray-950 mb-1">
-                Master Craftsmanship
-              </h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Handcrafted Austrian cut crystals, royal Kundan pearls, and traditional temple motifs.
-              </p>
             </div>
 
-            <div className="bg-[#FAF9F5] p-5 rounded-2xl border border-stone-200/80 shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-3">
-                <Truck className="w-5 h-5" />
+            <div className="w-[calc(50%-5px)] shrink-0 snap-start sm:w-auto bg-[#FAF9F5] p-3.5 sm:p-5 rounded-2xl border border-stone-200/80 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-2.5 sm:mb-3">
+                  <Truck className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <h3 className="text-xs sm:text-sm font-black text-gray-950 mb-1 leading-snug">
+                  Free Express Air & COD
+                </h3>
+                <p className="text-[11px] sm:text-xs text-gray-600 leading-relaxed">
+                  Fast 3–5 business day delivery across 26,000+ pin codes. 100% Cash On Delivery supported.
+                </p>
               </div>
-              <h3 className="text-sm font-black text-gray-950 mb-1">
-                Free Express Air & COD
-              </h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Fast 3–5 business day delivery across 26,000+ pin codes. 100% Cash On Delivery supported.
-              </p>
             </div>
+          </div>
+
+          {/* Mobile Slider Navigation Controls (Slide 1 & Slide 2) */}
+          <div className="flex sm:hidden items-center justify-center gap-3 mt-3.5">
+            <button
+              type="button"
+              onClick={() => scrollTrustToPage(0)}
+              className={`p-1.5 rounded-full border border-stone-300 text-gray-600 ${
+                trustSlidePage === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-amber-50 hover:text-[#B3874B]'
+              }`}
+              aria-label="Previous 2 trust cards"
+              disabled={trustSlidePage === 0}
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+            </button>
+
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => scrollTrustToPage(0)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  trustSlidePage === 0 ? 'w-6 bg-[#B3874B]' : 'w-2 bg-stone-300'
+                }`}
+                aria-label="View first 2 cards"
+              />
+              <button
+                type="button"
+                onClick={() => scrollTrustToPage(1)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  trustSlidePage === 1 ? 'w-6 bg-[#B3874B]' : 'w-2 bg-stone-300'
+                }`}
+                aria-label="View remaining 2 cards"
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollTrustToPage(1)}
+              className={`p-1.5 rounded-full border border-stone-300 text-gray-600 ${
+                trustSlidePage === 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-amber-50 hover:text-[#B3874B]'
+              }`}
+              aria-label="Next 2 trust cards"
+              disabled={trustSlidePage === 1}
+            >
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
           6. REAL VERIFIED CUSTOMER REVIEWS (Social Proof)
+          - Mobile: Show 2 cards only, other 2 in slider with smooth snap scrolling & dots
+          - Desktop: 4 cards in responsive grid
           ========================================================================= */}
-      <section className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
+      <section className="py-8 sm:py-14 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="text-center mb-6 sm:mb-8">
           <span className="text-xs font-bold uppercase tracking-widest text-[#B3874B]">
             Verified Testimonials
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-950 font-serif mt-1">
+          <h2 className="text-xl sm:text-3xl font-black text-gray-950 font-serif mt-1">
             Loved By Women Across India
           </h2>
           <p className="text-xs sm:text-sm text-gray-600 max-w-lg mx-auto mt-1">
@@ -618,82 +656,145 @@ export const HomePage: React.FC<HomePageProps> = ({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-          {HOME_REVIEWS.slice(0, 3).map((review) => (
+        {/* 
+            Mobile Slider (2 review cards visible, other 2 in slider) & Desktop Grid 
+        */}
+        <div
+          ref={reviewSliderRef}
+          onScroll={handleReviewScroll}
+          className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scroll-smooth no-scrollbar px-0.5 py-1"
+        >
+          {HOME_REVIEWS.map((review) => (
             <div
               key={review.id}
-              className="bg-white p-5 rounded-2xl border border-gray-200/90 shadow-2xs flex flex-col justify-between"
+              className="w-[calc(50%-5px)] shrink-0 snap-start sm:w-auto bg-white p-3.5 sm:p-5 rounded-2xl border border-gray-200/90 shadow-2xs flex flex-col justify-between"
             >
               <div>
                 {/* Rating */}
-                <div className="flex items-center gap-1 mb-2.5">
+                <div className="flex items-center gap-1 mb-2">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
 
                 {/* Review Headline */}
-                <h4 className="text-sm font-bold text-gray-900 mb-1.5 leading-snug">
+                <h4 className="text-xs sm:text-sm font-bold text-gray-900 mb-1 leading-snug line-clamp-2">
                   "{review.title}"
                 </h4>
 
                 {/* Review Comment */}
-                <p className="text-xs text-gray-600 leading-relaxed">
+                <p className="text-[10.5px] sm:text-xs text-gray-600 leading-relaxed line-clamp-4">
                   {review.comment}
                 </p>
               </div>
 
               {/* Author Info */}
-              <div className="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
+              <div className="pt-3 mt-3 border-t border-gray-100 flex flex-col min-[420px]:flex-row min-[420px]:items-center justify-between gap-1.5">
                 <div>
-                  <p className="text-xs font-bold text-gray-900">{review.author}</p>
-                  <p className="text-[11px] text-gray-500">
+                  <p className="text-[11px] sm:text-xs font-bold text-gray-900 line-clamp-1">{review.author}</p>
+                  <p className="text-[9.5px] sm:text-[11px] text-gray-500 line-clamp-1">
                     {review.city}, {review.state}
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  <CheckCircle2 className="w-3 h-3" />
+                <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 shrink-0 w-fit">
+                  <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                   Verified Buyer
                 </span>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Mobile Slider Navigation Controls for Reviews (Slide 1 & Slide 2) */}
+        <div className="flex sm:hidden items-center justify-center gap-3 mt-3.5">
+          <button
+            type="button"
+            onClick={() => scrollReviewToPage(0)}
+            className={`p-1.5 rounded-full border border-stone-300 text-gray-600 ${
+              reviewSlidePage === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-amber-50 hover:text-[#B3874B]'
+            }`}
+            aria-label="Previous 2 reviews"
+            disabled={reviewSlidePage === 0}
+          >
+            <ChevronLeft className="w-3.5 h-3.5" />
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => scrollReviewToPage(0)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                reviewSlidePage === 0 ? 'w-6 bg-[#B3874B]' : 'w-2 bg-stone-300'
+              }`}
+              aria-label="View first 2 reviews"
+            />
+            <button
+              type="button"
+              onClick={() => scrollReviewToPage(1)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                reviewSlidePage === 1 ? 'w-6 bg-[#B3874B]' : 'w-2 bg-stone-300'
+              }`}
+              aria-label="View remaining 2 reviews"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollReviewToPage(1)}
+            className={`p-1.5 rounded-full border border-stone-300 text-gray-600 ${
+              reviewSlidePage === 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-amber-50 hover:text-[#B3874B]'
+            }`}
+            aria-label="Next 2 reviews"
+            disabled={reviewSlidePage === 1}
+          >
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </section>
 
       {/* =========================================================================
           7. PRECISE FAQ ACCORDION
+          - Desktop view: 2 columns (md:grid-cols-2)
+          - Mobile view: 1 column
           ========================================================================= */}
-      <section className="bg-white border-t border-gray-200/80 py-10 sm:py-14">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
+      <section className="bg-white border-t border-gray-200/80 pt-7 pb-6 sm:pt-10 sm:pb-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6 sm:mb-8">
             <span className="text-xs font-bold uppercase tracking-widest text-[#B3874B]">
               Frequently Asked Questions
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-gray-950 font-serif mt-1">
               Everything You Need to Know
             </h2>
+            <p className="text-xs sm:text-sm text-gray-600 max-w-lg mx-auto mt-1.5">
+              Got questions? We have answers. Feel free to contact our WhatsApp support team anytime.
+            </p>
           </div>
 
-          <div className="space-y-3">
-            {HOME_FAQS.slice(0, 5).map((faq, idx) => {
-              const isOpen = openFaqIndex === idx;
+          {/* 2 Columns in Desktop View, 1 Column in Mobile View */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4.5 items-start">
+            {HOME_FAQS.map((faq, idx) => {
+              const isOpen = openFaqIndices.includes(idx);
               return (
                 <div
                   key={idx}
-                  className="rounded-xl border border-gray-200 overflow-hidden transition-all bg-[#FAF9F5]"
+                  className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                    isOpen
+                      ? 'border-amber-200/90 bg-white shadow-2xs'
+                      : 'border-gray-200/80 bg-[#FAF9F5] hover:border-amber-200'
+                  }`}
                 >
                   <button
                     type="button"
-                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full px-4 py-3.5 sm:px-5 sm:py-4 text-left flex items-center justify-between gap-3 cursor-pointer hover:bg-amber-50/50 transition-colors"
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full px-4 py-3.5 sm:px-5 sm:py-4 text-left flex items-center justify-between gap-3 cursor-pointer hover:bg-amber-50/40 transition-colors"
                   >
-                    <span className="text-xs sm:text-sm font-bold text-gray-900">
+                    <span className="text-xs sm:text-sm font-bold text-gray-900 leading-snug">
                       {faq.question}
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 text-gray-500 transition-transform duration-200 shrink-0 ${
-                        isOpen ? 'rotate-180' : ''
+                        isOpen ? 'rotate-180 text-[#B3874B]' : ''
                       }`}
                     />
                   </button>
@@ -712,7 +813,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* =========================================================================
           8. CONFIDENCE REASSURANCE BANNER
           ========================================================================= */}
-      <section className="bg-[#111111] text-white py-8 sm:py-10 border-t border-amber-900/30">
+      <section className="bg-[#111111] text-white py-5 sm:py-7 border-t border-amber-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/10 text-[#B3874B] mb-3">
             <Crown className="w-6 h-6" />

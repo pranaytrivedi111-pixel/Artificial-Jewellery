@@ -149,12 +149,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         <img
                           src={
                             item.bundle.id.includes('choker') || item.bundle.title.toLowerCase().includes('choker')
-                              ? '/White_Diamond_Kundan_Choker_Set_1.png'
+                              ? '/Hero_website_neklace.webp'
                               : ASSET_IMAGES.hero
                           }
                           alt={item.bundle.title}
+                          loading="lazy"
+                          decoding="async"
                           referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover rounded-lg"
                         />
                       </div>
 

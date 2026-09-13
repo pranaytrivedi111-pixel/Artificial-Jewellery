@@ -1,6 +1,7 @@
 import React from 'react';
 import { Star, Plus, CheckCircle2 } from 'lucide-react';
 import { RELATED_PRODUCTS } from '../data/productData';
+import { ReadMoreText } from './ReadMoreText';
 
 interface RelatedProductsProps {
   onAddToCartItem: (item: { title: string; price: number }) => void;
@@ -35,7 +36,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ onAddToCartIte
                   src={prod.image}
                   alt={prod.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-t-2xl sm:rounded-t-3xl"
                 />
               </div>
 
@@ -46,9 +47,14 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ onAddToCartIte
                     <span className="font-bold text-gray-900">{prod.rating}</span>
                     <span>({prod.reviews})</span>
                   </div>
-                  <h4 className="font-bold text-xs sm:text-sm text-gray-900 line-clamp-2 leading-snug break-words">
+                  <ReadMoreText
+                    as="h4"
+                    maxLines={2}
+                    className="font-bold text-xs sm:text-sm text-gray-900 leading-snug break-words"
+                    buttonClassName="text-[#B3874B] hover:text-amber-800 font-semibold text-[11px]"
+                  >
                     {prod.title}
-                  </h4>
+                  </ReadMoreText>
                 </div>
 
                 <div className="mt-3 pt-2 border-t border-gray-100 flex items-center justify-between gap-1 flex-wrap">

@@ -14,6 +14,14 @@ import {
   ELEGANT_EVERYDAY_BUNDLE_OPTIONS,
   RADHIKA_GREEN_AD_BUNDLE_OPTIONS,
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_PRODUCT_DETAILS,
+  TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS,
+  AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
+  EMERALD_SNAKE_PRODUCT_DETAILS,
+  EMERALD_SNAKE_BUNDLE_OPTIONS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS,
 } from '../data/productData';
 import { ShieldCheck, Star } from 'lucide-react';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -26,6 +34,10 @@ interface StickyBottomBarProps {
 }
 
 const getFallbackBundle = (productId: ProductId | string = 'jhumka'): BundleOption => {
+  if (productId === 'white-enamel-handbag-earrings') return WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS[0];
+  if (productId === 'emerald-snake-pendant') return EMERALD_SNAKE_BUNDLE_OPTIONS[0];
+  if (productId === 'combo-2-pendants') return AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS[0];
+  if (productId === 'trendy-alloy-set') return TRENDY_ALLOY_SET_BUNDLE_OPTIONS[0];
   if (productId === 'allure-gold-set') return ALLURE_GOLD_SET_BUNDLE_OPTIONS[0];
   if (productId === 'radhika-green-ad') return RADHIKA_GREEN_AD_BUNDLE_OPTIONS[0];
   if (productId === 'elegant-everyday-5') return ELEGANT_EVERYDAY_BUNDLE_OPTIONS[0];
@@ -40,6 +52,10 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   onAddToCart,
   activeProductId = 'jhumka',
 }) => {
+  const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
+  const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
+  const isAestheticCombo = activeProductId === 'combo-2-pendants';
+  const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
   const isChoker = activeProductId === 'choker';
   const isCombo5 = activeProductId === 'necklace-combo-5';
   const isElegantEveryday = activeProductId === 'elegant-everyday-5';
@@ -49,7 +65,15 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   // Guaranteed safe fallback bundle to eliminate any undefined access
   const safeBundle = bundle && bundle.price ? bundle : getFallbackBundle(activeProductId);
 
-  const currentProduct = isAllureGold
+  const currentProduct = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_DETAILS
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_DETAILS
@@ -61,7 +85,13 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentImage = isAllureGold
+  const currentImage = isEmeraldSnake
+    ? '/d1.webp'
+    : isAestheticCombo
+    ? '/c1.webp'
+    : isTrendyAlloy
+    ? '/b1.webp'
+    : isAllureGold
     ? '/aa1.webp'
     : isRadhikaGreen
     ? '/radhika_ambani_1.webp'
@@ -95,8 +125,8 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
       }}
     >
       {/* Green Promotional Announcement Ribbon - Mobile & Desktop */}
-      <div className="bg-[#1E8E3E] text-white text-[10.5px] sm:text-xs font-bold py-1 px-2.5 sm:px-3 text-center tracking-wide">
-        ₹500 Cashback on all prepaid orders
+      <div className="bg-[#1E8E3E] text-white text-[10.5px] sm:text-xs font-bold py-1 px-2.5 sm:px-3 text-center tracking-wide flex items-center justify-center">
+        <span>₹500 Cashback on prepaid orders</span>
       </div>
 
       {/* Main Bottom Checkout Action Bar */}
@@ -113,7 +143,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
                 referrerPolicy="no-referrer"
                 loading="eager"
                 decoding="async"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain rounded-xl"
               />
             </div>
 

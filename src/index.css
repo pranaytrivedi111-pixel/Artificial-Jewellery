@@ -9,6 +9,17 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+
+  /* Universal Rule: Ensure curved edges on all images throughout the website */
+  img {
+    border-radius: 0.75rem; /* 12px smooth curve */
+  }
+
+  /* Maintain circular geometry for avatar and pill image elements */
+  img.rounded-full,
+  .rounded-full img {
+    border-radius: 9999px;
+  }
 }
 
 /* Custom scrollbar */

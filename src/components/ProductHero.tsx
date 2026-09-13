@@ -22,7 +22,6 @@ import {
   BUNDLE_OPTIONS,
   AVAILABLE_COUPONS,
   REVIEWS_LIST,
-  ASSET_IMAGES,
   PRODUCT_DETAILS,
   PRODUCT_HIGHLIGHTS,
   ADDITIONAL_DETAILS,
@@ -62,12 +61,37 @@ import {
   ALLURE_GOLD_SET_ADDITIONAL_DETAILS,
   ALLURE_GOLD_SET_BUNDLE_OPTIONS,
   ALLURE_GOLD_SET_REVIEWS_LIST,
+  TRENDY_ALLOY_SET_PRODUCT_DETAILS,
+  TRENDY_ALLOY_SET_PRODUCT_GALLERY,
+  TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS,
+  TRENDY_ALLOY_SET_ADDITIONAL_DETAILS,
+  TRENDY_ALLOY_SET_BUNDLE_OPTIONS,
+  TRENDY_ALLOY_SET_REVIEWS_LIST,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_GALLERY,
+  AESTHETIC_PENDANT_COMBO_PRODUCT_HIGHLIGHTS,
+  AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS,
+  AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS,
+  AESTHETIC_PENDANT_COMBO_REVIEWS_LIST,
+  EMERALD_SNAKE_PRODUCT_DETAILS,
+  EMERALD_SNAKE_PRODUCT_GALLERY,
+  EMERALD_SNAKE_PRODUCT_HIGHLIGHTS,
+  EMERALD_SNAKE_ADDITIONAL_DETAILS,
+  EMERALD_SNAKE_BUNDLE_OPTIONS,
+  EMERALD_SNAKE_REVIEWS_LIST,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_GALLERY,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_HIGHLIGHTS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_ADDITIONAL_DETAILS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS,
+  WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST,
 } from '../data/productData';
 import {
   GPayLogo,
   PhonePeLogo,
   PaytmLogo,
 } from './PaymentLogos';
+import { ReadMoreText } from './ReadMoreText';
 
 interface ProductHeroProps {
   selectedBundle: BundleOption;
@@ -96,8 +120,20 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isCombo5 = isShimmering || isElegantEveryday;
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
+  const isTrendyAlloy = activeProductId === 'trendy-alloy-set';
+  const isAestheticCombo = activeProductId === 'combo-2-pendants';
+  const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
+  const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
 
-  const currentProduct: ProductDetails = isAllureGold
+  const currentProduct: ProductDetails = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_DETAILS
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_DETAILS
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_DETAILS
@@ -109,7 +145,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isAllureGold
+  const currentGallery = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_GALLERY
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_GALLERY
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_GALLERY
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_GALLERY
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_GALLERY
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_GALLERY
@@ -121,7 +165,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isAllureGold
+  const currentHighlights = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_HIGHLIGHTS
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_PRODUCT_HIGHLIGHTS
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_PRODUCT_HIGHLIGHTS
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_PRODUCT_HIGHLIGHTS
+    : isAllureGold
     ? ALLURE_GOLD_SET_PRODUCT_HIGHLIGHTS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_PRODUCT_HIGHLIGHTS
@@ -133,7 +185,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isAllureGold
+  const currentAdditionalDetails = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_ADDITIONAL_DETAILS
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_ADDITIONAL_DETAILS
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_ADDITIONAL_DETAILS
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_ADDITIONAL_DETAILS
+    : isAllureGold
     ? ALLURE_GOLD_SET_ADDITIONAL_DETAILS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_ADDITIONAL_DETAILS
@@ -145,7 +205,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isAllureGold
+  const currentBundleOptions = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_BUNDLE_OPTIONS
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_BUNDLE_OPTIONS
+    : isAllureGold
     ? ALLURE_GOLD_SET_BUNDLE_OPTIONS
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_BUNDLE_OPTIONS
@@ -157,7 +225,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isAllureGold
+  const currentReviewsList = isHandbagEarrings
+    ? WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST
+    : isEmeraldSnake
+    ? EMERALD_SNAKE_REVIEWS_LIST
+    : isAestheticCombo
+    ? AESTHETIC_PENDANT_COMBO_REVIEWS_LIST
+    : isTrendyAlloy
+    ? TRENDY_ALLOY_SET_REVIEWS_LIST
+    : isAllureGold
     ? ALLURE_GOLD_SET_REVIEWS_LIST
     : isRadhikaGreen
     ? RADHIKA_GREEN_AD_REVIEWS_LIST
@@ -174,7 +250,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   // Reset active image when product switches
   useEffect(() => {
     setActiveImageIndex(0);
-  }, [activeProductId, isChoker, isCombo5, isRadhikaGreen, isAllureGold]);
+  }, [activeProductId, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy, isAestheticCombo, isEmeraldSnake, isHandbagEarrings]);
   const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
   const [isOfferExpanded, setIsOfferExpanded] = useState(true);
   const [activeReviewIdx, setActiveReviewIdx] = useState(0);
@@ -309,11 +385,11 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
         <div className="lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-10 lg:items-start">
           {/* LEFT COLUMN: Gallery with Hero Image on Top and Collection Grid Below (Fixed/Sticky on Desktop) */}
           <div className="lg:col-span-6 xl:col-span-6 lg:sticky lg:top-20 self-start w-full mx-auto lg:mx-0">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5 sm:gap-3">
               {/* Main Hero Media Frame - 100% Raw, No Borders, Curvy Rounded Edges */}
               <div className="w-full relative flex justify-center">
                 <div
-                  className="relative aspect-square w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[480px] xl:max-w-[500px] rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center select-none mx-auto"
+                  className="relative aspect-square w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[380px] xl:max-w-[420px] rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center select-none mx-auto"
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
@@ -334,15 +410,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
               </div>
 
               {/* Image Collection Thumbnails - Same Corner Curvy Design (rounded-2xl sm:rounded-3xl) */}
-              <div className="w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[480px] xl:max-w-[500px] mx-auto">
-                <div className="flex items-center justify-center gap-2.5 sm:gap-3 px-0.5 py-1 w-full overflow-x-auto no-scrollbar">
+              <div className="w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[380px] xl:max-w-[420px] mx-auto">
+                <div className="flex items-center justify-center gap-2 sm:gap-2.5 px-0.5 py-1 w-full overflow-x-auto no-scrollbar">
                   {currentGallery.map((item, idx) => (
                     <button
                       key={item.id}
                       type="button"
                       onClick={() => setActiveImageIndex(idx)}
                       onMouseEnter={() => setActiveImageIndex(idx)}
-                      className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-[72px] lg:h-[72px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shrink-0 flex items-center justify-center p-0.5 transition-all duration-200 ${
+                      className={`relative w-13 h-13 min-[375px]:w-14 min-[375px]:h-14 sm:w-16 sm:h-16 lg:w-14 lg:h-14 xl:w-16 xl:h-16 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer shrink-0 flex items-center justify-center p-0.5 transition-all duration-200 ${
                         activeImageIndex === idx
                           ? 'ring-2 ring-[#b3874b] shadow-xs'
                           : 'opacity-85 hover:opacity-100 hover:ring-1 hover:ring-gray-300'
@@ -356,10 +432,10 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                         referrerPolicy="no-referrer"
                         loading="eager"
                         decoding="async"
-                        className="w-full h-full object-contain rounded-2xl sm:rounded-3xl"
+                        className="w-full h-full object-contain rounded-xl sm:rounded-2xl"
                       />
                       {activeImageIndex === idx && (
-                        <span className="absolute bottom-1 inset-x-3 h-0.5 bg-[#b3874b] rounded-full" />
+                        <span className="absolute bottom-1 inset-x-2.5 sm:inset-x-3 h-0.5 bg-[#b3874b] rounded-full" />
                       )}
                     </button>
                   ))}
@@ -372,13 +448,28 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
           <div className="lg:col-span-6 xl:col-span-6 mt-4 lg:mt-0 space-y-3 sm:space-y-3.5">
             {/* Product Title, Rating */}
             <div>
-              <h1 className="text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-black text-black tracking-tight leading-tight">
+              <ReadMoreText
+                as="h1"
+                maxLines={2}
+                className="text-xl sm:text-2xl lg:text-[26px] xl:text-[28px] font-black text-black tracking-tight leading-tight"
+                expandLabel="Read more"
+                collapseLabel="Read less"
+                buttonClassName="text-[#B3874B] hover:text-amber-900 font-bold text-sm sm:text-base hover:underline"
+              >
                 {currentProduct.title}
-              </h1>
+              </ReadMoreText>
               
-              <p className="text-xs sm:text-sm text-gray-600 font-medium mt-1 leading-relaxed">
+              <ReadMoreText
+                as="p"
+                maxLines={2}
+                className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed"
+                containerClassName="mt-1"
+                expandLabel="Read more"
+                collapseLabel="Read less"
+                buttonClassName="text-[#B3874B] hover:text-amber-900 font-semibold text-xs"
+              >
                 {currentProduct.fullDescription}
-              </p>
+              </ReadMoreText>
 
               {/* Rating Row */}
               <div className="flex items-center gap-2 mt-2 flex-wrap">
@@ -412,8 +503,8 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                 </span>
               </div>
 
-              <div className="text-xs text-gray-500 mt-1">
-                (Inclusive of all taxes)
+              <div className="flex items-center justify-between gap-2 flex-wrap text-xs text-gray-500 mt-1">
+                <span>(Inclusive of all taxes)</span>
               </div>
 
               {/* Green Offer Countdown Alert Bar */}
@@ -529,20 +620,14 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
             <div className="mt-4 pt-4 sm:mt-5 sm:pt-5 border-t border-gray-200/80 w-full space-y-3.5 sm:space-y-4">
           {/* Customer Review Carousel Card */}
           <div className="relative rounded-2xl border border-[#CFEAD5] bg-[#F1F9F3] p-3.5 sm:p-4 shadow-2xs">
-              {/* User Profile Row */}
-              <div className="flex items-center gap-3">
-                <img
-                  src={currentReviewsList[activeReviewIdx]?.userImage || ASSET_IMAGES.ankit}
-                  alt={currentReviewsList[activeReviewIdx]?.author || 'Customer'}
-                  referrerPolicy="no-referrer"
-                  className="w-12 h-12 rounded-full object-cover border border-white shadow-2xs"
-                />
+              {/* User Profile Row without DP photo */}
+              <div className="flex items-center justify-between gap-2">
                 <div>
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <span className="font-bold text-black text-sm sm:text-base">
                       {currentReviewsList[activeReviewIdx]?.author || 'Kavya Singhania'}
                     </span>
-                    <span className="bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="bg-[#1E8E3E] text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
                       <CheckCircle2 className="w-2.5 h-2.5 text-white" />
                       Verified
                     </span>
@@ -567,14 +652,23 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                   <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
                 </button>
 
-                <p className="text-xs sm:text-sm text-gray-800 leading-relaxed font-normal flex-1 px-1">
-                  "{currentReviewsList[activeReviewIdx]?.comment ||
+                <ReadMoreText
+                  as="p"
+                  maxLines={2}
+                  quoteMarks={true}
+                  className="text-xs sm:text-sm text-gray-800 leading-relaxed font-normal"
+                  containerClassName="flex-1 px-1 min-w-0"
+                  expandLabel="Read more"
+                  collapseLabel="Read less"
+                  buttonClassName="text-emerald-800 hover:text-emerald-950 font-semibold text-[11px] sm:text-xs"
+                >
+                  {currentReviewsList[activeReviewIdx]?.comment ||
                     (isCombo5
                       ? 'All 5 necklaces are sleek & subtle! Incredible value for ₹349. Beautiful design and doesn’t tarnish.'
                       : isChoker
                       ? 'Wore this set for my sister wedding reception. Everyone thought it was real polki diamond jewelry! Heavy royal look without hurting neckline.'
-                      : 'Meri wife ke liye gift liya tha, pack of 6 combo is fantastic value. Har ek jhumka ka finish aur design royal lagta hai. Light weight hone ki wajah se all-day function me pehenne me comfortable hai.')}"
-                </p>
+                      : 'Meri wife ke liye gift liya tha, pack of 6 combo is fantastic value. Har ek jhumka ka finish aur design royal lagta hai. Light weight hone ki wajah se all-day function me pehenne me comfortable hai.')}
+                </ReadMoreText>
 
                 <button
                   onClick={() =>
@@ -765,12 +859,25 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                       <span className="text-amber-600 font-bold">&bull;</span>
                       <span><strong className="font-bold text-black">6 Distinct Handcrafted Designs</strong> - Mayur Peacock, Lakshmi Devi, and Traditional Bell Jhumkas</span>
                     </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-amber-600 font-bold">&bull;</span>
+                      <span><strong className="font-bold text-black">Skin-Safe & Hypoallergenic</strong> - Lead and nickel-free brass alloy base with smooth push back closure</span>
+                    </li>
                   </ul>
                 )}
 
-                <p className="text-[12.5px] sm:text-[13.5px] text-gray-700 leading-normal pt-2.5 border-t border-amber-100/60 mt-2.5">
-                  <strong className="font-bold text-black">Care Note:</strong> {isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
-                </p>
+                <ReadMoreText
+                  as="p"
+                  maxLines={2}
+                  prefix={<strong className="font-bold text-black mr-1">Care Note:</strong>}
+                  className="text-[12.5px] sm:text-[13.5px] text-gray-700 leading-normal"
+                  containerClassName="pt-2.5 border-t border-amber-100/60 mt-2.5"
+                  expandLabel="Read more"
+                  collapseLabel="Read less"
+                  buttonClassName="text-amber-800 hover:text-amber-950 font-semibold text-xs"
+                >
+                  {isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
+                </ReadMoreText>
               </div>
             </div>
           </div>

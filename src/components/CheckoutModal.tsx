@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   X,
-  CheckCircle2,
   ShieldCheck,
   Truck,
   ArrowRight,
   ArrowLeft,
-  Copy,
   User,
   Phone,
   Mail,
@@ -15,7 +13,6 @@ import {
   Home,
   Check,
   AlertCircle,
-  Sparkles,
   ShoppingBag,
   ChevronDown,
   ChevronUp,
@@ -24,14 +21,11 @@ import {
   RotateCcw,
   Clock,
   Tag,
-  Package,
-  ExternalLink,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CartItem, CouponCode } from '../types';
 import { ASSET_IMAGES } from '../data/productData';
 import { ModernPaymentSection } from './ModernPaymentSection';
-import { WhatsAppIcon } from './PaymentLogos';
 import { recordLead } from '../services/leadService';
 
 interface CheckoutModalProps {
@@ -40,6 +34,7 @@ interface CheckoutModalProps {
   cartItems: CartItem[];
   appliedCoupon: CouponCode | null;
   onClearCart: () => void;
+  onOrderPlaced?: (orderId: string, method: 'upi' | 'cod') => void;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
@@ -48,8 +43,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   cartItems,
   appliedCoupon,
   onClearCart,
+  onOrderPlaced,
 }) => {
-  const [step, setStep] = useState<'address' | 'payment' | 'success'>('address');
+  const [step, setStep] = useState<'address' | 'payment'>('address');
 
   // Address form states
   const [name, setName] = useState('');
@@ -70,24 +66,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [paymentMethod, setPaymentMethod] = useState<'cod' | 'upi'>('upi');
   const [utrNumber, setUtrNumber] = useState('');
 
-  // Success state details - generated upfront for dynamic UPI barcode tracking
+  // Order identifier generated upfront for dynamic UPI barcode tracking
   const [orderId, setOrderId] = useState(() => `QVL-${Math.floor(100000 + Math.random() * 900000)}`);
   const [deliveryDate, setDeliveryDate] = useState('');
-  const [confirmedOrder, setConfirmedOrder] = useState<{
-    orderId: string;
-    totalAmount: number;
-    paymentMethod: 'cod' | 'upi';
-    utrNumber?: string;
-    discountAmount: number;
-    deliveryDate: string;
-    itemsSummary: string;
-    customerName: string;
-    address: string;
-    city: string;
-    pincode: string;
-  } | null>(null);
-
-  const [copiedOrderId, setCopiedOrderId] = useState(false);
   const [showEmailField, setShowEmailField] = useState(false);
 
   // Dedicated scroll container reference to guarantee top view on all screen transitions
@@ -125,9 +106,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   // When modal is reopened fresh, reset to address step
   useEffect(() => {
-    if (isOpen && step === 'success') {
+    if (isOpen) {
       setStep('address');
-      setConfirmedOrder(null);
       setOrderId(`QVL-${Math.floor(100000 + Math.random() * 900000)}`);
     }
   }, [isOpen]);
@@ -348,21 +328,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       finalPaymentMethod === 'cod' ? subtotal : finalTotal
     );
 
-    // Save snapshot of order before cart is cleared
-    setConfirmedOrder({
-      orderId: finalId,
-      totalAmount: payableAmount,
-      paymentMethod: finalPaymentMethod,
-      utrNumber: submittedUtr || utrNumber || '',
-      discountAmount: finalPaymentMethod === 'cod' ? 0 : discountAmount,
-      deliveryDate: calculatedDeliveryDate,
-      itemsSummary: itemsSummary || 'Jewelry Item',
-      customerName: name || 'Customer',
-      address: fullAddress,
-      city,
-      pincode,
-    });
-
     try {
       recordLead({
         orderId: finalId,
@@ -390,10 +355,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       console.error('Error invoking recordLead:', e);
     }
 
-    // Immediately advance to success view
-    setStep('success');
-    scrollToTop();
-
     // Confetti celebration
     try {
       confetti({
@@ -407,48 +368,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }
 
     onClearCart();
-  };
-
-  const handleCopyOrderId = () => {
-    const idToCopy = confirmedOrder?.orderId || orderId;
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(idToCopy).then(() => {
-        setCopiedOrderId(true);
-        setTimeout(() => setCopiedOrderId(false), 2000);
-      }).catch(() => {});
+    if (onOrderPlaced) {
+      onOrderPlaced(finalId, finalPaymentMethod);
     }
+    onClose();
   };
-
-  const isPrepaidOrder = (confirmedOrder?.paymentMethod || paymentMethod) === 'upi';
-
-  const whatsappShareUrl = (() => {
-    const currentOrderId = confirmedOrder?.orderId || orderId;
-    const currentAmount = confirmedOrder?.totalAmount ?? Math.round(finalTotal);
-    const currentName = confirmedOrder?.customerName || name || 'Valued Customer';
-    const currentPhone = phone ? `+91 ${phone}` : '';
-    const currentUtr = confirmedOrder?.utrNumber || utrNumber;
-    const currentAddress = confirmedOrder?.address || fullAddress;
-    const currentCity = confirmedOrder?.city || city;
-    const currentPincode = confirmedOrder?.pincode || pincode;
-
-    const lines = [
-      `👑 *QAVELLE – PREPAID ORDER PAYMENT CONFIRMATION*`,
-      ``,
-      `Hello Qavelle Team, I have successfully placed and paid my prepaid order on qavelle.store!`,
-      ``,
-      `📦 *Order ID:* ${currentOrderId}`,
-      `👤 *Customer Name:* ${currentName}`,
-      currentPhone ? `📞 *Phone:* ${currentPhone}` : null,
-      `💰 *Amount Paid:* ₹${currentAmount}`,
-      `💳 *Payment Method:* Prepaid UPI (Verified)`,
-      currentUtr ? `🔖 *UTR / Ref No:* ${currentUtr}` : null,
-      currentAddress ? `📍 *Delivery Address:* ${currentAddress}${currentCity ? `, ${currentCity}` : ''}${currentPincode ? ` - ${currentPincode}` : ''}` : null,
-      ``,
-      `📸 *Sharing my payment screenshot / receipt below for priority dispatch:*`
-    ].filter(Boolean) as string[];
-
-    return `https://wa.me/917982438137?text=${encodeURIComponent(lines.join('\n'))}`;
-  })();
 
   return (
     <div className="fixed inset-0 z-[80] bg-black/80 backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 md:p-6 animate-fadeIn overflow-hidden">
@@ -495,9 +419,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         </div>
 
         {/* Interactive Multi-Step Stepper Bar (Shopify / D2C Luxury Standard) */}
-        {step !== 'success' && (
-          <div className="bg-gray-50 border-b border-gray-200 px-4 py-2 sm:px-6 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2 sm:gap-3 w-full">
+        <div className="bg-gray-50 border-b border-gray-200 px-4 py-2 sm:px-6 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2 sm:gap-3 w-full">
               {/* Step 1 Pill */}
               <button
                 type="button"
@@ -554,11 +477,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <span>7-Day Replacement</span>
             </div>
           </div>
-        )}
 
         {/* Collapsible Order Summary Drawer (Lets shopper review their jewelry items at all times) */}
-        {step !== 'success' && (
-          <div className="border-b border-gray-200/90 bg-white">
+        <div className="border-b border-gray-200/90 bg-white">
             <button
               type="button"
               id="toggle-checkout-order-summary"
@@ -655,7 +576,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
             )}
           </div>
-        )}
 
         {/* Modal Body */}
         <div
@@ -1059,245 +979,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 handlePlaceOrder(txnDetails?.utr, finalMethod);
               }}
             />
-          )}
-
-          {/* STEP 3: SUCCESS CONFIRMATION */}
-          {step === 'success' && (
-            <div className="text-center flex flex-col items-center gap-3.5 py-2 animate-fadeIn text-xs">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 border-2 border-emerald-500 text-emerald-700 flex items-center justify-center shadow-lg animate-bounce">
-                <CheckCircle2 className="w-9 h-9" />
-              </div>
-
-              <div>
-                <img
-                  src={ASSET_IMAGES.brandLogo}
-                  alt="QAVELLE – Crafted For The Queen In You"
-                  className="h-9 sm:h-11 mx-auto object-contain mb-2"
-                  referrerPolicy="no-referrer"
-                />
-                <span className="inline-block px-3 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold text-[11px] uppercase tracking-wider mb-1">
-                  Handcrafted Order Confirmed
-                </span>
-                <h3 className="text-xl sm:text-2xl font-black text-gray-950">
-                  Thank You, {confirmedOrder?.customerName || name || 'Customer'}!
-                </h3>
-                <p className="text-xs text-gray-600 mt-1 max-w-md mx-auto">
-                  Your QAVELLE handcrafted jewelry is being carefully prepared for express dispatch.
-                </p>
-              </div>
-
-              {/* Order Visual Tracking Milestone Tracker */}
-              <div className="w-full p-3.5 rounded-2xl bg-white border border-gray-200 shadow-2xs text-left">
-                <span className="text-[11px] font-bold text-gray-700 block mb-2.5">
-                  Order Dispatch Roadmap
-                </span>
-                <div className="grid grid-cols-4 gap-1 text-center relative">
-                  {/* Step 1 */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold mb-1">
-                      <Check className="w-3.5 h-3.5" />
-                    </div>
-                    <span className="text-[10px] font-bold text-gray-900 leading-tight">Confirmed</span>
-                    <span className="text-[9px] text-emerald-700 font-medium">Today</span>
-                  </div>
-
-                  {/* Step 2 */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold mb-1">
-                      <Sparkles className="w-3.5 h-3.5" />
-                    </div>
-                    <span className="text-[10px] font-bold text-gray-900 leading-tight">Sanctifying</span>
-                    <span className="text-[9px] text-gray-500 font-medium">In Progress</span>
-                  </div>
-
-                  {/* Step 3 */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-6 h-6 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-[10px] font-bold mb-1">
-                      <Truck className="w-3.5 h-3.5" />
-                    </div>
-                    <span className="text-[10px] font-bold text-gray-700 leading-tight">Express Air</span>
-                    <span className="text-[9px] text-gray-500 font-medium">Tomorrow</span>
-                  </div>
-
-                  {/* Step 4 */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-6 h-6 rounded-full bg-amber-400 text-black flex items-center justify-center text-[10px] font-bold mb-1">
-                      <Package className="w-3.5 h-3.5" />
-                    </div>
-                    <span className="text-[10px] font-bold text-gray-900 leading-tight">Delivery</span>
-                    <span className="text-[9px] text-amber-800 font-bold">{confirmedOrder?.deliveryDate || deliveryDate}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Order Details Card */}
-              <div className="w-full p-4 rounded-2xl bg-gray-50 border border-gray-200 text-left flex flex-col gap-2.5">
-                <div className="flex items-center justify-between pb-2 border-b border-gray-200">
-                  <div>
-                    <span className="text-gray-500 block text-[10px]">Order Tracking ID:</span>
-                    <div className="flex items-center gap-2 mt-0.5">
-                      <strong className="text-sm sm:text-base text-gray-950 font-mono font-bold tracking-wide">
-                        {confirmedOrder?.orderId || orderId}
-                      </strong>
-                      <button
-                        type="button"
-                        onClick={handleCopyOrderId}
-                        className="inline-flex items-center gap-1 text-[10.5px] font-bold text-gray-700 hover:text-black bg-white hover:bg-gray-100 border border-gray-300 px-2 py-0.5 rounded-lg cursor-pointer transition-colors shadow-2xs"
-                        title="Copy Order ID"
-                      >
-                        {copiedOrderId ? (
-                          <>
-                            <Check className="w-3 h-3 text-emerald-600" />
-                            <span className="text-emerald-700">Copied!</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3 h-3 text-gray-500" />
-                            <span>Copy</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[11px] border border-emerald-200">
-                    {(confirmedOrder?.paymentMethod || paymentMethod) === 'cod' ? 'COD Confirmed' : 'Paid via UPI (Prepaid)'}
-                  </span>
-                </div>
-
-                {(confirmedOrder?.paymentMethod || paymentMethod) === 'upi' ? (
-                  <div className="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200 flex flex-col gap-1.5 text-[11.5px]">
-                    <div className="flex items-center justify-between">
-                      <span className="text-emerald-900 font-semibold">Payment Mode:</span>
-                      <strong className="text-emerald-950 font-bold">UPI Instant Payment (Prepaid)</strong>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-emerald-900 font-semibold">Prepaid Savings:</span>
-                      <span className="font-bold font-mono text-emerald-800">✓ ₹{totalPrepaidSavings} Saved</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-emerald-900 font-semibold">Payment Status:</span>
-                      <span className="font-bold text-emerald-700">Payment Verified &amp; Confirmed</span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="p-3 rounded-xl bg-amber-50/90 border border-amber-200 flex flex-col gap-1.5 text-[11.5px]">
-                    <div className="flex items-center justify-between">
-                      <span className="text-amber-900 font-semibold">Payment Mode:</span>
-                      <strong className="text-amber-950 font-bold">Cash on Delivery (Pay at Doorstep)</strong>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-amber-900 font-semibold">Cash to Pay:</span>
-                      <strong className="text-amber-950 font-bold font-mono">₹{confirmedOrder?.totalAmount ?? finalTotal}</strong>
-                    </div>
-                    <p className="text-[10px] text-amber-800 mt-0.5">
-                      Please keep exact cash ready upon delivery.
-                    </p>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                  <div>
-                    <span className="text-gray-500 block text-[10px]">Estimated Delivery:</span>
-                    <strong className="text-xs text-gray-900 flex items-center gap-1 mt-0.5">
-                      <Truck className="w-3.5 h-3.5 text-amber-700" />
-                      {confirmedOrder?.deliveryDate || deliveryDate}
-                    </strong>
-                  </div>
-                  <div>
-                    <span className="text-gray-500 block text-[10px]">Delivering To:</span>
-                    <p className="text-gray-900 font-medium truncate mt-0.5">
-                      {confirmedOrder?.address || fullAddress}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-2.5 border-t border-gray-200 flex items-center justify-between text-gray-800">
-                  <span className="font-semibold">Total Amount:</span>
-                  <span className="text-base font-black text-black font-mono">₹{confirmedOrder?.totalAmount ?? finalTotal}</span>
-                </div>
-              </div>
-
-              {/* WhatsApp Notification Card */}
-              <div className="w-full p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-left flex items-start gap-2.5 text-xs text-emerald-950">
-                <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold">
-                  ✓
-                </div>
-                <div>
-                  <strong className="block text-emerald-950 text-xs font-bold">Order Confirmation Dispatched</strong>
-                  <p className="text-[11px] text-emerald-800 mt-0.5">
-                    Delivery updates &amp; live courier tracking will be sent to your WhatsApp: <strong>+91 {phone || 'registered number'}</strong>.
-                  </p>
-                </div>
-              </div>
-
-              {/* For Prepaid Orders: Prominent "Share payment Screenshot via whatsapp" CTA Card & Button */}
-              {isPrepaidOrder && (
-                <div className="w-full p-4 rounded-2xl bg-gradient-to-br from-[#EBFBF0] via-[#F0FDF4] to-[#DCFCE7] border-2 border-[#25D366]/40 shadow-sm text-left flex flex-col gap-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                        <WhatsAppIcon className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <h4 className="text-xs sm:text-sm font-black text-gray-950">
-                            Instant Verification &amp; Priority Dispatch
-                          </h4>
-                          <span className="px-1.5 py-0.5 rounded bg-[#128C7E] text-white font-extrabold text-[9px] uppercase tracking-wider">
-                            PREPAID EXCLUSIVE
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-gray-600 mt-0.5 leading-relaxed">
-                          Share your payment screenshot or UPI receipt on WhatsApp to fast-track jewelry sanctification &amp; same-day express packaging.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* User-requested instant confirmation guidance line */}
-                  <p className="text-xs sm:text-[13px] font-bold text-[#075E54] bg-[#DCF8C6]/50 p-2.5 rounded-xl border border-[#25D366]/30 leading-snug">
-                    Payment successful? You can share your payment screenshot on WhatsApp to confirm order
-                  </p>
-
-                  {/* CTA Button with exact text requested as per best practices */}
-                  <a
-                    href={whatsappShareUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    id="prepaid-share-screenshot-whatsapp-cta"
-                    className="w-full min-h-[50px] py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer text-center group"
-                  >
-                    <WhatsAppIcon className="w-5 h-5 text-white shrink-0 group-hover:scale-110 transition-transform" />
-                    <span className="tracking-wide">Share Payment Screenshot on WhatsApp &bull; Confirm Order</span>
-                    <ExternalLink className="w-4 h-4 text-white/90 shrink-0" />
-                  </a>
-
-                  <div className="flex items-center justify-between text-[10.5px] text-emerald-900/80 px-1 pt-0.5 border-t border-emerald-200/60">
-                    <span className="flex items-center gap-1 font-medium">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                      Official WhatsApp: <strong>+91 7982438137</strong>
-                    </span>
-                    <span className="font-semibold text-emerald-800">Available 24/7</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Action Button: Mobile-First Single Prominent CTA */}
-              <div className="w-full pt-1">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className={`w-full min-h-[48px] py-3.5 px-6 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg cursor-pointer transition-all flex items-center justify-center gap-2 ${
-                    isPrepaidOrder
-                      ? 'bg-neutral-900 hover:bg-black text-white hover:text-[#FFD600] border border-neutral-800'
-                      : 'bg-black hover:bg-neutral-800 active:scale-[0.99] text-[#FFD600]'
-                  }`}
-                >
-                  <span>Continue Shopping</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
           )}
         </div>
       </div>

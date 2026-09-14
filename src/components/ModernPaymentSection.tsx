@@ -1343,6 +1343,31 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                 <span className="font-semibold text-gray-800">BHIM</span>
               </div>
 
+              {/* Showcase Payment & WhatsApp Share Screenshot Box for Prepaid Method (Desktop) */}
+              <div className="w-full mt-3.5 flex flex-col gap-2">
+                <p className="text-[11.5px] font-bold text-gray-950 bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-center leading-snug">
+                  Payment successful? You can share your payment screenshot on WhatsApp to confirm order
+                </p>
+
+                <a
+                  href={getWhatsAppPrepaidShareUrl('Prepaid UPI')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    handleSuccessConfirmation('upi', {
+                      utr: 'WhatsApp-Prepaid-Screenshot',
+                      app: 'Prepaid UPI',
+                    });
+                  }}
+                  id="desktop-prepaid-whatsapp-share-screenshot-cta"
+                  className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs uppercase tracking-wide flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all text-center"
+                >
+                  <WhatsAppIcon className="w-4 h-4 text-white shrink-0" />
+                  <span>Share Payment Screenshot on WhatsApp &bull; Confirm Order</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-white/90 shrink-0" />
+                </a>
+              </div>
+
               {/* Trust Badge */}
               <div className="flex items-center justify-center gap-1.5 text-[10px] text-gray-400 font-medium pt-3 mt-3 border-t border-gray-100 w-full">
                 <Lock className="w-3 h-3 text-emerald-600" />
@@ -1707,6 +1732,31 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* Showcase Payment & WhatsApp Share Screenshot Box for Prepaid Method (Mobile) */}
+              <div className="w-full mt-3 flex flex-col gap-2">
+                <p className="text-[11.5px] sm:text-xs font-bold text-gray-950 bg-emerald-50 border border-emerald-200/80 p-2.5 rounded-xl text-center leading-snug">
+                  Payment successful? You can share your payment screenshot on WhatsApp to confirm order
+                </p>
+
+                <a
+                  href={getWhatsAppPrepaidShareUrl('Prepaid UPI')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    handleSuccessConfirmation('upi', {
+                      utr: 'WhatsApp-Prepaid-Screenshot',
+                      app: 'Prepaid UPI',
+                    });
+                  }}
+                  id="mobile-prepaid-whatsapp-share-screenshot-cta"
+                  className="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs sm:text-sm uppercase tracking-wide flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all text-center"
+                >
+                  <WhatsAppIcon className="w-4 h-4 text-white shrink-0" />
+                  <span>Share Payment Screenshot on WhatsApp &bull; Confirm Order</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-white/90 shrink-0" />
+                </a>
               </div>
 
               {/* Divider: Dashed line with "OR" */}

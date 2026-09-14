@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { CheckCircle2, X } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './components/HomePage';
 import { ProductHero } from './components/ProductHero';
@@ -395,6 +396,17 @@ export default function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [appliedCoupon, setAppliedCoupon] = useState<CouponCode | null>(AVAILABLE_COUPONS[0]); // Auto-applied QVL100
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [orderNotification, setOrderNotification] = useState<{
+    id: string;
+    method: 'upi' | 'cod';
+  } | null>(null);
+
+  const handleOrderPlaced = (orderId: string, method: 'upi' | 'cod') => {
+    setOrderNotification({ id: orderId, method });
+    setTimeout(() => {
+      setOrderNotification(null);
+    }, 9000);
+  };
 
   // Preload critical product imagery and gallery assets on initial app mount
   useEffect(() => {
@@ -722,6 +734,7 @@ export default function App() {
         cartItems={cartItems}
         appliedCoupon={appliedCoupon}
         onClearCart={() => setCartItems([])}
+        onOrderPlaced={handleOrderPlaced}
       />
 
       {/* Mobile & Desktop Sticky Bottom Conversion Bar (Persistently visible at all times on all Product Detail Pages) */}
@@ -733,6 +746,36 @@ export default function App() {
           onAddToCart={() => handleAddToCart(selectedBundle)}
           activeProductId={activeProductId}
         />
+      )}
+
+      {/* Floating Order Confirmation Notification */}
+      {orderNotification && (
+        <div
+          id="order-confirmed-toast"
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-md bg-white border-2 border-emerald-500 shadow-2xl rounded-2xl p-4 flex items-start gap-3.5 animate-fadeIn"
+        >
+          <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+            <CheckCircle2 className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between gap-1">
+              <span className="font-black text-gray-950 text-xs sm:text-sm">
+                Order Received &amp; Confirmed!
+              </span>
+              <button
+                type="button"
+                onClick={() => setOrderNotification(null)}
+                className="text-gray-400 hover:text-gray-700 p-1 cursor-pointer transition-colors"
+                title="Dismiss"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="text-[11.5px] text-gray-700 mt-1 leading-snug">
+              Order <strong className="font-mono text-gray-950 font-bold">{orderNotification.id}</strong> ({orderNotification.method === 'upi' ? 'Prepaid UPI' : 'Cash On Delivery'}) has been received. Our team will share delivery tracking on your WhatsApp.
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

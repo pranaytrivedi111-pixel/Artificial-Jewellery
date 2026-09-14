@@ -98,7 +98,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     : PRODUCT_DETAILS;
 
   const currentImage = isRiceChain
-    ? '/rice_chain_1.webp'
+    ? '/g1.webp'
     : isDolphinCombo
     ? '/dolphin_f2.webp'
     : isHandbagEarrings

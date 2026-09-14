@@ -17,6 +17,7 @@ import {
   PaytmEmblem,
   BhimEmblem,
   UpiEmblem,
+  WhatsAppPayEmblem,
 } from './PaymentLogos';
 
 interface PhonePeUPIPaymentProps {
@@ -28,9 +29,9 @@ interface PhonePeUPIPaymentProps {
 }
 
 export const PAYMENT_ASSETS = {
-  upiId: 'suneetatrivedi@ibl',
+  upiId: 'pranyatrivedi@ybl',
   phoneNumber: '9171816900',
-  payeeName: 'PRANAY TRIVEDI',
+  payeeName: 'Qavelle',
 };
 
 export const PhonePeUPIPayment: React.FC<PhonePeUPIPaymentProps> = ({
@@ -54,15 +55,16 @@ export const PhonePeUPIPayment: React.FC<PhonePeUPIPaymentProps> = ({
   const formattedAmount = Number(amount).toFixed(2);
   const safeOrderId = orderId || 'ORDER';
 
-  // Standard UPI URI format strictly preserving '@' in VPA pa=suneetatrivedi@ibl
-  const upiPayUrl = `upi://pay?pa=suneetatrivedi@ibl&pn=PRANAY%20TRIVEDI&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
+  // Standard UPI URI format strictly preserving '@' in VPA pa=pranyatrivedi@ybl
+  const upiPayUrl = `upi://pay?pa=pranyatrivedi@ybl&pn=Qavelle&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
 
   // Direct app intents for instant redirection with prefilled price to collect real payments
-  const phonepeIntentUrl = `phonepe://pay?pa=suneetatrivedi@ibl&pn=PRANAY%20TRIVEDI&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
-  const gpayIntentUrl = `gpay://upi/pay?pa=suneetatrivedi@ibl&pn=PRANAY%20TRIVEDI&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
-  const paytmIntentUrl = `paytmmp://pay?pa=suneetatrivedi@ibl&pn=PRANAY%20TRIVEDI&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
-  const bhimIntentUrl = `bhim://upi/pay?pa=suneetatrivedi@ibl&pn=PRANAY%20TRIVEDI&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
-  const credIntentUrl = `cred://pay?pa=suneetatrivedi@ibl&pn=PRANAY%20TRIVEDI&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
+  const phonepeIntentUrl = `phonepe://pay?pa=pranyatrivedi@ybl&pn=Qavelle&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
+  const gpayIntentUrl = `gpay://upi/pay?pa=pranyatrivedi@ybl&pn=Qavelle&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
+  const paytmIntentUrl = `paytmmp://pay?pa=pranyatrivedi@ybl&pn=Qavelle&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
+  const whatsappIntentUrl = `whatsapp://pay?pa=pranyatrivedi@ybl&pn=Qavelle&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
+  const bhimIntentUrl = `bhim://upi/pay?pa=pranyatrivedi@ybl&pn=Qavelle&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
+  const credIntentUrl = `cred://pay?pa=pranyatrivedi@ybl&pn=Qavelle&am=${formattedAmount}&cu=INR&tn=Qavelle%20Order%20${safeOrderId}`;
 
   // Generate completely clean, unobstructed high-resolution QR code
   useEffect(() => {
@@ -161,6 +163,13 @@ export const PhonePeUPIPayment: React.FC<PhonePeUPIPaymentProps> = ({
       url: paytmIntentUrl,
       logo: <PaytmEmblem className="w-full h-10 max-w-[80px]" />,
       hoverBorder: 'hover:border-[#00BAF2] hover:bg-[#00BAF2]/5 hover:shadow-[#00BAF2]/15',
+    },
+    {
+      id: 'whatsapp',
+      name: 'WhatsApp Pay',
+      url: whatsappIntentUrl,
+      logo: <WhatsAppPayEmblem className="w-10 h-10 drop-shadow-2xs" />,
+      hoverBorder: 'hover:border-[#25D366] hover:bg-[#25D366]/5 hover:shadow-[#25D366]/15',
     },
     {
       id: 'cred',
@@ -360,7 +369,7 @@ export const PhonePeUPIPayment: React.FC<PhonePeUPIPaymentProps> = ({
               className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
             >
               <Check className="w-4 h-4" />
-              <span>I Have Paid via QR &bull; Confirm Order</span>
+              <span>Confirm Order</span>
             </button>
 
             <button

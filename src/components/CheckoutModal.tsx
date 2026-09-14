@@ -441,7 +441,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       currentPhone ? `📞 *Phone:* ${currentPhone}` : null,
       `💰 *Amount Paid:* ₹${currentAmount}`,
       `💳 *Payment Method:* Prepaid UPI (Verified)`,
-      currentUtr ? `🔖 *UTR / Ref No:* ${currentUtr}` : `🔖 *UTR:* Attached in screenshot`,
+      currentUtr ? `🔖 *UTR / Ref No:* ${currentUtr}` : null,
       currentAddress ? `📍 *Delivery Address:* ${currentAddress}${currentCity ? `, ${currentCity}` : ''}${currentPincode ? ` - ${currentPincode}` : ''}` : null,
       ``,
       `📸 *Sharing my payment screenshot / receipt below for priority dispatch:*`
@@ -583,11 +583,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
 
               <div className="flex items-center gap-2">
-                {paymentMethod !== 'cod' ? (
-                  <span className="text-[10px] font-black text-emerald-800 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
-                    SAVE ₹{totalPrepaidSavings}
-                  </span>
-                ) : (
+                {paymentMethod === 'cod' && (
                   <span className="text-[10px] font-bold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
                     COD
                   </span>
@@ -1023,9 +1019,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       ₹{subtotal - totalPrepaidSavings}
                     </span>
                   </div>
-                  <span className="text-[9.5px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded shadow-2xs">
-                    SAVE ₹{totalPrepaidSavings}
-                  </span>
                   <span className="text-[10px] text-gray-500 hidden xs:inline">
                     &bull; Free Express Delivery
                   </span>
@@ -1183,14 +1176,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-emerald-900 font-semibold">Payment Status:</span>
-                      <span className="font-bold text-emerald-700">Verified &amp; Approved</span>
+                      <span className="font-bold text-emerald-700">Payment Verified &amp; Confirmed</span>
                     </div>
-                    {(confirmedOrder?.utrNumber || utrNumber) && (
-                      <div className="flex items-center justify-between">
-                        <span className="text-emerald-900 font-semibold">Verified UTR / Ref No:</span>
-                        <span className="font-mono text-emerald-950 font-bold">UTR #{confirmedOrder?.utrNumber || utrNumber}</span>
-                      </div>
-                    )}
                   </div>
                 ) : (
                   <div className="p-3 rounded-xl bg-amber-50/90 border border-amber-200 flex flex-col gap-1.5 text-[11.5px]">
@@ -1269,7 +1256,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                   {/* User-requested instant confirmation guidance line */}
                   <p className="text-xs sm:text-[13px] font-bold text-[#075E54] bg-[#DCF8C6]/50 p-2.5 rounded-xl border border-[#25D366]/30 leading-snug">
-                    Payment successful! Click the button below to share your transaction screenshot via WhatsApp to confirm your order immediately.
+                    Payment successful? You can share your payment screenshot on WhatsApp to confirm order
                   </p>
 
                   {/* CTA Button with exact text requested as per best practices */}
@@ -1281,7 +1268,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     className="w-full min-h-[50px] py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-white font-black text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer text-center group"
                   >
                     <WhatsAppIcon className="w-5 h-5 text-white shrink-0 group-hover:scale-110 transition-transform" />
-                    <span className="tracking-wide">Share Payment Screenshot</span>
+                    <span className="tracking-wide">Share Payment Screenshot on WhatsApp &bull; Confirm Order</span>
                     <ExternalLink className="w-4 h-4 text-white/90 shrink-0" />
                   </a>
 

@@ -25,6 +25,34 @@ export interface GenuineProduct {
 
 export const GENUINE_PRODUCTS: GenuineProduct[] = [
   {
+    id: 'dolphin-crystals-pendant-combo',
+    slug: '/products/combo-of-3-elegant-dolphin-crystals-pendant-necklace-for-women-silver-plated-round-charm-with-colored-stone-pink-purple-sky',
+    title:
+      'Combo Of 3 Elegant Dolphin Crystals Pendant Necklace for Women Silver Plated Round Charm with Colored Stone (Pink, Purple, Sky)',
+    shortTitle: 'Combo of 3 Dolphin Crystals Pendants',
+    subtitle:
+      'Silver Plated Fine Chains • Sculpted Dolphin Charms • Includes All 3: Blush Pink, Amethyst Purple & Ocean Sky Blue',
+    category: 'Combo Deals',
+    badge: 'MEESHO VIRAL COMBO',
+    price: 499,
+    originalPrice: 1499,
+    discountPercent: 67,
+    rating: 4.9,
+    reviewsCount: 1120,
+    image: '/dolphin_f2.webp',
+    hoverImage: '/dolphin_f3.webp',
+    tag: 'Combo of 3 Pendants',
+    inStockCount: 12,
+    highlights: [
+      'Combo of 3 Complete Necklaces with Rose Pink, Amethyst Purple & Sky Blue Crystals',
+      'Intricate Sculpted Leaping Dolphin Embracing Faceted Gemstone',
+      'High-Lustre Silver Plating with Anti-Tarnish Protective Coating',
+      'Hypoallergenic Core with 45cm + 5cm Adjustable Extender Chain',
+    ],
+    occasion: 'Daily Wear, College, Office, Casual Western, BFF & Sister Gifting',
+    packageContains: '3 Silver Plated Dolphin Crystal Necklaces (Pink, Purple, Sky Blue) + Royal Velvet Pouch',
+  },
+  {
     id: 'white-enamel-handbag-earrings',
     slug: '/products/suyug-high-grade-u-shaped-white-enemel-handbag-drop-earrings-for-women-and-girls',
     title: 'High Grade U Shaped White Enamel Handbag Drop Earrings For Women And Girls',
@@ -287,7 +315,15 @@ export const HOME_CATEGORIES = [
     label: 'All Products',
     icon: '✨',
     image: '/Cinematic.webp',
-    count: 10,
+    count: 11,
+  },
+  {
+    id: 'dolphin-combo',
+    label: 'Dolphin Crystal Combo',
+    icon: '🐬',
+    image: '/dolphin_f2.webp',
+    count: 1,
+    targetProduct: 'dolphin-crystals-pendant-combo' as ProductId,
   },
   {
     id: 'handbag-earrings',

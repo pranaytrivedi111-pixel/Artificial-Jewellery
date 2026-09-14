@@ -2846,6 +2846,270 @@ export const WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA = [
   },
 ];
 
+// ============================================================================
+// 11. COMBO OF 3 ELEGANT DOLPHIN CRYSTALS PENDANT NECKLACES (f1v4i9)
+// Product ID: 'dolphin-crystals-pendant-combo'
+// Meesho Code: f1v4i9
+// ============================================================================
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG =
+  '/products/combo-of-3-elegant-dolphin-crystals-pendant-necklace-for-women-silver-plated-round-charm-with-colored-stone-pink-purple-sky';
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_MATCHING_VARIANTS = [
+  {
+    id: 'dolphin-combo-all3',
+    name: 'Trio Set (All 3 Included: Pink, Purple, Sky Blue)',
+    color: '#BAE6FD',
+    borderColor: '#7E22CE',
+    image: '/dolphin_f2.webp',
+    inStock: true,
+  },
+  {
+    id: 'dolphin-combo-double',
+    name: '2 Sets (6 Necklaces - Gifting Special)',
+    color: '#FFB6C1',
+    borderColor: '#0284C7',
+    image: '/dolphin_f3.webp',
+    inStock: true,
+  },
+];
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS = {
+  id: 'dolphin-crystals-pendant-combo',
+  title:
+    'Combo Of 3 Elegant Dolphin Crystals Pendant Necklace for Women Silver Plated Round Charm with Colored Stone (Pink, Purple, Sky)',
+  shortTitle: 'Combo of 3 Dolphin Crystals Pendants',
+  tagline:
+    'Silver Plated Fine Chains • Graceful Leaping Dolphin Motif • 3 Sparkling Faceted Crystals (Pink, Purple & Sky Blue)',
+  subtitle:
+    'Silver Plated Fine Chains • Graceful Leaping Dolphin Motif • 3 Sparkling Faceted Crystals (Pink, Purple & Sky Blue)',
+  price: 499,
+  originalPrice: 1499,
+  regularPrice: 1499,
+  salePrice: 499,
+  discountPercent: 67,
+  discountPercentage: 67,
+  rating: 4.9,
+  ratingsCount: 8430,
+  reviewsCount: 1120,
+  sku: 'QVL-DOLPHIN-F1V4I9',
+  inStock: true,
+  stockLeft: 12,
+  inStockCount: 12,
+  recentSales24h: 318,
+  currentLiveViewers: 47,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  urgencyText: 'Only 12 combo sets left at ₹499 offer — Viral trending on Meesho & Instagram!',
+  fullDescription:
+    'An enchanting symbol of joy, freedom, harmony, and affectionate friendship. This best-selling Meesho viral combo includes 3 individual silver-plated pendant necklaces, each showcasing a finely sculpted leaping dolphin silhouette encircling a brilliant round faceted crystal gemstone. You receive all three radiant gemstone hues: delicate Blush Rose Pink, mystical Amethyst Purple, and serene Ocean Sky Blue. Suspended on sleek, skin-friendly silver-plated link chains with secure lobster clasp closures, each piece effortlessly complements Western chic, casual college outfits, brunch wear, and gifting moments.',
+  description:
+    'An enchanting symbol of joy, freedom, harmony, and affectionate friendship. This best-selling Meesho viral combo includes 3 individual silver-plated pendant necklaces, each showcasing a finely sculpted leaping dolphin silhouette encircling a brilliant round faceted crystal gemstone. You receive all three radiant gemstone hues: delicate Blush Rose Pink, mystical Amethyst Purple, and serene Ocean Sky Blue. Suspended on sleek, skin-friendly silver-plated link chains with secure lobster clasp closures, each piece effortlessly complements Western chic, casual college outfits, brunch wear, and gifting moments.',
+  features: [
+    'Combo Set of 3 Complete Necklaces (Includes Rose Pink, Amethyst Purple & Ocean Sky Blue)',
+    'Intricately Sculpted Leaping Dolphin Silhouette Wrapping a Faceted Sparkling Crystal',
+    'Premium Silver Micron Plating with Protective Anti-Tarnish Coating',
+    'Durable & Hypoallergenic Stainless Alloy Base (100% Skin Safe & Nickel-Free)',
+    'Comfortable 45cm + 5cm Adjustable Extender Link Chain with Sturdy Lobster Clasp',
+    'Arrives in Signature Qavelle Velvet Gift Pouch with Authenticity Hallmark Guarantee',
+  ],
+  size: 'Pendant Diameter: 2.0 cm | Chain Length: 45 cm + 5 cm Extender | Weight: 5.8g each',
+  dimensions: 'Pendant Diameter: 2.0 cm | Chain Length: 45 cm + 5 cm Extender | Weight: 5.8g each',
+  materials: 'Silver Plated Hypoallergenic Alloy Core, Faceted High-Refraction Crystal Gemstones',
+  countryOfOrigin: 'India',
+};
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_HIGHLIGHTS = [
+  { label: 'Design', value: 'Sculpted Dolphin Circle Charm with Faceted Solitaire Crystal' },
+  { label: 'Net Quantity (N)', value: 'Combo of 3 Necklaces (Pink, Purple, Sky Blue) + Velvet Pouch' },
+  { label: 'Base Metal', value: 'High Grade Skin-Friendly Hypoallergenic Alloy' },
+  { label: 'Plating', value: 'High Lustre Silver Micron Plating with Anti-Tarnish Seal' },
+  { label: 'Stone Type', value: 'Faceted Brilliant-Cut Crystals (Rose Pink, Amethyst, Sky Blue)' },
+  { label: 'Chain Type', value: 'Sleek Link Chain (45 cm + 5 cm Adjustable Extension)' },
+  { label: 'Clasp Type', value: 'Durable Lobster Claw Clasp' },
+  { label: 'Occasion', value: 'Daily Wear, College, Office, Casual Western, BFF Gifting' },
+];
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '3x Silver Plated Dolphin Crystal Pendant Necklaces (Pink, Purple, Sky Blue) + Luxury Velvet Pouch',
+  },
+  { label: 'Gemstone Colors Included', value: 'Blush Rose Pink, Royal Amethyst Purple, Ocean Sky Blue' },
+  { label: 'Skin Safety', value: '100% Nickel-Free & Lead-Free (Guaranteed Zero Irritation)' },
+  { label: 'Finish', value: 'Mirror Silver Gloss Polish with Specular Diamond-Cut Reflection' },
+  { label: 'Water & Sweat Resistance', value: 'Splash-Proof with Anti-Oxidation Protective Shield' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value: 'Gently wipe with a soft dry cloth after wear. Store safely in the provided velvet pouch away from harsh chemical perfumes and household detergents.',
+  },
+];
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'dcpc-1',
+    src: '/dolphin_f2.webp',
+    thumbSrc: '/dolphin_f2_thumb.webp',
+    alt: 'Combo Of 3 Elegant Dolphin Crystals Pendant Necklace for Women Silver Plated Round Charm with Colored Stone - Hero Trio',
+    title: 'Combo of 3 Dolphin Pendants',
+    tag: 'Hero View',
+  },
+  {
+    id: 'dcpc-2',
+    src: '/dolphin_f3.webp',
+    thumbSrc: '/dolphin_f3_thumb.webp',
+    alt: 'Real Product Detail - Sculpted Silver Dolphin Charm Embracing Faceted Amethyst Crystal',
+    title: 'Dolphin Craftsmanship Close-Up',
+    tag: 'Detail View',
+  },
+  {
+    id: 'dcpc-3',
+    src: '/dolphin_f4.webp',
+    thumbSrc: '/dolphin_f4_thumb.webp',
+    alt: 'Rose Pink and Ocean Sky Blue Dolphin Crystal Pendant Necklaces Side by Side',
+    title: 'Vibrant Gemstones',
+    tag: 'Angle View',
+  },
+  {
+    id: 'dcpc-4',
+    src: '/dolphin_f5.webp',
+    thumbSrc: '/dolphin_f5_thumb.webp',
+    alt: 'Close-Up View of Dolphin Pendant with Faceted Sparkling Crystal Solitaire',
+    title: 'Crystal Solitaire Close-Up',
+    tag: 'Macro View',
+  },
+  {
+    id: 'dcpc-5',
+    src: '/dolphin_f6.webp',
+    thumbSrc: '/dolphin_f6_thumb.webp',
+    alt: 'Complete Set of 3 Dolphin Crystals Pendant Necklaces on Display',
+    title: 'Complete 3-Pendant Collection',
+    tag: 'Collection View',
+  },
+];
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'dolphin-combo-single',
+    title: '1 Combo Pack (Set of 3 Necklaces: Pink + Purple + Sky)',
+    subtitle: 'All 3 Necklaces Included + Velvet Gift Pouch + Free Express Delivery',
+    unitCount: 1,
+    price: 499,
+    originalPrice: 1499,
+    discountPercent: 67,
+    popular: true,
+    saveAmount: 1000,
+  },
+  {
+    id: 'dolphin-combo-double',
+    title: '2 Combo Packs (6 Necklaces - Besties & Sister Trio Gifting)',
+    subtitle: '6 Necklaces (2 Sets of 3) + 2 Velvet Pouches + Extra ₹100 Off',
+    unitCount: 2,
+    price: 899,
+    originalPrice: 2998,
+    discountPercent: 70,
+    popular: false,
+    saveAmount: 2099,
+  },
+  {
+    id: 'dolphin-combo-triple',
+    title: '3 Combo Packs (9 Necklaces - Maximum Family Value)',
+    subtitle: '9 Necklaces + Luxury Royal Presentation Box + Maximum Discount',
+    unitCount: 3,
+    price: 1299,
+    originalPrice: 4497,
+    discountPercent: 71,
+    popular: false,
+    saveAmount: 3198,
+  },
+];
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS: ReviewItem[] = [
+  {
+    id: 'r-dcpc-1',
+    author: 'Tanvi Saxena',
+    city: 'Jaipur',
+    state: 'Rajasthan',
+    rating: 5,
+    date: 'Yesterday',
+    title: 'All 3 necklaces are so beautiful! Best ₹499 spent ever!',
+    comment:
+      'I was so pleasantly surprised when I opened the parcel! You get all three necklaces — pink, purple, and sky blue — and each one has a gorgeous sparkling crystal with the cute silver dolphin. My two best friends and I took one each as friendship pendants! The silver polish is very shiny and chains feel sturdy.',
+    verified: true,
+    helpfulCount: 124,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-dcpc-2',
+    author: 'Meenakshi Iyer',
+    city: 'Chennai',
+    state: 'Tamil Nadu',
+    rating: 5,
+    date: '3 days ago',
+    title: 'The dolphin carving detail is so delicate and clear',
+    comment:
+      'Saw this viral on Meesho for a higher price and bought here for ₹499 with quick delivery. The dolphin wrapping around the crystal looks even better in real life. The purple crystal is very royal and the pink is so subtle and pretty. Lobster clasp works smoothly.',
+    verified: true,
+    helpfulCount: 98,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-dcpc-3',
+    author: 'Pooja Verma',
+    city: 'Lucknow',
+    state: 'Uttar Pradesh',
+    rating: 5,
+    date: '5 days ago',
+    title: 'Super lightweight and zero irritation on skin',
+    comment:
+      'Wore the ocean sky blue pendant all day to college. The chain length is just right, sits gracefully on the collarbone, and does not tangle. Very cute design and amazing value for ₹499 combo of 3!',
+    verified: true,
+    helpfulCount: 77,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-dcpc-4',
+    author: 'Deepika Sharma',
+    city: 'Chandigarh',
+    state: 'Punjab',
+    rating: 5,
+    date: '1 week ago',
+    title: 'Perfect for gifting or matching with different outfits',
+    comment:
+      'Having three colors means I can match with whatever top or dress I am wearing. Pink for pastel days, sky blue for denims, and purple for formal wear. Arrived safely packaged in a lovely pouch.',
+    verified: true,
+    helpfulCount: 63,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST = DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS;
+
+export const DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA = [
+  {
+    id: 'm-dcpc-1',
+    type: 'image',
+    image: '/dolphin_f2.webp',
+    author: 'Tanvi Saxena',
+    caption: 'Real photo: Loved all 3 dolphin necklaces! Rose pink, amethyst, and sky blue.',
+  },
+  {
+    id: 'm-dcpc-2',
+    type: 'image',
+    image: '/dolphin_f4.webp',
+    author: 'Meenakshi Iyer',
+    caption: 'Real photo: Super sparkly crystal stones and lovely silver dolphin motif.',
+  },
+  {
+    id: 'm-dcpc-3',
+    type: 'image',
+    image: '/dolphin_f5.webp',
+    author: 'Pooja Verma',
+    caption: 'Real photo: Unboxing all three pendants in real natural light.',
+  },
+];
+
+
 
 
 

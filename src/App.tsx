@@ -64,6 +64,11 @@ import {
   WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST,
   WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA,
   WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG,
+  DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS,
+  DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS,
+  DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST,
+  DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA,
+  DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -92,6 +97,19 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('f1v4i9') ||
+    pathname.includes('dolphin') ||
+    pathname.includes('crystals-pendant') ||
+    pathname.includes('round-charm-with-colored-stone') ||
+    param === 'dolphin-crystals-pendant-combo' ||
+    param === 'dolphin-combo' ||
+    param === 'dolphin' ||
+    param === 'f1v4i9'
+  ) {
+    return { view: 'product', productId: 'dolphin-crystals-pendant-combo' };
   }
 
   if (
@@ -224,6 +242,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'dolphin-crystals-pendant-combo': DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG,
   'white-enamel-handbag-earrings': WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG,
   'emerald-snake-pendant': EMERALD_SNAKE_SLUG,
   'combo-2-pendants': AESTHETIC_PENDANT_COMBO_SLUG,
@@ -241,6 +260,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'dolphin-crystals-pendant-combo') return DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'white-enamel-handbag-earrings') return WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'emerald-snake-pendant') return EMERALD_SNAKE_BUNDLE_OPTIONS[0];
   if (productId === 'combo-2-pendants') return AESTHETIC_PENDANT_COMBO_BUNDLE_OPTIONS[0];
@@ -259,9 +279,10 @@ export default function App() {
   // Current view: 'home' | 'product'
   const [currentView, setCurrentView] = useState<'home' | 'product'>(initialLoc.view);
 
-  // Active product: 'jhumka' | 'choker' | 'necklace-combo-5' | 'elegant-everyday-5' | 'radhika-green-ad' | 'allure-gold-set' | 'trendy-alloy-set' | 'combo-2-pendants' | 'emerald-snake-pendant' | 'white-enamel-handbag-earrings'
+  // Active product
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
   const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
   const isAestheticCombo = activeProductId === 'combo-2-pendants';
@@ -272,7 +293,9 @@ export default function App() {
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isHandbagEarrings
+  const currentProductDetails = isDolphinCombo
+    ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS
+    : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
     : isEmeraldSnake
     ? EMERALD_SNAKE_PRODUCT_DETAILS
@@ -292,7 +315,9 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isHandbagEarrings
+  const currentReviews = isDolphinCombo
+    ? DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST
+    : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST
     : isEmeraldSnake
     ? EMERALD_SNAKE_REVIEWS_LIST
@@ -312,7 +337,9 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isHandbagEarrings
+  const currentCustomerMedia = isDolphinCombo
+    ? DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA
+    : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA
     : isEmeraldSnake
     ? EMERALD_SNAKE_CUSTOMER_MEDIA

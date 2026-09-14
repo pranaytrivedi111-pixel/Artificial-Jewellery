@@ -11,6 +11,7 @@ import {
   ELEGANT_EVERYDAY_PRODUCT_DETAILS,
   EMERALD_SNAKE_PRODUCT_DETAILS,
   WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS,
+  DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS,
 } from '../data/productData';
 import { ProductId } from '../types';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -23,7 +24,9 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
   const [isExpanded, setIsExpanded] = useState(false);
 
   const currentProduct =
-    activeProductId === 'white-enamel-handbag-earrings'
+    activeProductId === 'dolphin-crystals-pendant-combo'
+      ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS
+      : activeProductId === 'white-enamel-handbag-earrings'
       ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
       : activeProductId === 'emerald-snake-pendant'
       ? EMERALD_SNAKE_PRODUCT_DETAILS

@@ -8,7 +8,8 @@ export type ProductId =
   | 'trendy-alloy-set'
   | 'combo-2-pendants'
   | 'emerald-snake-pendant'
-  | 'white-enamel-handbag-earrings';
+  | 'white-enamel-handbag-earrings'
+  | 'dolphin-crystals-pendant-combo';
 
 export interface ProductGalleryItem {
   id: string;

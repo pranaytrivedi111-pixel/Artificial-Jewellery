@@ -9,6 +9,8 @@ interface YouMayAlsoLikeProps {
 }
 
 const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'dolphin-crystals-pendant-combo':
+    '/products/combo-of-3-elegant-dolphin-crystals-pendant-necklace-for-women-silver-plated-round-charm-with-colored-stone-pink-purple-sky',
   'white-enamel-handbag-earrings':
     '/products/suyug-high-grade-u-shaped-white-enemel-handbag-drop-earrings-for-women-and-girls',
   'emerald-snake-pendant':

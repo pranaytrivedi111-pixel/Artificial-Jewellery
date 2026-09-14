@@ -69,6 +69,11 @@ import {
   DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST,
   DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA,
   DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG,
+  THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS,
+  THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS,
+  THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST,
+  THIN_AS_RICE_SILVER_CHAIN_CUSTOMER_MEDIA,
+  THIN_AS_RICE_SILVER_CHAIN_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -97,6 +102,19 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('70gs5y') ||
+    pathname.includes('424046230') ||
+    pathname.includes('rice-chain') ||
+    pathname.includes('thin-as-rice') ||
+    param === 'thin-as-rice-silver-chain' ||
+    param === 'rice-chain' ||
+    param === '70gs5y' ||
+    param === '424046230'
+  ) {
+    return { view: 'product', productId: 'thin-as-rice-silver-chain' };
   }
 
   if (
@@ -242,6 +260,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'thin-as-rice-silver-chain': THIN_AS_RICE_SILVER_CHAIN_SLUG,
   'dolphin-crystals-pendant-combo': DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG,
   'white-enamel-handbag-earrings': WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG,
   'emerald-snake-pendant': EMERALD_SNAKE_SLUG,
@@ -260,6 +279,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'thin-as-rice-silver-chain') return THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS[0];
   if (productId === 'dolphin-crystals-pendant-combo') return DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'white-enamel-handbag-earrings') return WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'emerald-snake-pendant') return EMERALD_SNAKE_BUNDLE_OPTIONS[0];
@@ -282,6 +302,7 @@ export default function App() {
   // Active product
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
   const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
@@ -293,7 +314,9 @@ export default function App() {
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isDolphinCombo
+  const currentProductDetails = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
@@ -315,7 +338,9 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isDolphinCombo
+  const currentReviews = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST
@@ -337,7 +362,9 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isDolphinCombo
+  const currentCustomerMedia = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_CUSTOMER_MEDIA
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA

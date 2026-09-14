@@ -9,7 +9,8 @@ export type ProductId =
   | 'combo-2-pendants'
   | 'emerald-snake-pendant'
   | 'white-enamel-handbag-earrings'
-  | 'dolphin-crystals-pendant-combo';
+  | 'dolphin-crystals-pendant-combo'
+  | 'thin-as-rice-silver-chain';
 
 export interface ProductGalleryItem {
   id: string;

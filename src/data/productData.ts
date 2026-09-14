@@ -3109,6 +3109,263 @@ export const DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA = [
   },
 ];
 
+// ==========================================
+// 12. THIN AS RICE 21 INCHES SILVER CHAIN (MEESHO 70gs5y / 424046230)
+// ==========================================
+
+export const THIN_AS_RICE_SILVER_CHAIN_SLUG =
+  '/products/trendy-designer-thin-as-rice-21-inches-25-gram-rice-chain-for-women-and-girls-black-silver-plated-brass-metal-chain';
+
+export const THIN_AS_RICE_SILVER_CHAIN_MATCHING_VARIANTS = [
+  {
+    id: 'rice-chain-single',
+    name: 'Single Chain (21 Inches - 2.5g)',
+    color: '#D1D5DB',
+    borderColor: '#374151',
+    image: '/rice_chain_1.webp',
+    inStock: true,
+  },
+  {
+    id: 'rice-chain-pair',
+    name: 'Pack of 2 Chains (Gifting Special)',
+    color: '#9CA3AF',
+    borderColor: '#111827',
+    image: '/rice_chain_3.webp',
+    inStock: true,
+  },
+];
+
+export const THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS = {
+  id: 'thin-as-rice-silver-chain',
+  title:
+    'Trendy Designer Thin as Rice 21 inches 2.5 gram Rice chain for women and Girls Black Silver Plated Brass, Metal Chain',
+  shortTitle: 'Thin as Rice 21" Silver Chain',
+  tagline:
+    'Ultra Delicate 2.5g Featherlight Weave • 21-Inch Princess Fit • Black Silver Mirror Luster',
+  subtitle:
+    'Ultra Delicate 2.5g Featherlight Weave • 21-Inch Princess Fit • Black Silver Mirror Luster',
+  price: 349,
+  originalPrice: 999,
+  regularPrice: 999,
+  salePrice: 349,
+  discountPercent: 65,
+  discountPercentage: 65,
+  rating: 4.8,
+  ratingsCount: 6140,
+  reviewsCount: 890,
+  sku: 'QVL-RICE-70GS5Y',
+  inStock: true,
+  stockLeft: 14,
+  inStockCount: 14,
+  recentSales24h: 245,
+  currentLiveViewers: 39,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  urgencyText: 'Trending on Meesho & Reels! Only 14 pieces left at ₹349 special price.',
+  fullDescription:
+    'Indulge in understated luxury with the viral "Thin as Rice" chain necklace. Crafted from premium brass with high-shine black silver micron plating, this piece features an ultra-fine rice-grain faceted weave that catches and reflects ambient light like diamonds. Measuring 21 inches in length and weighing just 2.5 grams, it provides a featherweight, skin-friendly silhouette that is barely felt yet distinctly visible. Perfect as an everyday standalone minimal necklace or for layering with your favourite pendants.',
+  description:
+    'Indulge in understated luxury with the viral "Thin as Rice" chain necklace. Crafted from premium brass with high-shine black silver micron plating, this piece features an ultra-fine rice-grain faceted weave that catches and reflects ambient light like diamonds. Measuring 21 inches in length and weighing just 2.5 grams, it provides a featherweight, skin-friendly silhouette that is barely felt yet distinctly visible. Perfect as an everyday standalone minimal necklace or for layering with your favourite pendants.',
+  features: [
+    'Delicate "Thin as Rice" Diamond-Faceted Grain Link Weave',
+    '21 Inches (53.3 cm) Princess Length for Elegant Neckline Drape',
+    'Featherlight 2.5 Gram Weight (Zero Pull or Strain for 24/7 Comfort)',
+    'Black Silver High-Luster Plating with Anti-Tarnish Gloss Shield',
+    'Hypoallergenic Brass Core — 100% Skin Safe, Lead & Nickel Free',
+    'Secure Spring Ring Clasp for Reliable Daily Wear',
+    'Arrives in Signature Qavelle Velvet Protective Pouch',
+  ],
+  size: 'Length: 21 Inches (53.3 cm) | Thickness: ~1.2 mm | Weight: 2.5 grams',
+  dimensions: 'Length: 21 Inches (53.3 cm) | Thickness: ~1.2 mm | Weight: 2.5 grams',
+  materials: 'High-Grade Brass Core, Black Silver Anti-Tarnish Plating',
+  countryOfOrigin: 'India',
+};
+
+export const THIN_AS_RICE_SILVER_CHAIN_PRODUCT_HIGHLIGHTS = [
+  { label: 'Design', value: 'Thin as Rice Faceted Grain Link Weave' },
+  { label: 'Chain Length', value: '21 Inches (53.3 cm) Princess Drape' },
+  { label: 'Weight', value: '2.5 Grams (Featherlight Comfort)' },
+  { label: 'Base Metal', value: 'Brass & High-Grade Metal Alloy' },
+  { label: 'Plating', value: 'Black Silver Plated with Anti-Tarnish Coating' },
+  { label: 'Stone Type', value: 'No Stone (Specular Metallic Diamond Facets)' },
+  { label: 'Sizing', value: 'Choker to Princess Fit (Free Size)' },
+  { label: 'Clasp Type', value: 'Durable Spring Ring Clasp' },
+  { label: 'Occasion', value: 'Daily Wear, College, Office, Casual Western, Layering' },
+];
+
+export const THIN_AS_RICE_SILVER_CHAIN_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '1x 21" Thin as Rice Chain Necklace + Luxury Qavelle Velvet Pouch',
+  },
+  { label: 'Trend', value: 'Minimalist Korean & Western Layering Aesthetic' },
+  { label: 'Skin Safety', value: '100% Nickel-Free & Lead-Free (Zero Irritation Guaranteed)' },
+  { label: 'Finish', value: 'Mirror Polish with Faceted Light-Reflecting Cuts' },
+  { label: 'Color', value: 'Black Silver / Oxidized Silver Tone' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value: 'Wipe gently with a soft dry cloth after wear. Store safely in the provided velvet pouch away from direct perfumes and harsh chemicals.',
+  },
+];
+
+export const THIN_AS_RICE_SILVER_CHAIN_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'tarc-1',
+    src: '/rice_chain_1.webp',
+    thumbSrc: '/rice_chain_1_thumb.webp',
+    alt: 'Trendy Designer Thin as Rice 21 inches 2.5 gram Rice chain - Hero View',
+    title: 'Thin as Rice 21" Chain',
+    tag: 'Hero View',
+  },
+  {
+    id: 'tarc-2',
+    src: '/rice_chain_2.webp',
+    thumbSrc: '/rice_chain_2_thumb.webp',
+    alt: 'Rice Grain Faceted Texture Close-Up - Black Silver Plated Brass',
+    title: 'Rice Grain Weave Close-Up',
+    tag: 'Detail View',
+  },
+  {
+    id: 'tarc-3',
+    src: '/rice_chain_3.webp',
+    thumbSrc: '/rice_chain_3_thumb.webp',
+    alt: '21 Inches Chain Drape on Display',
+    title: '21" Princess Drape',
+    tag: 'Angle View',
+  },
+  {
+    id: 'tarc-4',
+    src: '/rice_chain_4.webp',
+    thumbSrc: '/rice_chain_4_thumb.webp',
+    alt: 'Clasp and End Loop Detail - Thin as Rice Chain',
+    title: 'Secure Spring Ring Clasp',
+    tag: 'Clasp Detail',
+  },
+];
+
+export const THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'rice-chain-single',
+    title: '1 Chain (21 Inches - 2.5 Grams)',
+    subtitle: '1x Rice Chain + Luxury Velvet Gift Pouch + Free Express Delivery',
+    unitCount: 1,
+    price: 349,
+    originalPrice: 999,
+    discountPercent: 65,
+    popular: true,
+    saveAmount: 650,
+  },
+  {
+    id: 'rice-chain-double',
+    title: 'Pack of 2 Chains (Besties & Sister Gifting)',
+    subtitle: '2x 21" Chains + 2 Velvet Pouches + Extra ₹99 Off',
+    unitCount: 2,
+    price: 599,
+    originalPrice: 1998,
+    discountPercent: 70,
+    popular: false,
+    saveAmount: 1399,
+  },
+  {
+    id: 'rice-chain-triple',
+    title: 'Pack of 3 Chains (Maximum Value Set)',
+    subtitle: '3x 21" Chains + Velvet Pouches + Highest Discount',
+    unitCount: 3,
+    price: 849,
+    originalPrice: 2997,
+    discountPercent: 72,
+    popular: false,
+    saveAmount: 2148,
+  },
+];
+
+export const THIN_AS_RICE_SILVER_CHAIN_REVIEWS: ReviewItem[] = [
+  {
+    id: 'rv-rice-1',
+    author: 'Pooja Sharma',
+    city: 'Pune',
+    state: 'Maharashtra',
+    rating: 5,
+    date: '16 Jun 2025',
+    title: 'Best quality and colour 👍',
+    comment:
+      'Best quality and colour 👍 looks so delicate and pretty on western tops! Shines just like silver and is extremely light to wear all day long.',
+    verified: true,
+    helpfulCount: 28,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'rv-rice-2',
+    author: 'Sneha Patel',
+    city: 'Ahmedabad',
+    state: 'Gujarat',
+    rating: 5,
+    date: '25 Jan 2026',
+    title: 'Wonderful design and amazing cost',
+    comment:
+      'Wonderful design and amazing cost! The rice grain cut reflects light so beautifully. Highly recommended for daily wear.',
+    verified: true,
+    helpfulCount: 19,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'rv-rice-3',
+    author: 'Ananya Joshi',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    rating: 5,
+    date: '02 Feb 2026',
+    title: 'Thin as rice grain texture shines nicely',
+    comment:
+      'Delicate yet surprisingly durable. The 21-inch length is ideal for casual shirts and neckline tops. Velvet pouch packaging was also very neat.',
+    verified: true,
+    helpfulCount: 14,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'rv-rice-4',
+    author: 'Riya Mehta',
+    city: 'Jaipur',
+    state: 'Rajasthan',
+    rating: 5,
+    date: '18 Feb 2026',
+    title: 'Super lightweight 2.5g, feels like nothing on neck',
+    comment:
+      'Bought for ₹349 and it exceeded expectations! The black silver polish gives it a modern chic vibe without looking cheap. Got so many compliments.',
+    verified: true,
+    helpfulCount: 11,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST = THIN_AS_RICE_SILVER_CHAIN_REVIEWS;
+
+export const THIN_AS_RICE_SILVER_CHAIN_CUSTOMER_MEDIA = [
+  {
+    id: 'm-tarc-1',
+    type: 'image',
+    image: '/rice_chain_user_1.webp',
+    author: 'Pooja Sharma',
+    caption: 'Real photo: Best quality and colour, wearing it with my collared shirt.',
+  },
+  {
+    id: 'm-tarc-2',
+    type: 'image',
+    image: '/rice_chain_user_2.webp',
+    author: 'Sneha Patel',
+    caption: 'Real photo: Close up of the delicate rice weave in daylight.',
+  },
+  {
+    id: 'm-tarc-3',
+    type: 'image',
+    image: '/rice_chain_user_3.webp',
+    author: 'Ananya Joshi',
+    caption: 'Real photo: Beautiful packaging and stunning black silver shine.',
+  },
+];
+
+
 
 
 

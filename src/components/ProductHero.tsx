@@ -91,6 +91,12 @@ import {
   DOLPHIN_CRYSTALS_PENDANT_COMBO_ADDITIONAL_DETAILS,
   DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS,
   DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST,
+  THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS,
+  THIN_AS_RICE_SILVER_CHAIN_PRODUCT_GALLERY,
+  THIN_AS_RICE_SILVER_CHAIN_PRODUCT_HIGHLIGHTS,
+  THIN_AS_RICE_SILVER_CHAIN_ADDITIONAL_DETAILS,
+  THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS,
+  THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST,
 } from '../data/productData';
 import {
   GPayLogo,
@@ -120,6 +126,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   onNavigateHome,
   children,
 }) => {
+  const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
   const isChoker = activeProductId === 'choker';
   const isShimmering = activeProductId === 'necklace-combo-5';
@@ -132,7 +139,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
 
-  const currentProduct: ProductDetails = isDolphinCombo
+  const currentProduct: ProductDetails = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
@@ -154,7 +163,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isDolphinCombo
+  const currentGallery = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_GALLERY
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_GALLERY
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_GALLERY
@@ -176,7 +187,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isDolphinCombo
+  const currentHighlights = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_HIGHLIGHTS
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_HIGHLIGHTS
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_HIGHLIGHTS
@@ -198,7 +211,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isDolphinCombo
+  const currentAdditionalDetails = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_ADDITIONAL_DETAILS
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_ADDITIONAL_DETAILS
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_ADDITIONAL_DETAILS
@@ -220,7 +235,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isDolphinCombo
+  const currentBundleOptions = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS
@@ -242,7 +259,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isDolphinCombo
+  const currentReviewsList = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS_LIST
@@ -269,7 +288,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   // Reset active image when product switches
   useEffect(() => {
     setActiveImageIndex(0);
-  }, [activeProductId, isDolphinCombo, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy, isAestheticCombo, isEmeraldSnake, isHandbagEarrings]);
+  }, [activeProductId, isRiceChain, isDolphinCombo, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy, isAestheticCombo, isEmeraldSnake, isHandbagEarrings]);
   const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
   const [isOfferExpanded, setIsOfferExpanded] = useState(true);
   const [activeReviewIdx, setActiveReviewIdx] = useState(0);

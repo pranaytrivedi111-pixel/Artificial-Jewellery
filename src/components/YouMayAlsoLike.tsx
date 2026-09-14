@@ -9,6 +9,8 @@ interface YouMayAlsoLikeProps {
 }
 
 const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'thin-as-rice-silver-chain':
+    '/products/trendy-designer-thin-as-rice-21-inches-25-gram-rice-chain-for-women-and-girls-black-silver-plated-brass-metal-chain',
   'dolphin-crystals-pendant-combo':
     '/products/combo-of-3-elegant-dolphin-crystals-pendant-necklace-for-women-silver-plated-round-charm-with-colored-stone-pink-purple-sky',
   'white-enamel-handbag-earrings':

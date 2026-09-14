@@ -7,7 +7,7 @@ export interface GenuineProduct {
   title: string;
   shortTitle: string;
   subtitle: string;
-  category: 'Necklace Sets' | 'Combo Deals' | 'Earrings & Jhumkas' | 'Celebrity Inspired' | 'Anti-Tarnish Jewellery';
+  category: 'Necklace Sets' | 'Combo Deals' | 'Earrings & Jhumkas' | 'Celebrity Inspired' | 'Anti-Tarnish Jewellery' | 'Chains & Necklaces';
   badge: string;
   price: number;
   originalPrice: number;
@@ -24,6 +24,34 @@ export interface GenuineProduct {
 }
 
 export const GENUINE_PRODUCTS: GenuineProduct[] = [
+  {
+    id: 'thin-as-rice-silver-chain',
+    slug: '/products/trendy-designer-thin-as-rice-21-inches-25-gram-rice-chain-for-women-and-girls-black-silver-plated-brass-metal-chain',
+    title:
+      'Trendy Designer Thin as Rice 21 inches 2.5 gram Rice chain for women and Girls Black Silver Plated Brass, Metal Chain',
+    shortTitle: 'Thin as Rice 21" Silver Chain',
+    subtitle:
+      'Ultra Delicate 2.5g Featherlight Weave • 21-Inch Princess Fit • Black Silver Mirror Luster',
+    category: 'Chains & Necklaces',
+    badge: 'MEESHO VIRAL TREND',
+    price: 349,
+    originalPrice: 999,
+    discountPercent: 65,
+    rating: 4.8,
+    reviewsCount: 890,
+    image: '/rice_chain_1.webp',
+    hoverImage: '/rice_chain_2.webp',
+    tag: 'Minimalist Daily Wear',
+    inStockCount: 14,
+    highlights: [
+      'Delicate "Thin as Rice" Diamond-Faceted Grain Link Weave',
+      '21 Inches (53.3 cm) Princess Length for Elegant Neckline Drape',
+      'Featherlight 2.5 Gram Weight (Zero Pull or Strain for 24/7 Comfort)',
+      'Black Silver High-Luster Plating with Anti-Tarnish Gloss Shield',
+    ],
+    occasion: 'Daily Wear, College, Office, Casual Western, Layering',
+    packageContains: '1x 21" Rice Chain Necklace + Luxury Qavelle Velvet Pouch',
+  },
   {
     id: 'dolphin-crystals-pendant-combo',
     slug: '/products/combo-of-3-elegant-dolphin-crystals-pendant-necklace-for-women-silver-plated-round-charm-with-colored-stone-pink-purple-sky',
@@ -315,7 +343,15 @@ export const HOME_CATEGORIES = [
     label: 'All Products',
     icon: '✨',
     image: '/Cinematic.webp',
-    count: 11,
+    count: 12,
+  },
+  {
+    id: 'rice-chain',
+    label: 'Thin As Rice Chain',
+    icon: '🌾',
+    image: '/rice_chain_1.webp',
+    count: 1,
+    targetProduct: 'thin-as-rice-silver-chain' as ProductId,
   },
   {
     id: 'dolphin-combo',

@@ -24,6 +24,8 @@ import {
   WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS,
   DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS,
   DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS,
+  THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS,
+  THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS,
 } from '../data/productData';
 import { ShieldCheck, Star } from 'lucide-react';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -36,6 +38,7 @@ interface StickyBottomBarProps {
 }
 
 const getFallbackBundle = (productId: ProductId | string = 'jhumka'): BundleOption => {
+  if (productId === 'thin-as-rice-silver-chain') return THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS[0];
   if (productId === 'dolphin-crystals-pendant-combo') return DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'white-enamel-handbag-earrings') return WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'emerald-snake-pendant') return EMERALD_SNAKE_BUNDLE_OPTIONS[0];
@@ -55,6 +58,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   onAddToCart,
   activeProductId = 'jhumka',
 }) => {
+  const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
   const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
@@ -69,7 +73,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   // Guaranteed safe fallback bundle to eliminate any undefined access
   const safeBundle = bundle && bundle.price ? bundle : getFallbackBundle(activeProductId);
 
-  const currentProduct = isDolphinCombo
+  const currentProduct = isRiceChain
+    ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
+    : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS
     : isHandbagEarrings
     ? WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS
@@ -91,7 +97,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentImage = isDolphinCombo
+  const currentImage = isRiceChain
+    ? '/rice_chain_1.webp'
+    : isDolphinCombo
     ? '/dolphin_f2.webp'
     : isHandbagEarrings
     ? '/e1.webp'

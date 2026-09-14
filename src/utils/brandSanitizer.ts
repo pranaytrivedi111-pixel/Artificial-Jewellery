@@ -54,11 +54,26 @@ export const PROHIBITED_BRAND_PATTERNS: BrandReplacementRule[] = [
     description: 'Allure to Royal',
   },
 
-  // Meesho and Meesho-affiliated supplier terminology -> QAVELLE / Direct Atelier
+  // Strict Meesho Auto-Removal Rules -> QAVELLE / Royal Online
   {
     pattern: /\bmeesho\.com\b/gi,
     replacement: 'qavelle.com',
     description: 'Meesho domain to Qavelle domain',
+  },
+  {
+    pattern: /\bmeesho\s+viral\s+(trend(ing)?|combo)?\b/gi,
+    replacement: 'Royal Viral',
+    description: 'Meesho viral to Royal Viral',
+  },
+  {
+    pattern: /\b(viral\s+on\s+meesho|trending\s+on\s+meesho)\b/gi,
+    replacement: 'viral online',
+    description: 'viral on meesho to viral online',
+  },
+  {
+    pattern: /\b(on|from|via)\s+meesho\b/gi,
+    replacement: 'online',
+    description: 'on/from meesho to online',
   },
   {
     pattern: /\bmeesho\s+reseller\b/gi,
@@ -86,12 +101,14 @@ export const PROHIBITED_BRAND_PATTERNS: BrandReplacementRule[] = [
     description: 'Meesho app to QAVELLE Official Store',
   },
   {
-    pattern: /\bmeesho\b/gi,
-    replacement: (match) => {
-      if (match === match.toUpperCase()) return 'QAVELLE';
-      return 'QAVELLE';
-    },
+    pattern: /\bmeesho('s)?\b/gi,
+    replacement: 'QAVELLE',
     description: 'Meesho to QAVELLE',
+  },
+  {
+    pattern: /meesho/gi,
+    replacement: 'QAVELLE',
+    description: 'Fallback universal meesho removal',
   },
   {
     pattern: /\bfashnear\s*(technologies)?\b/gi,
@@ -313,4 +330,20 @@ export function sanitizeDeep<T>(item: T): T {
   }
 
   return item;
+}
+
+/**
+ * Strict auto-removal utility that ensures the keyword "meesho" is never present
+ * in any rendered text, review, title, badge, or description.
+ */
+export function autoRemoveMeesho(text: string | undefined | null): string {
+  if (!text) return '';
+  let clean = String(text);
+  clean = clean.replace(/\bmeesho\.com\b/gi, 'qavelle.com');
+  clean = clean.replace(/\bmeesho\s+viral(\s+trend(ing)?|\s+combo)?\b/gi, 'Royal Viral');
+  clean = clean.replace(/\b(viral\s+on\s+meesho|trending\s+on\s+meesho)\b/gi, 'viral online');
+  clean = clean.replace(/\b(on|from|via)\s+meesho\b/gi, 'online');
+  clean = clean.replace(/\bmeesho('s)?\b/gi, 'QAVELLE');
+  clean = clean.replace(/meesho/gi, 'QAVELLE');
+  return clean.replace(/\s{2,}/g, ' ').trim();
 }

@@ -39,6 +39,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   }, []);
 
   const [selectedHeroIndex, setSelectedHeroIndex] = useState<number>(0);
+  const [slideDirection, setSlideDirection] = useState<number>(1); // 1 = forward/next, -1 = backward/prev
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const currentHeroProduct = heroProducts[selectedHeroIndex] || heroProducts[0];
@@ -46,12 +47,13 @@ export const HomePage: React.FC<HomePageProps> = ({
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   const thumbnailButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Continuous auto-slider: automatically advances hero product every 3.5 seconds
+  // Continuous auto-slider: automatically advances hero product smoothly every 3.8 seconds
   useEffect(() => {
     if (isPaused || heroProducts.length <= 1) return;
     const interval = setInterval(() => {
+      setSlideDirection(1);
       setSelectedHeroIndex((prev) => (prev + 1) % heroProducts.length);
-    }, 3500);
+    }, 3800);
     return () => clearInterval(interval);
   }, [isPaused, heroProducts.length]);
 
@@ -79,14 +81,76 @@ export const HomePage: React.FC<HomePageProps> = ({
     }
   }, [selectedHeroIndex]);
 
-  // When user clicks a thumbnail, switch to it immediately and resume auto-sliding after 5s
+  // When user clicks a thumbnail or dot, switch smoothly in the correct direction
   const handleSelectHero = (idx: number) => {
-    setSelectedHeroIndex(idx);
+    if (idx !== selectedHeroIndex) {
+      setSlideDirection(idx > selectedHeroIndex ? 1 : -1);
+      setSelectedHeroIndex(idx);
+    }
     setIsPaused(true);
     if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     pauseTimeoutRef.current = setTimeout(() => {
       setIsPaused(false);
     }, 5000);
+  };
+
+  // Mobile touch swipe gestures on hero product card
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+
+    // Trigger only if horizontal swipe is clearly dominant
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.3) {
+      if (deltaX < 0) {
+        // Swipe left -> advance to next product
+        const nextIdx = (selectedHeroIndex + 1) % heroProducts.length;
+        handleSelectHero(nextIdx);
+      } else {
+        // Swipe right -> return to previous product
+        const prevIdx = (selectedHeroIndex - 1 + heroProducts.length) % heroProducts.length;
+        handleSelectHero(prevIdx);
+      }
+    }
+  };
+
+  // Luxury bespoke image transition variants with hardware-accelerated parallax and subtle zoom
+  const heroImageVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 44 : -44,
+      opacity: 0,
+      scale: 0.96,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        x: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.38, ease: [0.16, 1, 0.3, 1] },
+        scale: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+      },
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -44 : 44,
+      opacity: 0,
+      scale: 1.02,
+      transition: {
+        x: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.32, ease: [0.16, 1, 0.3, 1] },
+        scale: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+      },
+    }),
   };
 
   // FAQ Accordion State (supports 2-column desktop view with independent item toggling)
@@ -225,6 +289,8 @@ export const HomePage: React.FC<HomePageProps> = ({
           onClick={() => onSelectProduct(currentHeroProduct.id)}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           className="group relative w-full max-w-full sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-sm hover:shadow-md hover:border-amber-300 transition-all duration-300 cursor-pointer overflow-hidden select-none"
           title={`Click to view ${currentHeroProduct.title}`}
         >
@@ -232,19 +298,20 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="block lg:hidden p-1 sm:p-2">
             {/* Pristine Clean Image Container - Aspect Square Fit to Screen (Strictly ZERO Arrow, Text, Badge, or Rating Overlay on Image) */}
             <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF8F5] flex items-center justify-center">
-              <AnimatePresence mode="wait">
+              <AnimatePresence custom={slideDirection} initial={false}>
                 <motion.div
-                  key={currentHeroProduct.id}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="w-full h-full flex items-center justify-center"
+                  key={`hero-img-mob-${currentHeroProduct.id}`}
+                  custom={slideDirection}
+                  variants={heroImageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0 w-full h-full flex items-center justify-center p-1 sm:p-2 will-change-transform"
                 >
                   <img
                     src={currentHeroProduct.image}
                     alt={currentHeroProduct.title}
-                    className="w-full h-full object-contain rounded-2xl sm:rounded-3xl select-none transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain rounded-2xl sm:rounded-3xl select-none transition-transform duration-500 group-hover:scale-105 pointer-events-none"
                     loading="eager"
                     referrerPolicy="no-referrer"
                   />
@@ -254,42 +321,52 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             {/* Product Details cleanly placed underneath the photo */}
             <div className="mt-2.5 px-2 pb-2">
-              <div className="flex items-center justify-between gap-1.5 flex-wrap mb-1">
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#B3874B]">
-                  {currentHeroProduct.category}
-                </span>
-                <div className="flex items-center gap-1.5">
-                  <span className="bg-stone-100 text-stone-800 text-[9.5px] font-bold px-2 py-0.5 rounded-full border border-stone-200">
-                    {currentHeroProduct.badge}
-                  </span>
-                  <div className="flex items-center gap-1 bg-emerald-50 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-emerald-100">
-                    <Star className="w-2.5 h-2.5 fill-emerald-600 text-emerald-600" />
-                    <span>{currentHeroProduct.rating}</span>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`hero-details-mob-${currentHeroProduct.id}`}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22, ease: 'easeOut' }}
+                >
+                  <div className="flex items-center justify-between gap-1.5 flex-wrap mb-1">
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#B3874B]">
+                      {currentHeroProduct.category}
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="bg-stone-100 text-stone-800 text-[9.5px] font-bold px-2 py-0.5 rounded-full border border-stone-200">
+                        {currentHeroProduct.badge}
+                      </span>
+                      <div className="flex items-center gap-1 bg-emerald-50 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-emerald-100">
+                        <Star className="w-2.5 h-2.5 fill-emerald-600 text-emerald-600" />
+                        <span>{currentHeroProduct.rating}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              <h2 className="text-xs sm:text-sm font-semibold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug line-clamp-1 mt-0.5">
-                {currentHeroProduct.title}
-              </h2>
+                  <h2 className="text-xs sm:text-sm font-semibold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug line-clamp-1 mt-0.5">
+                    {currentHeroProduct.title}
+                  </h2>
 
-              <div className="mt-1 flex items-baseline gap-2 flex-wrap">
-                <span className="text-base sm:text-lg font-black text-gray-950">
-                  ₹{currentHeroProduct.price}
-                </span>
-                <span className="text-xs text-gray-400 line-through font-normal">
-                  ₹{currentHeroProduct.originalPrice}
-                </span>
-                <span className="text-xs font-bold text-[#B3874B]">
-                  ({currentHeroProduct.discountPercent}% OFF)
-                </span>
-              </div>
+                  <div className="mt-1 flex items-baseline gap-2 flex-wrap">
+                    <span className="text-base sm:text-lg font-black text-gray-950">
+                      ₹{currentHeroProduct.price}
+                    </span>
+                    <span className="text-xs text-gray-400 line-through font-normal">
+                      ₹{currentHeroProduct.originalPrice}
+                    </span>
+                    <span className="text-xs font-bold text-[#B3874B]">
+                      ({currentHeroProduct.discountPercent}% OFF)
+                    </span>
+                  </div>
 
-              {/* Action Bar */}
-              <div className="mt-2 w-full bg-[#111111] group-hover:bg-[#B3874B] text-white py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs">
-                <span>View Product Details & Offers</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </div>
+                  {/* Action Bar */}
+                  <div className="mt-2 w-full bg-[#111111] group-hover:bg-[#B3874B] text-white py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs">
+                    <span>View Product Details & Offers</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
@@ -297,19 +374,20 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="hidden lg:grid lg:grid-cols-12 items-center p-3 xl:p-4 gap-4 xl:gap-6">
             {/* Left Col: Pristine Clean Main Product Photo Fit to Screen (Aspect-Square, Zero Arrow/Badge/Rating Overlay) */}
             <div className="lg:col-span-5 xl:col-span-5 relative aspect-square w-full max-w-[270px] xl:max-w-[300px] 2xl:max-w-[320px] mx-auto rounded-2xl overflow-hidden bg-[#FAF8F5] flex items-center justify-center">
-              <AnimatePresence mode="wait">
+              <AnimatePresence custom={slideDirection} initial={false}>
                 <motion.div
-                  key={currentHeroProduct.id}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="w-full h-full flex items-center justify-center p-1"
+                  key={`hero-img-desk-${currentHeroProduct.id}`}
+                  custom={slideDirection}
+                  variants={heroImageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0 w-full h-full flex items-center justify-center p-1 xl:p-2 will-change-transform"
                 >
                   <img
                     src={currentHeroProduct.image}
                     alt={currentHeroProduct.title}
-                    className="w-full h-full object-contain rounded-2xl select-none transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain rounded-2xl select-none transition-transform duration-500 group-hover:scale-105 pointer-events-none"
                     loading="eager"
                     referrerPolicy="no-referrer"
                   />
@@ -319,78 +397,89 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             {/* Right Col: Product Information, Badges, Price & CTA */}
             <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-between h-full py-0.5">
-              <div>
-                <div className="flex items-center gap-2 text-xs font-semibold text-gray-600 flex-wrap">
-                  <span className="text-[#B3874B] font-bold uppercase tracking-wider">
-                    {currentHeroProduct.category}
-                  </span>
-                  <span className="text-stone-300">•</span>
-                  <span className="bg-stone-100 text-stone-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-stone-200">
-                    {currentHeroProduct.badge}
-                  </span>
-                  <span className="text-stone-300">•</span>
-                  <div className="flex items-center gap-1 bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-md font-bold text-xs border border-emerald-100">
-                    <span>{currentHeroProduct.rating}</span>
-                    <Star className="w-3 h-3 fill-emerald-600 text-emerald-600" />
-                  </div>
-                  <span className="text-gray-500 font-medium text-[11px]">
-                    ({currentHeroProduct.reviewsCount.toLocaleString()} Reviews)
-                  </span>
-                </div>
-
-                <h2
-                  className="text-base xl:text-lg 2xl:text-xl font-bold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug mt-1.5"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`hero-details-desk-${currentHeroProduct.id}`}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22, ease: 'easeOut' }}
+                  className="flex flex-col justify-between h-full"
                 >
-                  {currentHeroProduct.title}
-                </h2>
+                  <div>
+                    <div className="flex items-center gap-2 text-xs font-semibold text-gray-600 flex-wrap">
+                      <span className="text-[#B3874B] font-bold uppercase tracking-wider">
+                        {currentHeroProduct.category}
+                      </span>
+                      <span className="text-stone-300">•</span>
+                      <span className="bg-stone-100 text-stone-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-stone-200">
+                        {currentHeroProduct.badge}
+                      </span>
+                      <span className="text-stone-300">•</span>
+                      <div className="flex items-center gap-1 bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-md font-bold text-xs border border-emerald-100">
+                        <span>{currentHeroProduct.rating}</span>
+                        <Star className="w-3 h-3 fill-emerald-600 text-emerald-600" />
+                      </div>
+                      <span className="text-gray-500 font-medium text-[11px]">
+                        ({currentHeroProduct.reviewsCount.toLocaleString()} Reviews)
+                      </span>
+                    </div>
 
-                <p className="text-xs text-gray-600 mt-1 leading-relaxed line-clamp-2">
-                  {currentHeroProduct.subtitle}
-                </p>
+                    <h2
+                      className="text-base xl:text-lg 2xl:text-xl font-bold text-gray-950 group-hover:text-[#B3874B] transition-colors leading-snug mt-1.5"
+                      style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                    >
+                      {currentHeroProduct.title}
+                    </h2>
 
-                {/* Highlights */}
-                <div className="mt-2.5 grid grid-cols-2 gap-1 text-[11px] text-gray-700">
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
-                    <span className="truncate">24K Micro Gold Polish</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
-                    <span className="truncate">Free Express Delivery</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
-                    <span className="truncate">Hypoallergenic & Skin Safe</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
-                    <span className="truncate">Cash on Delivery Available</span>
-                  </div>
-                </div>
-              </div>
+                    <p className="text-xs text-gray-600 mt-1 leading-relaxed line-clamp-2">
+                      {currentHeroProduct.subtitle}
+                    </p>
 
-              {/* Price Row & CTA */}
-              <div className="mt-3 pt-2.5 border-t border-stone-200/80 flex items-center justify-between gap-4">
-                <div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-xl xl:text-2xl font-black text-gray-950">
-                      ₹{currentHeroProduct.price}
-                    </span>
-                    <span className="text-xs text-gray-400 line-through font-normal">
-                      MRP ₹{currentHeroProduct.originalPrice}
-                    </span>
+                    {/* Highlights */}
+                    <div className="mt-2.5 grid grid-cols-2 gap-1 text-[11px] text-gray-700">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                        <span className="truncate">24K Micro Gold Polish</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                        <span className="truncate">Free Express Delivery</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                        <span className="truncate">Hypoallergenic & Skin Safe</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B3874B] shrink-0" />
+                        <span className="truncate">Cash on Delivery Available</span>
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-[11px] font-bold text-[#B3874B]">
-                    {currentHeroProduct.discountPercent}% OFF • Special Royal Offer
-                  </span>
-                </div>
 
-                <div className="bg-[#111111] group-hover:bg-[#B3874B] text-white px-4 py-2 rounded-xl text-xs xl:text-sm font-bold flex items-center gap-2 transition-colors shadow-xs shrink-0">
-                  <span>View Product Details</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </div>
-              </div>
+                  {/* Price Row & CTA */}
+                  <div className="mt-3 pt-2.5 border-t border-stone-200/80 flex items-center justify-between gap-4">
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xl xl:text-2xl font-black text-gray-950">
+                          ₹{currentHeroProduct.price}
+                        </span>
+                        <span className="text-xs text-gray-400 line-through font-normal">
+                          MRP ₹{currentHeroProduct.originalPrice}
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-bold text-[#B3874B]">
+                        {currentHeroProduct.discountPercent}% OFF • Special Royal Offer
+                      </span>
+                    </div>
+
+                    <div className="bg-[#111111] group-hover:bg-[#B3874B] text-white px-4 py-2 rounded-xl text-xs xl:text-sm font-bold flex items-center gap-2 transition-colors shadow-xs shrink-0">
+                      <span>View Product Details</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 

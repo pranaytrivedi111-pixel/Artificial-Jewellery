@@ -2551,7 +2551,7 @@ export const EMERALD_SNAKE_REVIEWS: ReviewItem[] = [
     date: '5 days ago',
     title: 'Best daily wear chain I own, 10/10 recommend!',
     comment:
-      'Ordered after seeing it viral on Meesho and Qavelle’s finishing is even better! The emerald pendant is gorgeous and the clasp is super sturdy. Love the ₹100 + ₹25 prepaid discount as well.',
+      'Ordered after seeing it viral online and Qavelle’s finishing is even better! The emerald pendant is gorgeous and the clasp is super sturdy. Love the ₹100 + ₹25 prepaid discount as well.',
     verified: true,
     helpfulCount: 89,
     badge: 'Verified Buyer',
@@ -2601,7 +2601,7 @@ export const EMERALD_SNAKE_CUSTOMER_MEDIA = [
 // ============================================================================
 // 10. HIGH GRADE U-SHAPED WHITE ENAMEL HANDBAG DROP EARRINGS (63up0k)
 // Product ID: 'white-enamel-handbag-earrings'
-// Meesho Code: 63up0k
+// Atelier Code: 63up0k
 // ============================================================================
 export const WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG =
   '/products/suyug-high-grade-u-shaped-white-enemel-handbag-drop-earrings-for-women-and-girls';
@@ -2651,7 +2651,7 @@ export const WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS = {
   currentLiveViewers: 41,
   freeDeliveryThreshold: 0,
   brand: 'QAVELLE',
-  urgencyText: 'Only 19 pairs left in stock — High demand on Meesho & Instagram!',
+  urgencyText: 'Only 19 pairs left in stock — High demand across India & Instagram!',
   fullDescription:
     'A breathtaking fusion of playful whimsy and modern Parisian couture elegance. Crafted with an ultra-lightweight hypoallergenic alloy core and bathed in 18K yellow gold micron plating, each earring features a dainty U-shaped miniature handbag silhouette filled with high-gloss milk-white enamel inlay and an arched golden handle. Designed with a secure click-top hinged latch back, these earrings deliver effortless all-day comfort without tugging on sensitive ear lobes. Perfect for elevating casual denim, chic office blazers, brunch dates, or festive fusion ensembles.',
   description:
@@ -2771,7 +2771,7 @@ export const WHITE_ENAMEL_HANDBAG_EARRINGS_REVIEWS: ReviewItem[] = [
     date: 'Yesterday',
     title: 'Cutest earrings ever! Looks like high-end designer jewelry',
     comment:
-      'Saw this trending on Meesho and ordered directly from Qavelle. The white enamel has such a lustrous pearl-like gloss and the gold border is vibrant without looking brassy. They are unbelievably lightweight — I wore them all day at work and completely forgot I had them on! Unbeatable price at ₹399.',
+      'Saw this trending on Instagram and ordered directly from Qavelle. The white enamel has such a lustrous pearl-like gloss and the gold border is vibrant without looking brassy. They are unbelievably lightweight — I wore them all day at work and completely forgot I had them on! Unbeatable price at ₹399.',
     verified: true,
     helpfulCount: 94,
     badge: 'Verified Buyer',
@@ -2849,7 +2849,7 @@ export const WHITE_ENAMEL_HANDBAG_EARRINGS_CUSTOMER_MEDIA = [
 // ============================================================================
 // 11. COMBO OF 3 ELEGANT DOLPHIN CRYSTALS PENDANT NECKLACES (f1v4i9)
 // Product ID: 'dolphin-crystals-pendant-combo'
-// Meesho Code: f1v4i9
+// Atelier Code: f1v4i9
 // ============================================================================
 export const DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG =
   '/products/combo-of-3-elegant-dolphin-crystals-pendant-necklace-for-women-silver-plated-round-charm-with-colored-stone-pink-purple-sky';
@@ -2899,11 +2899,11 @@ export const DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS = {
   currentLiveViewers: 47,
   freeDeliveryThreshold: 0,
   brand: 'QAVELLE',
-  urgencyText: 'Only 12 combo sets left at ₹499 offer — Viral trending on Meesho & Instagram!',
+  urgencyText: 'Only 12 combo sets left at ₹499 offer — Viral trending across India & Instagram!',
   fullDescription:
-    'An enchanting symbol of joy, freedom, harmony, and affectionate friendship. This best-selling Meesho viral combo includes 3 individual silver-plated pendant necklaces, each showcasing a finely sculpted leaping dolphin silhouette encircling a brilliant round faceted crystal gemstone. You receive all three radiant gemstone hues: delicate Blush Rose Pink, mystical Amethyst Purple, and serene Ocean Sky Blue. Suspended on sleek, skin-friendly silver-plated link chains with secure lobster clasp closures, each piece effortlessly complements Western chic, casual college outfits, brunch wear, and gifting moments.',
+    'An enchanting symbol of joy, freedom, harmony, and affectionate friendship. This best-selling signature viral combo includes 3 individual silver-plated pendant necklaces, each showcasing a finely sculpted leaping dolphin silhouette encircling a brilliant round faceted crystal gemstone. You receive all three radiant gemstone hues: delicate Blush Rose Pink, mystical Amethyst Purple, and serene Ocean Sky Blue. Suspended on sleek, skin-friendly silver-plated link chains with secure lobster clasp closures, each piece effortlessly complements Western chic, casual college outfits, brunch wear, and gifting moments.',
   description:
-    'An enchanting symbol of joy, freedom, harmony, and affectionate friendship. This best-selling Meesho viral combo includes 3 individual silver-plated pendant necklaces, each showcasing a finely sculpted leaping dolphin silhouette encircling a brilliant round faceted crystal gemstone. You receive all three radiant gemstone hues: delicate Blush Rose Pink, mystical Amethyst Purple, and serene Ocean Sky Blue. Suspended on sleek, skin-friendly silver-plated link chains with secure lobster clasp closures, each piece effortlessly complements Western chic, casual college outfits, brunch wear, and gifting moments.',
+    'An enchanting symbol of joy, freedom, harmony, and affectionate friendship. This best-selling signature viral combo includes 3 individual silver-plated pendant necklaces, each showcasing a finely sculpted leaping dolphin silhouette encircling a brilliant round faceted crystal gemstone. You receive all three radiant gemstone hues: delicate Blush Rose Pink, mystical Amethyst Purple, and serene Ocean Sky Blue. Suspended on sleek, skin-friendly silver-plated link chains with secure lobster clasp closures, each piece effortlessly complements Western chic, casual college outfits, brunch wear, and gifting moments.',
   features: [
     'Combo Set of 3 Complete Necklaces (Includes Rose Pink, Amethyst Purple & Ocean Sky Blue)',
     'Intricately Sculpted Leaping Dolphin Silhouette Wrapping a Faceted Sparkling Crystal',
@@ -3048,7 +3048,7 @@ export const DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS: ReviewItem[] = [
     date: '3 days ago',
     title: 'The dolphin carving detail is so delicate and clear',
     comment:
-      'Saw this viral on Meesho for a higher price and bought here for ₹499 with quick delivery. The dolphin wrapping around the crystal looks even better in real life. The purple crystal is very royal and the pink is so subtle and pretty. Lobster clasp works smoothly.',
+      'Saw this viral online for a higher price and bought here for ₹499 with quick delivery. The dolphin wrapping around the crystal looks even better in real life. The purple crystal is very royal and the pink is so subtle and pretty. Lobster clasp works smoothly.',
     verified: true,
     helpfulCount: 98,
     badge: 'Verified Buyer',
@@ -3110,7 +3110,7 @@ export const DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA = [
 ];
 
 // ==========================================
-// 12. THIN AS RICE 21 INCHES SILVER CHAIN (MEESHO 70gs5y / 424046230)
+// 12. THIN AS RICE 21 INCHES SILVER CHAIN (ATELIER 70gs5y / 424046230)
 // ==========================================
 
 export const THIN_AS_RICE_SILVER_CHAIN_SLUG =
@@ -3161,7 +3161,7 @@ export const THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS = {
   currentLiveViewers: 39,
   freeDeliveryThreshold: 0,
   brand: 'QAVELLE',
-  urgencyText: 'Trending on Meesho & Reels! Only 14 pieces left at ₹349 special price.',
+  urgencyText: 'Trending on Instagram & Reels! Only 14 pieces left at ₹349 special price.',
   fullDescription:
     'Indulge in understated luxury with the viral "Thin as Rice" chain necklace. Crafted from premium brass with high-shine black silver micron plating, this piece features an ultra-fine rice-grain faceted weave that catches and reflects ambient light like diamonds. Measuring 21 inches in length and weighing just 2.5 grams, it provides a featherweight, skin-friendly silhouette that is barely felt yet distinctly visible. Perfect as an everyday standalone minimal necklace or for layering with your favourite pendants.',
   description:

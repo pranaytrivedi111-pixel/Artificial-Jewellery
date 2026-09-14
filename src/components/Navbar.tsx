@@ -11,6 +11,7 @@ import {
 import { ASSET_IMAGES } from '../data/productData';
 import { GENUINE_PRODUCTS } from '../data/homeCatalog';
 import { ProductId } from '../types';
+import { autoRemoveMeesho } from '../utils/brandSanitizer';
 
 interface NavbarProps {
   cartCount: number;
@@ -39,12 +40,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [headerSearchQuery, setHeaderSearchQuery] = useState('');
 
-  const searchResults = headerSearchQuery.trim()
+  const cleanedSearchQuery = autoRemoveMeesho(headerSearchQuery).trim();
+  const searchResults = cleanedSearchQuery
     ? GENUINE_PRODUCTS.filter(
         (p) =>
-          p.title.toLowerCase().includes(headerSearchQuery.toLowerCase()) ||
-          p.subtitle.toLowerCase().includes(headerSearchQuery.toLowerCase()) ||
-          p.category.toLowerCase().includes(headerSearchQuery.toLowerCase())
+          p.title.toLowerCase().includes(cleanedSearchQuery.toLowerCase()) ||
+          p.subtitle.toLowerCase().includes(cleanedSearchQuery.toLowerCase()) ||
+          p.category.toLowerCase().includes(cleanedSearchQuery.toLowerCase())
       )
     : [];
 
@@ -158,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="text"
                   autoFocus
                   value={headerSearchQuery}
-                  onChange={(e) => setHeaderSearchQuery(e.target.value)}
+                  onChange={(e) => setHeaderSearchQuery(autoRemoveMeesho(e.target.value))}
                   placeholder="Search for necklace sets, combo of 5, choker, jhumkas..."
                   className="w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition-all"
                 />

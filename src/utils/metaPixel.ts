@@ -7,6 +7,7 @@ export const META_PIXEL_ID = '1081286841529389';
 
 // Exact 1-to-1 SKU Mapping for QAVELLE's Catalog Products
 export const PRODUCT_ID_TO_SKU: Record<string, string> = {
+  'designer-metal-analog-watch': 'QVL-WATCH-6AYLP7',
   'korean-peacock-pearl-earrings': 'QVL-PEACOCK-6SQGX4',
   'thin-as-rice-silver-chain': 'QVL-RICE-70GS5Y',
   'dolphin-crystals-pendant-combo': 'QVL-DOLPHIN-F1V4I9',
@@ -27,6 +28,12 @@ export const CATALOG_PRODUCTS_INFO: Record<
   string,
   { sku: string; title: string; price: number; category: string }
 > = {
+  'designer-metal-analog-watch': {
+    sku: 'QVL-WATCH-6AYLP7',
+    title: 'New Solid Designer Metal Analog Watches For Women',
+    price: 299,
+    category: 'Watches & Accessories',
+  },
   'korean-peacock-pearl-earrings': {
     sku: 'QVL-PEACOCK-6SQGX4',
     title: 'Korean Glorious Pearl Gold Plated Peacock Motif Earring for Women with White Moti & Cubic Zirconia Drops Danglers',

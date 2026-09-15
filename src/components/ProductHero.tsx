@@ -103,6 +103,12 @@ import {
   KOREAN_PEACOCK_PEARL_EARRINGS_ADDITIONAL_DETAILS,
   KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS,
   KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST,
+  DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS,
+  DESIGNER_METAL_ANALOG_WATCH_PRODUCT_GALLERY,
+  DESIGNER_METAL_ANALOG_WATCH_PRODUCT_HIGHLIGHTS,
+  DESIGNER_METAL_ANALOG_WATCH_ADDITIONAL_DETAILS,
+  DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS,
+  DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST,
 } from '../data/productData';
 import {
   GPayLogo,
@@ -132,6 +138,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   onNavigateHome,
   children,
 }) => {
+  const isWatch = activeProductId === 'designer-metal-analog-watch';
   const isPeacockEarrings = activeProductId === 'korean-peacock-pearl-earrings';
   const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
@@ -146,7 +153,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
 
-  const currentProduct: ProductDetails = isPeacockEarrings
+  const currentProduct: ProductDetails = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
@@ -172,7 +181,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isPeacockEarrings
+  const currentGallery = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_GALLERY
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_GALLERY
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_GALLERY
@@ -198,7 +209,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isPeacockEarrings
+  const currentHighlights = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_HIGHLIGHTS
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_HIGHLIGHTS
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_HIGHLIGHTS
@@ -224,7 +237,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isPeacockEarrings
+  const currentAdditionalDetails = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_ADDITIONAL_DETAILS
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_ADDITIONAL_DETAILS
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_ADDITIONAL_DETAILS
@@ -250,7 +265,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isPeacockEarrings
+  const currentBundleOptions = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS
@@ -276,7 +293,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isPeacockEarrings
+  const currentReviewsList = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST
@@ -307,7 +326,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   // Reset active image when product switches
   useEffect(() => {
     setActiveImageIndex(0);
-  }, [activeProductId, isRiceChain, isDolphinCombo, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy, isAestheticCombo, isEmeraldSnake, isHandbagEarrings]);
+  }, [activeProductId, isWatch, isPeacockEarrings, isRiceChain, isDolphinCombo, isChoker, isCombo5, isRadhikaGreen, isAllureGold, isTrendyAlloy, isAestheticCombo, isEmeraldSnake, isHandbagEarrings]);
   const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
   const [isOfferExpanded, setIsOfferExpanded] = useState(true);
   const [activeReviewIdx, setActiveReviewIdx] = useState(0);
@@ -703,7 +722,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                   buttonClassName="text-emerald-800 hover:text-emerald-950 font-semibold text-[11px] sm:text-xs"
                 >
                   {currentReviewsList[activeReviewIdx]?.comment ||
-                    (isCombo5
+                    (isWatch
+                      ? 'I ordered this after seeing it viral online. The solid metal feel, shiny link bracelet and accurate timekeeping are top tier.'
+                      : isCombo5
                       ? 'All 5 necklaces are sleek & subtle! Incredible value for ₹349. Beautiful design and doesn’t tarnish.'
                       : isChoker
                       ? 'Wore this set for my sister wedding reception. Everyone thought it was real polki diamond jewelry! Heavy royal look without hurting neckline.'
@@ -770,7 +791,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                     Product Highlights
                   </h3>
                   <span className="text-[11px] font-bold uppercase bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-md">
-                    {isRadhikaGreen
+                    {isWatch
+                      ? 'Designer Metal Watch'
+                      : isRadhikaGreen
                       ? 'Celebrity Bridal AD Set'
                       : isCombo5
                       ? 'Combo of 5'
@@ -822,9 +845,32 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
               {/* Key Craftsmanship Points */}
               <div className="p-4 rounded-2xl bg-[#FFFDF6] border border-[#F4EEDC]">
                 <h3 className="text-[14px] sm:text-[15px] font-bold text-black mb-2">
-                  Key Craftsmanship & Heritage:
+                  {isWatch ? 'Timepiece Engineering & Craftsmanship:' : 'Key Craftsmanship & Heritage:'}
                 </h3>
-                {isRadhikaGreen ? (
+                {isWatch ? (
+                  <ul className="space-y-1 text-[13px] sm:text-[14px] text-gray-900">
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-amber-600 font-bold">&bull;</span>
+                      <span><strong className="font-bold text-black">Solid Stainless Steel Link Strap</strong> - Precision-cast metal links with mirror-gloss electroplated luster</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-amber-600 font-bold">&bull;</span>
+                      <span><strong className="font-bold text-black">High-Precision Quartz Movement</strong> - Accurate analog timekeeping powered by long-life pre-installed battery</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-amber-600 font-bold">&bull;</span>
+                      <span><strong className="font-bold text-black">Scratch-Resistant Mineral Crystal Glass</strong> - Hardened crystal dial window protecting radiant sunburst watch face</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-amber-600 font-bold">&bull;</span>
+                      <span><strong className="font-bold text-black">Secure Fold-Over Deployment Clasp</strong> - Ergonomic safety clasp with removable links for custom wrist adjustment</span>
+                    </li>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-amber-600 font-bold">&bull;</span>
+                      <span><strong className="font-bold text-black">3ATM Daily Splash Resistance</strong> - Safe against daily handwash, sweat, and rain splashes; hypoallergenic stainless steel case back</span>
+                    </li>
+                  </ul>
+                ) : isRadhikaGreen ? (
                   <ul className="space-y-1 text-[13px] sm:text-[14px] text-gray-900">
                     <li className="flex items-start gap-1.5">
                       <span className="text-emerald-700 font-bold">&bull;</span>
@@ -916,7 +962,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                   collapseLabel="Read less"
                   buttonClassName="text-amber-800 hover:text-amber-950 font-semibold text-xs"
                 >
-                  {isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
+                  {isWatch ? 'Solid stainless steel link bracelet with hardened mineral crystal glass and Japanese quartz movement. Wipe clean with a soft dry cloth. Avoid spraying direct perfume, body mist, or alcohol-based sanitizer directly on the dial and strap.' : isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
                 </ReadMoreText>
               </div>
             </div>

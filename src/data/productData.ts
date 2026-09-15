@@ -3623,6 +3623,264 @@ export const KOREAN_PEACOCK_PEARL_EARRINGS_CUSTOMER_MEDIA = [
   },
 ];
 
+// ==========================================
+// 14. NEW SOLID DESIGNER METAL ANALOG WATCHES FOR WOMEN (6aylp7)
+// ==========================================
+
+export const DESIGNER_METAL_ANALOG_WATCH_SLUG =
+  '/products/new-solid-designer-metal-analog-watches-for-women';
+
+export const DESIGNER_METAL_ANALOG_WATCH_MATCHING_VARIANTS = [
+  {
+    id: 'watch-style-1',
+    name: 'Style 1 - Classic Gold Link',
+    color: '#EAB308',
+    borderColor: '#CA8A04',
+    image: '/h1.png',
+    inStock: true,
+  },
+  {
+    id: 'watch-style-2',
+    name: 'Style 2 - Sunburst Dial Edition',
+    color: '#FDA4AF',
+    borderColor: '#F43F5E',
+    image: '/h2.png',
+    inStock: true,
+  },
+  {
+    id: 'watch-style-3',
+    name: 'Style 3 - Royal Metallic Duo',
+    color: '#E2E8F0',
+    borderColor: '#94A3B8',
+    image: '/h3.png',
+    inStock: true,
+  },
+];
+
+export const DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS = {
+  id: 'designer-metal-analog-watch',
+  title: 'New Solid Designer Metal Analog Watches For Women',
+  shortTitle: 'Solid Designer Metal Analog Watch',
+  tagline:
+    'Solid Stainless Steel Link Strap • High-Accuracy Quartz Movement • Anti-Tarnish 18K Gold Finish',
+  subtitle:
+    'Solid Stainless Steel Link Strap • High-Accuracy Quartz Movement • Anti-Tarnish 18K Gold Finish',
+  price: 299,
+  originalPrice: 1299,
+  regularPrice: 1299,
+  salePrice: 299,
+  discountPercent: 77,
+  discountPercentage: 77,
+  rating: 4.9,
+  ratingsCount: 8940,
+  reviewsCount: 1420,
+  sku: 'QVL-WATCH-6AYLP7',
+  inStock: true,
+  stockLeft: 12,
+  inStockCount: 12,
+  recentSales24h: 486,
+  currentLiveViewers: 63,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  urgencyText: 'Only 12 watches remaining at ₹299 — Royal Viral Trend selling fast across India!',
+  fullDescription:
+    'Indulge in timeless elegance with the New Solid Designer Metal Analog Watch for Women by QAVELLE. Expertly engineered with a solid stainless steel link strap, this exquisite timepiece showcases a gleaming sunburst analog dial framed by crystal-accented hour indices. Equipped with high-precision quartz movement and protected by scratch-resistant mineral crystal glass, it combines opulent royal aesthetics with everyday durability. Featuring an anti-tarnish 18K electroplated luster and a comfortable fold-over deployment clasp, it effortlessly elevates festive wear, office attire, and chic evening parties.',
+  description:
+    'Indulge in timeless elegance with the New Solid Designer Metal Analog Watch for Women by QAVELLE. Expertly engineered with a solid stainless steel link strap, this exquisite timepiece showcases a gleaming sunburst analog dial framed by crystal-accented hour indices. Equipped with high-precision quartz movement and protected by scratch-resistant mineral crystal glass, it combines opulent royal aesthetics with everyday durability. Featuring an anti-tarnish 18K electroplated luster and a comfortable fold-over deployment clasp, it effortlessly elevates festive wear, office attire, and chic evening parties.',
+  features: [
+    'Solid Stainless Steel Link Strap with Secure Safety Fold-Over Deployment Clasp',
+    'High-Precision Japanese Quartz Analog Movement (Battery Included & Pre-Installed)',
+    'Scratch-Resistant Hardened Mineral Crystal Glass Dial Window',
+    'Anti-Tarnish 18K Micron Electroplating with Mirror-Gloss Luster',
+    '3ATM Daily Water Resistance (Splash, Handwash & Rain Proof)',
+    '100% Hypoallergenic & Skin-Safe Nickel-Free Stainless Steel Case Back',
+    'Arrives in Signature Qavelle Velvet Watch Presentation Box with 1-Year Movement Warranty Card',
+  ],
+  size: 'Case Diameter: 32 mm | Case Thickness: 8 mm | Strap Width: 14 mm | Weight: 58g',
+  dimensions: 'Case Diameter: 32 mm | Case Thickness: 8 mm | Strap Width: 14 mm | Weight: 58g',
+  materials:
+    'Solid Stainless Steel, 18K Micron Gold Electroplating, Hardened Mineral Glass, Japanese Quartz Core',
+  countryOfOrigin: 'India',
+};
+
+export const DESIGNER_METAL_ANALOG_WATCH_PRODUCT_HIGHLIGHTS = [
+  { label: 'Strap Material', value: 'Solid Stainless Steel Link Bracelet' },
+  { label: 'Display Type', value: 'Classic Analog with Crystal Hour Indices' },
+  { label: 'Movement', value: 'High-Precision Quartz (Battery Operated)' },
+  { label: 'Plating & Finish', value: '18K Yellow Gold & Rose Gold Anti-Tarnish Polish' },
+  { label: 'Glass Material', value: 'Scratch-Resistant Hardened Mineral Glass' },
+  { label: 'Clasp Type', value: 'Fold-Over Safety Deployment Clasp' },
+  { label: 'Water Resistance', value: '3ATM / 30M Splash Resistant' },
+  { label: 'Net Quantity (N)', value: '1 Watch + Luxury Velvet Watch Box + 1-Year Warranty Card' },
+  { label: 'Occasion', value: 'Daily Office, Festive Celebrations, Evening Parties & Luxury Gifting' },
+];
+
+export const DESIGNER_METAL_ANALOG_WATCH_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '1 Designer Metal Analog Watch + Luxury Velvet Watch Box + Extra Battery & Warranty Card',
+  },
+  { label: 'Strap Closure', value: 'Secure Fold-over Clasp with Removable Links for Custom Sizing' },
+  { label: 'Bezel & Case', value: 'Polished Alloy Bezel with Diamond-Cut Edge' },
+  { label: 'Skin Safety', value: 'Hypoallergenic Stainless Steel Back (Nickel & Lead Free)' },
+  { label: 'Water Resistance', value: 'Splash Proof & Sweat Proof for Daily Wear' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value:
+      'Wipe with a soft dry cloth after daily wear. Avoid spraying perfume or alcohol-based sanitizer directly on the watch dial and strap.',
+  },
+];
+
+export const DESIGNER_METAL_ANALOG_WATCH_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'dmw-1',
+    src: '/h1.png',
+    thumbSrc: '/h1.png',
+    alt: 'New Solid Designer Metal Analog Watch for Women - Hero Front Shot',
+    title: 'Solid Designer Metal Analog Watch',
+    tag: 'Hero View',
+  },
+  {
+    id: 'dmw-2',
+    src: '/h2.png',
+    thumbSrc: '/h2.png',
+    alt: 'New Solid Designer Metal Analog Watch - Dial Macro & Bezel Detail',
+    title: 'Precision Dial & Crystal Detail',
+    tag: 'Detail View',
+  },
+  {
+    id: 'dmw-3',
+    src: '/h3.png',
+    thumbSrc: '/h3.png',
+    alt: 'New Solid Designer Metal Analog Watch - Angle & Clasp Profile View',
+    title: 'Solid Link Strap & Fold-Over Clasp',
+    tag: 'Side Profile',
+  },
+];
+
+export const DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'watch-single',
+    title: '1 Designer Metal Watch (Classic Edition)',
+    subtitle: '1 Watch + Velvet Watch Presentation Box + Free COD Express Delivery',
+    unitCount: 1,
+    price: 299,
+    originalPrice: 1299,
+    discountPercent: 77,
+    popular: true,
+    saveAmount: 1000,
+  },
+  {
+    id: 'watch-double',
+    title: '2 Watches (Gift Pack - 2 Editions)',
+    subtitle: '2 Watches + 2 Velvet Watch Boxes + Extra ₹50 Instant Discount',
+    unitCount: 2,
+    price: 549,
+    originalPrice: 2598,
+    discountPercent: 79,
+    popular: false,
+    saveAmount: 2049,
+  },
+  {
+    id: 'watch-triple',
+    title: '3 Watches (Royal Celebration Family Pack)',
+    subtitle: '3 Watches (All 3 Editions) + 3 Velvet Watch Boxes + Maximum Savings',
+    unitCount: 3,
+    price: 799,
+    originalPrice: 3897,
+    discountPercent: 80,
+    popular: false,
+    saveAmount: 3098,
+  },
+];
+
+export const DESIGNER_METAL_ANALOG_WATCH_REVIEWS: ReviewItem[] = [
+  {
+    id: 'r-dmw-1',
+    author: 'Ananya Deshmukh',
+    city: 'Pune',
+    state: 'Maharashtra',
+    rating: 5,
+    date: 'Yesterday',
+    title: 'Cannot believe the quality for just ₹299! Pure royal aesthetic',
+    comment:
+      'I ordered this after seeing it viral online. When I opened the box, I was genuinely shocked by the heavy solid metal feel and mirror polish. It looks exactly like a ₹4,000 branded watch. Keeps accurate time and the clasp is very secure.',
+    verified: true,
+    helpfulCount: 114,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-dmw-2',
+    author: 'Shalini Saxena',
+    city: 'Lucknow',
+    state: 'Uttar Pradesh',
+    rating: 5,
+    date: '2 days ago',
+    title: 'Wore it to office and received endless compliments',
+    comment:
+      'The dial has a lovely sunburst effect and the crystal markers catch the light subtly. It fits my slim wrist comfortably after easily removing two links. Waterproof for washing hands as well. Excellent buy from Qavelle!',
+    verified: true,
+    helpfulCount: 92,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-dmw-3',
+    author: 'Sneha Chawla',
+    city: 'Chandigarh',
+    state: 'Punjab',
+    rating: 5,
+    date: '4 days ago',
+    title: 'Ordered the 2 watch bundle for me and my mom',
+    comment:
+      'Got 2 different editions. Both came in royal velvet presentation watch boxes with warranty cards. The finish has not faded or scratched even with everyday use. Free cash on delivery was super fast.',
+    verified: true,
+    helpfulCount: 83,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-dmw-4',
+    author: 'Rhea Patel',
+    city: 'Ahmedabad',
+    state: 'Gujarat',
+    rating: 5,
+    date: '5 days ago',
+    title: 'Stunning solid link bracelet and crystal glass',
+    comment:
+      'Packaging was very premium and shipping took only 3 days. Best watch purchase under ₹300 anywhere in India. Highly recommended!',
+    verified: true,
+    helpfulCount: 67,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST =
+  DESIGNER_METAL_ANALOG_WATCH_REVIEWS;
+
+export const DESIGNER_METAL_ANALOG_WATCH_CUSTOMER_MEDIA = [
+  {
+    id: 'm-dmw-1',
+    type: 'image',
+    image: '/h1.png',
+    author: 'Ananya Deshmukh',
+    caption: 'Real photo: The solid metal link bracelet and dial shine so bright!',
+  },
+  {
+    id: 'm-dmw-2',
+    type: 'image',
+    image: '/h2.png',
+    author: 'Shalini Saxena',
+    caption: 'Real photo: Macro shot of the crystal hour markers and clean bezel.',
+  },
+  {
+    id: 'm-dmw-3',
+    type: 'image',
+    image: '/h3.png',
+    author: 'Sneha Chawla',
+    caption: 'Real photo: Elegant wrist fit paired with formal and ethnic attire.',
+  },
+];
+
 
 
 

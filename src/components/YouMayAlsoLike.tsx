@@ -9,6 +9,8 @@ interface YouMayAlsoLikeProps {
 }
 
 const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'designer-metal-analog-watch':
+    '/products/new-solid-designer-metal-analog-watches-for-women',
   'korean-peacock-pearl-earrings':
     '/products/korean-glorious-pearl-gold-plated-peacock-motif-earrings-with-white-moti-for-women',
   'thin-as-rice-silver-chain':

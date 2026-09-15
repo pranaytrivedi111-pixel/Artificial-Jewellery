@@ -7,7 +7,7 @@ export interface GenuineProduct {
   title: string;
   shortTitle: string;
   subtitle: string;
-  category: 'Necklace Sets' | 'Combo Deals' | 'Earrings & Jhumkas' | 'Celebrity Inspired' | 'Anti-Tarnish Jewellery' | 'Chains & Necklaces';
+  category: 'Necklace Sets' | 'Combo Deals' | 'Earrings & Jhumkas' | 'Celebrity Inspired' | 'Anti-Tarnish Jewellery' | 'Chains & Necklaces' | 'Luxury Watches';
   badge: string;
   price: number;
   originalPrice: number;
@@ -24,6 +24,33 @@ export interface GenuineProduct {
 }
 
 export const GENUINE_PRODUCTS: GenuineProduct[] = [
+  {
+    id: 'designer-metal-analog-watch',
+    slug: '/products/new-solid-designer-metal-analog-watches-for-women',
+    title: 'New Solid Designer Metal Analog Watches For Women',
+    shortTitle: 'Solid Designer Metal Analog Watch',
+    subtitle:
+      'Solid Stainless Steel Link Strap • High-Accuracy Quartz Movement • Anti-Tarnish 18K Gold Finish',
+    category: 'Luxury Watches',
+    badge: 'ROYAL VIRAL TREND',
+    price: 299,
+    originalPrice: 1299,
+    discountPercent: 77,
+    rating: 4.9,
+    reviewsCount: 1420,
+    image: '/h1.png',
+    hoverImage: '/h2.png',
+    tag: 'Designer Watch',
+    inStockCount: 12,
+    highlights: [
+      'Solid Stainless Steel Metal Link Strap with Safety Fold-Over Clasp',
+      'High-Accuracy Quartz Analog Movement with Sunburst Dial',
+      'Scratch-Resistant Hardened Mineral Crystal Glass',
+      'Water-Resistant Daily Wear with Anti-Tarnish 18K Polish',
+    ],
+    occasion: 'Office, Daily Luxury, Evening Parties & Royal Gifting',
+    packageContains: '1 Designer Metal Analog Watch + Luxury Velvet Watch Box + Warranty Card',
+  },
   {
     id: 'korean-peacock-pearl-earrings',
     slug: '/products/korean-glorious-pearl-gold-plated-peacock-motif-earrings-with-white-moti-for-women',
@@ -371,7 +398,15 @@ export const HOME_CATEGORIES = [
     label: 'All Products',
     icon: '✨',
     image: '/Cinematic.webp',
-    count: 13,
+    count: 14,
+  },
+  {
+    id: 'designer-watch',
+    label: 'Designer Metal Watch',
+    icon: '⌚',
+    image: '/h1.png',
+    count: 1,
+    targetProduct: 'designer-metal-analog-watch' as ProductId,
   },
   {
     id: 'peacock-earrings',

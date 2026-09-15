@@ -28,6 +28,8 @@ import {
   THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS,
   KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS,
   KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS,
+  DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS,
+  DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS,
 } from '../data/productData';
 import { ShieldCheck, Star } from 'lucide-react';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -40,6 +42,7 @@ interface StickyBottomBarProps {
 }
 
 const getFallbackBundle = (productId: ProductId | string = 'jhumka'): BundleOption => {
+  if (productId === 'designer-metal-analog-watch') return DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS[0];
   if (productId === 'korean-peacock-pearl-earrings') return KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'thin-as-rice-silver-chain') return THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS[0];
   if (productId === 'dolphin-crystals-pendant-combo') return DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS[0];
@@ -61,6 +64,7 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   onAddToCart,
   activeProductId = 'jhumka',
 }) => {
+  const isWatch = activeProductId === 'designer-metal-analog-watch';
   const isPeacockEarrings = activeProductId === 'korean-peacock-pearl-earrings';
   const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
@@ -77,7 +81,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
   // Guaranteed safe fallback bundle to eliminate any undefined access
   const safeBundle = bundle && bundle.price ? bundle : getFallbackBundle(activeProductId);
 
-  const currentProduct = isPeacockEarrings
+  const currentProduct = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
@@ -103,7 +109,9 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentImage = isPeacockEarrings
+  const currentImage = isWatch
+    ? '/h1.png'
+    : isPeacockEarrings
     ? '/g1-1.png'
     : isRiceChain
     ? '/g1.webp'

@@ -11,7 +11,8 @@ export type ProductId =
   | 'white-enamel-handbag-earrings'
   | 'dolphin-crystals-pendant-combo'
   | 'thin-as-rice-silver-chain'
-  | 'korean-peacock-pearl-earrings';
+  | 'korean-peacock-pearl-earrings'
+  | 'designer-metal-analog-watch';
 
 export interface ProductGalleryItem {
   id: string;

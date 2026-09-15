@@ -80,6 +80,11 @@ import {
   KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST,
   KOREAN_PEACOCK_PEARL_EARRINGS_CUSTOMER_MEDIA,
   KOREAN_PEACOCK_PEARL_EARRINGS_SLUG,
+  DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS,
+  DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS,
+  DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST,
+  DESIGNER_METAL_ANALOG_WATCH_CUSTOMER_MEDIA,
+  DESIGNER_METAL_ANALOG_WATCH_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -116,6 +121,18 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('6aylp7') ||
+    pathname.includes('designer-metal-analog-watch') ||
+    pathname.includes('new-solid-designer-metal-analog-watches-for-women') ||
+    pathname.includes('watches-for-women') ||
+    param === 'designer-metal-analog-watch' ||
+    param === 'solid-designer-watch' ||
+    param === '6aylp7'
+  ) {
+    return { view: 'product', productId: 'designer-metal-analog-watch' };
   }
 
   if (
@@ -286,6 +303,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'designer-metal-analog-watch': DESIGNER_METAL_ANALOG_WATCH_SLUG,
   'korean-peacock-pearl-earrings': KOREAN_PEACOCK_PEARL_EARRINGS_SLUG,
   'thin-as-rice-silver-chain': THIN_AS_RICE_SILVER_CHAIN_SLUG,
   'dolphin-crystals-pendant-combo': DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG,
@@ -306,6 +324,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'designer-metal-analog-watch') return DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS[0];
   if (productId === 'korean-peacock-pearl-earrings') return KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'thin-as-rice-silver-chain') return THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS[0];
   if (productId === 'dolphin-crystals-pendant-combo') return DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS[0];
@@ -330,6 +349,7 @@ export default function App() {
   // Active product
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isWatch = activeProductId === 'designer-metal-analog-watch';
   const isPeacockEarrings = activeProductId === 'korean-peacock-pearl-earrings';
   const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
@@ -343,7 +363,9 @@ export default function App() {
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isPeacockEarrings
+  const currentProductDetails = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
@@ -369,7 +391,9 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isPeacockEarrings
+  const currentReviews = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST
@@ -395,7 +419,9 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isPeacockEarrings
+  const currentCustomerMedia = isWatch
+    ? DESIGNER_METAL_ANALOG_WATCH_CUSTOMER_MEDIA
+    : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_CUSTOMER_MEDIA
     : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_CUSTOMER_MEDIA
@@ -556,6 +582,8 @@ export default function App() {
 
     if (currentView === 'home') {
       pageTitle = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+    } else if (activeProductId === 'designer-metal-analog-watch') {
+      pageTitle = 'New Solid Designer Metal Analog Watches For Women | QAVELLE';
     } else if (activeProductId === 'korean-peacock-pearl-earrings') {
       pageTitle = 'Korean Glorious Pearl Gold Plated Peacock Drop Earrings with White Moti | QAVELLE';
     } else if (activeProductId === 'thin-as-rice-silver-chain') {
@@ -597,7 +625,10 @@ export default function App() {
           sku: currentProductDetails.sku,
           name: currentProductDetails.title,
           price: currentProductDetails.price,
-          category: currentProductDetails.brand || 'Jewellery',
+          category:
+            activeProductId === 'designer-metal-analog-watch'
+              ? 'Watches & Timepieces'
+              : currentProductDetails.brand || 'Jewellery',
         });
       }
     } catch (err) {

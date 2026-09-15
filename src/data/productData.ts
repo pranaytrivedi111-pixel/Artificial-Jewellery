@@ -3357,6 +3357,273 @@ export const THIN_AS_RICE_SILVER_CHAIN_CUSTOMER_MEDIA = [
   },
 ];
 
+// ==========================================
+// 13. KOREAN GLORIOUS PEARL PEACOCK EARRINGS (6sqgx4)
+// ==========================================
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_SLUG =
+  '/products/korean-glorious-pearl-gold-plated-peacock-motif-earrings-with-white-moti-for-women';
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_MATCHING_VARIANTS = [
+  {
+    id: 'peacock-earrings-single',
+    name: '1 Pair (Royal Gold & White Moti)',
+    color: '#F59E0B',
+    borderColor: '#B45309',
+    image: '/g1-1.png',
+    inStock: true,
+  },
+  {
+    id: 'peacock-earrings-duo',
+    name: 'Set of 2 Pairs (Sister & Bestie Gift Pack)',
+    color: '#FEF3C7',
+    borderColor: '#D97706',
+    image: '/g2-1.png',
+    inStock: true,
+  },
+];
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS = {
+  id: 'korean-peacock-pearl-earrings',
+  title:
+    'Korean Glorious Pearl Gold Plated Peacock Motif Earring for Women with White Moti & Cubic Zirconia Drops Danglers',
+  shortTitle: 'Korean Peacock Pearl Drop Earrings',
+  tagline:
+    '18K Gold Plated • Sculpted Royal Peacock with Lustrous White Moti Pearl • Shimmering CZ Diamond Accents',
+  subtitle:
+    '18K Gold Plated • Sculpted Royal Peacock with Lustrous White Moti Pearl • Shimmering CZ Diamond Accents',
+  price: 399,
+  originalPrice: 1299,
+  regularPrice: 1299,
+  salePrice: 399,
+  discountPercent: 69,
+  discountPercentage: 69,
+  rating: 4.9,
+  ratingsCount: 7420,
+  reviewsCount: 915,
+  sku: 'QVL-PEACOCK-6SQGX4',
+  inStock: true,
+  stockLeft: 16,
+  inStockCount: 16,
+  recentSales24h: 312,
+  currentLiveViewers: 44,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  urgencyText: 'Only 16 pairs remaining at ₹399 — Royal Viral Korean Trend selling fast across India!',
+  fullDescription:
+    'Experience the harmonious blend of regal Indian heritage and modern Korean couture aesthetics. Bathed in rich 18K yellow gold micron plating, each earring features a meticulously sculpted peacock silhouette adorned with sparkling micro-pavé cubic zirconia crystals along the graceful plumage. Suspended beneath is a luminous teardrop white moti pearl that sways with effortless elegance. Hypoallergenic and ultra-lightweight, these earrings feature smooth post studs with secure push-back closures for comfortable all-day styling from festive celebrations to chic everyday fusion wear.',
+  description:
+    'Experience the harmonious blend of regal Indian heritage and modern Korean couture aesthetics. Bathed in rich 18K yellow gold micron plating, each earring features a meticulously sculpted peacock silhouette adorned with sparkling micro-pavé cubic zirconia crystals along the graceful plumage. Suspended beneath is a luminous teardrop white moti pearl that sways with effortless elegance. Hypoallergenic and ultra-lightweight, these earrings feature smooth post studs with secure push-back closures for comfortable all-day styling from festive celebrations to chic everyday fusion wear.',
+  features: [
+    '18K Yellow Gold Micron Polish with Long-Lasting Anti-Tarnish Coating',
+    'Intricately Sculpted Royal Peacock Motif with Brilliant CZ Crystal Crest',
+    'Lustrous Teardrop White Moti Pearl Suspended Dangler',
+    'Featherlight 5.2 Gram Weight per Pair (Zero Pulling on Sensitive Ear Lobes)',
+    '100% Hypoallergenic Alloy Core — Nickel-Free, Lead-Free & Skin-Friendly',
+    'Comfort Push-Back Post Stud Closure for Snag-Free All-Day Wear',
+    'Arrives in Signature Qavelle Velvet Gift Box with Authenticity Guarantee',
+  ],
+  size: 'Length: 3.8 cm | Width: 1.8 cm | Weight: 5.2g (Pair)',
+  dimensions: 'Length: 3.8 cm | Width: 1.8 cm | Weight: 5.2g (Pair)',
+  materials:
+    'Hypoallergenic Skin-Friendly Alloy Core, 18K Yellow Gold Polish, White Moti Drop, Pavé Cubic Zirconia',
+  countryOfOrigin: 'India',
+};
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_HIGHLIGHTS = [
+  { label: 'Design', value: 'Korean Peacock Motif with Hanging White Moti Dangler' },
+  { label: 'Base Metal', value: 'High-Grade Hypoallergenic Brass Alloy' },
+  { label: 'Plating', value: '18K Yellow Gold Micron Finish with Anti-Tarnish Coat' },
+  { label: 'Stone Type', value: 'Lustrous White Moti (Pearl) & Pavé Cubic Zirconia' },
+  { label: 'Style', value: 'Drops, Danglers & Studs' },
+  { label: 'Closure Type', value: 'Smooth Push-Back Post (Comfort-Fit)' },
+  { label: 'Weight & Comfort', value: 'Ultra-Light 5.2g per pair (Zero ear pulling)' },
+  { label: 'Net Quantity (N)', value: '1 Pair (2 Pieces) + Royal Velvet Gift Box' },
+  { label: 'Occasion', value: 'Festive, Wedding, Office, Daily Western & Party Wear' },
+];
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '1 Pair of Korean Peacock Pearl Drop Earrings + Luxury Velvet Jewellery Box',
+  },
+  { label: 'Closure', value: 'Precision Push-Back Stud with Hypoallergenic Silicon Stopper' },
+  { label: 'Finish', value: '18K Royal Gold Mirror Polish with Shimmering Crystals' },
+  { label: 'Skin Safety', value: '100% Nickel-Free & Lead-Free (Guaranteed No Skin Irritation)' },
+  { label: 'Water & Sweat Resistance', value: 'Water-Resistant with Protective Clear Shield' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value:
+      'Gently wipe with a soft, dry lint-free cloth after wear. Store in the complimentary velvet pouch away from direct perfume sprays and harsh chemicals.',
+  },
+];
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'kpe-1',
+    src: '/g1-1.png',
+    thumbSrc: '/g1-1.png',
+    alt: 'Korean Glorious Pearl Gold Plated Peacock Motif Earring with White Moti - Front Shot',
+    title: 'Korean Peacock Pearl Earrings',
+    tag: 'Hero View',
+  },
+  {
+    id: 'kpe-2',
+    src: '/g2-1.png',
+    thumbSrc: '/g2-1.png',
+    alt: 'Korean Peacock Earrings - Detail & Craftsmanship View',
+    title: 'Peacock & Pearl Craftsmanship',
+    tag: 'Detail View',
+  },
+  {
+    id: 'kpe-3',
+    src: '/g3-1.png',
+    thumbSrc: '/g3-1.png',
+    alt: 'Korean Peacock Earrings - Side Angle & Luster View',
+    title: 'Angle & Silhouette View',
+    tag: 'Angle View',
+  },
+  {
+    id: 'kpe-4',
+    src: '/g4.png',
+    thumbSrc: '/g4.png',
+    alt: 'Korean Peacock Earrings - Complete Set View',
+    title: 'Earrings Pair Showcase',
+    tag: 'Pair Shot',
+  },
+];
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS: BundleOption[] = [
+  {
+    id: 'peacock-earrings-single',
+    title: '1 Pair (Royal Peacock & White Moti)',
+    subtitle: '1 Pair of Earrings + Velvet Gift Box + Free COD Express Delivery',
+    unitCount: 1,
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
+    popular: true,
+    saveAmount: 900,
+  },
+  {
+    id: 'peacock-earrings-double',
+    title: '2 Pairs (Duo Gifting Pack - Self & Bestie)',
+    subtitle: '2 Pairs + 2 Velvet Boxes + Extra ₹100 Instant Savings',
+    unitCount: 2,
+    price: 699,
+    originalPrice: 2598,
+    discountPercent: 73,
+    popular: false,
+    saveAmount: 1899,
+  },
+  {
+    id: 'peacock-earrings-triple',
+    title: '3 Pairs (Family & Celebration Bundle)',
+    subtitle: '3 Pairs + Royal Presentation Box + Maximum Savings',
+    unitCount: 3,
+    price: 899,
+    originalPrice: 3897,
+    discountPercent: 77,
+    popular: false,
+    saveAmount: 2998,
+  },
+];
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS: ReviewItem[] = [
+  {
+    id: 'r-kpe-1',
+    author: 'Pooja Sharma',
+    city: 'Jaipur',
+    state: 'Rajasthan',
+    rating: 5,
+    date: 'Yesterday',
+    title: 'Exceeded all expectations! The peacock carving is stunning',
+    comment:
+      'Saw this design trending everywhere and was hoping it looks as good in person. When the Qavelle package arrived, I was blown away! The gold plating has a royal warm finish and the white pearl has a gorgeous pearlescent sheen. Best ₹399 purchase I have made this year.',
+    verified: true,
+    helpfulCount: 96,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-kpe-2',
+    author: 'Meenakshi Iyer',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    rating: 5,
+    date: '2 days ago',
+    title: 'Ultra-lightweight on ears and zero irritation',
+    comment:
+      'I have extremely sensitive skin and usually avoid alloy jewelry, but these did not cause any itching even after wearing them for 8 hours at an office function. The hanging pearl drops add such an elegant touch. Highly recommend!',
+    verified: true,
+    helpfulCount: 84,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-kpe-3',
+    author: 'Divya Malhotra',
+    city: 'New Delhi',
+    state: 'Delhi',
+    rating: 5,
+    date: '4 days ago',
+    title: 'Perfect combination of ethnic peacock motif & modern Korean vibe',
+    comment:
+      'Wore these with a simple white linen shirt and jeans, and then with a floral organza saree. Looked fabulous with both! The CZ crystals shimmer under light and the push back fits snug and secure.',
+    verified: true,
+    helpfulCount: 71,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-kpe-4',
+    author: 'Sunita Reddy',
+    city: 'Hyderabad',
+    state: 'Telangana',
+    rating: 5,
+    date: '6 days ago',
+    title: 'Arrived in 3 days with free cash on delivery',
+    comment:
+      'Delivery was super quick to Hyderabad. The velvet box was very premium and the earrings look like real 18K gold worth ₹4,000+. Unbelievable value for ₹399.',
+    verified: true,
+    helpfulCount: 58,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST =
+  KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS;
+
+export const KOREAN_PEACOCK_PEARL_EARRINGS_CUSTOMER_MEDIA = [
+  {
+    id: 'm-kpe-1',
+    type: 'image',
+    image: '/g1-1.png',
+    author: 'Pooja Sharma',
+    caption: 'Real photo: The peacock design with the dangling white moti pearl is gorgeous!',
+  },
+  {
+    id: 'm-kpe-2',
+    type: 'image',
+    image: '/g2-1.png',
+    author: 'Meenakshi Iyer',
+    caption: 'Real photo: Close up of the golden luster and brilliant CZ crystals.',
+  },
+  {
+    id: 'm-kpe-3',
+    type: 'image',
+    image: '/g3-1.png',
+    author: 'Divya Malhotra',
+    caption: 'Real photo: Perfectly sized drop earrings, looks high end on ears.',
+  },
+  {
+    id: 'm-kpe-4',
+    type: 'image',
+    image: '/g4.png',
+    author: 'Kavita Joshi',
+    caption: 'Real photo: Unboxed both pairs, absolute finest craftsmanship!',
+  },
+];
+
+
 
 
 

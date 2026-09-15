@@ -5,8 +5,9 @@
 
 export const META_PIXEL_ID = '1081286841529389';
 
-// Exact 1-to-1 SKU Mapping for QAVELLE's 12 Catalog Products
+// Exact 1-to-1 SKU Mapping for QAVELLE's Catalog Products
 export const PRODUCT_ID_TO_SKU: Record<string, string> = {
+  'korean-peacock-pearl-earrings': 'QVL-PEACOCK-6SQGX4',
   'thin-as-rice-silver-chain': 'QVL-RICE-70GS5Y',
   'dolphin-crystals-pendant-combo': 'QVL-DOLPHIN-F1V4I9',
   'white-enamel-handbag-earrings': 'QVL-EARRING-63UP0K',
@@ -26,6 +27,12 @@ export const CATALOG_PRODUCTS_INFO: Record<
   string,
   { sku: string; title: string; price: number; category: string }
 > = {
+  'korean-peacock-pearl-earrings': {
+    sku: 'QVL-PEACOCK-6SQGX4',
+    title: 'Korean Glorious Pearl Gold Plated Peacock Motif Earring for Women with White Moti & Cubic Zirconia Drops Danglers',
+    price: 399,
+    category: 'Earrings & Drops',
+  },
   'thin-as-rice-silver-chain': {
     sku: 'QVL-RICE-70GS5Y',
     title: 'Trendy Designer Thin as Rice 21 inches 2.5 gram Rice chain for women and Girls Black Silver Plated Brass Metal Chain',

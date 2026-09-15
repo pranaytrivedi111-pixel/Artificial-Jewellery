@@ -25,6 +25,34 @@ export interface GenuineProduct {
 
 export const GENUINE_PRODUCTS: GenuineProduct[] = [
   {
+    id: 'korean-peacock-pearl-earrings',
+    slug: '/products/korean-glorious-pearl-gold-plated-peacock-motif-earrings-with-white-moti-for-women',
+    title:
+      'Korean Glorious Pearl Gold Plated Peacock Motif Earring for Women with White Moti & Cubic Zirconia Drops Danglers',
+    shortTitle: 'Korean Peacock Pearl Drop Earrings',
+    subtitle:
+      '18K Gold Plated • Sculpted Royal Peacock with Lustrous White Moti Pearl • Shimmering CZ Diamond Accents',
+    category: 'Earrings & Jhumkas',
+    badge: 'ROYAL VIRAL TREND',
+    price: 399,
+    originalPrice: 1299,
+    discountPercent: 69,
+    rating: 4.9,
+    reviewsCount: 915,
+    image: '/g1-1.png',
+    hoverImage: '/g2-1.png',
+    tag: 'Korean Couture Trend',
+    inStockCount: 16,
+    highlights: [
+      '18K Yellow Gold Micron Polish with Anti-Tarnish Coating',
+      'Sculpted Peacock Motif with Micro-Pavé Cubic Zirconia Plumage',
+      'Lustrous Dangling White Moti Teardrop Pearl',
+      'Featherlight 5.2g Comfort-Fit with Hypoallergenic Push Backs',
+    ],
+    occasion: 'Festive, Wedding, Office, Daily Western & Party Wear',
+    packageContains: '1 Pair of Korean Peacock Pearl Earrings + Royal Velvet Gift Box',
+  },
+  {
     id: 'thin-as-rice-silver-chain',
     slug: '/products/trendy-designer-thin-as-rice-21-inches-25-gram-rice-chain-for-women-and-girls-black-silver-plated-brass-metal-chain',
     title:
@@ -343,7 +371,15 @@ export const HOME_CATEGORIES = [
     label: 'All Products',
     icon: '✨',
     image: '/Cinematic.webp',
-    count: 12,
+    count: 13,
+  },
+  {
+    id: 'peacock-earrings',
+    label: 'Korean Peacock Earrings',
+    icon: '🦚',
+    image: '/g1-1.png',
+    count: 1,
+    targetProduct: 'korean-peacock-pearl-earrings' as ProductId,
   },
   {
     id: 'rice-chain',

@@ -14,6 +14,7 @@ import {
   WHITE_ENAMEL_HANDBAG_EARRINGS_PRODUCT_DETAILS,
   DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS,
   THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS,
+  KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS,
 } from '../data/productData';
 import { ProductId } from '../types';
 import { sanitizeText } from '../utils/brandSanitizer';
@@ -26,7 +27,9 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
   const [isExpanded, setIsExpanded] = useState(false);
 
   const currentProduct =
-    activeProductId === 'thin-as-rice-silver-chain'
+    activeProductId === 'korean-peacock-pearl-earrings'
+      ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
+      : activeProductId === 'thin-as-rice-silver-chain'
       ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
       : activeProductId === 'dolphin-crystals-pendant-combo'
       ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS

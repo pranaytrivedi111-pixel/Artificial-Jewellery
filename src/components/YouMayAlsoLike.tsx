@@ -9,6 +9,8 @@ interface YouMayAlsoLikeProps {
 }
 
 const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'korean-peacock-pearl-earrings':
+    '/products/korean-glorious-pearl-gold-plated-peacock-motif-earrings-with-white-moti-for-women',
   'thin-as-rice-silver-chain':
     '/products/trendy-designer-thin-as-rice-21-inches-25-gram-rice-chain-for-women-and-girls-black-silver-plated-brass-metal-chain',
   'dolphin-crystals-pendant-combo':

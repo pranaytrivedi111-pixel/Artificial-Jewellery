@@ -307,5 +307,30 @@
         <g:price>0.00 INR</g:price>
       </g:shipping>
     </item>
+    <item>
+      <g:id>QVL-PEACOCK-6SQGX4</g:id>
+      <g:title>Korean Glorious Pearl Gold Plated Style Peacock and White Moti Earring for Women</g:title>
+      <g:description>Indulge in imperial elegance with these Korean Glorious Pearl Gold Plated Peacock motif drop earrings. Handcrafted from hypoallergenic alloy with rich 18K yellow gold micron plating, each earring features an ornate peacock silhouette adorned with micro-faceted cubic zirconia diamonds and lustrous cascade pearl moti drops. 100% skin safe, lead and nickel free with comfortable hypoallergenic push back closures.</g:description>
+      <g:link>https://qavelle.store/products/korean-glorious-pearl-gold-plated-peacock-motif-earrings-with-white-moti-for-women</g:link>
+      <g:image_link>https://qavelle.store/g1-1.png</g:image_link>
+      <g:additional_image_link>https://qavelle.store/g2-1.png</g:additional_image_link>
+      <g:additional_image_link>https://qavelle.store/g3-1.png</g:additional_image_link>
+      <g:additional_image_link>https://qavelle.store/g4.png</g:additional_image_link>
+      <g:brand>QAVELLE</g:brand>
+      <g:condition>new</g:condition>
+      <g:availability>in stock</g:availability>
+      <g:price>999.00 INR</g:price>
+      <g:sale_price>399.00 INR</g:sale_price>
+      <g:google_product_category>Apparel &amp; Accessories &gt; Jewelry &gt; Earrings</g:google_product_category>
+      <g:item_group_id>QVL-GRP-PEACOCK-EARRING</g:item_group_id>
+      <g:gender>female</g:gender>
+      <g:color>Gold &amp; White Pearl</g:color>
+      <g:material>18K Gold Plated Alloy, Cubic Zirconia &amp; Pearls</g:material>
+      <g:shipping>
+        <g:country>IN</g:country>
+        <g:service>Express Delivery</g:service>
+        <g:price>0.00 INR</g:price>
+      </g:shipping>
+    </item>
   </channel>
 </rss>

@@ -97,6 +97,12 @@ import {
   THIN_AS_RICE_SILVER_CHAIN_ADDITIONAL_DETAILS,
   THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS,
   THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST,
+  KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS,
+  KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_GALLERY,
+  KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_HIGHLIGHTS,
+  KOREAN_PEACOCK_PEARL_EARRINGS_ADDITIONAL_DETAILS,
+  KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS,
+  KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST,
 } from '../data/productData';
 import {
   GPayLogo,
@@ -126,6 +132,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   onNavigateHome,
   children,
 }) => {
+  const isPeacockEarrings = activeProductId === 'korean-peacock-pearl-earrings';
   const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
   const isChoker = activeProductId === 'choker';
@@ -139,7 +146,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
 
-  const currentProduct: ProductDetails = isRiceChain
+  const currentProduct: ProductDetails = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS
@@ -163,7 +172,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isRiceChain
+  const currentGallery = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_GALLERY
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_GALLERY
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_GALLERY
@@ -187,7 +198,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isRiceChain
+  const currentHighlights = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_HIGHLIGHTS
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_HIGHLIGHTS
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_HIGHLIGHTS
@@ -211,7 +224,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isRiceChain
+  const currentAdditionalDetails = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_ADDITIONAL_DETAILS
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_ADDITIONAL_DETAILS
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_ADDITIONAL_DETAILS
@@ -235,7 +250,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isRiceChain
+  const currentBundleOptions = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS
@@ -259,7 +276,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isRiceChain
+  const currentReviewsList = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST

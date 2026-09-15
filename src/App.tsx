@@ -75,6 +75,11 @@ import {
   THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST,
   THIN_AS_RICE_SILVER_CHAIN_CUSTOMER_MEDIA,
   THIN_AS_RICE_SILVER_CHAIN_SLUG,
+  KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS,
+  KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS,
+  KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST,
+  KOREAN_PEACOCK_PEARL_EARRINGS_CUSTOMER_MEDIA,
+  KOREAN_PEACOCK_PEARL_EARRINGS_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -111,6 +116,18 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('6sqgx4') ||
+    pathname.includes('peacock') ||
+    pathname.includes('korean-glorious-pearl') ||
+    pathname.includes('white-moti') ||
+    param === 'korean-peacock-pearl-earrings' ||
+    param === 'peacock-earrings' ||
+    param === '6sqgx4'
+  ) {
+    return { view: 'product', productId: 'korean-peacock-pearl-earrings' };
   }
 
   if (
@@ -269,6 +286,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'korean-peacock-pearl-earrings': KOREAN_PEACOCK_PEARL_EARRINGS_SLUG,
   'thin-as-rice-silver-chain': THIN_AS_RICE_SILVER_CHAIN_SLUG,
   'dolphin-crystals-pendant-combo': DOLPHIN_CRYSTALS_PENDANT_COMBO_SLUG,
   'white-enamel-handbag-earrings': WHITE_ENAMEL_HANDBAG_EARRINGS_SLUG,
@@ -288,6 +306,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'korean-peacock-pearl-earrings') return KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'thin-as-rice-silver-chain') return THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS[0];
   if (productId === 'dolphin-crystals-pendant-combo') return DOLPHIN_CRYSTALS_PENDANT_COMBO_BUNDLE_OPTIONS[0];
   if (productId === 'white-enamel-handbag-earrings') return WHITE_ENAMEL_HANDBAG_EARRINGS_BUNDLE_OPTIONS[0];
@@ -311,6 +330,7 @@ export default function App() {
   // Active product
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isPeacockEarrings = activeProductId === 'korean-peacock-pearl-earrings';
   const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
   const isDolphinCombo = activeProductId === 'dolphin-crystals-pendant-combo';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
@@ -323,7 +343,9 @@ export default function App() {
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isRiceChain
+  const currentProductDetails = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_PRODUCT_DETAILS
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_PRODUCT_DETAILS
@@ -347,7 +369,9 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isRiceChain
+  const currentReviews = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_REVIEWS_LIST
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_REVIEWS_LIST
@@ -371,7 +395,9 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isRiceChain
+  const currentCustomerMedia = isPeacockEarrings
+    ? KOREAN_PEACOCK_PEARL_EARRINGS_CUSTOMER_MEDIA
+    : isRiceChain
     ? THIN_AS_RICE_SILVER_CHAIN_CUSTOMER_MEDIA
     : isDolphinCombo
     ? DOLPHIN_CRYSTALS_PENDANT_COMBO_CUSTOMER_MEDIA
@@ -530,6 +556,8 @@ export default function App() {
 
     if (currentView === 'home') {
       pageTitle = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+    } else if (activeProductId === 'korean-peacock-pearl-earrings') {
+      pageTitle = 'Korean Glorious Pearl Gold Plated Peacock Drop Earrings with White Moti | QAVELLE';
     } else if (activeProductId === 'thin-as-rice-silver-chain') {
       pageTitle = 'Trendy Designer Thin as Rice 21" Silver Chain | QAVELLE';
     } else if (activeProductId === 'dolphin-crystals-pendant-combo') {

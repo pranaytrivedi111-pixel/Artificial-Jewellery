@@ -27,6 +27,12 @@ import { CartItem, CouponCode } from '../types';
 import { ASSET_IMAGES } from '../data/productData';
 import { ModernPaymentSection } from './ModernPaymentSection';
 import { recordLead } from '../services/leadService';
+import {
+  trackMetaInitiateCheckout,
+  trackMetaAddPaymentInfo,
+  trackMetaPurchase,
+  resolveCatalogSku,
+} from '../utils/metaPixel';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -104,13 +110,31 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }
   }, [isOpen]);
 
-  // When modal is reopened fresh, reset to address step
+  // When modal is reopened fresh, reset to address step and track InitiateCheckout
   useEffect(() => {
     if (isOpen) {
       setStep('address');
       setOrderId(`QVL-${Math.floor(100000 + Math.random() * 900000)}`);
+
+      if (cartItems.length > 0) {
+        const itemsTotal = cartItems.reduce(
+          (sum, item) => sum + (item.bundle?.price || 0) * item.quantity,
+          0
+        );
+        trackMetaInitiateCheckout({
+          items: cartItems.map((item) => ({
+            id: item.bundle?.id || 'jewelry',
+            sku: resolveCatalogSku(item.bundle?.id || item.bundle?.title),
+            name: item.bundle?.title || 'Jewelry Item',
+            price: item.bundle?.price || 0,
+            quantity: item.quantity,
+          })),
+          totalValue: itemsTotal,
+          coupon: appliedCoupon?.code,
+        });
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, cartItems, appliedCoupon]);
 
   // When step changes or modal opens, immediately ensure top view (no center/below page section appears)
   useEffect(() => {
@@ -277,6 +301,26 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     setStep('payment');
     scrollToTop();
 
+    // Track Meta Pixel AddPaymentInfo event
+    try {
+      const payableAtStep = Math.round(
+        paymentMethod === 'cod' ? subtotal : finalTotal
+      );
+      trackMetaAddPaymentInfo({
+        paymentType: paymentMethod,
+        value: payableAtStep,
+        items: cartItems.map((item) => ({
+          id: item.bundle?.id || 'jewelry',
+          sku: resolveCatalogSku(item.bundle?.id || item.bundle?.title),
+          name: item.bundle?.title || 'Jewelry Item',
+          price: item.bundle?.price || 0,
+          quantity: item.quantity,
+        })),
+      });
+    } catch (err) {
+      console.warn('Meta Pixel AddPaymentInfo error:', err);
+    }
+
     // Record early lead: Customer entered phone and delivery address
     const itemsSummary = cartItems
       .map((item) => `${item.bundle?.title || 'Jewelry'} x ${item.quantity}`)
@@ -353,6 +397,30 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       });
     } catch (e) {
       console.error('Error invoking recordLead:', e);
+    }
+
+    // Track Meta Pixel Purchase Conversion Event
+    try {
+      trackMetaPurchase({
+        orderId: finalId,
+        value: payableAmount,
+        currency: 'INR',
+        items: cartItems.map((item) => ({
+          id: item.bundle?.id || 'jewelry',
+          sku: resolveCatalogSku(item.bundle?.id || item.bundle?.title),
+          name: item.bundle?.title || 'Jewelry Item',
+          price: item.bundle?.price || 0,
+          quantity: item.quantity,
+        })),
+        paymentMethod: finalPaymentMethod,
+        customerPhone: phone,
+        customerEmail: email,
+        customerCity: city,
+        customerState: state,
+        customerPincode: pincode,
+      });
+    } catch (err) {
+      console.warn('Meta Pixel Purchase event error:', err);
     }
 
     // Confetti celebration

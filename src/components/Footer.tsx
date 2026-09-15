@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { IndiaPaymentsStrip } from './PaymentLogos';
+import { trackMetaContact } from '../utils/metaPixel';
 import {
   ASSET_IMAGES,
   PRODUCT_DETAILS,
@@ -86,6 +87,13 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  try {
+                    trackMetaContact('WhatsApp');
+                  } catch (err) {
+                    console.warn('Meta Pixel Contact error:', err);
+                  }
+                }}
                 className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-800 border border-gray-200 flex items-center justify-center transition-all cursor-pointer active:scale-95 group"
                 aria-label="Chat with QAVELLE on WhatsApp (7982438137)"
                 title="Chat on WhatsApp"

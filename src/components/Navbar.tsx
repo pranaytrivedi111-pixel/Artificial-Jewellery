@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ShoppingBag,
   Menu,
@@ -12,6 +12,7 @@ import { ASSET_IMAGES } from '../data/productData';
 import { GENUINE_PRODUCTS } from '../data/homeCatalog';
 import { ProductId } from '../types';
 import { autoRemoveMeesho } from '../utils/brandSanitizer';
+import { trackMetaSearch } from '../utils/metaPixel';
 
 interface NavbarProps {
   cartCount: number;
@@ -41,6 +42,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [headerSearchQuery, setHeaderSearchQuery] = useState('');
 
   const cleanedSearchQuery = autoRemoveMeesho(headerSearchQuery).trim();
+
+  // Track Meta Pixel Search event with debounce
+  useEffect(() => {
+    if (!cleanedSearchQuery || cleanedSearchQuery.length < 3) return;
+    const timer = setTimeout(() => {
+      try {
+        trackMetaSearch(cleanedSearchQuery);
+      } catch (err) {
+        console.warn('Meta Pixel Search error:', err);
+      }
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [cleanedSearchQuery]);
+
   const searchResults = cleanedSearchQuery
     ? GENUINE_PRODUCTS.filter(
         (p) =>

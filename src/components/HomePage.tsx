@@ -23,6 +23,7 @@ import {
   HOME_REVIEWS,
 } from '../data/homeCatalog';
 import { BundleOption, ProductId } from '../types';
+import { trackMetaContact } from '../utils/metaPixel';
 
 interface HomePageProps {
   onSelectProduct: (productId: ProductId) => void;
@@ -941,6 +942,13 @@ export const HomePage: React.FC<HomePageProps> = ({
           )}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            try {
+              trackMetaContact('WhatsApp');
+            } catch (err) {
+              console.warn('Meta Pixel Contact error:', err);
+            }
+          }}
           id="fixed-whatsapp-home-button"
           aria-label="Chat with QAVELLE on WhatsApp"
           title="Chat with us on WhatsApp (+91 7982438137)"

@@ -81,6 +81,14 @@ import {
   ALLURE_GOLD_SET_SLUG,
 } from './data/productData';
 import { BundleOption, CartItem, CouponCode, ProductId } from './types';
+import {
+  trackMetaPageView,
+  trackMetaViewContent,
+  trackMetaAddToCart,
+  trackMetaInitiateCheckout,
+  trackMetaAddToWishlist,
+  resolveCatalogSku,
+} from './utils/metaPixel';
 
 // Helper to resolve view and product from URL slug or query parameter
 const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId: ProductId } => {
@@ -516,43 +524,73 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Sync document title
+  // Sync document title and Meta Pixel events
   useEffect(() => {
+    let pageTitle = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+
     if (currentView === 'home') {
-      document.title = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+      pageTitle = 'QAVELLE – India’s Most Trusted Royal Handcrafted Jewellery Store';
+    } else if (activeProductId === 'thin-as-rice-silver-chain') {
+      pageTitle = 'Trendy Designer Thin as Rice 21" Silver Chain | QAVELLE';
+    } else if (activeProductId === 'dolphin-crystals-pendant-combo') {
+      pageTitle = 'Combo of 3 Dolphin Crystals Pendant Necklaces | QAVELLE';
     } else if (activeProductId === 'white-enamel-handbag-earrings') {
-      document.title =
-        'High Grade U-Shaped White Enamel Handbag Drop Earrings | QAVELLE';
+      pageTitle = 'High Grade U-Shaped White Enamel Handbag Drop Earrings | QAVELLE';
     } else if (activeProductId === 'emerald-snake-pendant') {
-      document.title =
-        'Gold Plated Stainless Steel Emerald CZ Flat Snake Chain Necklace | QAVELLE';
+      pageTitle = 'Gold Plated Stainless Steel Emerald CZ Flat Snake Chain Necklace | QAVELLE';
     } else if (activeProductId === 'combo-2-pendants') {
-      document.title =
-        'Combo of 2 Aesthetic Daily Wear Pendants – Pastel Pink & Panna Green Locket | QAVELLE';
+      pageTitle = 'Combo of 2 Aesthetic Daily Wear Pendants – Pastel Pink & Panna Green Locket | QAVELLE';
     } else if (activeProductId === 'trendy-alloy-set') {
-      document.title =
-        'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings | QAVELLE';
+      pageTitle = 'Trendy Alloy Gold Plated Kundan & Pearl Jewellery Set with Matching Drop Earrings | QAVELLE';
     } else if (activeProductId === 'allure-gold-set') {
-      document.title =
-        'Royal Elegant Gold Plated Jewellery Set with Matching Earrings | QAVELLE';
+      pageTitle = 'Royal Elegant Gold Plated Jewellery Set with Matching Earrings | QAVELLE';
     } else if (activeProductId === 'radhika-green-ad') {
-      document.title =
-        'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Earrings | QAVELLE';
+      pageTitle = 'Radhika Anant Ambani Inspired Green AD Necklace Set with Matching Earrings | QAVELLE';
     } else if (activeProductId === 'elegant-everyday-5') {
-      document.title =
-        'Elegant Everyday Necklace Set – Combo of 5 Necklaces | QAVELLE';
+      pageTitle = 'Elegant Everyday Necklace Set – Combo of 5 Necklaces | QAVELLE';
     } else if (activeProductId === 'necklace-combo-5') {
-      document.title =
-        'Shimmering Beautiful Pack of 5 Necklace Chain Pendant Combo | QAVELLE';
+      pageTitle = 'Shimmering Beautiful Pack of 5 Necklace Chain Pendant Combo | QAVELLE';
     } else if (activeProductId === 'choker') {
-      document.title = 'Rhodium Plated White Austrian Diamond Bridal Choker Set | QAVELLE';
+      pageTitle = 'Rhodium Plated White Austrian Diamond Bridal Choker Set | QAVELLE';
     } else {
-      document.title = 'Gold Plated Fancy Jhumka Earrings for Women – Set of 6 Pairs | QAVELLE';
+      pageTitle = 'Gold Plated Fancy Jhumka Earrings for Women – Set of 6 Pairs | QAVELLE';
     }
-  }, [currentView, activeProductId]);
+
+    document.title = pageTitle;
+
+    // Track Meta Pixel PageView
+    try {
+      trackMetaPageView(pageTitle, window.location.pathname);
+
+      // Track Meta Pixel ViewContent if on product page
+      if (currentView === 'product') {
+        trackMetaViewContent({
+          id: activeProductId,
+          sku: currentProductDetails.sku,
+          name: currentProductDetails.title,
+          price: currentProductDetails.price,
+          category: currentProductDetails.brand || 'Jewellery',
+        });
+      }
+    } catch (err) {
+      console.warn('Meta Pixel View tracking error:', err);
+    }
+  }, [currentView, activeProductId, currentProductDetails]);
 
   // Cart actions
   const handleAddToCart = (bundle: BundleOption) => {
+    try {
+      trackMetaAddToCart({
+        id: bundle.id,
+        sku: resolveCatalogSku(bundle.id || activeProductId),
+        name: bundle.title,
+        price: bundle.price,
+        quantity: 1,
+      });
+    } catch (err) {
+      console.warn('Meta Pixel AddToCart error:', err);
+    }
+
     setCartItems((prev) => {
       const existing = prev.find((item) => item.bundle.id === bundle.id);
       if (existing) {
@@ -575,6 +613,32 @@ export default function App() {
 
   const handleBuyNow = (bundle?: BundleOption) => {
     const targetBundle = bundle || selectedBundle;
+    const targetSku = resolveCatalogSku(targetBundle.id || activeProductId);
+
+    try {
+      trackMetaAddToCart({
+        id: targetBundle.id,
+        sku: targetSku,
+        name: targetBundle.title,
+        price: targetBundle.price,
+        quantity: 1,
+      });
+      trackMetaInitiateCheckout({
+        items: [
+          {
+            id: targetBundle.id,
+            sku: targetSku,
+            name: targetBundle.title,
+            price: targetBundle.price,
+            quantity: 1,
+          },
+        ],
+        totalValue: targetBundle.price,
+      });
+    } catch (err) {
+      console.warn('Meta Pixel BuyNow tracking error:', err);
+    }
+
     setCartItems([
       {
         id: `buynow-${Date.now()}`,
@@ -640,6 +704,17 @@ export default function App() {
   };
 
   const handleAddToCartItem = (item: { title: string; price: number }) => {
+    try {
+      trackMetaAddToCart({
+        id: item.title,
+        sku: resolveCatalogSku(item.title),
+        name: item.title,
+        price: item.price,
+        quantity: 1,
+      });
+    } catch (err) {
+      console.warn('Meta Pixel AddToCart error:', err);
+    }
     handleAddUpsell(item.title, item.price);
     setIsCartOpen(true);
   };
@@ -653,7 +728,22 @@ export default function App() {
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         wishlistCount={isWishlisted ? 1 : 0}
-        onToggleWishlist={() => setIsWishlisted(!isWishlisted)}
+        onToggleWishlist={() => {
+          const nextWishlist = !isWishlisted;
+          setIsWishlisted(nextWishlist);
+          if (nextWishlist && currentView === 'product') {
+            try {
+              trackMetaAddToWishlist({
+                id: activeProductId,
+                sku: currentProductDetails.sku,
+                name: currentProductDetails.title,
+                price: currentProductDetails.price,
+              });
+            } catch (err) {
+              console.warn('Meta Pixel Wishlist error:', err);
+            }
+          }
+        }}
         isWishlisted={isWishlisted}
         onNavigateHome={handleNavigateHome}
         onSelectProduct={handleSwitchProduct}
@@ -721,6 +811,24 @@ export default function App() {
         onApplyCoupon={handleApplyCoupon}
         onRemoveCoupon={handleRemoveCoupon}
         onProceedToCheckout={() => {
+          try {
+            trackMetaInitiateCheckout({
+              items: cartItems.map((item) => ({
+                id: item.bundle?.id || 'jewelry',
+                sku: resolveCatalogSku(item.bundle?.id || item.bundle?.title),
+                name: item.bundle?.title || 'Jewelry Item',
+                price: item.bundle?.price || 0,
+                quantity: item.quantity,
+              })),
+              totalValue: cartItems.reduce(
+                (sum, item) => sum + (item.bundle?.price || 0) * item.quantity,
+                0
+              ),
+              coupon: appliedCoupon?.code,
+            });
+          } catch (err) {
+            console.warn('Meta Pixel InitiateCheckout error:', err);
+          }
           setIsCartOpen(false);
           setIsCheckoutOpen(true);
         }}

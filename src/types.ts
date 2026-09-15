@@ -12,7 +12,8 @@ export type ProductId =
   | 'dolphin-crystals-pendant-combo'
   | 'thin-as-rice-silver-chain'
   | 'korean-peacock-pearl-earrings'
-  | 'designer-metal-analog-watch';
+  | 'designer-metal-analog-watch'
+  | 'korean-trendy-butterfly-earrings';
 
 export interface ProductGalleryItem {
   id: string;

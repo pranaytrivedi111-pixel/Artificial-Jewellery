@@ -9,6 +9,8 @@ interface YouMayAlsoLikeProps {
 }
 
 const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'korean-trendy-butterfly-earrings':
+    '/products/korean-trendy-butterfly-earrings-western-fancy-earrings-for-women-girls',
   'designer-metal-analog-watch':
     '/products/new-solid-designer-metal-analog-watches-for-women',
   'korean-peacock-pearl-earrings':

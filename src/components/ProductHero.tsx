@@ -109,6 +109,12 @@ import {
   DESIGNER_METAL_ANALOG_WATCH_ADDITIONAL_DETAILS,
   DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS,
   DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_DETAILS,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_GALLERY,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_HIGHLIGHTS,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_ADDITIONAL_DETAILS,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_BUNDLE_OPTIONS,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_REVIEWS,
 } from '../data/productData';
 import {
   GPayLogo,
@@ -138,6 +144,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   onNavigateHome,
   children,
 }) => {
+  const isButterflyEarrings = activeProductId === 'korean-trendy-butterfly-earrings';
   const isWatch = activeProductId === 'designer-metal-analog-watch';
   const isPeacockEarrings = activeProductId === 'korean-peacock-pearl-earrings';
   const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
@@ -153,7 +160,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const isEmeraldSnake = activeProductId === 'emerald-snake-pendant';
   const isHandbagEarrings = activeProductId === 'white-enamel-handbag-earrings';
 
-  const currentProduct: ProductDetails = isWatch
+  const currentProduct: ProductDetails = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_DETAILS
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
@@ -181,7 +190,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentGallery = isWatch
+  const currentGallery = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_GALLERY
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_GALLERY
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_GALLERY
@@ -209,7 +220,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_GALLERY
     : PRODUCT_GALLERY;
 
-  const currentHighlights = isWatch
+  const currentHighlights = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_HIGHLIGHTS
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_HIGHLIGHTS
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_HIGHLIGHTS
@@ -237,7 +250,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_PRODUCT_HIGHLIGHTS
     : PRODUCT_HIGHLIGHTS;
 
-  const currentAdditionalDetails = isWatch
+  const currentAdditionalDetails = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_ADDITIONAL_DETAILS
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_ADDITIONAL_DETAILS
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_ADDITIONAL_DETAILS
@@ -265,7 +280,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_ADDITIONAL_DETAILS
     : ADDITIONAL_DETAILS;
 
-  const currentBundleOptions = isWatch
+  const currentBundleOptions = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_BUNDLE_OPTIONS
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS
@@ -293,7 +310,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     ? CHOKER_BUNDLE_OPTIONS
     : BUNDLE_OPTIONS;
 
-  const currentReviewsList = isWatch
+  const currentReviewsList = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_REVIEWS
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST
@@ -791,7 +810,9 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                     Product Highlights
                   </h3>
                   <span className="text-[11px] font-bold uppercase bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-md">
-                    {isWatch
+                    {isButterflyEarrings
+                      ? 'Korean Butterfly Pearl Drop'
+                      : isWatch
                       ? 'Designer Metal Watch'
                       : isRadhikaGreen
                       ? 'Celebrity Bridal AD Set'
@@ -962,7 +983,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
                   collapseLabel="Read less"
                   buttonClassName="text-amber-800 hover:text-amber-950 font-semibold text-xs"
                 >
-                  {isWatch ? 'Solid stainless steel link bracelet with hardened mineral crystal glass and Japanese quartz movement. Wipe clean with a soft dry cloth. Avoid spraying direct perfume, body mist, or alcohol-based sanitizer directly on the dial and strap.' : isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
+                  {isButterflyEarrings ? 'Delicate butterfly crystal setting with teardrop pearl drop. Wipe gently with a soft dry cloth after wearing. Store in the velvet presentation box away from water, perfumes, hairsprays, and harsh chemicals.' : isWatch ? 'Solid stainless steel link bracelet with hardened mineral crystal glass and Japanese quartz movement. Wipe clean with a soft dry cloth. Avoid spraying direct perfume, body mist, or alcohol-based sanitizer directly on the dial and strap.' : isRadhikaGreen ? 'Skin-safe brass alloy with rhodium silver polish and faceted emerald green cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : isCombo5 ? 'Skin-safe brass base with gold plating and cubic zirconia / AD accents. Wipe gently with a soft dry cloth after use. Store in individual pouches away from perfumes and direct water.' : isChoker ? 'High-grade alloy base with rhodium polish & cubic zirconia. Wipe gently with a soft dry cloth after use. Store in presentation pouch away from water, perfumes, and sprays.' : 'High-grade alloy base with oxidised gold plating. Wipe gently with a soft dry cloth after use. Keep away from water, perfumes, and sprays.'}
                 </ReadMoreText>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { BundleOption, CouponCode, FaqItem, ProductGalleryItem, ReviewItem } from '../types';
+import { BundleOption, CouponCode, FaqItem, ProductDetails, ProductGalleryItem, ReviewItem } from '../types';
 
 import jhumkaHeroBanner from '../assets/images/hero_jhumka_exact_1788252165017.jpg';
 import jhumkaCinematic from '../assets/images/cinematic_exact_1788252183341.jpg';
@@ -3878,6 +3878,266 @@ export const DESIGNER_METAL_ANALOG_WATCH_CUSTOMER_MEDIA = [
     image: '/h3.png',
     author: 'Sneha Chawla',
     caption: 'Real photo: Elegant wrist fit paired with formal and ethnic attire.',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Korean Trendy Butterfly Pearl Earrings Western Fancy Earrings (SKU: QVL-BUTTERFLY-6MH7FX)
+// ---------------------------------------------------------------------------
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_SLUG =
+  '/products/korean-trendy-butterfly-earrings-western-fancy-earrings-for-women-girls';
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_MATCHING_VARIANTS = [
+  {
+    id: 'butterfly-gold-white-pearl',
+    name: '18K Gold Plated with Luminous Pearl Drop',
+    color: '#EAB308',
+    borderColor: '#CA8A04',
+    image: '/i1.png',
+    inStock: true,
+  },
+  {
+    id: 'butterfly-crystal-detail',
+    name: 'Crystal Pavé Wing Edition',
+    color: '#FDE047',
+    borderColor: '#EAB308',
+    image: '/i2.png',
+    inStock: true,
+  },
+  {
+    id: 'butterfly-rose-gold',
+    name: 'Western Fancy Edition',
+    color: '#FDA4AF',
+    borderColor: '#F43F5E',
+    image: '/i3.png',
+    inStock: true,
+  },
+];
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_DETAILS = {
+  id: 'korean-trendy-butterfly-earrings',
+  title: 'Korean Trendy Butterfly Pearl Earrings Western Fancy Earrings For Women & Girls',
+  shortTitle: 'Korean Butterfly Pearl Earrings',
+  tagline:
+    'Delicate Butterfly Wings with Pavé Crystal Accents • Luminous Pearl Drop • Lightweight Anti-Tarnish 18K Gold Plating',
+  subtitle:
+    'Delicate Butterfly Wings with Pavé Crystal Accents • Luminous Pearl Drop • Lightweight Anti-Tarnish 18K Gold Plating',
+  badge: 'ROYAL VIRAL TREND',
+  tag: 'Royal Viral Trend',
+  price: 499,
+  originalPrice: 1599,
+  regularPrice: 1599,
+  salePrice: 499,
+  discountPercent: 69,
+  discountPercentage: 69,
+  rating: 4.9,
+  ratingsCount: 7420,
+  reviewsCount: 1680,
+  sku: 'QVL-BUTTERFLY-6MH7FX',
+  inStock: true,
+  stockLeft: 14,
+  inStockCount: 14,
+  recentSales24h: 538,
+  currentLiveViewers: 82,
+  freeDeliveryThreshold: 0,
+  brand: 'QAVELLE',
+  urgencyText: 'Only 14 pairs remaining at ₹499 — Royal Viral Trend selling fast across India!',
+  fullDescription:
+    'Channel delicate romance and ethereal charm with the Korean Trendy Butterfly Pearl Earrings for Women & Girls by QAVELLE. Featuring intricately sculpted butterfly wings embellished with glittering pavé cubic zirconia crystals, these earrings flow seamlessly into a lustrous teardrop pearl drop that sways gracefully with every movement. Coated in a signature 18K electroplated anti-tarnish gold finish and secured with comfortable hypoallergenic push-back studs, this pair effortlessly complements Western evening wear, chic casual outfits, and festive gatherings.',
+  description:
+    'Channel delicate romance and ethereal charm with the Korean Trendy Butterfly Pearl Earrings for Women & Girls by QAVELLE. Featuring intricately sculpted butterfly wings embellished with glittering pavé cubic zirconia crystals, these earrings flow seamlessly into a lustrous teardrop pearl drop that sways gracefully with every movement. Coated in a signature 18K electroplated anti-tarnish gold finish and secured with comfortable hypoallergenic push-back studs, this pair effortlessly complements Western evening wear, chic casual outfits, and festive gatherings.',
+  features: [
+    'Sculpted Butterfly Motif Adorned with Pavé Diamond-Cut Cubic Zirconia Crystals',
+    'Lustrous Tear-Drop Pearl Drop that Catches and Reflects Radiant Ambient Light',
+    'Anti-Tarnish 18K Gold Electroplating Engineered for Enduring Everyday Shine',
+    'Lightweight & Ergonomic Silhouette Designed for 14+ Hours Pain-Free Comfort',
+    '100% Skin-Safe, Nickel-Free & Hypoallergenic Brass Alloy Base Metal',
+    'Secure Push-Back Closure with Soft Comfort Silicone Backings Included',
+    'Arrives in Signature Qavelle Royal Velvet Gift Box with Certificate of Authenticity',
+  ],
+  size: 'Earring Length: 3.5 cm | Width: 2.0 cm | Weight: 4.8g per pair (Featherlight)',
+  dimensions: 'Length: 3.5 cm | Width: 2.0 cm | Weight: 4.8g per pair',
+  materials:
+    'Hypoallergenic Brass Alloy, 18K Micron Gold Electroplating, Pavé Cubic Zirconia, Luminous Pearl Drop',
+  countryOfOrigin: 'India',
+};
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_HIGHLIGHTS = [
+  { label: 'Design Type', value: 'Korean Trendy Butterfly Wing Drop with Pearl Tassel' },
+  { label: 'Stone & Accent', value: 'Faceted Pavé Cubic Zirconia & Luminous Teardrop Pearl' },
+  { label: 'Base Metal', value: 'High-Grade Hypoallergenic Environmental Alloy' },
+  { label: 'Plating & Polish', value: 'Anti-Tarnish 18K Gold Micron Electroplating' },
+  { label: 'Closure Mechanism', value: 'Comfort Push-Back Stud with Silicone Stoppers' },
+  { label: 'Earring Weight', value: '4.8 grams (Ultra-Lightweight & Feather-Soft on Lobes)' },
+  { label: 'Skin Safety', value: '100% Nickel-Free, Lead-Free & Hypoallergenic' },
+  { label: 'Net Quantity (N)', value: '1 Pair Earrings + Royal Velvet Box + Care Card' },
+  { label: 'Occasion', value: 'Western Partywear, College, Date Nights, Birthdays & Luxury Gifting' },
+];
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_ADDITIONAL_DETAILS = [
+  {
+    label: 'Package Contains',
+    value: '1 Pair Korean Butterfly Pearl Earrings + Royal Velvet Jewelry Box + Microfiber Cleaning Cloth',
+  },
+  { label: 'Earring Type', value: 'Drop & Dangler / Western Fancy Stud Dangler' },
+  { label: 'Sizing & Fit', value: 'Universal One-Size Comfort Push Back with Extra Soft Backings' },
+  { label: 'Anti-Tarnish Coating', value: 'Triple-Layered Protective Seal Against Sweat & Moisture' },
+  { label: 'Water Contact', value: 'Splash-resistant; keep away from direct perfumed alcohol mist' },
+  { label: 'Country of Origin', value: 'India' },
+  {
+    label: 'Care Instructions',
+    value:
+      'Gently wipe with a soft dry cloth after wearing. Store individually in the velvet gift box away from moisture, hairsprays, and perfumes.',
+  },
+];
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_GALLERY: ProductGalleryItem[] = [
+  {
+    id: 'ktbe-1',
+    src: '/i1.png',
+    thumbSrc: '/i1.png',
+    alt: 'Korean Trendy Butterfly Pearl Earrings - Hero Product View',
+    title: 'Korean Butterfly Pearl Earrings',
+    tag: 'Hero View',
+  },
+  {
+    id: 'ktbe-2',
+    src: '/i2.png',
+    thumbSrc: '/i2.png',
+    alt: 'Korean Trendy Butterfly Pearl Earrings - Studio Detail View',
+    title: 'Pavé Crystal Wing & Pearl Detail',
+    tag: 'Detail View',
+  },
+  {
+    id: 'ktbe-3',
+    src: '/i3.png',
+    thumbSrc: '/i3.png',
+    alt: 'Korean Trendy Butterfly Pearl Earrings - Luxury Display View',
+    title: 'Western Fancy Butterfly Silhouette',
+    tag: 'Display View',
+  },
+];
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_BUNDLE_OPTIONS = [
+  {
+    id: 'butterfly-single',
+    title: '1 Pair Korean Butterfly Pearl Earrings',
+    subtitle: '1 Pair + Luxury Velvet Gift Box + Free COD Delivery Across India',
+    unitCount: 1,
+    price: 499,
+    originalPrice: 1599,
+    discountPercent: 69,
+    isPopular: false,
+    badgeText: 'Classic Choice',
+  },
+  {
+    id: 'butterfly-double',
+    title: '2 Pairs (Gift Pack - 2 Color / Style Editions)',
+    subtitle: '2 Pairs + 2 Velvet Gift Boxes + Extra ₹100 Instant Savings',
+    unitCount: 2,
+    price: 899,
+    originalPrice: 3198,
+    discountPercent: 72,
+    isPopular: true,
+    badgeText: 'MOST POPULAR (SAVE ₹2,299)',
+  },
+  {
+    id: 'butterfly-triple',
+    title: '3 Pairs (Royal Celebration & Friends Gift Pack)',
+    subtitle: '3 Pairs + 3 Velvet Boxes + Free Express Courier & Maximum Savings',
+    unitCount: 3,
+    price: 1299,
+    originalPrice: 4797,
+    discountPercent: 73,
+    isPopular: false,
+    badgeText: 'BEST VALUE PACK',
+  },
+];
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_REVIEWS: ReviewItem[] = [
+  {
+    id: 'r-ktbe-1',
+    author: 'Kavya Sharma',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    rating: 5,
+    date: 'Yesterday',
+    title: 'Obsessed with the butterfly wing sparkle and pearl drop!',
+    comment:
+      'Saw this trending online and immediately placed the order. It arrived in just 2 days via Cash on Delivery. The butterfly crystals are so dazzling and the pearls have a dreamy milky glow. Very lightweight on ears, no stretching or pain at all!',
+    verified: true,
+    helpfulCount: 76,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-ktbe-2',
+    author: 'Tanvi Iyer',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    rating: 5,
+    date: '3 days ago',
+    title: 'Looks 10x more expensive than ₹499!',
+    comment:
+      'The finish is genuinely 18K gold looking with zero cheap brassiness. Wore it to a rooftop birthday party with a black cocktail dress and received so many compliments. Packaging came in a rich royal velvet box.',
+    verified: true,
+    helpfulCount: 64,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-ktbe-3',
+    author: 'Ruchika Malhotra',
+    city: 'Delhi',
+    state: 'Delhi NCR',
+    rating: 5,
+    date: '5 days ago',
+    title: 'Ordered the 2 pair bundle for my sister and me',
+    comment:
+      'We both love Korean minimalist aesthetics. The butterfly motif is delicate yet eye-catching. The silicone push backs keep them completely snug and safe. Highly recommend grabbing the 2-pair bundle for the extra discount.',
+    verified: true,
+    helpfulCount: 91,
+    badge: 'Verified Buyer',
+  },
+  {
+    id: 'r-ktbe-4',
+    author: 'Pooja Nair',
+    city: 'Kochi',
+    state: 'Kerala',
+    rating: 5,
+    date: '1 week ago',
+    title: 'Zero allergic reaction on sensitive earlobes',
+    comment:
+      'Usually fashion earrings itch my ears within 20 minutes, but Qavelle’s hypoallergenic post was completely comfortable all through an 8-hour college day. Will buy again!',
+    verified: true,
+    helpfulCount: 48,
+    badge: 'Verified Buyer',
+  },
+];
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_REVIEWS_LIST =
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_REVIEWS;
+
+export const KOREAN_TRENDY_BUTTERFLY_EARRINGS_CUSTOMER_MEDIA = [
+  {
+    id: 'm-ktbe-1',
+    type: 'image',
+    image: '/i1.png',
+    author: 'Kavya Sharma',
+    caption: 'Real photo: Gorgeous butterfly crystals and dangling pearl on velvet.',
+  },
+  {
+    id: 'm-ktbe-2',
+    type: 'image',
+    image: '/i2.png',
+    author: 'Tanvi Iyer',
+    caption: 'Real photo: Super close macro showing the fine crystal setting.',
+  },
+  {
+    id: 'm-ktbe-3',
+    type: 'image',
+    image: '/i3.png',
+    author: 'Ruchika Malhotra',
+    caption: 'Real photo: On-ear styling with western dress, perfectly dainty.',
   },
 ];
 

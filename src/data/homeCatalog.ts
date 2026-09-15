@@ -25,6 +25,33 @@ export interface GenuineProduct {
 
 export const GENUINE_PRODUCTS: GenuineProduct[] = [
   {
+    id: 'korean-trendy-butterfly-earrings',
+    slug: '/products/korean-trendy-butterfly-earrings-western-fancy-earrings-for-women-girls',
+    title: 'Korean Trendy Butterfly Pearl Earrings Western Fancy Earrings For Women & Girls',
+    shortTitle: 'Korean Butterfly Pearl Earrings',
+    subtitle:
+      'Delicate Butterfly Wings with Pavé Crystal Accents • Luminous Pearl Drop • Lightweight Anti-Tarnish 18K Gold Plating',
+    category: 'Earrings & Jhumkas',
+    badge: 'ROYAL VIRAL TREND',
+    price: 499,
+    originalPrice: 1599,
+    discountPercent: 69,
+    rating: 4.9,
+    reviewsCount: 1680,
+    image: '/i1.png',
+    hoverImage: '/i2.png',
+    tag: 'Royal Viral Trend',
+    inStockCount: 14,
+    highlights: [
+      'Sculpted Butterfly Motif with Pavé Diamond-Cut Cubic Zirconia',
+      'Lustrous Teardrop Pearl Drop Reflecting Radiant Light',
+      'Anti-Tarnish 18K Gold Electroplating for Long-Lasting Shine',
+      'Lightweight Feather-Soft Feel with Hypoallergenic Push-Back',
+    ],
+    occasion: 'Western Parties, Date Nights, Birthdays, College & Royal Gifting',
+    packageContains: '1 Pair Korean Butterfly Pearl Earrings + Royal Velvet Box + Microfiber Cloth',
+  },
+  {
     id: 'designer-metal-analog-watch',
     slug: '/products/new-solid-designer-metal-analog-watches-for-women',
     title: 'New Solid Designer Metal Analog Watches For Women',

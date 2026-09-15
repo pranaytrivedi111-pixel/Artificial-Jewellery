@@ -125,12 +125,72 @@
   <!-- Product 10: Gold Plated Fancy Jhumka Earrings Set of 6 -->
   <url>
     <loc>https://qavelle.store/products/gold-plated-fancy-jhumka-earrings-set-of-6</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://qavelle.store/radhika_ambani_1.webp</image:loc>
+      <image:loc>https://qavelle.store/Cinematic.webp</image:loc>
       <image:title>Gold Plated Royal Heritage Fancy Jhumka Earrings Set of 6</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 11: Thin as Rice Chain Necklace -->
+  <url>
+    <loc>https://qavelle.store/products/trendy-designer-thin-as-rice-21-inches-25-gram-rice-chain-for-women-and-girls-black-silver-plated-brass-metal-chain</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/g1.webp</image:loc>
+      <image:title>Trendy Designer Thin as Rice 21 inches Rice Chain</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 12: Combo of 3 Dolphin Crystals Pendant -->
+  <url>
+    <loc>https://qavelle.store/products/combo-of-3-elegant-dolphin-crystals-pendant-necklace-for-women-silver-plated-round-charm-with-colored-stone-pink-purple-sky</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/dolphin_f2.webp</image:loc>
+      <image:title>Combo of 3 Elegant Dolphin Crystals Pendant Necklace</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 13: Peacock Motif Drop Earrings -->
+  <url>
+    <loc>https://qavelle.store/products/korean-glorious-pearl-gold-plated-peacock-motif-earrings-with-white-moti-for-women</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/g1-1.png</image:loc>
+      <image:title>Korean Glorious Pearl Gold Plated Style Peacock Earrings</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 14: New Solid Designer Metal Analog Watch -->
+  <url>
+    <loc>https://qavelle.store/products/new-solid-designer-metal-analog-watches-for-women</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/w1.png</image:loc>
+      <image:title>New Solid Designer Metal Analog Watches For Women</image:title>
+    </image:image>
+  </url>
+
+  <!-- Product 15: Korean Trendy Butterfly Pearl Earrings -->
+  <url>
+    <loc>https://qavelle.store/products/korean-trendy-butterfly-earrings-western-fancy-earrings-for-women-girls</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://qavelle.store/i1.png</image:loc>
+      <image:title>Korean Trendy Butterfly Pearl Earrings Western Fancy Earrings For Women and Girls</image:title>
     </image:image>
   </url>
 

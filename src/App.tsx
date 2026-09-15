@@ -85,6 +85,11 @@ import {
   DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST,
   DESIGNER_METAL_ANALOG_WATCH_CUSTOMER_MEDIA,
   DESIGNER_METAL_ANALOG_WATCH_SLUG,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_DETAILS,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_BUNDLE_OPTIONS,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_REVIEWS_LIST,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_CUSTOMER_MEDIA,
+  KOREAN_TRENDY_BUTTERFLY_EARRINGS_SLUG,
   RADHIKA_GREEN_AD_SLUG,
   COMBO5_SLUG,
   SHIMMERING_SLUG,
@@ -121,6 +126,18 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 
   if (viewParam === 'home') {
     return { view: 'home', productId: 'jhumka' };
+  }
+
+  if (
+    pathname.includes('6mh7fx') ||
+    pathname.includes('butterfly') ||
+    pathname.includes('korean-trendy-butterfly-earrings') ||
+    pathname.includes('western-fancy-earrings') ||
+    param === 'korean-trendy-butterfly-earrings' ||
+    param === 'butterfly-earrings' ||
+    param === '6mh7fx'
+  ) {
+    return { view: 'product', productId: 'korean-trendy-butterfly-earrings' };
   }
 
   if (
@@ -303,6 +320,7 @@ const getViewAndProductFromLocation = (): { view: 'home' | 'product'; productId:
 };
 
 export const PRODUCT_SLUGS: Record<ProductId, string> = {
+  'korean-trendy-butterfly-earrings': KOREAN_TRENDY_BUTTERFLY_EARRINGS_SLUG,
   'designer-metal-analog-watch': DESIGNER_METAL_ANALOG_WATCH_SLUG,
   'korean-peacock-pearl-earrings': KOREAN_PEACOCK_PEARL_EARRINGS_SLUG,
   'thin-as-rice-silver-chain': THIN_AS_RICE_SILVER_CHAIN_SLUG,
@@ -324,6 +342,7 @@ const getSlugForProduct = (productId: ProductId): string => {
 };
 
 const getDefaultBundle = (productId: ProductId): BundleOption => {
+  if (productId === 'korean-trendy-butterfly-earrings') return KOREAN_TRENDY_BUTTERFLY_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'designer-metal-analog-watch') return DESIGNER_METAL_ANALOG_WATCH_BUNDLE_OPTIONS[0];
   if (productId === 'korean-peacock-pearl-earrings') return KOREAN_PEACOCK_PEARL_EARRINGS_BUNDLE_OPTIONS[0];
   if (productId === 'thin-as-rice-silver-chain') return THIN_AS_RICE_SILVER_CHAIN_BUNDLE_OPTIONS[0];
@@ -349,6 +368,7 @@ export default function App() {
   // Active product
   const [activeProductId, setActiveProductId] = useState<ProductId>(initialLoc.productId);
 
+  const isButterflyEarrings = activeProductId === 'korean-trendy-butterfly-earrings';
   const isWatch = activeProductId === 'designer-metal-analog-watch';
   const isPeacockEarrings = activeProductId === 'korean-peacock-pearl-earrings';
   const isRiceChain = activeProductId === 'thin-as-rice-silver-chain';
@@ -363,7 +383,9 @@ export default function App() {
   const isRadhikaGreen = activeProductId === 'radhika-green-ad';
   const isAllureGold = activeProductId === 'allure-gold-set';
 
-  const currentProductDetails = isWatch
+  const currentProductDetails = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_PRODUCT_DETAILS
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_PRODUCT_DETAILS
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_PRODUCT_DETAILS
@@ -391,7 +413,9 @@ export default function App() {
     ? CHOKER_PRODUCT_DETAILS
     : PRODUCT_DETAILS;
 
-  const currentReviews = isWatch
+  const currentReviews = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_REVIEWS_LIST
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_REVIEWS_LIST
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_REVIEWS_LIST
@@ -419,7 +443,9 @@ export default function App() {
     ? CHOKER_REVIEWS_LIST
     : REVIEWS_LIST;
 
-  const currentCustomerMedia = isWatch
+  const currentCustomerMedia = isButterflyEarrings
+    ? KOREAN_TRENDY_BUTTERFLY_EARRINGS_CUSTOMER_MEDIA
+    : isWatch
     ? DESIGNER_METAL_ANALOG_WATCH_CUSTOMER_MEDIA
     : isPeacockEarrings
     ? KOREAN_PEACOCK_PEARL_EARRINGS_CUSTOMER_MEDIA

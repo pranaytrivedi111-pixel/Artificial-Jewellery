@@ -153,10 +153,21 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
           <IndiaPaymentsStrip compact={true} />
         </div>
 
-        {/* Copyright */}
+        {/* Copyright & Feeds */}
         <div className="mt-3.5 pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400 gap-2">
           <span>© {new Date().getFullYear()} QAVELLE Inc. All rights reserved.</span>
-          <span>100% Handcrafted Heritage Royal Jewelry</span>
+          <div className="flex items-center gap-3">
+            <a
+              href="/meta_commerce_catalog.csv"
+              download="meta_commerce_catalog.csv"
+              className="text-gray-500 hover:text-black underline transition-colors"
+              title="Download product feed for Meta / Facebook Commerce Manager"
+            >
+              Meta Catalog CSV
+            </a>
+            <span className="text-gray-300">•</span>
+            <span>100% Handcrafted Heritage Royal Jewelry</span>
+          </div>
         </div>
       </div>
     </footer>

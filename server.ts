@@ -51,6 +51,29 @@ async function startServer() {
     res.status(404).type('text/plain').send('robots.txt not found');
   });
 
+  // Explicit Catalog endpoints for Meta Commerce Manager & Dynamic Product Ads (CSV & XML RSS)
+  const serveCatalogFile = (req: express.Request, res: express.Response, filename: string, contentType: string) => {
+    const candidates = [
+      path.join(process.cwd(), 'public', filename),
+      path.join(process.cwd(), 'dist', filename),
+    ];
+    for (const file of candidates) {
+      if (fs.existsSync(file)) {
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        return res.sendFile(file);
+      }
+    }
+    res.status(404).type('text/plain').send(`${filename} not found`);
+  };
+
+  app.get('/meta_commerce_catalog.csv', (req, res) => serveCatalogFile(req, res, 'meta_commerce_catalog.csv', 'text/csv; charset=utf-8'));
+  app.get('/facebook_product_catalog.csv', (req, res) => serveCatalogFile(req, res, 'facebook_product_catalog.csv', 'text/csv; charset=utf-8'));
+  app.get('/meta_product_catalog.csv', (req, res) => serveCatalogFile(req, res, 'meta_product_catalog.csv', 'text/csv; charset=utf-8'));
+  app.get('/meta_product_feed.xml', (req, res) => serveCatalogFile(req, res, 'meta_product_feed.xml', 'application/xml; charset=utf-8'));
+  app.get('/product_feed.xml', (req, res) => serveCatalogFile(req, res, 'product_feed.xml', 'application/xml; charset=utf-8'));
+
   // 2. Server-side Order Lead Proxy to Google Sheets
   // Eliminates browser CORS, iframe, adblocker, and 302 redirect conversion issues
   app.post('/api/order', async (req, res) => {

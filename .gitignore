@@ -9,5 +9,5 @@ coverage/
 bun.lock
 yarn.lock
 /*.png
-data/
+/data/
 

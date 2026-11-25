@@ -48,7 +48,9 @@ export interface BundleOption {
   originalPrice: number;
   discountPercent: number;
   badge?: string;
+  badgeText?: string;
   popular?: boolean;
+  isPopular?: boolean;
   saveAmount?: number;
 }
 
@@ -107,4 +109,16 @@ export interface ProductDetails {
   freeDeliveryThreshold: number;
   brand: string;
   countryOfOrigin: string;
+  subtitle?: string;
+  badge?: string;
+  tag?: string;
+  description?: string;
+  regularPrice?: number;
+  salePrice?: number;
+  discountPercentage?: number;
+  inStockCount?: number;
+  urgencyText?: string;
+  features?: string[];
+  materials?: string | string[];
+  dimensions?: string;
 }

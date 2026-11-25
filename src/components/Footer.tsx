@@ -22,9 +22,13 @@ import { sanitizeText } from '../utils/brandSanitizer';
 
 interface FooterProps {
   activeProductId?: ProductId;
+  onOpenMerchantPortal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) => {
+export const Footer: React.FC<FooterProps> = ({
+  activeProductId = 'jhumka',
+  onOpenMerchantPortal,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const currentProduct =
@@ -170,7 +174,7 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
         {/* Copyright & Feeds */}
         <div className="mt-3.5 pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400 gap-2">
           <span>© {new Date().getFullYear()} QAVELLE Inc. All rights reserved.</span>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
             <a
               href="/meta_commerce_catalog.csv"
               download="meta_commerce_catalog.csv"
@@ -179,6 +183,19 @@ export const Footer: React.FC<FooterProps> = ({ activeProductId = 'jhumka' }) =>
             >
               Meta Catalog CSV
             </a>
+            {onOpenMerchantPortal && (
+              <>
+                <span className="text-gray-300">•</span>
+                <button
+                  type="button"
+                  onClick={onOpenMerchantPortal}
+                  className="text-gray-500 hover:text-black underline transition-colors cursor-pointer"
+                  title="Open QAVELLE Merchant Portal & YouPI-PG Reconciliation"
+                >
+                  Merchant Portal
+                </button>
+              </>
+            )}
             <span className="text-gray-300">•</span>
             <span>100% Handcrafted Heritage Royal Jewelry</span>
           </div>

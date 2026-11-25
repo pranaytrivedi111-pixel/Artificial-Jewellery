@@ -13,6 +13,8 @@ export interface CustomerLead {
   paymentType: 'COD' | 'Prepaid UPI';
   paymentStatus: string;
   utr?: string;
+  paymentId?: string;
+  gatewayStatus?: string;
   leadStage: 'Completed Order' | 'Address Submitted';
 }
 
@@ -136,6 +138,8 @@ export const recordLead = async (lead: CustomerLead): Promise<{ success: boolean
     paymentType: lead.paymentType,
     paymentStatus: lead.paymentStatus,
     utr: lead.utr || '',
+    paymentId: lead.paymentId || '',
+    gatewayStatus: lead.gatewayStatus || '',
     leadStage: lead.leadStage,
     timestamp: lead.timestamp || new Date().toISOString(),
     customWebhookUrl: webhookUrl !== DEFAULT_SHEETS_WEBHOOK_URL ? webhookUrl : undefined,
@@ -211,6 +215,8 @@ export const exportOrdersToCSV = (): void => {
     'Phone Number',
     'Payment Type',
     'Payment Status',
+    'YouPI-PG Payment ID',
+    'Gateway Status',
     'UPI UTR Number',
     'Total Amount (INR)',
     'Items Ordered',
@@ -234,6 +240,8 @@ export const exportOrdersToCSV = (): void => {
     escapeCell(o.phone),
     escapeCell(o.paymentType),
     escapeCell(o.paymentStatus),
+    escapeCell(o.paymentId || 'N/A'),
+    escapeCell(o.gatewayStatus || 'N/A'),
     escapeCell(o.utr || 'N/A'),
     escapeCell(o.totalAmount),
     escapeCell(o.items),

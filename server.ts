@@ -1,7 +1,9 @@
+import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
+import { createYoupiGatewayRouter, createYoupiWebhookHandler } from './server/youpiGateway';
 
 const PORT = 3000;
 const DEFAULT_SHEETS_WEBHOOK_URL =
@@ -9,11 +11,35 @@ const DEFAULT_SHEETS_WEBHOOK_URL =
   process.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL ||
   'https://script.google.com/macros/s/AKfycbz85fr5XXQPvN-yLT8RAj2HART9Tlhs1aUz9ns_JG9PB_zGJdCa1wBwcZ8ihmwDnt4/exec';
 
+function resolveSafeSheetsWebhookUrl(candidate: unknown): string {
+  if (typeof candidate !== 'string' || !candidate.trim()) {
+    return DEFAULT_SHEETS_WEBHOOK_URL;
+  }
+  try {
+    const parsed = new URL(candidate.trim());
+    if (
+      parsed.protocol === 'https:' &&
+      (parsed.hostname === 'script.google.com' || parsed.hostname === 'script.googleusercontent.com')
+    ) {
+      return parsed.href;
+    }
+  } catch {
+    // Fall back to default
+  }
+  return DEFAULT_SHEETS_WEBHOOK_URL;
+}
+
 async function startServer() {
   const app = express();
 
-  app.use(express.json());
+  // Mount YouPI-PG signed webhook BEFORE express.json() so HMAC-SHA256 verifies raw request bytes
+  app.post('/api/youpi/v1/webhook', ...createYoupiWebhookHandler());
+
+  app.use(express.json({ limit: '2mb' }));
   app.use(express.urlencoded({ extended: true }));
+
+  // Mount YouPI-PG Payment Gateway API routes
+  app.use('/api/youpi/v1', createYoupiGatewayRouter());
 
   // 1. Health check route
   app.get('/api/health', (req, res) => {
@@ -78,7 +104,7 @@ async function startServer() {
   // Eliminates browser CORS, iframe, adblocker, and 302 redirect conversion issues
   app.post('/api/order', async (req, res) => {
     const orderData = req.body;
-    const targetWebhookUrl = orderData.customWebhookUrl || DEFAULT_SHEETS_WEBHOOK_URL;
+    const targetWebhookUrl = resolveSafeSheetsWebhookUrl(orderData.customWebhookUrl);
 
     console.log(`[Order API] Received order ${orderData.orderId || 'NEW'} (${orderData.paymentType || 'COD'})`);
 
@@ -96,6 +122,8 @@ async function startServer() {
       paymentType: orderData.paymentType || 'COD',
       paymentStatus: orderData.paymentStatus || 'Confirmed (Cash on Delivery)',
       utr: orderData.utr || '',
+      paymentId: orderData.paymentId || '',
+      gatewayStatus: orderData.gatewayStatus || '',
       leadStage: orderData.leadStage || 'Completed Order',
       timestamp: orderData.timestamp || new Date().toISOString(),
     };
@@ -134,7 +162,7 @@ async function startServer() {
 
   // 3. Test ping endpoint for manual verification
   app.post('/api/test-sheet', async (req, res) => {
-    const targetWebhookUrl = req.body.webhookUrl || DEFAULT_SHEETS_WEBHOOK_URL;
+    const targetWebhookUrl = resolveSafeSheetsWebhookUrl(req.body?.webhookUrl);
     const testPayload = {
       orderId: `TEST-${Math.floor(1000 + Math.random() * 9000)}`,
       customerName: 'Verified Connection Test',

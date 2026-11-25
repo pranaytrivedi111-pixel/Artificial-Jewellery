@@ -15,6 +15,7 @@ import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { StickyBottomBar } from './components/StickyBottomBar';
 import { Footer } from './components/Footer';
+import { AdminLeadsModal } from './components/AdminLeadsModal';
 import { preloadProductAssets } from './utils/imagePreload';
 import {
   BUNDLE_OPTIONS,
@@ -480,15 +481,17 @@ export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [appliedCoupon, setAppliedCoupon] = useState<CouponCode | null>(AVAILABLE_COUPONS[0]); // Auto-applied QVL100
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [orderNotification, setOrderNotification] = useState<{
     id: string;
     method: 'upi' | 'cod';
+    gatewayStatus?: string;
   } | null>(null);
 
-  const handleOrderPlaced = (orderId: string, method: 'upi' | 'cod') => {
-    setOrderNotification({ id: orderId, method });
+  const handleOrderPlaced = (orderId: string, method: 'upi' | 'cod', gatewayStatus?: string) => {
+    setOrderNotification({ id: orderId, method, gatewayStatus });
     setTimeout(() => {
       setOrderNotification(null);
     }, 9000);
@@ -883,7 +886,10 @@ export default function App() {
       </main>
 
       {/* QAVELLE Footer */}
-      <Footer activeProductId={activeProductId} />
+      <Footer
+        activeProductId={activeProductId}
+        onOpenMerchantPortal={() => setIsAdminOpen(true)}
+      />
 
       {/* Slide-out QAVELLE Cart Drawer */}
       <CartDrawer
@@ -920,7 +926,7 @@ export default function App() {
         onAddUpsell={handleAddUpsell}
       />
 
-      {/* 2-Step Checkout Modal (COD + Instant UPI) */}
+      {/* 2-Step Checkout Modal (COD + Instant UPI via YouPI-PG) */}
       <CheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
@@ -928,6 +934,12 @@ export default function App() {
         appliedCoupon={appliedCoupon}
         onClearCart={() => setCartItems([])}
         onOrderPlaced={handleOrderPlaced}
+      />
+
+      {/* Merchant Portal & YouPI-PG Payment Reconciliation Modal */}
+      <AdminLeadsModal
+        isOpen={isAdminOpen}
+        onClose={() => setIsAdminOpen(false)}
       />
 
       {/* Mobile & Desktop Sticky Bottom Conversion Bar (Persistently visible at all times on all Product Detail Pages) */}
@@ -953,7 +965,9 @@ export default function App() {
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between gap-1">
               <span className="font-black text-gray-950 text-xs sm:text-sm">
-                Order Received &amp; Confirmed!
+                {orderNotification.method === 'upi' && orderNotification.gatewayStatus !== 'RECONCILED'
+                  ? 'Order Received • UTR Verification Queued'
+                  : 'Order Received & Confirmed!'}
               </span>
               <button
                 type="button"
@@ -965,7 +979,13 @@ export default function App() {
               </button>
             </div>
             <p className="text-[11.5px] text-gray-700 mt-1 leading-snug">
-              Order <strong className="font-mono text-gray-950 font-bold">{orderNotification.id}</strong> ({orderNotification.method === 'upi' ? 'Prepaid UPI' : 'Cash On Delivery'}) has been received. Our team will share delivery tracking on your WhatsApp.
+              Order <strong className="font-mono text-gray-950 font-bold">{orderNotification.id}</strong> (
+              {orderNotification.method === 'upi'
+                ? orderNotification.gatewayStatus === 'RECONCILED'
+                  ? 'Bank Reconciled UPI'
+                  : 'Prepaid UPI • UTR Submitted'
+                : 'Cash On Delivery'}
+              ) has been logged via YouPI-PG. Our team will share delivery tracking on your WhatsApp.
             </p>
           </div>
         </div>

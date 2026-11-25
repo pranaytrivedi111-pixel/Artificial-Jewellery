@@ -40,7 +40,7 @@ interface CheckoutModalProps {
   cartItems: CartItem[];
   appliedCoupon: CouponCode | null;
   onClearCart: () => void;
-  onOrderPlaced?: (orderId: string, method: 'upi' | 'cod') => void;
+  onOrderPlaced?: (orderId: string, method: 'upi' | 'cod', gatewayStatus?: string) => void;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
@@ -345,9 +345,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }).catch((err) => console.warn('Early lead capture warning:', err));
   };
 
-  const handlePlaceOrder = (submittedUtr?: string, explicitPaymentMethod?: 'cod' | 'upi') => {
+  const handlePlaceOrder = (
+    txnDetails?: { utr?: string; paymentId?: string; gatewayStatus?: string },
+    explicitPaymentMethod?: 'cod' | 'upi'
+  ) => {
     const finalPaymentMethod = explicitPaymentMethod || paymentMethod;
     const finalId = orderId || `QVL-${Math.floor(100000 + Math.random() * 900000)}`;
+    const submittedUtr = txnDetails?.utr;
+    const gatewayStatus = txnDetails?.gatewayStatus;
     setOrderId(finalId);
     if (submittedUtr) {
       setUtrNumber(submittedUtr);
@@ -372,6 +377,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       finalPaymentMethod === 'cod' ? subtotal : finalTotal
     );
 
+    const honestPaymentStatus =
+      finalPaymentMethod === 'cod'
+        ? 'Confirmed (Cash on Delivery)'
+        : gatewayStatus === 'RECONCILED'
+        ? 'Bank Reconciled (YouPI-PG)'
+        : gatewayStatus === 'MANUAL_REVIEW'
+        ? 'UPI UTR Submitted (Pending Verification)'
+        : 'UPI Submitted (YouPI-PG)';
+
     try {
       recordLead({
         orderId: finalId,
@@ -386,11 +400,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         items: itemsSummary || 'Jewelry Item',
         totalAmount: payableAmount,
         paymentType: finalPaymentMethod === 'upi' ? 'Prepaid UPI' : 'COD',
-        paymentStatus:
-          finalPaymentMethod === 'upi'
-            ? 'Payment Verified (UPI)'
-            : 'Confirmed (Cash on Delivery)',
+        paymentStatus: honestPaymentStatus,
         utr: submittedUtr || utrNumber || '',
+        paymentId: txnDetails?.paymentId || '',
+        gatewayStatus: gatewayStatus || (finalPaymentMethod === 'cod' ? 'SUCCESS' : 'MANUAL_REVIEW'),
         leadStage: 'Completed Order',
       }).catch((err) => {
         console.warn('Webhook sync background note:', err);
@@ -437,7 +450,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
     onClearCart();
     if (onOrderPlaced) {
-      onOrderPlaced(finalId, finalPaymentMethod);
+      onOrderPlaced(finalId, finalPaymentMethod, gatewayStatus);
     }
     onClose();
   };
@@ -1033,7 +1046,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               orderId={orderId}
               customerName={name}
               customerPhone={phone}
+              customerEmail={email}
               deliveryAddress={fullAddress}
+              itemsSummary={cartItems
+                .map((item) => `${item.bundle?.title || 'Jewelry'} x ${item.quantity}`)
+                .join(', ')}
               paymentMethod={paymentMethod}
               onPaymentMethodChange={(m) => setPaymentMethod(m)}
               onBackToAddress={() => {
@@ -1044,7 +1061,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 const finalMethod = method === 'cod' ? 'cod' : 'upi';
                 setPaymentMethod(finalMethod);
                 if (txnDetails?.utr) setUtrNumber(txnDetails.utr);
-                handlePlaceOrder(txnDetails?.utr, finalMethod);
+                handlePlaceOrder(txnDetails, finalMethod);
               }}
             />
           )}

@@ -156,7 +156,8 @@ export const recordLead = async (lead: CustomerLead): Promise<{ success: boolean
       body: JSON.stringify(payload),
     });
 
-    if (apiRes.ok) {
+    const apiContentType = (apiRes.headers.get('content-type') || '').toLowerCase();
+    if (apiRes.ok && apiContentType.includes('application/json')) {
       const result = await apiRes.json();
       console.log('[LeadService] Server processed order:', result);
       if (result.syncedWithSheet) {
@@ -194,11 +195,22 @@ export const testSheetConnection = async (
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ webhookUrl: urlToTest }),
     });
-    const data = await res.json();
-    if (data.success) {
-      return { success: true, message: `Connected! Status ${data.status}: ${data.responseText}` };
+    const contentType = (res.headers.get('content-type') || '').toLowerCase();
+    if (res.ok && contentType.includes('application/json')) {
+      const data = await res.json();
+      if (data.success) {
+        return { success: true, message: `Connected! Status ${data.status}: ${data.responseText}` };
+      }
+      return { success: false, message: data.error || 'Connection test failed' };
     }
-    return { success: false, message: data.error || 'Connection test failed' };
+    // Static hosting fallback: send a direct no-cors ping to verify webhook reachability
+    await fetch(urlToTest, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ orderId: 'TEST-PING', leadStage: 'TEST_CONNECTION', timestamp: new Date().toISOString() }),
+    });
+    return { success: true, message: 'Direct webhook ping sent from browser (static host mode).' };
   } catch (err: any) {
     return { success: false, message: err?.message || 'Unable to connect to server' };
   }

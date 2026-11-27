@@ -110,9 +110,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }
   }, [isOpen]);
 
-  // When modal is reopened fresh, reset to address step and track InitiateCheckout
+  const wasOpenRef = useRef(false);
+
+  // When modal is reopened fresh (false -> true), reset to address step and track InitiateCheckout
   useEffect(() => {
-    if (isOpen) {
+    const justOpened = isOpen && !wasOpenRef.current;
+    wasOpenRef.current = isOpen;
+
+    if (justOpened) {
       setStep('address');
       setOrderId(`QVL-${Math.floor(100000 + Math.random() * 900000)}`);
 

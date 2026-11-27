@@ -31,17 +31,17 @@ export function buildUpiUri(options) {
   }
 
   const amountStr = toRupeesString(options.amountPaise);
+  const cleanVpa = options.payeeVpa.trim();
+  const cleanName = encodeURIComponent(options.payeeName.trim());
+  const currency = (options.currency || 'INR').toUpperCase();
+  const rawNote = (options.transactionNote || options.transactionRef || '').trim().replace(/[^a-zA-Z0-9 ._-]/g, ' ').replace(/\s+/g, ' ').slice(0, 50);
 
-  const params = new URLSearchParams();
-  params.set('pa', options.payeeVpa.trim());
-  params.set('pn', options.payeeName.trim());
-  params.set('am', amountStr);
-  const txnId = (options.transactionRef || options.transactionNote || '').trim();
-  if (txnId) {
-    params.set('tn', txnId);
+  let uri = `upi://pay?pa=${cleanVpa}&pn=${cleanName}&am=${amountStr}&cu=${currency}`;
+  if (rawNote) {
+    uri += `&tn=${encodeURIComponent(rawNote)}`;
   }
 
-  return `upi://pay?${params.toString()}`;
+  return uri;
 }
 
 /**

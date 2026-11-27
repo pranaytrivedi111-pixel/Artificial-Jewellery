@@ -195,39 +195,34 @@ function formatPaise(paise: number): string {
   return (paise / 100).toFixed(2);
 }
 
+function buildUpiQueryString(
+  payeeVpa: string,
+  payeeName: string,
+  amountStr: string,
+  orderId: string
+): string {
+  const cleanVpa = payeeVpa.trim();
+  const cleanName = encodeURIComponent(payeeName.trim());
+  const cleanNote = encodeURIComponent(`Qavelle ${orderId}`.replace(/[^a-zA-Z0-9 ._-]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 50));
+  return `pa=${cleanVpa}&pn=${cleanName}&am=${amountStr}&cu=INR&tn=${cleanNote}`;
+}
+
 function buildCanonicalUpiUri(
   payeeVpa: string,
   payeeName: string,
   amountStr: string,
-  orderId: string,
-  trRef: string
+  orderId: string
 ): string {
-  const params = new URLSearchParams({
-    pa: payeeVpa,
-    pn: payeeName,
-    am: amountStr,
-    cu: 'INR',
-    tn: `Qavelle ${orderId}`.slice(0, 50),
-    tr: trRef,
-  });
-  return `upi://pay?${params.toString()}`;
+  return `upi://pay?${buildUpiQueryString(payeeVpa, payeeName, amountStr, orderId)}`;
 }
 
 function buildIntentUris(
   payeeVpa: string,
   payeeName: string,
   amountStr: string,
-  orderId: string,
-  trRef: string
+  orderId: string
 ): Record<string, string> {
-  const baseQuery = new URLSearchParams({
-    pa: payeeVpa,
-    pn: payeeName,
-    am: amountStr,
-    cu: 'INR',
-    tn: `Qavelle ${orderId}`.slice(0, 50),
-    tr: trRef,
-  }).toString();
+  const baseQuery = buildUpiQueryString(payeeVpa, payeeName, amountStr, orderId);
 
   const intents: Record<string, string> = {};
   for (const [appId, pkg] of Object.entries(ANDROID_UPI_PACKAGES)) {
@@ -364,10 +359,9 @@ function staticCreatePaymentSession(params: CreateYoupiPaymentParams): YoupiPaym
   const expires = new Date(now.getTime() + SESSION_TIMEOUT_SECONDS * 1000);
   const paymentId = generateRandomId('pay');
   const sessionToken = generateRandomId('st');
-  const trRef = `YPG${paymentId.replace(/[^a-zA-Z0-9]/g, '').slice(-14).toUpperCase()}`;
 
-  const upiUri = buildCanonicalUpiUri(ledger.payeeVpa, ledger.payeeName, amountStr, params.orderId, trRef);
-  const intentUris = buildIntentUris(ledger.payeeVpa, ledger.payeeName, amountStr, params.orderId, trRef);
+  const upiUri = buildCanonicalUpiUri(ledger.payeeVpa, ledger.payeeName, amountStr, params.orderId);
+  const intentUris = buildIntentUris(ledger.payeeVpa, ledger.payeeName, amountStr, params.orderId);
 
   const record: StaticLedgerRecord = {
     paymentId,

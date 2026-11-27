@@ -324,8 +324,8 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
   // Generate QR Code strictly from server-validated YouPI-PG UPI URI
   useEffect(() => {
     QRCode.toDataURL(universalUpiUrl, {
-      width: 280,
-      margin: 1.5,
+      width: 300,
+      margin: 2,
       color: {
         dark: '#000000',
         light: '#ffffff',
@@ -426,79 +426,105 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
     return 'UPI App';
   };
 
-  // Specific deep-link URLs powered by YouPI-PG Android intent URIs + iOS app schemes
+  // Detect device OS safely for accurate UPI deep-linking (prevents iOS Safari invalid-address popups)
+  const isAndroidDevice = () =>
+    typeof navigator !== 'undefined' && /android/i.test(navigator.userAgent);
+  const isIosDevice = () =>
+    typeof navigator !== 'undefined' && /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isMobileDevice = () => isAndroidDevice() || isIosDevice();
+
+  // Specific deep-link URLs powered by YouPI-PG Android intent URIs + verified iOS app schemes
   const getAppDeepLink = (appId: string) => {
-    const isAndroid = typeof navigator !== 'undefined' && /android/i.test(navigator.userAgent);
-    if (isAndroid && youpiSession?.intentUris && youpiSession.intentUris[appId]) {
+    const cleanVpa = activePayeeVpa.trim();
+    const cleanParams = `pa=${cleanVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+
+    if (isAndroidDevice() && youpiSession?.intentUris && youpiSession.intentUris[appId]) {
       return youpiSession.intentUris[appId];
     }
 
     switch (appId) {
       case 'whatsapp':
-        return `whatsapp://pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `whatsapp://pay?${cleanParams}`;
       case 'navi':
-        return `navi://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `navi://upi/pay?${cleanParams}`;
       case 'mobikwik':
-        return `mobikwik://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `mobikwik://upi/pay?${cleanParams}`;
       case 'airtel':
-        return `airtel://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `airtel://upi/pay?${cleanParams}`;
       case 'slice':
-        return `slice://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `slice://upi/pay?${cleanParams}`;
       case 'jupiter':
-        return `jupiter://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `jupiter://upi/pay?${cleanParams}`;
       case 'phonepe':
-        return `phonepe://pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `phonepe://pay?${cleanParams}`;
       case 'gpay':
-        return `gpay://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        // Google Pay iOS scheme is tez://upi/pay (gpay:// fails on iOS)
+        return isIosDevice() ? `tez://upi/pay?${cleanParams}` : `gpay://upi/pay?${cleanParams}`;
       case 'paytm':
-        return `paytmmp://pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `paytmmp://pay?${cleanParams}`;
       case 'cred':
-        return `cred://pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return isIosDevice() ? `credpay://upi/pay?${cleanParams}` : `cred://pay?${cleanParams}`;
       case 'bhim':
-        return `bhim://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `bhim://upi/pay?${cleanParams}`;
       case 'amazonpay':
-        return `amazonpay://upi/pay?pa=${activePayeeVpa}&pn=${encodedPayeeName}&am=${formattedPrepaidAmount}&cu=INR&tn=${encodedNote}`;
+        return `amazonpay://upi/pay?${cleanParams}`;
       case 'universal':
       default:
         return universalUpiUrl;
     }
   };
 
-  const handleLaunchUpiApp = (app: { id: string; name: string; emblem: React.ReactNode }) => {
+  const handleLaunchUpiApp = (
+    app: { id: string; name: string; emblem: React.ReactNode },
+    options?: { skipNavigate?: boolean }
+  ) => {
     setIsAllUpiModalOpen(false);
     setRedirectingApp(app);
     setIsRedirecting(true);
     setCountdown(6);
     setAppNotInstalled(false);
+    setShowQrFallback(false);
     hasLeftTabRef.current = false;
     scrollToCheckoutTop();
 
     if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
     if (autoConfirmTimerRef.current) clearTimeout(autoConfirmTimerRef.current);
 
-    const targetUrl = getAppDeepLink(app.id);
-    try {
-      window.location.href = targetUrl;
-    } catch {
-      // Handled
-    }
+    const onAndroid = isAndroidDevice();
+    const onMobile = isMobileDevice();
 
-    // Smart Seamless Fallback:
-    // If user selected a specific app (e.g. PhonePe or GPay), but doesn't have it installed,
-    // the webpage remains visible. After 1.5 seconds, we flag it as not installed
-    // and automatically trigger the universal UPI intent (upi://pay?pa=...) so Android/iOS
-    // natively prompts the customer's installed UPI apps (PhonePe, GPay, Paytm, BHIM, etc.)!
-    if (app.id !== 'universal') {
-      fallbackTimerRef.current = setTimeout(() => {
-        if (!document.hidden && !hasLeftTabRef.current) {
-          setAppNotInstalled(true);
-          try {
-            window.location.href = universalUpiUrl;
-          } catch {
-            // Handled
+    // On desktop browsers or iOS 'universal' (iOS has no universal upi:// handler),
+    // immediately present the scannable QR code & Copy UPI ID instead of triggering an OS error popup.
+    if (!onMobile || (!onAndroid && app.id === 'universal')) {
+      setAppNotInstalled(true);
+      setShowQrFallback(true);
+    } else if (!options?.skipNavigate) {
+      const targetUrl = getAppDeepLink(app.id);
+      try {
+        window.location.assign(targetUrl);
+      } catch {
+        setShowQrFallback(true);
+      }
+
+      // Smart Seamless Fallback:
+      // If user tapped a specific app that isn't installed, the page stays visible after 1.5s.
+      // On Android: fall back to universal upi://pay chooser.
+      // On iOS: never fire upi://pay (causes Safari invalid-address popup); auto-open QR fallback instead.
+      if (app.id !== 'universal') {
+        fallbackTimerRef.current = setTimeout(() => {
+          if (!document.hidden && !hasLeftTabRef.current) {
+            setAppNotInstalled(true);
+            setShowQrFallback(true);
+            if (onAndroid) {
+              try {
+                window.location.assign(universalUpiUrl);
+              } catch {
+                // QR fallback is already visible
+              }
+            }
           }
-        }
-      }, 1500);
+        }, 1500);
+      }
     }
 
     if (countdownIntervalRef.current) clearInterval(countdownIntervalRef.current);
@@ -507,11 +533,12 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
     }, 1000);
   };
 
-  // Best-practice UPI Collect Request flow for "Enter UPI ID"
+  // Validate customer's UPI ID, identify their UPI app, and launch it directly (or open QR fallback on desktop)
+  // Direct UPI does not send NPCI push collect notifications, so launching the app directly ensures instant real-time payment.
   const handleVerifyAndPayCustomVpa = (e: React.FormEvent) => {
     e.preventDefault();
     const clean = customUpiId.trim().toLowerCase();
-    if (!clean || !clean.includes('@') || clean.length < 5) {
+    if (!/^[a-z0-9._-]{2,}@[a-z]{2,}$/i.test(clean)) {
       setVpaError('Please enter a valid UPI ID (e.g. mobile@upi or name@okhdfcbank)');
       return;
     }
@@ -519,26 +546,33 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
     setVpaError('');
     setIsVerifyingVpa(true);
 
-    setTimeout(() => {
-      setIsVerifyingVpa(false);
-      const detectedApp = detectUpiProvider(clean);
-      setUpiCollectRequest({
-        vpa: clean,
-        appName: detectedApp,
-        remainingSeconds: 300, // 5 minutes standard NPCI collect expiry
-      });
+    const detectedAppName = detectUpiProvider(clean);
+    let targetAppId = 'universal';
+    let targetEmblem: React.ReactNode = <UpiEmblem className="w-8 h-8" />;
 
-      if (collectIntervalRef.current) clearInterval(collectIntervalRef.current);
-      collectIntervalRef.current = setInterval(() => {
-        setUpiCollectRequest((prev) => {
-          if (!prev || prev.remainingSeconds <= 1) {
-            if (collectIntervalRef.current) clearInterval(collectIntervalRef.current);
-            return null;
-          }
-          return { ...prev, remainingSeconds: prev.remainingSeconds - 1 };
-        });
-      }, 1000);
-    }, 600);
+    if (detectedAppName === 'PhonePe') {
+      targetAppId = 'phonepe';
+      targetEmblem = <PhonePeEmblem className="w-8 h-8" />;
+    } else if (detectedAppName === 'Google Pay') {
+      targetAppId = 'gpay';
+      targetEmblem = <GPayEmblem className="w-8 h-8" />;
+    } else if (detectedAppName === 'Paytm') {
+      targetAppId = 'paytm';
+      targetEmblem = <PaytmEmblem className="w-8 h-8" />;
+    } else if (detectedAppName === 'BHIM UPI') {
+      targetAppId = 'bhim';
+      targetEmblem = <BhimEmblem className="w-8 h-8" />;
+    } else if (detectedAppName === 'Amazon Pay') {
+      targetAppId = 'amazonpay';
+      targetEmblem = <AmazonPayEmblem className="w-8 h-8" />;
+    }
+
+    setIsVerifyingVpa(false);
+    handleLaunchUpiApp({
+      id: targetAppId,
+      name: detectedAppName,
+      emblem: targetEmblem,
+    });
   };
 
   const handleSuccessConfirmation = (
@@ -982,8 +1016,12 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
             <button
               type="button"
               onClick={() => {
+                if (!isMobileDevice() || (!isAndroidDevice() && redirectingApp.id === 'universal')) {
+                  setShowQrFallback(true);
+                  return;
+                }
                 const url = getAppDeepLink(redirectingApp.id);
-                window.location.href = url;
+                window.location.assign(url);
               }}
               className="w-full py-2 px-4 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 font-bold text-xs uppercase tracking-wide flex items-center justify-center gap-2 cursor-pointer transition-colors"
             >
@@ -1683,9 +1721,35 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
             </div>
 
             {/* ========================================================================= */}
-            {/* MOBILE VIEW: Show UPI App 1-Tap launch, apps grid & toggleable QR Code */}
+            {/* MOBILE VIEW: Direct 1-Tap UPI Intent CTA, Apps Grid & Toggleable QR Code */}
             {/* ========================================================================= */}
             <div className="block md:hidden">
+              {/* Primary 1-Tap Direct UPI Anchor (synchronous native intent on Android Chrome / In-App Browsers) */}
+              <a
+                href={universalUpiUrl}
+                id="mobile-direct-upi-1tap-cta"
+                onClick={(e) => {
+                  if (!isAndroidDevice()) {
+                    e.preventDefault();
+                    setShowQrCode(true);
+                    return;
+                  }
+                  handleLaunchUpiApp(
+                    {
+                      id: 'universal',
+                      name: 'UPI App',
+                      emblem: <UpiEmblem className="w-8 h-8" />,
+                    },
+                    { skipNavigate: true }
+                  );
+                }}
+                className="w-full mb-3 py-3 px-4 rounded-xl bg-gray-950 hover:bg-black active:scale-[0.99] text-[#FFD600] font-black text-[13px] tracking-wide flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+              >
+                <Zap className="w-4 h-4 fill-current shrink-0" />
+                <span>Pay ₹{formattedPrepaidAmount} with Any UPI App</span>
+                <ChevronRight className="w-4 h-4 shrink-0" />
+              </a>
+
               {/* Popular UPI Apps Grid: PhonePe, Google Pay, Paytm, BHIM, Amazon Pay, CRED */}
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-2.5 items-stretch mb-3 w-full">
                 {/* 1. PhonePe */}
@@ -2072,10 +2136,10 @@ export const ModernPaymentSection: React.FC<ModernPaymentSectionProps> = ({
                         {isVerifyingVpa ? (
                           <span className="flex items-center gap-1">
                             <Loader2 className="w-3 h-3 animate-spin" />
-                            Verifying...
+                            Opening...
                           </span>
                         ) : (
-                          'Verify & pay'
+                          'Open UPI App'
                         )}
                       </button>
                     </div>
